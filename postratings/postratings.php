@@ -112,7 +112,7 @@ function the_ratings_vote_js() {
 
 
 ### Function: Display Ratings Vote
-function the_ratings_vote() {
+function the_ratings_vote($text_start = '', $text_end = '') {
 	global $id, $ratings_image, $ratings_max;
 	$rated = check_rated($id);
 	if(!$rated) {
@@ -136,7 +136,7 @@ function the_ratings_vote() {
 			echo '<img src="'.get_settings('home').'/wp-content/plugins/postratings/images/'.$ratings_image.'/rating_end.gif" alt="" />';
 		}
 	} else {
-		the_ratings();
+		the_ratings($text_start, $text_end);
 	}
 }
 
@@ -273,49 +273,53 @@ if(!function_exists('get_ipaddress')) {
 
 
 ### Function: Display Most Rated Page/Post
-function get_most_rated($mode = '', $limit = 10) {
-	global $wpdb, $post;
-	$where = '';
-	if($mode == 'post') {
-		$where = 'post_status = \'publish\'';
-	} elseif($mode == 'page') {
-		$where = 'post_status = \'static\'';
-	} else {
-		$where = '(post_status = \'publish\' OR post_status = \'static\')';
-	}
-	$most_rated = $wpdb->get_results("SELECT wp_posts.ID, post_title, post_name, post_status, post_date, CAST(meta_value AS UNSIGNED) AS votes FROM wp_posts LEFT JOIN wp_postmeta ON wp_postmeta.post_id = wp_posts.ID WHERE post_date < '".current_time('mysql')."' AND $where AND meta_key = 'ratings_users' AND post_password = '' ORDER BY votes DESC LIMIT $limit");
-	if($most_rated) {
-		foreach ($most_rated as $post) {
+if(!function_exists('get_most_rated')) {
+	function get_most_rated($mode = '', $limit = 10) {
+		global $wpdb, $post;
+		$where = '';
+		if($mode == 'post') {
+			$where = 'post_status = \'publish\'';
+		} elseif($mode == 'page') {
+			$where = 'post_status = \'static\'';
+		} else {
+			$where = '(post_status = \'publish\' OR post_status = \'static\')';
+		}
+		$most_rated = $wpdb->get_results("SELECT wp_posts.ID, post_title, post_name, post_status, post_date, CAST(meta_value AS UNSIGNED) AS votes FROM wp_posts LEFT JOIN wp_postmeta ON wp_postmeta.post_id = wp_posts.ID WHERE post_date < '".current_time('mysql')."' AND $where AND meta_key = 'ratings_users' AND post_password = '' ORDER BY votes DESC LIMIT $limit");
+		if($most_rated) {
+			foreach ($most_rated as $post) {
 				$post_title = htmlspecialchars(stripslashes($post->post_title));
 				$post_views = intval($post->votes);
-				echo "- <a href=\"".get_permalink()."\">$post_title</a> ($post_views ".__('Votes').")<br />";
+				echo "<li><a href=\"".get_permalink()."\">$post_title</a> ($post_views ".__('Votes').")</li>";
+			}
+		} else {
+			echo '<li>'.__('N/A').'</li>';
 		}
-	} else {
-		_e('N/A');
 	}
 }
 
 
 ### Function: Display Highest Rated Page/Post
-function get_highest_rated($mode = '', $limit = 10) {
-	global $wpdb, $post;
-	$where = '';
-	if($mode == 'post') {
-		$where = 'post_status = \'publish\'';
-	} elseif($mode == 'page') {
-		$where = 'post_status = \'static\'';
-	} else {
-		$where = '(post_status = \'publish\' OR post_status = \'static\')';
-	}
-	$most_rated = $wpdb->get_results("SELECT wp_posts.ID, post_title, post_name, post_status, post_date, (meta_value+0.00) AS highest FROM wp_posts LEFT JOIN wp_postmeta ON wp_postmeta.post_id = wp_posts.ID WHERE post_date < '".current_time('mysql')."' AND $where AND meta_key = 'ratings_average' AND post_password = '' ORDER BY highest DESC LIMIT $limit");
-	if($most_rated) {
-		foreach ($most_rated as $post) {
+if(!function_exists('get_highest_rated')) {
+	function get_highest_rated($mode = '', $limit = 10) {
+		global $wpdb, $post;
+		$where = '';
+		if($mode == 'post') {
+			$where = 'post_status = \'publish\'';
+		} elseif($mode == 'page') {
+			$where = 'post_status = \'static\'';
+		} else {
+			$where = '(post_status = \'publish\' OR post_status = \'static\')';
+		}
+		$most_rated = $wpdb->get_results("SELECT wp_posts.ID, post_title, post_name, post_status, post_date, (meta_value+0.00) AS highest FROM wp_posts LEFT JOIN wp_postmeta ON wp_postmeta.post_id = wp_posts.ID WHERE post_date < '".current_time('mysql')."' AND $where AND meta_key = 'ratings_average' AND post_password = '' ORDER BY highest DESC LIMIT $limit");
+		if($most_rated) {
+			foreach ($most_rated as $post) {
 				$post_title = htmlspecialchars(stripslashes($post->post_title));
 				$post_views = $post->highest;
-				echo "- <a href=\"".get_permalink()."\">$post_title</a> ($post_views ".__('Score').")<br />";
+				echo "<li><a href=\"".get_permalink()."\">$post_title</a> ($post_views ".__('Stars').")</li>";
+			}
+		} else {
+			echo '<li>'.__('N/A').'</li>';
 		}
-	} else {
-		_e('N/A');
 	}
 }
 
