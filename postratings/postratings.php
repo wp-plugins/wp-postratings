@@ -39,7 +39,7 @@ function ratings_menu() {
 	}
 	if (function_exists('add_submenu_page')) {
 		add_submenu_page('postratings/postratings-manager.php', __('Manage Ratings'), __('Manage Ratings'), 'manage_ratings', 'postratings/postratings-manager.php');
-		add_submenu_page('postratings/postratings-manager.php', __('Ratings Option'), __('Ratings Option'),  'manage_ratings', 'postratings/postratings-options.php');
+		add_submenu_page('postratings/postratings-manager.php', __('Ratings Options'), __('Ratings Options'),  'manage_ratings', 'postratings/postratings-options.php');
 	}
 }
 
