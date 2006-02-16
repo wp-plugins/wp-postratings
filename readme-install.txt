@@ -8,7 +8,7 @@ Folder: postratings
 ------------------------------------------------------------------
 
 
-// Activate the WP-PostRatings plugin
+// Activate WP-PostRatings plugin
 
 
 
