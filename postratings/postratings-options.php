@@ -164,7 +164,7 @@ function ratings_default_templates(template) {
 				</table>
 			</fieldset>
 			<div align="center">
-				<input type="submit" name="Submit" class="button" value="<?php _e('Update Options'); ?>" /> 
+				<input type="submit" name="Submit" class="button" value="<?php _e('Update Options'); ?>" />&nbsp;&nbsp;<input type="button" name="cancel" Value="<?php _e('Cancel'); ?>" class="button" onclick="javascript:history.go(-1)" />
 			</div>
 	</form>
 </div>
