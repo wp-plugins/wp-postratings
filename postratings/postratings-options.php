@@ -32,16 +32,19 @@ $base_page = 'admin.php?page='.$base_name;
 if($_POST['Submit']) {
 	$postratings_image = strip_tags(trim($_POST['postratings_image']));
 	$postratings_max = intval($_POST['postratings_max']);
+	$postratings_template_vote = trim($_POST['postratings_template_vote']);
 	$postratings_template_text = trim($_POST['postratings_template_text']);
 	$postratings_template_none = trim($_POST['postratings_template_none']);
 	$update_ratings_queries = array();
 	$update_ratings_text = array();
 	$update_ratings_queries[] = update_option('postratings_image', $postratings_image);
 	$update_ratings_queries[] = update_option('postratings_max', $postratings_max);
+	$update_ratings_queries[] = update_option('postratings_template_vote', $postratings_template_vote);
 	$update_ratings_queries[] = update_option('postratings_template_text', $postratings_template_text);
 	$update_ratings_queries[] = update_option('postratings_template_none', $postratings_template_none);
 	$update_ratings_text[] = __('Ratings Image');
 	$update_ratings_text[] = __('Max Ratings');
+	$update_ratings_text[] = __('Ratings Template Vote');
 	$update_ratings_text[] = __('Ratings Template Text');
 	$update_ratings_text[] = __('Ratings Template For No Ratings');
 	$i=0;
@@ -61,6 +64,9 @@ if($_POST['Submit']) {
 function ratings_default_templates(template) {
 	var default_template;
 	switch(template) {
+		case "vote":
+			default_template = "<p>%RATINGS_IMAGES_VOTE%</p>";
+			break;
 		case "text":
 			default_template = "<p>%RATINGS_IMAGES% (<b>%RATINGS_USERS%</b> votes, average: <b>%RATINGS_AVERAGE%</b> out of %RATINGS_MAX%)</p>";
 			break;
@@ -127,17 +133,31 @@ function ratings_default_templates(template) {
 				<table width="100%"  border="0" cellspacing="3" cellpadding="3">
 					<tr>
 						<td><b>%RATINGS_IMAGES%</b> - <?php _e('Display the ratings images'); ?></td>
-						<td><b>%RATINGS_MAX%</b> - <?php _e('Display the max number of ratings'); ?></td>
+						<td><b>%RATINGS_IMAGES_VOTE%</b> - <?php _e('Display the ratings voting image'); ?></td>
 					</tr>
 					<tr>
 						<td><b>%RATINGS_AVERAGE%</b> - <?php _e('Display the average ratings'); ?></td>
-						<td><b>%RATINGS_USERS%</b> - <?php _e('Display the total number of users rated for the post'); ?></td>
+						<td><b>%RATINGS_USERS%</b> - <?php _e('Display the total number of users rated for the post'); ?></td>						
+					</tr>
+					<tr>
+						<td><b>%RATINGS_MAX%</b> - <?php _e('Display the max number of ratings'); ?></td>
+						<td>&nbsp;</td>
 					</tr>
 				</table>
 			</fieldset>
 			<fieldset class="options">
 				<legend><?php _e('Ratings Templates'); ?></legend>
 				<table width="100%"  border="0" cellspacing="3" cellpadding="3">
+					 <tr valign="top">
+						<td align="left" width="30%">
+							<b><?php _e('Ratings Vote Text:'); ?></b><br /><br />
+							<?php _e('Allowed Variables:'); ?><br />
+							- %RATINGS_IMAGES_VOTE%<br />
+							- %RATINGS_MAX%<br /><br />
+							<input type="button" name="RestoreDefault" value="<?php _e('Restore Default Template'); ?>" onclick="javascript: ratings_default_templates('vote');" class="button" />
+						</td>
+						<td align="left"><textarea cols="80" rows="10" id="postratings_template_vote" name="postratings_template_vote"><?php echo get_settings('postratings_template_vote'); ?></textarea></td>
+					</tr>
 					 <tr valign="top">
 						<td align="left" width="30%">
 							<b><?php _e('Ratings Text:'); ?></b><br /><br />

@@ -114,7 +114,11 @@ if(!empty($_POST['delete_logs'])) {
 $total_ratings = $wpdb->get_var("SELECT COUNT(rating_id) FROM $wpdb->ratings");
 $total_users = $wpdb->get_var("SELECT SUM(CAST(meta_value AS UNSIGNED)) FROM $wpdb->postmeta WHERE meta_key = 'ratings_users'");
 $total_score = $wpdb->get_var("SELECT SUM(CAST(meta_value AS UNSIGNED)) FROM $wpdb->postmeta WHERE meta_key = 'ratings_score'");
-$total_average = $total_score/$total_users;
+if($total_users == 0) { 
+	$total_average = 0;
+} else {
+	$total_average = $total_score/$total_users;
+}
 
 
 ### Checking $postratings_page and $offset
