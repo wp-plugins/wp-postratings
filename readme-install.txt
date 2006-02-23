@@ -16,7 +16,6 @@ Folder: postratings
 
 -> Usage Instructions
 ------------------------------------------------------------------
-
 // Open wp-content/themes/<YOUR THEME NAME>/index.php
 
 Find:
@@ -29,25 +28,10 @@ Add Anywhere Below It:
 ------------------------------------------------------------------
 Note:
 ------------------------------------------------------------------
-This will display the ratings of the post.
-------------------------------------------------------------------
-
-
-// Open wp-content/themes/<YOUR THEME NAME>/single.php OR page.php
-
-Find:
-------------------------------------------------------------------
-<?php while (have_posts()) : the_post(); ?>
-------------------------------------------------------------------
-Add Anywhere Below It:
-------------------------------------------------------------------
-<?php if(function_exists('the_ratings')) { the_ratings_vote(); } ?> 
-------------------------------------------------------------------
-Note:
-------------------------------------------------------------------
-This will display the image which will allow users to rate. If the 
-user has rated the post before, it will just display the ratings for
-the post.
+- This will display the ratings of the post and the voting image if user has not voted yet.
+- To embed the ratings into your post, use [ratings].
+- the_ratings_result(); will display the ratings of the post.
+- the_ratings_vote(); will display the voting images.
 ------------------------------------------------------------------
 
 

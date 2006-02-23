@@ -147,7 +147,7 @@ function the_ratings_results($display = true) {
 		$template_postratings_text = str_replace("%RATINGS_IMAGES%", $post_ratings_images, $template_postratings_text);
 		$template_postratings_text = str_replace("%RATINGS_MAX%", $ratings_max, $template_postratings_text);
 		$template_postratings_text = str_replace("%RATINGS_AVERAGE%", $post_ratings_average, $template_postratings_text);
-		$template_postratings_text = str_replace("%RATINGS_USERS%", $post_ratings_users, $template_postratings_text);		
+		$template_postratings_text = str_replace("%RATINGS_USERS%", number_format($post_ratings_users), $template_postratings_text);		
 		if($display) {
 			echo $template_postratings_text;
 		} else {
