@@ -208,7 +208,7 @@ function process_ratings() {
 			$post = get_post($post_id);
 			// If Valid Post Then We Rate It
 			if($post) {
-				$post_title = $post->post_title;
+				$post_title = addslashes($post->post_title);
 				$post_ratings_users = the_ratings_users(false);
 				$post_ratings_score = the_ratings_score(false);				
 				// Check For Ratings Lesser Than 1 And Greater Than $ratings_max
