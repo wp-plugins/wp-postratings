@@ -1,5 +1,13 @@
 -> Installation Instructions
 ------------------------------------------------------------------
+// Drop previous wp-postratings table (wp_ratingslogs) using phpmyadmin
+
+Note:
+------------------------------------------------------------------
+Only if you are using the previous version of wp-postratings
+------------------------------------------------------------------
+
+
 // Open wp-content/plugins folder
 
 Put:

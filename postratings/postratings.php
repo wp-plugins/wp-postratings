@@ -92,16 +92,18 @@ function the_ratings_results($display = true) {
 	global $id;
 	$ratings_image = get_settings('postratings_image');
 	$ratings_max = intval(get_settings('postratings_max'));
-	$post_ratings_users = the_ratings_users(false);
-	$post_ratings_score = the_ratings_score(false);
-	$post_ratings_average = the_ratings_average(false);
+	$post_ratings = get_post_custom();
+	$post_ratings_users = $post_ratings['ratings_users'][0];
+	$post_ratings_score = $post_ratings['ratings_score'][0];
+	$post_ratings_average = $post_ratings['ratings_average'][0];
 	$post_ratings_images = '';
 	if($post_ratings_score == 0 || $post_ratings_users == 0) {
 		$post_ratings = 0;
 		$post_ratings_average = 0;
+		$post_ratings_percentage = 0;
 	} else {
 		$post_ratings = round($post_ratings_average, 1);
-		
+		$post_ratings_percentage = round((($post_ratings_score/$post_ratings_users)/$ratings_max) * 100, 2);		
 	}
 	// Check For Half Star
 	$insert_half = 0;
@@ -113,10 +115,11 @@ function the_ratings_results($display = true) {
 	}	
 	$post_ratings = intval($post_ratings);
 	// No Ratings
-	if($post_ratings == 0 && $post_ratings == 0) {
+	if($post_ratings == 0) {
 		$template_postratings_none = stripslashes(get_settings('postratings_template_none'));
 		$template_postratings_none = str_replace("%RATINGS_MAX%", $ratings_max, $template_postratings_none);
 		$template_postratings_none = str_replace("%RATINGS_AVERAGE%", $post_ratings_average, $template_postratings_none);
+		$template_postratings_none = str_replace("%RATINGS_PERCENTAGE%", $post_ratings_percentage, $template_postratings_none);
 		$template_postratings_none = str_replace("%RATINGS_USERS%", $post_ratings_users, $template_postratings_none);
 		if($display) {
 			echo $template_postratings_none;
@@ -147,6 +150,7 @@ function the_ratings_results($display = true) {
 		$template_postratings_text = str_replace("%RATINGS_IMAGES%", $post_ratings_images, $template_postratings_text);
 		$template_postratings_text = str_replace("%RATINGS_MAX%", $ratings_max, $template_postratings_text);
 		$template_postratings_text = str_replace("%RATINGS_AVERAGE%", $post_ratings_average, $template_postratings_text);
+		$template_postratings_text = str_replace("%RATINGS_PERCENTAGE%", $post_ratings_percentage, $template_postratings_text);
 		$template_postratings_text = str_replace("%RATINGS_USERS%", number_format($post_ratings_users), $template_postratings_text);		
 		if($display) {
 			echo $template_postratings_text;
@@ -209,8 +213,9 @@ function process_ratings() {
 			// If Valid Post Then We Rate It
 			if($post) {
 				$post_title = addslashes($post->post_title);
-				$post_ratings_users = the_ratings_users(false);
-				$post_ratings_score = the_ratings_score(false);				
+				$post_ratings = get_post_custom($post_id);
+				$post_ratings_users = $post_ratings['ratings_users'][0];
+				$post_ratings_score = $post_ratings['ratings_score'][0];	
 				// Check For Ratings Lesser Than 1 And Greater Than $ratings_max
 				if($rate < 1 || $rate > $ratings_max) {
 					$rate = 0;
@@ -241,39 +246,6 @@ function process_ratings() {
 				$rate_cookie = setcookie("rated_".$post_id, 1, time() + 30000000, COOKIEPATH);
 			}
 		}
-	}
-}
-
-
-### Function: Displays The Total Users That Have Rated For The Post
-function the_ratings_users($display = true) {
-	$post_ratings_users = intval(post_custom('ratings_users'));
-	if($display) {
-		echo $post_ratings_users;
-	} else {
-		return $post_ratings_users;
-	}
-}
-
-
-### Function: Displays The Total Score For The Post
-function the_ratings_score($display = true) {
-	$post_ratings_score = intval(post_custom('ratings_score'));
-	if($display) {
-		echo $post_ratings_score;
-	} else {
-		return $post_ratings_score;
-	}
-}
-
-
-### Function: Displays The Average Score For The Post
-function the_ratings_average($display = true) {
-	$post_ratings_average = post_custom('ratings_average');
-	if($display) {
-		echo $post_ratings_average;
-	} else {
-		return $post_ratings_average;
 	}
 }
 

@@ -141,7 +141,7 @@ function ratings_default_templates(template) {
 					</tr>
 					<tr>
 						<td><b>%RATINGS_MAX%</b> - <?php _e('Display the max number of ratings'); ?></td>
-						<td>&nbsp;</td>
+						<td><b>%RATINGS_PERCENTAGE%</b> - <?php _e('Display the ratings percentage'); ?></td>
 					</tr>
 				</table>
 			</fieldset>
@@ -165,7 +165,8 @@ function ratings_default_templates(template) {
 							- %RATINGS_IMAGES%<br />
 							- %RATINGS_MAX%<br />
 							- %RATINGS_USERS%<br />							
-							- %RATINGS_AVERAGE%<br /><br />
+							- %RATINGS_AVERAGE%<br />
+							- %RATINGS_PERCENTAGE%<br /><br />
 							<input type="button" name="RestoreDefault" value="<?php _e('Restore Default Template'); ?>" onclick="javascript: ratings_default_templates('text');" class="button" />
 						</td>
 						<td align="left"><textarea cols="80" rows="10" id="postratings_template_text" name="postratings_template_text"><?php echo get_settings('postratings_template_text'); ?></textarea></td>
@@ -176,7 +177,8 @@ function ratings_default_templates(template) {
 							<?php _e('Allowed Variables:'); ?><br />
 							- %RATINGS_MAX%<br />
 							- %RATINGS_USERS%<br />							
-							- %RATINGS_AVERAGE%<br /><br />
+							- %RATINGS_AVERAGE%<br />
+							- %RATINGS_PERCENTAGE%<br /><br />
 							<input type="button" name="RestoreDefault" value="<?php _e('Restore Default Template'); ?>" onclick="javascript: ratings_default_templates('none');" class="button" />
 						</td>
 						<td align="left"><textarea cols="80" rows="10" id="postratings_template_none" name="postratings_template_none"><?php echo get_settings('postratings_template_none'); ?></textarea></td>
