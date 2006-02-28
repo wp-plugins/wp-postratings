@@ -156,7 +156,7 @@ function ratings_default_templates(template) {
 							- %RATINGS_MAX%<br /><br />
 							<input type="button" name="RestoreDefault" value="<?php _e('Restore Default Template'); ?>" onclick="javascript: ratings_default_templates('vote');" class="button" />
 						</td>
-						<td align="left"><textarea cols="80" rows="10" id="postratings_template_vote" name="postratings_template_vote"><?php echo get_settings('postratings_template_vote'); ?></textarea></td>
+						<td align="left"><textarea cols="80" rows="10" id="postratings_template_vote" name="postratings_template_vote"><?php echo stripslashes(get_settings('postratings_template_vote')); ?></textarea></td>
 					</tr>
 					 <tr valign="top">
 						<td align="left" width="30%">
@@ -169,7 +169,7 @@ function ratings_default_templates(template) {
 							- %RATINGS_PERCENTAGE%<br /><br />
 							<input type="button" name="RestoreDefault" value="<?php _e('Restore Default Template'); ?>" onclick="javascript: ratings_default_templates('text');" class="button" />
 						</td>
-						<td align="left"><textarea cols="80" rows="10" id="postratings_template_text" name="postratings_template_text"><?php echo get_settings('postratings_template_text'); ?></textarea></td>
+						<td align="left"><textarea cols="80" rows="10" id="postratings_template_text" name="postratings_template_text"><?php echo stripslashes(get_settings('postratings_template_text')); ?></textarea></td>
 					</tr>
 					 <tr valign="top">
 						<td align="left" width="30%">
@@ -181,7 +181,7 @@ function ratings_default_templates(template) {
 							- %RATINGS_PERCENTAGE%<br /><br />
 							<input type="button" name="RestoreDefault" value="<?php _e('Restore Default Template'); ?>" onclick="javascript: ratings_default_templates('none');" class="button" />
 						</td>
-						<td align="left"><textarea cols="80" rows="10" id="postratings_template_none" name="postratings_template_none"><?php echo get_settings('postratings_template_none'); ?></textarea></td>
+						<td align="left"><textarea cols="80" rows="10" id="postratings_template_none" name="postratings_template_none"><?php echo stripslashes(get_settings('postratings_template_none')); ?></textarea></td>
 					</tr>
 				</table>
 			</fieldset>
