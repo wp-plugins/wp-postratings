@@ -362,7 +362,7 @@ if(!function_exists('get_highest_rated')) {
 add_action('activate_postratings/postratings.php', 'create_ratinglogs_table');
 function create_ratinglogs_table() {
 	global $wpdb;
-	include(ABSPATH.'/wp-admin/upgrade-functions.php');
+	include_once(ABSPATH.'/wp-admin/upgrade-functions.php');
 	// Create Post Ratings Table
 	$create_ratinglogs_sql = "CREATE TABLE $wpdb->ratings (".
 			"rating_id INT(11) NOT NULL auto_increment,".
