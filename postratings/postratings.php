@@ -3,7 +3,7 @@
 Plugin Name: WP-PostRatings
 Plugin URI: http://www.lesterchan.net/portfolio/programming.php
 Description: Enables You To Have A Rating System For Your Post
-Version: 1.00
+Version: 1.01
 Author: GaMerZ
 Author URI: http://www.lesterchan.net
 */
@@ -52,17 +52,18 @@ function the_ratings($display = true) {
 	// If User Voted
 	if($user_voted) {
 		if(!$display) {
-			return the_ratings_results(false);
+			return "<div id=\"post-ratings-$id\">".the_ratings_results($id).'</div>'."\n";
 		} else {
-			the_ratings_results();
+			echo "<div id=\"post-ratings-$id\">".the_ratings_results($id).'</div>'."\n";
+			return;
 		}
 	// If User Has Not Voted
 	} else {
 		if(!$display) {
-			return the_ratings_vote(false)."\n".the_ratings_results(false);
+			return "<div id=\"post-ratings-$id\">".the_ratings_vote($id).the_ratings_results($id).'</div>'."\n";
 		} else {
-			the_ratings_vote();
-			the_ratings_results();
+			echo "<div id=\"post-ratings-$id\">".the_ratings_vote($id).the_ratings_results($id).'</div>'."\n";
+			return;
 		}
 	}
 }
@@ -73,29 +74,52 @@ add_action('wp_head', 'the_ratings_vote_js');
 function the_ratings_vote_js() {
 	$ratings_image = get_settings('postratings_image');
 	$ratings_max = intval(get_settings('postratings_max'));
+	echo '<script src="'.get_settings('siteurl').'/wp-includes/js/tw-sack.js" type="text/javascript"></script>'."\n";
 	echo '<script language="JavaScript" type="text/javascript">'."\n";
-	echo 'function current_rating(id, rating) {'."\n";
-	echo 'for(i = 1; i <= rating; i++) {'."\n";
-	echo 'document.images[\'rating_\' + id + \'_\' + i].src = \''.get_settings('siteurl').'/wp-content/plugins/postratings/images/'.$ratings_image.'/rating_on.gif\';'."\n";	
-	echo '}}'."\n";
-	echo 'function ratings_off(id) {'."\n";
+	echo "\t".'var ratings = new sack(\'index.php\');'."\n";
+	echo "\t".'var post_id = 0;'."\n";
+	echo"\t". 'function current_rating(id, rating) {'."\n";
+	echo "\t\t".'post_id = id;'."\n";
+	echo "\t\t".'for(i = 1; i <= rating; i++) {'."\n";
+	echo "\t\t\t".'document.images[\'rating_\' + post_id + \'_\' + i].src = \''.get_settings('siteurl').'/wp-content/plugins/postratings/images/'.$ratings_image.'/rating_on.gif\';'."\n";	
+	echo "\t\t".'}'."\n";
+	echo "\t".'}'."\n";
+	echo "\t".'function ratings_off() {'."\n";
 	for($i=1; $i <= $ratings_max; $i++) {
-		echo 'document.images[\'rating_\' + id + \'_'.$i.'\'].src = \''.get_settings('siteurl').'/wp-content/plugins/postratings/images/'.$ratings_image.'/rating_off.gif\';'."\n";
+		echo "\t\t".'document.images[\'rating_\' + post_id + \'_'.$i.'\'].src = \''.get_settings('siteurl').'/wp-content/plugins/postratings/images/'.$ratings_image.'/rating_off.gif\';'."\n";
 	}
-	echo '}'."\n";
-	echo "</script>";
+	echo "\t".'}'."\n";
+	echo "\t".'function rate_loading(){'."\n";
+	echo "\t\t".'document.getElementById(\'post-ratings-\' + post_id).innerHTML = "<p>Processing Your Vote ...</p>";'."\n";
+	echo "\t".'}'."\n";
+	echo "\t".'function rate_post(post_ratings) {'."\n";
+	echo "\t\t".'ratings.setVar("pid", post_id);'."\n";
+	echo "\t\t".'ratings.setVar("rate", post_ratings);'."\n";
+	echo "\t\t".'ratings.method = \'GET\';'."\n";
+	echo "\t\t".'ratings.element = \'post-ratings-\' + post_id;'."\n";
+	echo "\t\t".'ratings.onLoading = rate_loading;'."\n";
+	echo "\t\t".'ratings.onLoaded = rate_loading; '."\n";
+	echo "\t\t". 'ratings.onInteractive = rate_loading;'."\n";
+	echo "\t\t".'ratings.runAJAX();'."\n";
+	echo "\t".'}'."\n";
+	echo '</script>'."\n";
 }
 
 
 ### Function: Display Ratings Results 
-function the_ratings_results($display = true) {
-	global $id;
+function the_ratings_results($post_id, $new_user = 0, $new_score = 0, $new_average = 0) {
 	$ratings_image = get_settings('postratings_image');
 	$ratings_max = intval(get_settings('postratings_max'));
-	$post_ratings = get_post_custom();
-	$post_ratings_users = $post_ratings['ratings_users'][0];
-	$post_ratings_score = $post_ratings['ratings_score'][0];
-	$post_ratings_average = $post_ratings['ratings_average'][0];
+	if($new_user == 0 && $new_score == 0 && $new_average == 0) {
+		$post_ratings = get_post_custom($post_id);
+		$post_ratings_users = $post_ratings['ratings_users'][0];
+		$post_ratings_score = $post_ratings['ratings_score'][0];
+		$post_ratings_average = $post_ratings['ratings_average'][0];
+	} else {
+		$post_ratings_users = $new_user;
+		$post_ratings_score = $new_score;
+		$post_ratings_average = $new_average;
+	}
 	$post_ratings_images = '';
 	if($post_ratings_score == 0 || $post_ratings_users == 0) {
 		$post_ratings = 0;
@@ -121,11 +145,8 @@ function the_ratings_results($display = true) {
 		$template_postratings_none = str_replace("%RATINGS_AVERAGE%", $post_ratings_average, $template_postratings_none);
 		$template_postratings_none = str_replace("%RATINGS_PERCENTAGE%", $post_ratings_percentage, $template_postratings_none);
 		$template_postratings_none = str_replace("%RATINGS_USERS%", $post_ratings_users, $template_postratings_none);
-		if($display) {
-			echo $template_postratings_none;
-		} else {
-			return $template_postratings_none;
-		}
+		// Return Post Ratings Template
+		return $template_postratings_none;
 	} else {
 		// Display Start Of Rating Image
 		if(file_exists(ABSPATH.'/wp-content/plugins/postratings/images/'.$ratings_image.'/rating_start.gif')) {
@@ -151,35 +172,25 @@ function the_ratings_results($display = true) {
 		$template_postratings_text = str_replace("%RATINGS_MAX%", $ratings_max, $template_postratings_text);
 		$template_postratings_text = str_replace("%RATINGS_AVERAGE%", $post_ratings_average, $template_postratings_text);
 		$template_postratings_text = str_replace("%RATINGS_PERCENTAGE%", $post_ratings_percentage, $template_postratings_text);
-		$template_postratings_text = str_replace("%RATINGS_USERS%", number_format($post_ratings_users), $template_postratings_text);		
-		if($display) {
-			echo $template_postratings_text;
-		} else {
-			return $template_postratings_text;
-		}
+		$template_postratings_text = str_replace("%RATINGS_USERS%", number_format($post_ratings_users), $template_postratings_text);
+		// Return Post Ratings Template
+		return $template_postratings_text;
 	}
 }
 
 
 ### Function: Display Ratings Vote
-function the_ratings_vote($display = true) {
-	global $id;
+function the_ratings_vote($post_id) {
 	$post_ratings_image_vote = '';
 	$ratings_image = get_settings('postratings_image');
 	$ratings_max = intval(get_settings('postratings_max'));
-	$rating_url = get_permalink();
-	if(strpos($rating_url, '?') !== false) {
-		$rating_url = $rating_url.'&amp;pid='.$id.'&amp;';
-	} else {
-		$rating_url = $rating_url.'?pid='.$id.'&amp;';
-	}
 	// Display Start Of Rating Image
 	if(file_exists(ABSPATH.'/wp-content/plugins/postratings/images/'.$ratings_image.'/rating_start.gif')) {
 		$post_ratings_image_vote = '<img src="'.get_settings('siteurl').'/wp-content/plugins/postratings/images/'.$ratings_image.'/rating_start.gif" alt="" />';
 	}
 	// Display Rating Image
 	for($i=1; $i <= $ratings_max; $i++) {
-	$post_ratings_image_vote .= '<a href="'.$rating_url.'rate='.$i.'" title="'.$i.' Stars"><img src="'.get_settings('siteurl').'/wp-content/plugins/postratings/images/'.$ratings_image.'/rating_off.gif" alt="'.$i.' Stars" border="0" name="rating_'.$id.'_'.$i.'" onmouseover="current_rating('.$id.', '.$i.');" onmouseout="ratings_off('.$id.');" /></a>';
+	$post_ratings_image_vote .= '<img src="'.get_settings('siteurl').'/wp-content/plugins/postratings/images/'.$ratings_image.'/rating_off.gif" alt="'.$i.' Stars" border="0" name="rating_'.$post_id.'_'.$i.'" onmouseover="current_rating('.$post_id.', '.$i.');" onmouseout="ratings_off();" title="'.$i.' Stars" onclick="rate_post(\''.$i.'\');" style="cursor: pointer;" />';
 	}
 	// Display End Of Rating Image
 	if(file_exists(ABSPATH.'/wp-content/plugins/postratings/images/'.$ratings_image.'/rating_end.gif')) {
@@ -189,11 +200,8 @@ function the_ratings_vote($display = true) {
 	$template_postratings_vote = stripslashes(get_settings('postratings_template_vote'));
 	$template_postratings_vote = str_replace("%RATINGS_IMAGES_VOTE%", $post_ratings_image_vote, $template_postratings_vote);
 	$template_postratings_vote = str_replace("%RATINGS_MAX%", $ratings_max, $template_postratings_vote);
-	if($display) {
-		echo $template_postratings_vote;
-	} else {
-		return $template_postratings_vote;
-	}
+	// Return Post Ratings Voting Template
+	return $template_postratings_vote;
 }
 
 
@@ -201,6 +209,14 @@ function the_ratings_vote($display = true) {
 add_action('init', 'process_ratings');
 function process_ratings() {
 	global $wpdb, $user_identity;
+	// Check For Bot
+	$bots_useragent = array('googlebot', 'google', 'msnbot', 'ia_archiver', 'lycos', 'jeeves', 'scooter', 'fast-webcrawler', 'slurp@inktomi', 'turnitinbot', 'technorati', 'yahoo', 'findexa', 'findlinks', 'gaisbo', 'zyborg', 'surveybot', 'bloglines', 'blogsearch', 'ubsub', 'syndic8', 'userland', 'gigabot', 'become.com');
+	$useragent = $_SERVER['HTTP_USER_AGENT'];
+	foreach ($bots_useragent as $bot) { 
+		if (stristr($useragent, $bot) !== false) {
+			exit();
+		} 
+	}
 	$ratings_max = intval(get_settings('postratings_max'));
 	$rate = intval($_GET['rate']);
 	$post_id = intval($_GET['pid']);
@@ -214,23 +230,27 @@ function process_ratings() {
 			if($post) {
 				$post_title = addslashes($post->post_title);
 				$post_ratings = get_post_custom($post_id);
-				$post_ratings_users = $post_ratings['ratings_users'][0];
-				$post_ratings_score = $post_ratings['ratings_score'][0];	
+				$post_ratings_users = intval($post_ratings['ratings_users'][0]);
+				$post_ratings_score = intval($post_ratings['ratings_score'][0]);	
 				// Check For Ratings Lesser Than 1 And Greater Than $ratings_max
 				if($rate < 1 || $rate > $ratings_max) {
 					$rate = 0;
 				}
 				// Add Ratings
 				if($post_ratings_users == 0 && $post_ratings_score == 0) {
+					$post_ratings_users = 1;
+					$post_ratings_score = $rate;
 					$post_ratings_average = round($rate/1, 2);
 					add_post_meta($post_id, 'ratings_users', 1);
 					add_post_meta($post_id, 'ratings_score', $rate);
 					add_post_meta($post_id, 'ratings_average',$post_ratings_average);	
 				// Update Ratings
 				} else {
-					$post_ratings_average = round(($post_ratings_score+$rate)/($post_ratings_users+1), 2);
-					update_post_meta($post_id, 'ratings_users', ($post_ratings_users+1));	
-					update_post_meta($post_id, 'ratings_score', ($post_ratings_score+$rate));
+					$post_ratings_users = ($post_ratings_users+1);
+					$post_ratings_score = ($post_ratings_score+$rate);
+					$post_ratings_average = round($post_ratings_score/$post_ratings_users, 2);					
+					update_post_meta($post_id, 'ratings_users', $post_ratings_users);	
+					update_post_meta($post_id, 'ratings_score', $post_ratings_score);
 					update_post_meta($post_id, 'ratings_average', $post_ratings_average);
 				}
 				// Add Log
@@ -244,6 +264,9 @@ function process_ratings() {
 				$rate_log = $wpdb->query("INSERT INTO $wpdb->ratings VALUES (0, $post_id, '$post_title', $rate,'".current_time('timestamp')."', '".get_ipaddress()."', '".gethostbyaddr(get_ipaddress())."' ,'$rate_user')");
 				// Add Cookie
 				$rate_cookie = setcookie("rated_".$post_id, 1, time() + 30000000, COOKIEPATH);
+				// Output AJAX Result
+				echo the_ratings_results($post_id, $post_ratings_users, $post_ratings_score, $post_ratings_average);
+				exit();
 			}
 		}
 	}
@@ -362,7 +385,7 @@ if(!function_exists('get_highest_rated')) {
 add_action('activate_postratings/postratings.php', 'create_ratinglogs_table');
 function create_ratinglogs_table() {
 	global $wpdb;
-	include_once(ABSPATH.'/wp-admin/upgrade-functions.php');
+	include(ABSPATH.'/wp-admin/upgrade-functions.php');
 	// Create Post Ratings Table
 	$create_ratinglogs_sql = "CREATE TABLE $wpdb->ratings (".
 			"rating_id INT(11) NOT NULL auto_increment,".
@@ -378,7 +401,7 @@ function create_ratinglogs_table() {
 	// Add In Options (4 Records)
 	add_option('postratings_image', 'stars', 'Your Ratings Image');
 	add_option('postratings_max', 5, 'Your Max Ratings');
-	add_option('postratings_template_vote', '<p>%RATINGS_IMAGES_VOTE%</p>', 'Ratings Vote Template Text');
+	add_option('postratings_template_vote', '<p>Rate This Post: %RATINGS_IMAGES_VOTE%</p>', 'Ratings Vote Template Text');
 	add_option('postratings_template_text', '<p>%RATINGS_IMAGES% (<b>%RATINGS_USERS%</b> votes, average: <b>%RATINGS_AVERAGE%</b> out of %RATINGS_MAX%)</p>', 'Ratings Template Text');
 	add_option('postratings_template_none', 'No Ratings Yet', 'Ratings Template For No Ratings');
 	// Set 'manage_ratings' Capabilities To Administrator	

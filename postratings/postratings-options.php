@@ -2,7 +2,7 @@
 /*
 +----------------------------------------------------------------+
 |																							|
-|	WordPress 2.0 Plugin: WP-PostRatings 1.00								|
+|	WordPress 2.0 Plugin: WP-PostRatings 1.01								|
 |	Copyright (c) 2006 Lester "GaMerZ" Chan									|
 |																							|
 |	File Written By:																	|
@@ -65,7 +65,7 @@ function ratings_default_templates(template) {
 	var default_template;
 	switch(template) {
 		case "vote":
-			default_template = "<p>%RATINGS_IMAGES_VOTE%</p>";
+			default_template = "<p>Rate This Post: %RATINGS_IMAGES_VOTE%</p>";
 			break;
 		case "text":
 			default_template = "<p>%RATINGS_IMAGES% (<b>%RATINGS_USERS%</b> votes, average: <b>%RATINGS_AVERAGE%</b> out of %RATINGS_MAX%)</p>";

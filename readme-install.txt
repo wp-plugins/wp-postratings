@@ -1,13 +1,5 @@
 -> Installation Instructions
 ------------------------------------------------------------------
-// Drop previous wp-postratings table (wp_ratingslogs) using phpmyadmin
-
-Note:
-------------------------------------------------------------------
-Only if you are using the previous version of wp-postratings
-------------------------------------------------------------------
-
-
 // Open wp-content/plugins folder
 
 Put:
@@ -38,8 +30,6 @@ Note:
 ------------------------------------------------------------------
 - This will display the ratings of the post and the voting image if user has not voted yet.
 - To embed the ratings into your post, use [ratings].
-- the_ratings_result(); will display the ratings of the post.
-- the_ratings_vote(); will display the voting images.
 ------------------------------------------------------------------
 
 
