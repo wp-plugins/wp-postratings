@@ -12,7 +12,9 @@ Updated		-> 1st April 2006
 
 // Version 1.01 (01-04-2006)
 - NEW: AJAX Voting
+- NEW: Category ID Filter Added To Highest Rated Post And Most Rated Post. Example: get_highest_rated(mode, category_id, limit)
 - FIXED: Block Search Bots From Voting
+- FIXED: Hard Coded Table Name In Ratings Stats
 
 // Version 1.00 (01-03-2006)
 - NEW: Initial Release

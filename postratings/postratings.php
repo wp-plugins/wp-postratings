@@ -331,7 +331,7 @@ function place_ratings($content){
 
 ### Function: Display Most Rated Page/Post
 if(!function_exists('get_most_rated')) {
-	function get_most_rated($mode = '', $limit = 10) {
+	function get_most_rated($mode = '', $category_id = 0, $limit = 10) {
 		global $wpdb, $post;
 		$where = '';
 		if($mode == 'post') {
@@ -341,7 +341,10 @@ if(!function_exists('get_most_rated')) {
 		} else {
 			$where = '(post_status = \'publish\' OR post_status = \'static\')';
 		}
-		$most_rated = $wpdb->get_results("SELECT wp_posts.ID, post_title, post_name, post_status, post_date, CAST(meta_value AS UNSIGNED) AS votes FROM $wpdb->posts LEFT JOIN $wpdb->postmeta ON $wpdb->postmeta.post_id = $wpdb->posts.ID WHERE post_date < '".current_time('mysql')."' AND $where AND meta_key = 'ratings_users' AND post_password = '' ORDER BY votes DESC LIMIT $limit");
+		if($category_id > 0) {
+			$where .= " AND  post_category = $category_id";
+		}
+		$most_rated = $wpdb->get_results("SELECT $wpdb->posts.ID, post_title, post_name, post_status, post_date, CAST(meta_value AS UNSIGNED) AS votes FROM $wpdb->posts LEFT JOIN $wpdb->postmeta ON $wpdb->postmeta.post_id = $wpdb->posts.ID WHERE post_date < '".current_time('mysql')."' AND $where AND meta_key = 'ratings_users' AND post_password = '' ORDER BY votes DESC LIMIT $limit");
 		if($most_rated) {
 			foreach ($most_rated as $post) {
 				$post_title = htmlspecialchars(stripslashes($post->post_title));
@@ -357,7 +360,7 @@ if(!function_exists('get_most_rated')) {
 
 ### Function: Display Highest Rated Page/Post
 if(!function_exists('get_highest_rated')) {
-	function get_highest_rated($mode = '', $limit = 10) {
+	function get_highest_rated($mode = '', $category_id = 0, $limit = 10) {
 		global $wpdb, $post;
 		$where = '';
 		if($mode == 'post') {
@@ -367,7 +370,10 @@ if(!function_exists('get_highest_rated')) {
 		} else {
 			$where = '(post_status = \'publish\' OR post_status = \'static\')';
 		}
-		$most_rated = $wpdb->get_results("SELECT wp_posts.ID, post_title, post_name, post_status, post_date, (meta_value+0.00) AS highest FROM $wpdb->posts LEFT JOIN $wpdb->postmeta ON $wpdb->postmeta.post_id = $wpdb->posts.ID WHERE post_date < '".current_time('mysql')."' AND $where AND meta_key = 'ratings_average' AND post_password = '' ORDER BY highest DESC LIMIT $limit");
+		if($category_id > 0) {
+			$where .= " AND  post_category = $category_id";
+		}
+		$most_rated = $wpdb->get_results("SELECT $wpdb->posts.ID, post_title, post_name, post_status, post_date, (meta_value+0.00) AS highest FROM $wpdb->posts LEFT JOIN $wpdb->postmeta ON $wpdb->postmeta.post_id = $wpdb->posts.ID WHERE post_date < '".current_time('mysql')."' AND $where AND meta_key = 'ratings_average' AND post_password = '' ORDER BY highest DESC LIMIT $limit");
 		if($most_rated) {
 			foreach ($most_rated as $post) {
 				$post_title = htmlspecialchars(stripslashes($post->post_title));
