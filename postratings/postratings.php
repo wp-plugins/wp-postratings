@@ -75,7 +75,7 @@ function the_ratings_vote_js() {
 	$ratings_image = get_settings('postratings_image');
 	$ratings_max = intval(get_settings('postratings_max'));
 	echo '<script src="'.get_settings('siteurl').'/wp-includes/js/tw-sack.js" type="text/javascript"></script>'."\n";
-	echo '<script language="JavaScript" type="text/javascript">'."\n";
+	echo '<script type="text/javascript">'."\n";
 	echo "\t".'var ratings = new sack(\'index.php\');'."\n";
 	echo "\t".'var post_id = 0;'."\n";
 	echo"\t". 'function current_rating(id, rating) {'."\n";
@@ -90,7 +90,7 @@ function the_ratings_vote_js() {
 	}
 	echo "\t".'}'."\n";
 	echo "\t".'function rate_loading(){'."\n";
-	echo "\t\t".'document.getElementById(\'post-ratings-\' + post_id).innerHTML = "<p>Processing Your Vote ...</p>";'."\n";
+	echo "\t\t".'document.getElementById(\'post-ratings-\' + post_id).innerHTML = "Processing Your Vote ...";'."\n";
 	echo "\t".'}'."\n";
 	echo "\t".'function rate_post(post_ratings) {'."\n";
 	echo "\t\t".'ratings.setVar("pid", post_id);'."\n";
@@ -190,7 +190,7 @@ function the_ratings_vote($post_id) {
 	}
 	// Display Rating Image
 	for($i=1; $i <= $ratings_max; $i++) {
-	$post_ratings_image_vote .= '<img src="'.get_settings('siteurl').'/wp-content/plugins/postratings/images/'.$ratings_image.'/rating_off.gif" alt="'.$i.' Stars" border="0" name="rating_'.$post_id.'_'.$i.'" onmouseover="current_rating('.$post_id.', '.$i.');" onmouseout="ratings_off();" title="'.$i.' Stars" onclick="rate_post(\''.$i.'\');" style="cursor: pointer;" />';
+	$post_ratings_image_vote .= '<img src="'.get_settings('siteurl').'/wp-content/plugins/postratings/images/'.$ratings_image.'/rating_off.gif" alt="'.$i.' Stars" id="rating_'.$post_id.'_'.$i.'" onmouseover="current_rating('.$post_id.', '.$i.');" onmouseout="ratings_off();" title="'.$i.' Stars" onclick="rate_post(\''.$i.'\');" style="cursor: pointer;" />';
 	}
 	// Display End Of Rating Image
 	if(file_exists(ABSPATH.'/wp-content/plugins/postratings/images/'.$ratings_image.'/rating_end.gif')) {
