@@ -3,7 +3,7 @@
 Plugin Name: WP-PostRatings
 Plugin URI: http://www.lesterchan.net/portfolio/programming.php
 Description: Enables You To Have A Rating System For Your Post
-Version: 1.01
+Version: 1.02
 Author: GaMerZ
 Author URI: http://www.lesterchan.net
 */
@@ -52,20 +52,34 @@ function the_ratings($display = true) {
 	// If User Voted
 	if($user_voted) {
 		if(!$display) {
-			return "<div id=\"post-ratings-$id\">".the_ratings_results($id).'</div>'."\n";
+			return "<div id=\"post-ratings-$id\" class=\"post-ratings\">".the_ratings_results($id).'</div>'."\n";
 		} else {
-			echo "<div id=\"post-ratings-$id\">".the_ratings_results($id).'</div>'."\n";
+			echo "<div id=\"post-ratings-$id\" class=\"post-ratings\">".the_ratings_results($id).'</div>'."\n";
 			return;
 		}
 	// If User Has Not Voted
 	} else {
 		if(!$display) {
-			return "<div id=\"post-ratings-$id\">".the_ratings_vote($id).the_ratings_results($id).'</div>'."\n";
+			return "<div id=\"post-ratings-$id\" class=\"post-ratings\">".the_ratings_vote($id).'</div>'."\n";
 		} else {
-			echo "<div id=\"post-ratings-$id\">".the_ratings_vote($id).the_ratings_results($id).'</div>'."\n";
+			echo "<div id=\"post-ratings-$id\" class=\"post-ratings\">".the_ratings_vote($id).'</div>'."\n";
 			return;
 		}
 	}
+}
+
+
+### Function: Displays Ratings CSS
+add_action('wp_head', 'ratings_css');
+function ratings_css() {
+	echo '<style type="text/css" media="screen">'."\n";
+	echo "\t".'.post-ratings {'."\n";
+	echo "\t\t".'width:100%;'."\n";
+	echo "\t\t".'filter: alpha(opacity=100);'."\n";
+	echo "\t\t".'-moz-opacity: 1;'."\n";
+	echo "\t\t".'opacity: 1;'."\n";
+	echo "\t".'}'."\n";
+	echo '</style>'."\n";
 }
 
 
@@ -76,32 +90,66 @@ function the_ratings_vote_js() {
 	$ratings_max = intval(get_settings('postratings_max'));
 	echo '<script src="'.get_settings('siteurl').'/wp-includes/js/tw-sack.js" type="text/javascript"></script>'."\n";
 	echo '<script type="text/javascript">'."\n";
+	echo '/* <![CDATA[*/'."\n";
 	echo "\t".'var ratings = new sack(\'index.php\');'."\n";
 	echo "\t".'var post_id = 0;'."\n";
-	echo"\t". 'function current_rating(id, rating) {'."\n";
+	echo "\t".'var post_rating = 0;'."\n";
+	echo "\t".'var fade_in_opacity = 0;'."\n";
+	echo "\t".'var fade_out_opacity = 100;'."\n";
+	echo "\t".'var fade_out_opacity = 100;'."\n";
+	echo "\t".'var is_ie = (document.all && document.getElementById);'."\n";
+	echo "\t".'var is_moz = (!document.all && document.getElementById);'."\n";
+	echo"\t".'function fade_in_text() {'."\n";
+	echo "\t\t".'if(fade_in_opacity < 100) {'."\n";
+	echo "\t\t\t".'fade_in_opacity += 10;'."\n";
+	echo "\t\t\t".'if(is_ie) document.getElementById(\'post-ratings-\' + post_id).filters.alpha.opacity = fade_in_opacity;'."\n";
+	echo "\t\t\t".'if(is_moz) document.getElementById(\'post-ratings-\' + post_id).style.MozOpacity = (fade_in_opacity/100);'."\n";
+	echo "\t\t\t".'setTimeout("fade_in_text()", 100); '."\n";
+	echo "\t\t".'} else {'."\n";
+	echo "\t\t\t".'fade_in_opacity = 100;'."\n";
+	echo "\t\t".'}'."\n";
+	echo"\t".'}'."\n";
+	echo"\t".'function current_rating(id, rating) {'."\n";
 	echo "\t\t".'post_id = id;'."\n";
+	echo "\t\t".'post_rating = rating;'."\n";
 	echo "\t\t".'for(i = 1; i <= rating; i++) {'."\n";
-	echo "\t\t\t".'document.images[\'rating_\' + post_id + \'_\' + i].src = \''.get_settings('siteurl').'/wp-content/plugins/postratings/images/'.$ratings_image.'/rating_on.gif\';'."\n";	
+	echo "\t\t\t".'document.images[\'rating_\' + post_id + \'_\' + i].src = \''.get_settings('siteurl').'/wp-content/plugins/postratings/images/'.$ratings_image.'/rating_over.gif\';'."\n";	
 	echo "\t\t".'}'."\n";
 	echo "\t".'}'."\n";
-	echo "\t".'function ratings_off() {'."\n";
-	for($i=1; $i <= $ratings_max; $i++) {
-		echo "\t\t".'document.images[\'rating_\' + post_id + \'_'.$i.'\'].src = \''.get_settings('siteurl').'/wp-content/plugins/postratings/images/'.$ratings_image.'/rating_off.gif\';'."\n";
-	}
+	echo "\t".'function ratings_off(rating_score, insert_half) {'."\n";
+	echo "\t\t".'for(i = 1; i <= '.$ratings_max.'; i++) {'."\n";
+	echo "\t\t\t".'if(i <= rating_score) {'."\n";
+	echo "\t\t\t\t".'document.images[\'rating_\' + post_id + \'_\' + i].src = \''.get_settings('siteurl').'/wp-content/plugins/postratings/images/'.$ratings_image.'/rating_on.gif\';'."\n";	
+	echo "\t\t\t".'} else if(i == insert_half) {'."\n";
+	echo "\t\t\t\t".'document.images[\'rating_\' + post_id + \'_\' + i].src = \''.get_settings('siteurl').'/wp-content/plugins/postratings/images/'.$ratings_image.'/rating_half.gif\';'."\n";
+	echo "\t\t\t".'} else {'."\n";
+	echo "\t\t\t\t".'document.images[\'rating_\' + post_id + \'_\' + i].src = \''.get_settings('siteurl').'/wp-content/plugins/postratings/images/'.$ratings_image.'/rating_off.gif\';'."\n";
+	echo "\t\t\t".'}'."\n";
+	echo "\t\t".'}'."\n";
 	echo "\t".'}'."\n";
 	echo "\t".'function rate_loading(){'."\n";
 	echo "\t\t".'document.getElementById(\'post-ratings-\' + post_id).innerHTML = "Processing Your Vote ...";'."\n";
 	echo "\t".'}'."\n";
-	echo "\t".'function rate_post(post_ratings) {'."\n";
-	echo "\t\t".'ratings.setVar("pid", post_id);'."\n";
-	echo "\t\t".'ratings.setVar("rate", post_ratings);'."\n";
-	echo "\t\t".'ratings.method = \'GET\';'."\n";
-	echo "\t\t".'ratings.element = \'post-ratings-\' + post_id;'."\n";
-	echo "\t\t".'ratings.onLoading = rate_loading;'."\n";
-	echo "\t\t".'ratings.onLoaded = rate_loading; '."\n";
-	echo "\t\t". 'ratings.onInteractive = rate_loading;'."\n";
-	echo "\t\t".'ratings.runAJAX();'."\n";
+	echo "\t".'function rate_post() {'."\n";	
+	echo "\t\t".'if(fade_out_opacity > 0) {'."\n";
+	echo "\t\t\t".'fade_out_opacity -= 10;'."\n";
+	echo "\t\t\t".'if(is_ie) document.getElementById(\'post-ratings-\' + post_id).filters.alpha.opacity = fade_out_opacity;'."\n";
+	echo "\t\t\t".'if(is_moz) document.getElementById(\'post-ratings-\' + post_id).style.MozOpacity = (fade_out_opacity/100);'."\n";
+	echo "\t\t\t".'setTimeout("rate_post()", 100); '."\n";
+	echo "\t\t".'} else {'."\n";
+	echo "\t\t\t".'fade_out_opacity = 0;'."\n";
+	echo "\t\t\t".'ratings.setVar("pid", post_id);'."\n";
+	echo "\t\t\t".'ratings.setVar("rate", post_rating);'."\n";
+	echo "\t\t\t".'ratings.method = \'GET\';'."\n";
+	echo "\t\t\t".'ratings.element = \'post-ratings-\' + post_id;'."\n";
+	echo "\t\t\t".'ratings.onLoading = rate_loading;'."\n";
+	echo "\t\t\t".'ratings.onLoaded = rate_loading; '."\n";
+	echo "\t\t\t".'ratings.onInteractive = rate_loading;'."\n";
+	echo "\t\t\t".'ratings.onCompletion = fade_in_text;'."\n";
+	echo "\t\t\t".'ratings.runAJAX();'."\n";	
+	echo "\t\t".'}'."\n";
 	echo "\t".'}'."\n";
+	echo '/* ]]> */'."\n";
 	echo '</script>'."\n";
 }
 
@@ -138,9 +186,93 @@ function the_ratings_results($post_id, $new_user = 0, $new_score = 0, $new_avera
 		$insert_half = ceil($post_ratings);
 	}	
 	$post_ratings = intval($post_ratings);
-	// No Ratings
+
+	// Display Start Of Rating Image
+	if(file_exists(ABSPATH.'/wp-content/plugins/postratings/images/'.$ratings_image.'/rating_start.gif')) {
+		$post_ratings_images .= '<img src="'.get_settings('siteurl').'/wp-content/plugins/postratings/images/'.$ratings_image.'/rating_start.gif" alt="" />';
+	}
+	// Display Rated Images
+	for($i=1; $i <= $ratings_max; $i++) {
+		if($i <= $post_ratings) {
+			$post_ratings_images .= '<img src="'.get_settings('siteurl').'/wp-content/plugins/postratings/images/'.$ratings_image.'/rating_on.gif" alt="'.$post_ratings_users.__(' Votes | Average: ').$post_ratings_average.__(' out of ').$ratings_max.'" />';		
+		} elseif($i == $insert_half) {
+			$post_ratings_images .= '<img src="'.get_settings('siteurl').'/wp-content/plugins/postratings/images/'.$ratings_image.'/rating_half.gif" alt="'.$post_ratings_users.__(' Votes | Average: ').$post_ratings_average.__(' out of ').$ratings_max.'" />';
+		} else {
+			$post_ratings_images .= '<img src="'.get_settings('siteurl').'/wp-content/plugins/postratings/images/'.$ratings_image.'/rating_off.gif" alt="'.$post_ratings_users.__(' Votes | Average: ').$post_ratings_average.__(' out of ').$ratings_max.'" />';
+		}
+	}
+	// Display End Of Rating Image
+	if(file_exists(ABSPATH.'/wp-content/plugins/postratings/images/'.$ratings_image.'/rating_end.gif')) {
+		$post_ratings_images .= '<img src="'.get_settings('siteurl').'/wp-content/plugins/postratings/images/'.$ratings_image.'/rating_end.gif" alt="" />';
+	}
+	// Display The Contents
+	$template_postratings_text = stripslashes(get_settings('postratings_template_text'));
+	$template_postratings_text = str_replace("%RATINGS_IMAGES%", $post_ratings_images, $template_postratings_text);
+	$template_postratings_text = str_replace("%RATINGS_MAX%", $ratings_max, $template_postratings_text);
+	$template_postratings_text = str_replace("%RATINGS_AVERAGE%", $post_ratings_average, $template_postratings_text);
+	$template_postratings_text = str_replace("%RATINGS_PERCENTAGE%", $post_ratings_percentage, $template_postratings_text);
+	$template_postratings_text = str_replace("%RATINGS_USERS%", number_format($post_ratings_users), $template_postratings_text);
+	// Return Post Ratings Template
+	return $template_postratings_text;
+}
+
+
+### Function: Display Ratings Vote
+function the_ratings_vote($post_id, $new_user = 0, $new_score = 0, $new_average = 0) {
+	$ratings_image = get_settings('postratings_image');
+	$ratings_max = intval(get_settings('postratings_max'));
+	if($new_user == 0 && $new_score == 0 && $new_average == 0) {
+		$post_ratings = get_post_custom($post_id);
+		$post_ratings_users = $post_ratings['ratings_users'][0];
+		$post_ratings_score = $post_ratings['ratings_score'][0];
+		$post_ratings_average = $post_ratings['ratings_average'][0];
+	} else {
+		$post_ratings_users = $new_user;
+		$post_ratings_score = $new_score;
+		$post_ratings_average = $new_average;
+	}
+	$post_ratings_images = '';
+	if($post_ratings_score == 0 || $post_ratings_users == 0) {
+		$post_ratings = 0;
+		$post_ratings_average = 0;
+		$post_ratings_percentage = 0;
+	} else {
+		$post_ratings = round($post_ratings_average, 1);
+		$post_ratings_percentage = round((($post_ratings_score/$post_ratings_users)/$ratings_max) * 100, 2);		
+	}
+	// Check For Half Star
+	$insert_half = 0;
+	$average_diff = abs(floor($post_ratings_average)-$post_ratings);
+	if($average_diff >= 0.25 && $average_diff <= 0.75) {
+		$insert_half = ceil($post_ratings_average);
+	} elseif($average_diff > 0.75) {
+		$insert_half = ceil($post_ratings);
+	}	
+	$post_ratings = intval($post_ratings);
+
+	// Display Start Of Rating Image
+	if(file_exists(ABSPATH.'/wp-content/plugins/postratings/images/'.$ratings_image.'/rating_start.gif')) {
+		$post_ratings_images .= '<img src="'.get_settings('siteurl').'/wp-content/plugins/postratings/images/'.$ratings_image.'/rating_start.gif" alt="" />';
+	}
+	// Display Rated Images
+	for($i=1; $i <= $ratings_max; $i++) {
+		if($i <= $post_ratings) {
+			$post_ratings_images .= '<img id="rating_'.$post_id.'_'.$i.'" src="'.get_settings('siteurl').'/wp-content/plugins/postratings/images/'.$ratings_image.'/rating_on.gif" alt="'.$post_ratings_users.__(' Votes | Average: ').$post_ratings_average.__(' out of ').$ratings_max.'" title="'.$i.' Stars" onmouseover="current_rating('.$post_id.', '.$i.');" onmouseout="ratings_off('.$post_ratings.', '.$insert_half.');" onclick="rate_post();" style="cursor: pointer;" />';		
+		} elseif($i == $insert_half) {
+			$post_ratings_images .= '<img id="rating_'.$post_id.'_'.$i.'" src="'.get_settings('siteurl').'/wp-content/plugins/postratings/images/'.$ratings_image.'/rating_half.gif" alt="'.$post_ratings_users.__(' Votes | Average: ').$post_ratings_average.__(' out of ').$ratings_max.'" title="'.$i.' Stars" onmouseover="current_rating('.$post_id.', '.$i.');" onmouseout="ratings_off('.$post_ratings.', '.$insert_half.');" onclick="rate_post();" style="cursor: pointer;" />';
+		} else {
+			$post_ratings_images .= '<img id="rating_'.$post_id.'_'.$i.'" src="'.get_settings('siteurl').'/wp-content/plugins/postratings/images/'.$ratings_image.'/rating_off.gif" alt="'.$post_ratings_users.__(' Votes | Average: ').$post_ratings_average.__(' out of ').$ratings_max.'" title="'.$i.' Stars" onmouseover="current_rating('.$post_id.', '.$i.');" onmouseout="ratings_off('.$post_ratings.', '.$insert_half.');" onclick="rate_post();" style="cursor: pointer;" />';
+		}
+	}
+	// Display End Of Rating Image
+	if(file_exists(ABSPATH.'/wp-content/plugins/postratings/images/'.$ratings_image.'/rating_end.gif')) {
+		$post_ratings_images .= '<img src="'.get_settings('siteurl').'/wp-content/plugins/postratings/images/'.$ratings_image.'/rating_end.gif" alt="" />';
+	}
+
+	// If No Ratings, Return No Ratings templae
 	if($post_ratings == 0) {
 		$template_postratings_none = stripslashes(get_settings('postratings_template_none'));
+		$template_postratings_none = str_replace("%RATINGS_IMAGES_VOTE%", $post_ratings_images, $template_postratings_none);
 		$template_postratings_none = str_replace("%RATINGS_MAX%", $ratings_max, $template_postratings_none);
 		$template_postratings_none = str_replace("%RATINGS_AVERAGE%", $post_ratings_average, $template_postratings_none);
 		$template_postratings_none = str_replace("%RATINGS_PERCENTAGE%", $post_ratings_percentage, $template_postratings_none);
@@ -148,60 +280,16 @@ function the_ratings_results($post_id, $new_user = 0, $new_score = 0, $new_avera
 		// Return Post Ratings Template
 		return $template_postratings_none;
 	} else {
-		// Display Start Of Rating Image
-		if(file_exists(ABSPATH.'/wp-content/plugins/postratings/images/'.$ratings_image.'/rating_start.gif')) {
-			$post_ratings_images .= '<img src="'.get_settings('siteurl').'/wp-content/plugins/postratings/images/'.$ratings_image.'/rating_start.gif" alt="" />';
-		}
-		// Display Rated Images
-		for($i=1; $i <= $ratings_max; $i++) {
-			if($i <= $post_ratings) {
-				$post_ratings_images .= '<img src="'.get_settings('siteurl').'/wp-content/plugins/postratings/images/'.$ratings_image.'/rating_on.gif" alt="'.$post_ratings_users.__(' Votes | Average: ').$post_ratings_average.__(' out of ').$ratings_max.'" />';		
-			} elseif($i == $insert_half) {
-				$post_ratings_images .= '<img src="'.get_settings('siteurl').'/wp-content/plugins/postratings/images/'.$ratings_image.'/rating_half.gif" alt="'.$post_ratings_users.__(' Votes | Average: ').$post_ratings_average.__(' out of ').$ratings_max.'" />';
-			} else {
-				$post_ratings_images .= '<img src="'.get_settings('siteurl').'/wp-content/plugins/postratings/images/'.$ratings_image.'/rating_off.gif" alt="'.$post_ratings_users.__(' Votes | Average: ').$post_ratings_average.__(' out of ').$ratings_max.'" />';
-			}
-		}
-		// Display End Of Rating Image
-		if(file_exists(ABSPATH.'/wp-content/plugins/postratings/images/'.$ratings_image.'/rating_end.gif')) {
-			$post_ratings_images .= '<img src="'.get_settings('siteurl').'/wp-content/plugins/postratings/images/'.$ratings_image.'/rating_end.gif" alt="" />';
-		}
 		// Display The Contents
-		$template_postratings_text = stripslashes(get_settings('postratings_template_text'));
-		$template_postratings_text = str_replace("%RATINGS_IMAGES%", $post_ratings_images, $template_postratings_text);
-		$template_postratings_text = str_replace("%RATINGS_MAX%", $ratings_max, $template_postratings_text);
-		$template_postratings_text = str_replace("%RATINGS_AVERAGE%", $post_ratings_average, $template_postratings_text);
-		$template_postratings_text = str_replace("%RATINGS_PERCENTAGE%", $post_ratings_percentage, $template_postratings_text);
-		$template_postratings_text = str_replace("%RATINGS_USERS%", number_format($post_ratings_users), $template_postratings_text);
-		// Return Post Ratings Template
-		return $template_postratings_text;
+		$template_postratings_vote = stripslashes(get_settings('postratings_template_vote'));
+		$template_postratings_vote = str_replace("%RATINGS_IMAGES_VOTE%", $post_ratings_images, $template_postratings_vote);
+		$template_postratings_vote = str_replace("%RATINGS_MAX%", $ratings_max, $template_postratings_vote);
+		$template_postratings_vote = str_replace("%RATINGS_AVERAGE%", $post_ratings_average, $template_postratings_vote);
+		$template_postratings_vote = str_replace("%RATINGS_PERCENTAGE%", $post_ratings_percentage, $template_postratings_vote);
+		$template_postratings_vote = str_replace("%RATINGS_USERS%", number_format($post_ratings_users), $template_postratings_vote);
+		// Return Post Ratings Voting Template
+		return $template_postratings_vote;
 	}
-}
-
-
-### Function: Display Ratings Vote
-function the_ratings_vote($post_id) {
-	$post_ratings_image_vote = '';
-	$ratings_image = get_settings('postratings_image');
-	$ratings_max = intval(get_settings('postratings_max'));
-	// Display Start Of Rating Image
-	if(file_exists(ABSPATH.'/wp-content/plugins/postratings/images/'.$ratings_image.'/rating_start.gif')) {
-		$post_ratings_image_vote = '<img src="'.get_settings('siteurl').'/wp-content/plugins/postratings/images/'.$ratings_image.'/rating_start.gif" alt="" />';
-	}
-	// Display Rating Image
-	for($i=1; $i <= $ratings_max; $i++) {
-	$post_ratings_image_vote .= '<img src="'.get_settings('siteurl').'/wp-content/plugins/postratings/images/'.$ratings_image.'/rating_off.gif" alt="'.$i.' Stars" id="rating_'.$post_id.'_'.$i.'" onmouseover="current_rating('.$post_id.', '.$i.');" onmouseout="ratings_off();" title="'.$i.' Stars" onclick="rate_post(\''.$i.'\');" style="cursor: pointer;" />';
-	}
-	// Display End Of Rating Image
-	if(file_exists(ABSPATH.'/wp-content/plugins/postratings/images/'.$ratings_image.'/rating_end.gif')) {
-		$post_ratings_image_vote .= '<img src="'.get_settings('siteurl').'/wp-content/plugins/postratings/images/'.$ratings_image.'/rating_end.gif" alt="" />';
-	}
-	// Display The Contents
-	$template_postratings_vote = stripslashes(get_settings('postratings_template_vote'));
-	$template_postratings_vote = str_replace("%RATINGS_IMAGES_VOTE%", $post_ratings_image_vote, $template_postratings_vote);
-	$template_postratings_vote = str_replace("%RATINGS_MAX%", $ratings_max, $template_postratings_vote);
-	// Return Post Ratings Voting Template
-	return $template_postratings_vote;
 }
 
 
@@ -401,9 +489,9 @@ function create_ratinglogs_table() {
 	// Add In Options (4 Records)
 	add_option('postratings_image', 'stars', 'Your Ratings Image');
 	add_option('postratings_max', 5, 'Your Max Ratings');
-	add_option('postratings_template_vote', '<p>Rate This Post: %RATINGS_IMAGES_VOTE%</p>', 'Ratings Vote Template Text');
+	add_option('postratings_template_vote', '<p>%RATINGS_IMAGES_VOTE% (<b>%RATINGS_USERS%</b> votes, average: <b>%RATINGS_AVERAGE%</b> out of %RATINGS_MAX%)</p>', 'Ratings Vote Template Text');
 	add_option('postratings_template_text', '<p>%RATINGS_IMAGES% (<b>%RATINGS_USERS%</b> votes, average: <b>%RATINGS_AVERAGE%</b> out of %RATINGS_MAX%)</p>', 'Ratings Template Text');
-	add_option('postratings_template_none', 'No Ratings Yet', 'Ratings Template For No Ratings');
+	add_option('postratings_template_none', '<p>%RATINGS_IMAGES_VOTE% (No Ratings Yet)</p>', 'Ratings Template For No Ratings');
 	// Set 'manage_ratings' Capabilities To Administrator	
 	$role = get_role('administrator');
 	if(!$role->has_cap('manage_ratings')) {

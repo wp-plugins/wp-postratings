@@ -2,7 +2,7 @@
 /*
 +----------------------------------------------------------------+
 |																							|
-|	WordPress 2.0 Plugin: WP-PostRatings 1.01								|
+|	WordPress 2.0 Plugin: WP-PostRatings 1.02								|
 |	Copyright (c) 2006 Lester "GaMerZ" Chan									|
 |																							|
 |	File Written By:																	|
@@ -30,7 +30,7 @@ $base_page = 'admin.php?page='.$base_name;
 
 ### If Form Is Submitted
 if($_POST['Submit']) {
-	$postratings_image = strip_tags(trim($_POST['postratings_image']));
+	$postratings_image = strip_tags(trim($_POST['postratings_image']));
 	$postratings_max = intval($_POST['postratings_max']);
 	$postratings_template_vote = trim($_POST['postratings_template_vote']);
 	$postratings_template_text = trim($_POST['postratings_template_text']);
@@ -65,13 +65,13 @@ function ratings_default_templates(template) {
 	var default_template;
 	switch(template) {
 		case "vote":
-			default_template = "<p>Rate This Post: %RATINGS_IMAGES_VOTE%</p>";
+			default_template = "<p>%RATINGS_IMAGES_VOTE% (<b>%RATINGS_USERS%</b> votes, average: <b>%RATINGS_AVERAGE%</b> out of %RATINGS_MAX%)</p>";
 			break;
 		case "text":
 			default_template = "<p>%RATINGS_IMAGES% (<b>%RATINGS_USERS%</b> votes, average: <b>%RATINGS_AVERAGE%</b> out of %RATINGS_MAX%)</p>";
 			break;
 		case "none":
-			default_template = "No Ratings Yet";
+			default_template = "<p>%RATINGS_IMAGES_VOTE% (No Ratings Yet)</p>";
 			break;
 	}
 	document.getElementById("postratings_template_" + template).value = default_template;
@@ -104,7 +104,7 @@ function ratings_default_templates(template) {
 											if(file_exists($postratings_path.'/'.$filename.'/rating_start.gif')) {
 												echo '<img src="'.$postratings_url.'/'.$filename.'/rating_start.gif" alt="rating_start.gif" />';
 											}
-											echo '<img src="'.$postratings_url.'/'.$filename.'/rating_on.gif" alt="rating_on.gif" />';
+											echo '<img src="'.$postratings_url.'/'.$filename.'/rating_over.gif" alt="rating_over.gif" />';
 											echo '<img src="'.$postratings_url.'/'.$filename.'/rating_on.gif" alt="rating_on.gif" />';
 											echo '<img src="'.$postratings_url.'/'.$filename.'/rating_on.gif" alt="rating_on.gif" />';
 											echo '<img src="'.$postratings_url.'/'.$filename.'/rating_half.gif" alt="rating_half.gif" />';
@@ -153,7 +153,10 @@ function ratings_default_templates(template) {
 							<b><?php _e('Ratings Vote Text:'); ?></b><br /><br />
 							<?php _e('Allowed Variables:'); ?><br />
 							- %RATINGS_IMAGES_VOTE%<br />
-							- %RATINGS_MAX%<br /><br />
+							- %RATINGS_MAX%<br />
+							- %RATINGS_USERS%<br />							
+							- %RATINGS_AVERAGE%<br />
+							- %RATINGS_PERCENTAGE%<br /><br />
 							<input type="button" name="RestoreDefault" value="<?php _e('Restore Default Template'); ?>" onclick="javascript: ratings_default_templates('vote');" class="button" />
 						</td>
 						<td align="left"><textarea cols="80" rows="10" id="postratings_template_vote" name="postratings_template_vote"><?php echo stripslashes(get_settings('postratings_template_vote')); ?></textarea></td>
@@ -175,6 +178,7 @@ function ratings_default_templates(template) {
 						<td align="left" width="30%">
 							<b><?php _e('Ratings None:'); ?></b><br /><br />
 							<?php _e('Allowed Variables:'); ?><br />
+							- %RATINGS_IMAGES_VOTE%<br />
 							- %RATINGS_MAX%<br />
 							- %RATINGS_USERS%<br />							
 							- %RATINGS_AVERAGE%<br />
