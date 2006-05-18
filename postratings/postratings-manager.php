@@ -263,7 +263,7 @@ $postratings_logs = $wpdb->get_results("SELECT * FROM $wpdb->ratings ORDER BY $p
 		?>
 	<br />
 	<form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="get">
-		<input type="hidden" name="page" value="<?php echo $base_name; ?>">
+		<input type="hidden" name="page" value="<?php echo $base_name; ?>" />
 		Sort Options:&nbsp;&nbsp;&nbsp;
 		<select name="by" size="1">
 			<option value="id"<?php if($postratings_sortby == 'rating_id') { echo ' selected="selected"'; }?>>ID</option>
