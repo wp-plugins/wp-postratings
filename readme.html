@@ -197,11 +197,19 @@
 			<div class="SubTitle">&raquo; Index</div>
 			<div class="SubSubTitle">Plugin Information</div>
 			<p><b>Author</b><br /><b>&raquo;</b> Lester 'GaMerZ' Chan</p>
-			<p><b>EMail:</b><br /><b>&raquo;</b> <a href="mailto:gamerz84@hotmail.com?Subject=WP-Polls%202.06" title="EMail To gamerz84@hotmail.com">gamerz84@hotmail.com</a></p>
-			<p><b>Website:</b><br /><b>&raquo;</b> <a href="http://www.lesterchan.net/" target="_blank" title="http://www.lesterchan.net/">http://www.lesterchan.net/</a></p>
-			<p><b>Demo:</b><br /><b>&raquo;</b> <a href="http://www.lesterchan.net/blogs" target="_blank" title="http://www.lesterchan.net/blogs">http://www.lesterchan.net/blogs</a></p>
-			<p><b>Documentation:</b><br /><b>&raquo;</b> <a href="http://dev.wp-plugins.org/wiki/wp-postratings" target="_blank" title="http://dev.wp-plugins.org/wiki/wp-postratings">http://dev.wp-plugins.org/wiki/wp-postratings</a></p>
-			<p><b>Development:</b><br /><b>&raquo;</b> <a href="http://dev.wp-plugins.org/browser/wp-postratings/" target="_blank" title="http://dev.wp-plugins.org/browser/wp-postratings/">http://dev.wp-plugins.org/browser/wp-postratings/</a></p>
+			<p>
+				<b>EMail:</b><br /><b>&raquo;</b>
+				<script type="text/javascript">
+					/* <![CDATA[*/
+					document.write(' <a href="mailto:gamerz84@hotmail.com?Subject=WP-Polls%202.1%20Support" title="EMail To gamerz84@hotmail.com">gamerz84@hotmail.com</a>');
+					/* ]]> */
+				</script>
+			</p>
+			<p><b>Website:</b><br /><b>&raquo;</b> <a href="http://www.lesterchan.net/" title="http://www.lesterchan.net/">http://www.lesterchan.net/</a></p>
+			<p><b>Demo:</b><br /><b>&raquo;</b> <a href="http://www.lesterchan.net/blogs" title="http://www.lesterchan.net/blogs">http://www.lesterchan.net/blogs</a></p>
+			<p><b>Documentation:</b><br /><b>&raquo;</b> <a href="http://dev.wp-plugins.org/wiki/wp-postratings" title="http://dev.wp-plugins.org/wiki/wp-postratings">http://dev.wp-plugins.org/wiki/wp-postratings</a></p>
+			<p><b>Development:</b><br /><b>&raquo;</b> <a href="http://dev.wp-plugins.org/browser/wp-postratings/" title="http://dev.wp-plugins.org/browser/wp-postratings/">http://dev.wp-plugins.org/browser/wp-postratings/</a></p>
+			<p><b>Support Forums:</b><br /><b>&raquo;</b> <a href="http://forums.lesterchan.net/viewforum.php?f=24" title="http://forums.lesterchan.net/viewforum.php?f=24">http://forums.lesterchan.net/viewforum.php?f=24</a></p>
 			<p><b>Updated:</b><br /><b>&raquo;</b> 1st June 2006</p>
 			<div class="SubSubTitle">Changelog</div>
 			<ul>
@@ -255,11 +263,17 @@
 			<div class="SubSubTitle">From v1.0x To v1.02</div>
 			<ol>
 				<li>
+					<b>Deactivate</b> WP-PostRatings Plugin
+				</li>
+				<li>
 					Open <b>wp-content/plugins</b> Folder
 				</li>
 				<li>
 					Overwrite:
 					<blockquote>Folder: postratings</blockquote>
+				</li>
+				<li>
+					<b>Activate</b> WP-PostRatings Plugin
 				</li>
 				<li>
 					Go to 'WP-Admin -> Ratings -> Ratings Options' and restore all the template variables to <b>Default</b>
@@ -286,7 +300,28 @@
 					<blockquote>
 						&lt;?php if(function_exists('the_ratings')) { the_ratings(); } ?&gt;
 					</blockquote>
-					<p> To embed the ratings into your post, use [ratings].</p>
+					<p>If you DO NOT want the ratings to appear in every post, DO NOT use the code above. Just type in <b>[ratings]</b> into the selected post content and it will embed ratings into that post only.</p>
+				</li>
+				<li>
+					Note: In IE, some of the poll's text may appear jagged (this is normal in IE). To solve this issue,
+					<ol>
+						<li>
+							Open <b>poll-css.css</b>
+						</li>
+						<li>
+							Find:
+							<blockquote>
+									/* background-color: #ffffff; */
+							</blockquote>
+						</li>
+						<li>
+							Replace:
+							<blockquote>
+									background-color: #ffffff;
+							</blockquote>
+							<p>Where <b>#ffffff</b> should be your background color for the poll.</p>
+						</li>
+					</ol>
 				</li>
 			</ol>
 			<div class="SubSubTitle">Ratings Stats (Outside WP Loop)</div>

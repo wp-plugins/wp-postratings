@@ -89,7 +89,7 @@ function rate_post() {
 		rate_loading_text();
 		rate_process();		
 	} else {		
-		alert('Please rate 1 post at a time.');
+		alert('Please rate only 1 post at a time.');
 	}
 }
 

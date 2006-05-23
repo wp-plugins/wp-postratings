@@ -322,7 +322,8 @@ $postratings_logs = $wpdb->get_results("SELECT * FROM $wpdb->ratings ORDER BY $p
 		<form action="<?php echo $_SERVER['REQUEST_URI']; ?>" method="post">
 			<b>Are You Sure You Want To Delete All Post Ratings Logs?</b><br /><br />
 			<input type="checkbox" name="delete_logs_yes" value="yes" />&nbsp;Yes<br /><br />
-			<input type="submit" name="delete_logs" value="Delete" class="button" onclick="return confirm('You Are About To Delete All Post Ratings\nThis Action Is Not Reversible.\n\n Choose \'Cancel\' to stop, \'OK\' to delete.')" />
+			<input type="submit" name="delete_logs" value="Delete All Logs" class="button" onclick="return confirm('You Are About To Delete All Post Ratings Logs.\nThis Action Is Not Reversible.\n\n Choose \'Cancel\' to stop, \'OK\' to delete.')" />
 		</form>
 	</div>
+	<p>Note: If your logging method is by IP and Cookie or by Cookie, users may still be unable to rate if they have voted before as the cookie is still stored in their computer.</p>
 </div>
