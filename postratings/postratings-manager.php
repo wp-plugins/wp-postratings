@@ -33,7 +33,8 @@ $postratings_sortorder = trim($_GET['order']);
 $postratings_sortorder_text = '';
 $postratings_log_perpage = intval($_GET['perpage']);
 $postratings_sort_url = '';
-
+$ratings_image = get_settings('postratings_image');
+$ratings_max = intval(get_settings('postratings_max'));
 
 ### Form Sorting URL
 if(!empty($postratings_sortby)) {
@@ -180,7 +181,7 @@ $postratings_logs = $wpdb->get_results("SELECT * FROM $wpdb->ratings ORDER BY $p
 				}
 				$postratings_id = intval($postratings_log->rating_id);
 				$postratings_username = stripslashes($postratings_log->rating_username);
-				$postratings_rating = stripslashes($postratings_log->rating_rating);
+				$postratings_rating = intval($postratings_log->rating_rating);
 				$postratings_postid = intval($postratings_log->rating_postid);
 				$postratings_posttitle = stripslashes($postratings_log->rating_posttitle);
 				$postratings_date = gmdate("jS F Y", $postratings_log->rating_timestamp);
@@ -190,7 +191,21 @@ $postratings_logs = $wpdb->get_results("SELECT * FROM $wpdb->ratings ORDER BY $p
 				echo "<tr $style>\n";
 				echo "<td>$postratings_id</td>\n";
 				echo "<td>$postratings_username</td>\n";
-				echo "<td>$postratings_rating Star(s)</td>\n";
+				echo '<td>';
+				if(file_exists(ABSPATH.'/wp-content/plugins/postratings/images/'.$ratings_image.'/rating_start.gif')) {
+					echo '<img src="'.get_settings('siteurl').'/wp-content/plugins/postratings/images/'.$ratings_image.'/rating_start.gif" alt="" />';
+				}
+				for($j=1; $j <= $ratings_max; $j++) {
+					if($j <= $postratings_rating) {
+						echo '<img src="'.get_settings('siteurl').'/wp-content/plugins/postratings/images/'.$ratings_image.'/rating_on.gif" alt="'.__('User Rate This Post ').$postratings_rating.__(' Stars Out Of ').$ratings_max.'" title="'.__('User Rate This Post ').$postratings_rating.__(' Stars Out Of ').$ratings_max.'" />';
+					} else {
+						echo '<img src="'.get_settings('siteurl').'/wp-content/plugins/postratings/images/'.$ratings_image.'/rating_off.gif" alt="'.__('User Rate This Post ').$postratings_rating.__(' Stars Out Of ').$ratings_max.'" title="'.__('User Rate This Post ').$postratings_rating.__(' Stars Out Of ').$ratings_max.'" />';
+					}
+				}
+				if(file_exists(ABSPATH.'/wp-content/plugins/postratings/images/'.$ratings_image.'/rating_end.gif')) {
+					echo '<img src="'.get_settings('siteurl').'/wp-content/plugins/postratings/images/'.$ratings_image.'/rating_end.gif" alt="" />';
+				}
+				echo '</td>'."\n";
 				echo "<td>$postratings_posttitle</td>\n";
 				echo "<td>$postratings_date, $postratings_time</td>\n";
 				echo "<td>$postratings_ip / $postratings_host</td>\n";
