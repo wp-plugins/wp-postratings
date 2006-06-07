@@ -24,6 +24,7 @@ var rate_fadein_opacity = 0;
 var rate_fadeout_opacity = 100;
 var is_ie = (document.all && document.getElementById);
 var is_moz = (!document.all && document.getElementById);
+var is_opera = (navigator.userAgent.indexOf("Opera") > -1);
 var is_being_rated = false;
 
 
@@ -31,8 +32,13 @@ var is_being_rated = false;
 function rade_fadein_text() {
 	if(rate_fadein_opacity < 100) {
 		rate_fadein_opacity += 10;
-		if(is_ie) document.getElementById('post-ratings-' + post_id).filters.alpha.opacity = rate_fadein_opacity;
-		if(is_moz) document.getElementById('post-ratings-' + post_id).style.MozOpacity = (rate_fadein_opacity/100);
+		if(is_opera)  {
+			rate_fadein_opacity = 100;
+		} else	 if(is_ie) {
+			document.getElementById('post-ratings-' + post_id).filters.alpha.opacity = rate_fadein_opacity;
+		} else	 if(is_moz) {
+			document.getElementById('post-ratings-' + post_id).style.MozOpacity = (rate_fadein_opacity/100);
+		}
 		setTimeout("rade_fadein_text()", 100); 
 	} else {
 		rate_fadein_opacity = 100;
@@ -98,8 +104,13 @@ function rate_post() {
 function rate_process() {
 	if(rate_fadeout_opacity > 0) {
 		rate_fadeout_opacity -= 10;
-		if(is_ie) document.getElementById('post-ratings-' + post_id).filters.alpha.opacity = rate_fadeout_opacity;
-		if(is_moz) document.getElementById('post-ratings-' + post_id).style.MozOpacity = (rate_fadeout_opacity/100);
+		if(is_opera) {
+			rate_fadein_opacity = 0;
+		} else if(is_ie) {
+			document.getElementById('post-ratings-' + post_id).filters.alpha.opacity = rate_fadeout_opacity;
+		} else if(is_moz) {
+			document.getElementById('post-ratings-' + post_id).style.MozOpacity = (rate_fadeout_opacity/100);
+		}
 		setTimeout("rate_process()", 100); 
 	} else {
 		rate_fadeout_opacity = 0;		
