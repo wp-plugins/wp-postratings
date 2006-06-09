@@ -404,7 +404,7 @@ function place_ratings($content){
 
 ### Function: Display Most Rated Page/Post
 if(!function_exists('get_most_rated')) {
-	function get_most_rated($mode = '', $limit = 10) {
+	function get_most_rated($mode = '', $limit = 10, $chars = 0) {
 		global $wpdb, $post;
 		$where = '';
 		if($mode == 'post') {
@@ -416,10 +416,18 @@ if(!function_exists('get_most_rated')) {
 		}
 		$most_rated = $wpdb->get_results("SELECT $wpdb->posts.ID, post_title, post_name, post_status, post_date, CAST(meta_value AS UNSIGNED) AS ratings_votes FROM $wpdb->posts LEFT JOIN $wpdb->postmeta ON $wpdb->postmeta.post_id = $wpdb->posts.ID WHERE post_date < '".current_time('mysql')."' AND $where AND meta_key = 'ratings_users' AND post_password = '' ORDER BY ratings_votes DESC LIMIT $limit");
 		if($most_rated) {
-			foreach ($most_rated as $post) {
-				$post_title = htmlspecialchars(stripslashes($post->post_title));
-				$post_votes = intval($post->ratings_votes);
-				echo "<li><a href=\"".get_permalink()."\">$post_title</a> ($post_votes ".__('Votes').")</li>";
+			if($chars > 0) {
+				foreach ($most_rated as $post) {
+					$post_title = htmlspecialchars(stripslashes($post->post_title));
+					$post_votes = intval($post->ratings_votes);
+					echo "<li><a href=\"".get_permalink()."\">".snippet_chars($post_title, $chars)."</a> - $post_votes ".__('Votes')."</li>";
+				}
+			} else {
+				foreach ($most_rated as $post) {
+					$post_title = htmlspecialchars(stripslashes($post->post_title));
+					$post_votes = intval($post->ratings_votes);
+					echo "<li><a href=\"".get_permalink()."\">$post_title</a> - $post_votes ".__('Votes')."</li>";
+				}
 			}
 		} else {
 			echo '<li>'.__('N/A').'</li>';
@@ -430,7 +438,7 @@ if(!function_exists('get_most_rated')) {
 
 ### Function: Display Highest Rated Page/Post
 if(!function_exists('get_highest_rated')) {
-	function get_highest_rated($mode = '', $limit = 10) {
+	function get_highest_rated($mode = '', $limit = 10, $chars = 0) {
 		global $wpdb, $post;
 		$ratings_image = get_settings('postratings_image');
 		$ratings_max = intval(get_settings('postratings_max'));
@@ -477,7 +485,11 @@ if(!function_exists('get_highest_rated')) {
 				if(file_exists(ABSPATH.'/wp-content/plugins/postratings/images/'.$ratings_image.'/rating_end.gif')) {
 					$post_ratings_images .= '<img src="'.get_settings('siteurl').'/wp-content/plugins/postratings/images/'.$ratings_image.'/rating_end.gif" alt="" />';
 				}
-				echo "<li><a href=\"".get_permalink()."\">$post_title</a> ".$post_ratings_images." ($post_ratings_average".__(' out of ')."$ratings_max)</li>\n";
+				if($chars > 0) {
+					echo "<li><a href=\"".get_permalink()."\">".snippet_chars($post_title, $chars)."</a> ".$post_ratings_images."</li>\n";
+				} else {
+					echo "<li><a href=\"".get_permalink()."\">$post_title</a> ".$post_ratings_images." ($post_ratings_average".__(' out of ')."$ratings_max)</li>\n";
+				}
 			}
 		} else {
 			echo '<li>'.__('N/A').'</li>';
