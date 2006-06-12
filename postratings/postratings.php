@@ -262,18 +262,18 @@ function check_allowtorate() {
 add_action('init', 'process_ratings');
 function process_ratings() {
 	global $wpdb, $user_identity;
-	// Check For Bot
-	$bots_useragent = array('googlebot', 'google', 'msnbot', 'ia_archiver', 'lycos', 'jeeves', 'scooter', 'fast-webcrawler', 'slurp@inktomi', 'turnitinbot', 'technorati', 'yahoo', 'findexa', 'findlinks', 'gaisbo', 'zyborg', 'surveybot', 'bloglines', 'blogsearch', 'ubsub', 'syndic8', 'userland', 'gigabot', 'become.com');
-	$useragent = $_SERVER['HTTP_USER_AGENT'];
-	foreach ($bots_useragent as $bot) { 
-		if (stristr($useragent, $bot) !== false) {
-			exit();
-		} 
-	}
 	$ratings_max = intval(get_settings('postratings_max'));
 	$rate = intval($_GET['rate']);
 	$post_id = intval($_GET['pid']);
 	if($rate > 0 && $post_id > 0 && check_allowtorate()) {
+		// Check For Bot
+		$bots_useragent = array('googlebot', 'google', 'msnbot', 'ia_archiver', 'lycos', 'jeeves', 'scooter', 'fast-webcrawler', 'slurp@inktomi', 'turnitinbot', 'technorati', 'yahoo', 'findexa', 'findlinks', 'gaisbo', 'zyborg', 'surveybot', 'bloglines', 'blogsearch', 'ubsub', 'syndic8', 'userland', 'gigabot', 'become.com');
+		$useragent = $_SERVER['HTTP_USER_AGENT'];
+		foreach ($bots_useragent as $bot) { 
+			if (stristr($useragent, $bot) !== false) {
+				return;
+			} 
+		}
 		$rated = check_rated($post_id);
 		// Check Whether Post Has Been Rated By User
 		if(!$rated) {
