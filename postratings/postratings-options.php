@@ -2,7 +2,7 @@
 /*
 +----------------------------------------------------------------+
 |																							|
-|	WordPress 2.0 Plugin: WP-PostRatings 1.02								|
+|	WordPress 2.0 Plugin: WP-PostRatings 1.03								|
 |	Copyright (c) 2006 Lester "GaMerZ" Chan									|
 |																							|
 |	File Written By:																	|
@@ -110,15 +110,15 @@ if($_POST['Submit']) {
 											}
 											echo '&nbsp;&nbsp;&nbsp;';
 											if(file_exists($postratings_path.'/'.$filename.'/rating_start.gif')) {
-												echo '<img src="'.$postratings_url.'/'.$filename.'/rating_start.gif" alt="rating_start.gif" />';
+												echo '<img src="'.$postratings_url.'/'.$filename.'/rating_start.gif" alt="rating_start.gif" style="border: 0px;" />';
 											}
-											echo '<img src="'.$postratings_url.'/'.$filename.'/rating_over.gif" alt="rating_over.gif" />';
-											echo '<img src="'.$postratings_url.'/'.$filename.'/rating_on.gif" alt="rating_on.gif" />';
-											echo '<img src="'.$postratings_url.'/'.$filename.'/rating_on.gif" alt="rating_on.gif" />';
-											echo '<img src="'.$postratings_url.'/'.$filename.'/rating_half.gif" alt="rating_half.gif" />';
-											echo '<img src="'.$postratings_url.'/'.$filename.'/rating_off.gif" alt="rating_off.gif" />';
+											echo '<img src="'.$postratings_url.'/'.$filename.'/rating_over.gif" alt="rating_over.gif" style="border: 0px;" />';
+											echo '<img src="'.$postratings_url.'/'.$filename.'/rating_on.gif" alt="rating_on.gif" style="border: 0px;" />';
+											echo '<img src="'.$postratings_url.'/'.$filename.'/rating_on.gif" alt="rating_on.gif" style="border: 0px;" />';
+											echo '<img src="'.$postratings_url.'/'.$filename.'/rating_half.gif" alt="rating_half.gif" style="border: 0px;" />';
+											echo '<img src="'.$postratings_url.'/'.$filename.'/rating_off.gif" alt="rating_off.gif" style="border: 0px;" />';
 											if(file_exists($postratings_path.'/'.$filename.'/rating_end.gif')) {
-												echo '<img src="'.$postratings_url.'/'.$filename.'/rating_end.gif" alt="rating_end.gif" />';
+												echo '<img src="'.$postratings_url.'/'.$filename.'/rating_end.gif" alt="rating_end.gif" style="border: 0px;" />';
 											}
 											echo '&nbsp;&nbsp;&nbsp;('.$filename.')';
 											echo '<br /><br />'."\n";

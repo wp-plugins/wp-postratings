@@ -52,17 +52,17 @@ function the_ratings($display = true) {
 	// If User Voted Or Is Not Allowed To Rate
 	if($user_voted || !check_allowtorate()) {
 		if(!$display) {
-			return "<div id=\"post-ratings-$id\" class=\"post-ratings\">".the_ratings_results($id).'</div>'."\n<div id=\"post-ratings-$id-loading\"  class=\"post-ratings-loading\"><img src=\"".get_settings('siteurl')."/wp-content/plugins/postratings/images/loading.gif\" width=\"16\" height=\"16\" alt=\"".__('Loading')." ...\" title=\"".__('Loading')." ...\" />&nbsp;".__('Loading')." ...</div>\n";
+			return "<div id=\"post-ratings-$id\" class=\"post-ratings\">".the_ratings_results($id).'</div>'."\n<div id=\"post-ratings-$id-loading\"  class=\"post-ratings-loading\"><img src=\"".get_settings('siteurl')."/wp-content/plugins/postratings/images/loading.gif\" width=\"16\" height=\"16\" alt=\"".__('Loading')." ...\" title=\"".__('Loading')." ...\" style=\"border: 0px;\" />&nbsp;".__('Loading')." ...</div>\n";
 		} else {
-			echo "<div id=\"post-ratings-$id\" class=\"post-ratings\">".the_ratings_results($id).'</div>'."\n<div id=\"post-ratings-$id-loading\"  class=\"post-ratings-loading\"><img src=\"".get_settings('siteurl')."/wp-content/plugins/postratings/images/loading.gif\" width=\"16\" height=\"16\" alt=\"".__('Loading')." ...\" title=\"".__('Loading')." ...\" />&nbsp;".__('Loading')." ...</div>\n";
+			echo "<div id=\"post-ratings-$id\" class=\"post-ratings\">".the_ratings_results($id).'</div>'."\n<div id=\"post-ratings-$id-loading\"  class=\"post-ratings-loading\"><img src=\"".get_settings('siteurl')."/wp-content/plugins/postratings/images/loading.gif\" width=\"16\" height=\"16\" alt=\"".__('Loading')." ...\" title=\"".__('Loading')." ...\" style=\"border: 0px;\" />&nbsp;".__('Loading')." ...</div>\n";
 			return;
 		}
 	// If User Has Not Voted
 	} else {
 		if(!$display) {
-			return "<div id=\"post-ratings-$id\" class=\"post-ratings\">".the_ratings_vote($id).'</div>'."\n<div id=\"post-ratings-$id-loading\"  class=\"post-ratings-loading\"><img src=\"".get_settings('siteurl')."/wp-content/plugins/postratings/images/loading.gif\" width=\"16\" height=\"16\" alt=\"".__('Loading')." ...\" title=\"".__('Loading')." ...\" />&nbsp;".__('Loading')." ...</div>\n";
+			return "<div id=\"post-ratings-$id\" class=\"post-ratings\">".the_ratings_vote($id).'</div>'."\n<div id=\"post-ratings-$id-loading\"  class=\"post-ratings-loading\"><img src=\"".get_settings('siteurl')."/wp-content/plugins/postratings/images/loading.gif\" width=\"16\" height=\"16\" alt=\"".__('Loading')." ...\" title=\"".__('Loading')." ...\" style=\"border: 0px;\" />&nbsp;".__('Loading')." ...</div>\n";
 		} else {
-			echo "<div id=\"post-ratings-$id\" class=\"post-ratings\">".the_ratings_vote($id).'</div>'."\n<div id=\"post-ratings-$id-loading\" class=\"post-ratings-loading\"><img src=\"".get_settings('siteurl')."/wp-content/plugins/postratings/images/loading.gif\" width=\"16\" height=\"16\" alt=\"".__('Loading')." ...\" title=\"".__('Loading')." ...\" />&nbsp;".__('Loading')." ...</div>\n";
+			echo "<div id=\"post-ratings-$id\" class=\"post-ratings\">".the_ratings_vote($id).'</div>'."\n<div id=\"post-ratings-$id-loading\" class=\"post-ratings-loading\"><img src=\"".get_settings('siteurl')."/wp-content/plugins/postratings/images/loading.gif\" width=\"16\" height=\"16\" alt=\"".__('Loading')." ...\" title=\"".__('Loading')." ...\" style=\"border: 0px;\" />&nbsp;".__('Loading')." ...</div>\n";
 			return;
 		}
 	}
@@ -126,21 +126,21 @@ function the_ratings_results($post_id, $new_user = 0, $new_score = 0, $new_avera
 
 	// Display Start Of Rating Image
 	if(file_exists(ABSPATH.'/wp-content/plugins/postratings/images/'.$ratings_image.'/rating_start.gif')) {
-		$post_ratings_images .= '<img src="'.get_settings('siteurl').'/wp-content/plugins/postratings/images/'.$ratings_image.'/rating_start.gif" alt="" />';
+		$post_ratings_images .= '<img src="'.get_settings('siteurl').'/wp-content/plugins/postratings/images/'.$ratings_image.'/rating_start.gif" alt="" style="border: 0px;" />';
 	}
 	// Display Rated Images
 	for($i=1; $i <= $ratings_max; $i++) {
 		if($i <= $post_ratings) {
-			$post_ratings_images .= '<img src="'.get_settings('siteurl').'/wp-content/plugins/postratings/images/'.$ratings_image.'/rating_on.gif" alt="'.$post_ratings_users.__(' Votes | Average: ').$post_ratings_average.__(' out of ').$ratings_max.'" />';		
+			$post_ratings_images .= '<img src="'.get_settings('siteurl').'/wp-content/plugins/postratings/images/'.$ratings_image.'/rating_on.gif" alt="'.$post_ratings_users.__(' Votes | Average: ').$post_ratings_average.__(' out of ').$ratings_max.'" style="border: 0px;" />';		
 		} elseif($i == $insert_half) {
-			$post_ratings_images .= '<img src="'.get_settings('siteurl').'/wp-content/plugins/postratings/images/'.$ratings_image.'/rating_half.gif" alt="'.$post_ratings_users.__(' Votes | Average: ').$post_ratings_average.__(' out of ').$ratings_max.'" />';
+			$post_ratings_images .= '<img src="'.get_settings('siteurl').'/wp-content/plugins/postratings/images/'.$ratings_image.'/rating_half.gif" alt="'.$post_ratings_users.__(' Votes | Average: ').$post_ratings_average.__(' out of ').$ratings_max.'" style="border: 0px;" />';
 		} else {
-			$post_ratings_images .= '<img src="'.get_settings('siteurl').'/wp-content/plugins/postratings/images/'.$ratings_image.'/rating_off.gif" alt="'.$post_ratings_users.__(' Votes | Average: ').$post_ratings_average.__(' out of ').$ratings_max.'" />';
+			$post_ratings_images .= '<img src="'.get_settings('siteurl').'/wp-content/plugins/postratings/images/'.$ratings_image.'/rating_off.gif" alt="'.$post_ratings_users.__(' Votes | Average: ').$post_ratings_average.__(' out of ').$ratings_max.'" style="border: 0px;" />';
 		}
 	}
 	// Display End Of Rating Image
 	if(file_exists(ABSPATH.'/wp-content/plugins/postratings/images/'.$ratings_image.'/rating_end.gif')) {
-		$post_ratings_images .= '<img src="'.get_settings('siteurl').'/wp-content/plugins/postratings/images/'.$ratings_image.'/rating_end.gif" alt="" />';
+		$post_ratings_images .= '<img src="'.get_settings('siteurl').'/wp-content/plugins/postratings/images/'.$ratings_image.'/rating_end.gif" alt="" style="border: 0px;" />';
 	}
 	// Display The Contents
 	$template_postratings_text = stripslashes(get_settings('postratings_template_text'));
@@ -189,21 +189,21 @@ function the_ratings_vote($post_id, $new_user = 0, $new_score = 0, $new_average 
 
 	// Display Start Of Rating Image
 	if(file_exists(ABSPATH.'/wp-content/plugins/postratings/images/'.$ratings_image.'/rating_start.gif')) {
-		$post_ratings_images .= '<img src="'.get_settings('siteurl').'/wp-content/plugins/postratings/images/'.$ratings_image.'/rating_start.gif" alt="" />';
+		$post_ratings_images .= '<img src="'.get_settings('siteurl').'/wp-content/plugins/postratings/images/'.$ratings_image.'/rating_start.gif" alt="" style="border: 0px;" />';
 	}
 	// Display Rated Images
 	for($i=1; $i <= $ratings_max; $i++) {
 		if($i <= $post_ratings) {
-			$post_ratings_images .= '<img id="rating_'.$post_id.'_'.$i.'" src="'.get_settings('siteurl').'/wp-content/plugins/postratings/images/'.$ratings_image.'/rating_on.gif" alt="'.$post_ratings_users.__(' Votes | Average: ').$post_ratings_average.__(' out of ').$ratings_max.'" title="'.$i.' Stars" onmouseover="current_rating('.$post_id.', '.$i.');" onmouseout="ratings_off('.$post_ratings.', '.$insert_half.');" onclick="rate_post();" style="cursor: pointer;" />';		
+			$post_ratings_images .= '<img id="rating_'.$post_id.'_'.$i.'" src="'.get_settings('siteurl').'/wp-content/plugins/postratings/images/'.$ratings_image.'/rating_on.gif" alt="'.$post_ratings_users.__(' Votes | Average: ').$post_ratings_average.__(' out of ').$ratings_max.'" title="'.$i.' Stars" onmouseover="current_rating('.$post_id.', '.$i.');" onmouseout="ratings_off('.$post_ratings.', '.$insert_half.');" onclick="rate_post();" style="cursor: pointer; border: 0px;" />';		
 		} elseif($i == $insert_half) {
-			$post_ratings_images .= '<img id="rating_'.$post_id.'_'.$i.'" src="'.get_settings('siteurl').'/wp-content/plugins/postratings/images/'.$ratings_image.'/rating_half.gif" alt="'.$post_ratings_users.__(' Votes | Average: ').$post_ratings_average.__(' out of ').$ratings_max.'" title="'.$i.' Stars" onmouseover="current_rating('.$post_id.', '.$i.');" onmouseout="ratings_off('.$post_ratings.', '.$insert_half.');" onclick="rate_post();" style="cursor: pointer;" />';
+			$post_ratings_images .= '<img id="rating_'.$post_id.'_'.$i.'" src="'.get_settings('siteurl').'/wp-content/plugins/postratings/images/'.$ratings_image.'/rating_half.gif" alt="'.$post_ratings_users.__(' Votes | Average: ').$post_ratings_average.__(' out of ').$ratings_max.'" title="'.$i.' Stars" onmouseover="current_rating('.$post_id.', '.$i.');" onmouseout="ratings_off('.$post_ratings.', '.$insert_half.');" onclick="rate_post();" style="cursor: pointer; border: 0px;" />';
 		} else {
-			$post_ratings_images .= '<img id="rating_'.$post_id.'_'.$i.'" src="'.get_settings('siteurl').'/wp-content/plugins/postratings/images/'.$ratings_image.'/rating_off.gif" alt="'.$post_ratings_users.__(' Votes | Average: ').$post_ratings_average.__(' out of ').$ratings_max.'" title="'.$i.' Stars" onmouseover="current_rating('.$post_id.', '.$i.');" onmouseout="ratings_off('.$post_ratings.', '.$insert_half.');" onclick="rate_post();" style="cursor: pointer;" />';
+			$post_ratings_images .= '<img id="rating_'.$post_id.'_'.$i.'" src="'.get_settings('siteurl').'/wp-content/plugins/postratings/images/'.$ratings_image.'/rating_off.gif" alt="'.$post_ratings_users.__(' Votes | Average: ').$post_ratings_average.__(' out of ').$ratings_max.'" title="'.$i.' Stars" onmouseover="current_rating('.$post_id.', '.$i.');" onmouseout="ratings_off('.$post_ratings.', '.$insert_half.');" onclick="rate_post();" style="cursor: pointer; border: 0px;" />';
 		}
 	}
 	// Display End Of Rating Image
 	if(file_exists(ABSPATH.'/wp-content/plugins/postratings/images/'.$ratings_image.'/rating_end.gif')) {
-		$post_ratings_images .= '<img src="'.get_settings('siteurl').'/wp-content/plugins/postratings/images/'.$ratings_image.'/rating_end.gif" alt="" />';
+		$post_ratings_images .= '<img src="'.get_settings('siteurl').'/wp-content/plugins/postratings/images/'.$ratings_image.'/rating_end.gif" alt="" style="border: 0px;" />';
 	}
 
 	// If No Ratings, Return No Ratings templae
@@ -469,21 +469,21 @@ if(!function_exists('get_highest_rated')) {
 				}
 				// Display Start Of Rating Image
 				if(file_exists(ABSPATH.'/wp-content/plugins/postratings/images/'.$ratings_image.'/rating_start.gif')) {
-					$post_ratings_images .= '<img src="'.get_settings('siteurl').'/wp-content/plugins/postratings/images/'.$ratings_image.'/rating_start.gif" alt="" />';
+					$post_ratings_images .= '<img src="'.get_settings('siteurl').'/wp-content/plugins/postratings/images/'.$ratings_image.'/rating_start.gif" alt="" style="border: 0px;" />';
 				}
 				// Display Rated Images
 				for($i=1; $i <= $ratings_max; $i++) {
 					if($i <= $post_ratings) {
-						$post_ratings_images .= '<img src="'.get_settings('siteurl').'/wp-content/plugins/postratings/images/'.$ratings_image.'/rating_on.gif" alt="'.__('Average: ').$post_ratings_average.__(' out of ').$ratings_max.'" title="'.__('Average: ').$post_ratings_average.__(' out of ').$ratings_max.'" />';		
+						$post_ratings_images .= '<img src="'.get_settings('siteurl').'/wp-content/plugins/postratings/images/'.$ratings_image.'/rating_on.gif" alt="'.__('Average: ').$post_ratings_average.__(' out of ').$ratings_max.'" title="'.__('Average: ').$post_ratings_average.__(' out of ').$ratings_max.'" style="border: 0px;" />';		
 					} elseif($i == $insert_half) {						
-						$post_ratings_images .= '<img src="'.get_settings('siteurl').'/wp-content/plugins/postratings/images/'.$ratings_image.'/rating_half.gif" alt="'.__('Average: ').$post_ratings_average.__(' out of ').$ratings_max.'" title="'.__('Average: ').$post_ratings_average.__(' out of ').$ratings_max.'" />';
+						$post_ratings_images .= '<img src="'.get_settings('siteurl').'/wp-content/plugins/postratings/images/'.$ratings_image.'/rating_half.gif" alt="'.__('Average: ').$post_ratings_average.__(' out of ').$ratings_max.'" title="'.__('Average: ').$post_ratings_average.__(' out of ').$ratings_max.'" style="border: 0px;" />';
 					} else {
-						$post_ratings_images .= '<img src="'.get_settings('siteurl').'/wp-content/plugins/postratings/images/'.$ratings_image.'/rating_off.gif" alt="'.__('Average: ').$post_ratings_average.__(' out of ').$ratings_max.'" title="'.__('Average: ').$post_ratings_average.__(' out of ').$ratings_max.'" />';
+						$post_ratings_images .= '<img src="'.get_settings('siteurl').'/wp-content/plugins/postratings/images/'.$ratings_image.'/rating_off.gif" alt="'.__('Average: ').$post_ratings_average.__(' out of ').$ratings_max.'" title="'.__('Average: ').$post_ratings_average.__(' out of ').$ratings_max.'" style="border: 0px;" />';
 					}
 				}
 				// Display End Of Rating Image
 				if(file_exists(ABSPATH.'/wp-content/plugins/postratings/images/'.$ratings_image.'/rating_end.gif')) {
-					$post_ratings_images .= '<img src="'.get_settings('siteurl').'/wp-content/plugins/postratings/images/'.$ratings_image.'/rating_end.gif" alt="" />';
+					$post_ratings_images .= '<img src="'.get_settings('siteurl').'/wp-content/plugins/postratings/images/'.$ratings_image.'/rating_end.gif" alt="" style="border: 0px;" />';
 				}
 				if($chars > 0) {
 					echo "<li><a href=\"".get_permalink()."\">".snippet_chars($post_title, $chars)."</a> ".$post_ratings_images."</li>\n";
