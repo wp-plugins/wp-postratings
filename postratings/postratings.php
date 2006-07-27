@@ -3,7 +3,7 @@
 Plugin Name: WP-PostRatings
 Plugin URI: http://www.lesterchan.net/portfolio/programming.php
 Description: Enables You To Have A Rating System For Your Post
-Version: 1.03
+Version: 1.04
 Author: GaMerZ
 Author URI: http://www.lesterchan.net
 */
@@ -495,6 +495,42 @@ if(!function_exists('get_highest_rated')) {
 			echo '<li>'.__('N/A').'</li>';
 		}
 	}
+}
+
+
+### Function: Display Highest Rated Page/Post in sidebar (Credits To Herman - http://www.wereldkeuken.be)
+if(!function_exists('get_highest_rated_sidebar')) {
+    function get_highest_rated_sidebar($mode = '', $limit = 10, $chars = 0, $minimum_votes = 3) {
+        global $wpdb, $post; 
+        $ratings_max = intval(get_settings('postratings_max'));
+        $where = '';
+		$where_minimum_votes = '';
+        if($mode == 'post') {
+            $where = 'post_status = \'publish\'';
+        } elseif($mode == 'page') {
+            $where = 'post_status = \'static\''; 
+        } else {
+            $where = '(post_status = \'publish\' OR post_status = \'static\')';
+        }
+        if($minimum_votes > 0)  {
+          $where_minimum_votes =  "AND $wpdb->posts.ID IN (SELECT rating_postid FROM $wpdb->ratings GROUP BY rating_postid HAVING count(*) >= $minimum_votes)";
+		}                                
+        $highest_rated = $wpdb->get_results("SELECT $wpdb->posts.ID, post_title, post_name, post_status, post_date, (meta_value+0.00) AS ratings_average FROM $wpdb->posts LEFT JOIN $wpdb->postmeta ON $wpdb-> postmeta.post_id = $wpdb->posts.ID WHERE post_date < '".current_time('mysql')."' AND $where AND meta_key = 'ratings_average' AND post_password = '' $where_minimum_votes ORDER BY ratings_average DESC, post_date DESC LIMIT $limit");
+        if($highest_rated) {
+            foreach($highest_rated as $post) {
+                // Variables 
+                $post_title = htmlspecialchars(stripslashes($post->post_title));
+                $post_ratings_average = $post->ratings_average;
+                if($chars > 0) {
+                    echo "<li><a href=\"".get_permalink()."\">".snippet_chars($post_title, $chars)."</a> ($post_ratings_average/$ratings_max)</li>\n";
+                } else {
+                    echo "<li><a href=\"".get_permalink()."\">$post_title</a> ($post_ratings_average/$ratings_max)</li>\n";
+                }
+            }
+        } else {
+            echo '<li>'.__('N/A').'</li>';
+        } 
+    }
 }
 
 
