@@ -1,7 +1,7 @@
 /*
 +----------------------------------------------------------------+
 |																							|
-|	WordPress 2.0 Plugin: WP-PostRatings 1.02								|
+|	WordPress 2.0 Plugin: WP-PostRatings 1.04								|
 |	Copyright (c) 2006 Lester "GaMerZ" Chan									|
 |																							|
 |	File Written By:																	|
@@ -23,9 +23,11 @@
 	opacity: 1;
 	/* background-color: #ffffff; */
 }
-
 .post-ratings-loading {
 	display: none;
 	height: 16px;
 	text-align: left;
+}
+.post-ratings-image {
+	border: 0px;
 }

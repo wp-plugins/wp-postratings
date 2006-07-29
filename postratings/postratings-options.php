@@ -2,7 +2,7 @@
 /*
 +----------------------------------------------------------------+
 |																							|
-|	WordPress 2.0 Plugin: WP-PostRatings 1.03								|
+|	WordPress 2.0 Plugin: WP-PostRatings 1.04								|
 |	Copyright (c) 2006 Lester "GaMerZ" Chan									|
 |																							|
 |	File Written By:																	|
@@ -110,15 +110,15 @@ if($_POST['Submit']) {
 											}
 											echo '&nbsp;&nbsp;&nbsp;';
 											if(file_exists($postratings_path.'/'.$filename.'/rating_start.gif')) {
-												echo '<img src="'.$postratings_url.'/'.$filename.'/rating_start.gif" alt="rating_start.gif" style="border: 0px;" />';
+												echo '<img src="'.$postratings_url.'/'.$filename.'/rating_start.gif" alt="rating_start.gif" class="post-ratings-image" />';
 											}
-											echo '<img src="'.$postratings_url.'/'.$filename.'/rating_over.gif" alt="rating_over.gif" style="border: 0px;" />';
-											echo '<img src="'.$postratings_url.'/'.$filename.'/rating_on.gif" alt="rating_on.gif" style="border: 0px;" />';
-											echo '<img src="'.$postratings_url.'/'.$filename.'/rating_on.gif" alt="rating_on.gif" style="border: 0px;" />';
-											echo '<img src="'.$postratings_url.'/'.$filename.'/rating_half.gif" alt="rating_half.gif" style="border: 0px;" />';
-											echo '<img src="'.$postratings_url.'/'.$filename.'/rating_off.gif" alt="rating_off.gif" style="border: 0px;" />';
+											echo '<img src="'.$postratings_url.'/'.$filename.'/rating_over.gif" alt="rating_over.gif" class="post-ratings-image" />';
+											echo '<img src="'.$postratings_url.'/'.$filename.'/rating_on.gif" alt="rating_on.gif" class="post-ratings-image" />';
+											echo '<img src="'.$postratings_url.'/'.$filename.'/rating_on.gif" alt="rating_on.gif" class="post-ratings-image" />';
+											echo '<img src="'.$postratings_url.'/'.$filename.'/rating_half.gif" alt="rating_half.gif" class="post-ratings-image" />';
+											echo '<img src="'.$postratings_url.'/'.$filename.'/rating_off.gif" alt="rating_off.gif" class="post-ratings-image" />';
 											if(file_exists($postratings_path.'/'.$filename.'/rating_end.gif')) {
-												echo '<img src="'.$postratings_url.'/'.$filename.'/rating_end.gif" alt="rating_end.gif" style="border: 0px;" />';
+												echo '<img src="'.$postratings_url.'/'.$filename.'/rating_end.gif" alt="rating_end.gif" class="post-ratings-image" />';
 											}
 											echo '&nbsp;&nbsp;&nbsp;('.$filename.')';
 											echo '<br /><br />'."\n";
@@ -162,6 +162,7 @@ if($_POST['Submit']) {
 						<option value="1"<?php selected('1', get_settings('postratings_logging_method')); ?>><?php _e('Logged By Cookie'); ?></option>
 						<option value="2"<?php selected('2', get_settings('postratings_logging_method')); ?>><?php _e('Logged By IP'); ?></option>
 						<option value="3"<?php selected('3', get_settings('postratings_logging_method')); ?>><?php _e('Logged By Cookie And IP'); ?></option>
+						<option value="4"<?php selected('4', get_settings('postratings_logging_method')); ?>><?php _e('Logged By Username'); ?></option>
 					</select>
 				</td>
 			</tr>
