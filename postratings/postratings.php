@@ -428,9 +428,10 @@ function place_ratings($content){
 
 ### Function: Display Most Rated Page/Post
 if(!function_exists('get_most_rated')) {
-	function get_most_rated($mode = '', $limit = 10, $chars = 0) {
+	function get_most_rated($mode = '', $limit = 10, $chars = 0, $display = true) {
 		global $wpdb, $post;
 		$where = '';
+		$temp = '';
 		if($mode == 'post') {
 			$where = 'post_status = \'publish\'';
 		} elseif($mode == 'page') {
@@ -444,17 +445,22 @@ if(!function_exists('get_most_rated')) {
 				foreach ($most_rated as $post) {
 					$post_title = htmlspecialchars(stripslashes($post->post_title));
 					$post_votes = intval($post->ratings_votes);
-					echo "<li><a href=\"".get_permalink()."\">".snippet_chars($post_title, $chars)."</a> - $post_votes ".__('Votes')."</li>";
+					$temp .= "<li><a href=\"".get_permalink()."\">".snippet_chars($post_title, $chars)."</a> - $post_votes ".__('Votes')."</li>\n";
 				}
 			} else {
 				foreach ($most_rated as $post) {
 					$post_title = htmlspecialchars(stripslashes($post->post_title));
 					$post_votes = intval($post->ratings_votes);
-					echo "<li><a href=\"".get_permalink()."\">$post_title</a> - $post_votes ".__('Votes')."</li>";
+					$temp .= "<li><a href=\"".get_permalink()."\">$post_title</a> - $post_votes ".__('Votes')."</li>\n";
 				}
 			}
 		} else {
-			echo '<li>'.__('N/A').'</li>';
+			$temp = '<li>'.__('N/A').'</li>'."\n";
+		}
+		if($display) {
+			echo $temp;
+		} else {
+			return $temp;
 		}
 	}
 }
@@ -462,11 +468,12 @@ if(!function_exists('get_most_rated')) {
 
 ### Function: Display Highest Rated Page/Post
 if(!function_exists('get_highest_rated')) {
-	function get_highest_rated($mode = '', $limit = 10, $chars = 0) {
+	function get_highest_rated($mode = '', $limit = 10, $chars = 0, $display = true) {
 		global $wpdb, $post;
 		$ratings_image = get_settings('postratings_image');
 		$ratings_max = intval(get_settings('postratings_max'));
 		$where = '';
+		$temp = '';
 		if($mode == 'post') {
 			$where = 'post_status = \'publish\'';
 		} elseif($mode == 'page') {
@@ -510,13 +517,18 @@ if(!function_exists('get_highest_rated')) {
 					$post_ratings_images .= '<img src="'.get_settings('siteurl').'/wp-content/plugins/postratings/images/'.$ratings_image.'/rating_end.gif" alt="" class="post-ratings-image" />';
 				}
 				if($chars > 0) {
-					echo "<li><a href=\"".get_permalink()."\">".snippet_chars($post_title, $chars)."</a> ".$post_ratings_images."</li>\n";
+					$temp .= "<li><a href=\"".get_permalink()."\">".snippet_chars($post_title, $chars)."</a> ".$post_ratings_images."</li>\n";
 				} else {
-					echo "<li><a href=\"".get_permalink()."\">$post_title</a> ".$post_ratings_images." ($post_ratings_average".__(' out of ')."$ratings_max)</li>\n";
+					$temp .= "<li><a href=\"".get_permalink()."\">$post_title</a> ".$post_ratings_images." ($post_ratings_average".__(' out of ')."$ratings_max)</li>\n";
 				}
 			}
 		} else {
-			echo '<li>'.__('N/A').'</li>';
+			$temp = '<li>'.__('N/A').'</li>'."\n";
+		}
+		if($display) {
+			echo $temp;
+		} else {
+			return $temp;
 		}
 	}
 }
@@ -560,20 +572,28 @@ if(!function_exists('get_highest_rated_sidebar')) {
 
 ### Function: Display Total Rating Votes
 if(!function_exists('get_ratings_votes')) {
-	function get_ratings_votes() {
+	function get_ratings_votes($display = true) {
 		global $wpdb;
 		$ratings_votes = $wpdb->get_var("SELECT SUM(CAST(meta_value AS UNSIGNED)) FROM $wpdb->postmeta WHERE meta_key = 'ratings_score'");
-		echo number_format($ratings_votes);
+		if($display) {
+			echo number_format($ratings_votes);
+		} else {
+			return number_format($ratings_votes);
+		}
 	}
 }
 
 
 ### Function: Display Total Rating Users
 if(!function_exists('get_ratings_users')) {
-	function get_ratings_users() {
+	function get_ratings_users($display = true) {
 		global $wpdb;
 		$ratings_users = $wpdb->get_var("SELECT SUM(CAST(meta_value AS UNSIGNED)) FROM $wpdb->postmeta WHERE meta_key = 'ratings_users'");
-		echo number_format($ratings_users);
+		if($display) {
+			echo number_format($ratings_users);
+		} else {
+			return number_format($ratings_users);
+		}
 	}
 }
 
@@ -593,7 +613,7 @@ function create_ratinglogs_table() {
 			"rating_ip VARCHAR(40) NOT NULL ,".
 			"rating_host VARCHAR(200) NOT NULL,".
 			"rating_username VARCHAR(50) NOT NULL,".
-			"rating_userid int(10) NOT NULL default '0'".
+			"rating_userid int(10) NOT NULL default '0',".
 			"PRIMARY KEY (rating_id))";
 	maybe_create_table($wpdb->ratings, $create_ratinglogs_sql);
 	// Add In Options (4 Records)
