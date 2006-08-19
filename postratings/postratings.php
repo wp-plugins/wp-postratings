@@ -419,7 +419,7 @@ if(!function_exists('get_ipaddress')) {
 
 
 ### Function: Place Rating In Content
-add_filter('the_content', 'place_ratings', 12);
+add_filter('the_content', 'place_ratings', 7);
 function place_ratings($content){
     $content = preg_replace( "/\[ratings\]/ise", "the_ratings(false)", $content);
 	return $content;
