@@ -72,10 +72,10 @@ if($_POST['Submit']) {
 		var default_template;
 		switch(template) {
 			case "vote":
-				default_template = "%RATINGS_IMAGES_VOTE% (<b>%RATINGS_USERS%</b> votes, average: <b>%RATINGS_AVERAGE%</b> out of %RATINGS_MAX%)";
+				default_template = "%RATINGS_IMAGES_VOTE% (<strong>%RATINGS_USERS%</strong> votes, average: <strong>%RATINGS_AVERAGE%</strong> out of %RATINGS_MAX%)";
 				break;
 			case "text":
-				default_template = "%RATINGS_IMAGES% (<b>%RATINGS_USERS%</b> votes, average: <b>%RATINGS_AVERAGE%</b> out of %RATINGS_MAX%)";
+				default_template = "%RATINGS_IMAGES% (<strong>%RATINGS_USERS%</strong> votes, average: <strong>%RATINGS_AVERAGE%</strong> out of %RATINGS_MAX%)";
 				break;
 			case "none":
 				default_template = "%RATINGS_IMAGES_VOTE% (No Ratings Yet)";
@@ -172,16 +172,16 @@ if($_POST['Submit']) {
 		<legend><?php _e('Template Variables'); ?></legend>
 		<table width="100%"  border="0" cellspacing="3" cellpadding="3">
 			<tr>
-				<td><b>%RATINGS_IMAGES%</b> - <?php _e('Display the ratings images'); ?></td>
-				<td><b>%RATINGS_IMAGES_VOTE%</b> - <?php _e('Display the ratings voting image'); ?></td>
+				<td><strong>%RATINGS_IMAGES%</strong> - <?php _e('Display the ratings images'); ?></td>
+				<td><strong>%RATINGS_IMAGES_VOTE%</strong> - <?php _e('Display the ratings voting image'); ?></td>
 			</tr>
 			<tr>
-				<td><b>%RATINGS_AVERAGE%</b> - <?php _e('Display the average ratings'); ?></td>
-				<td><b>%RATINGS_USERS%</b> - <?php _e('Display the total number of users rated for the post'); ?></td>						
+				<td><strong>%RATINGS_AVERAGE%</strong> - <?php _e('Display the average ratings'); ?></td>
+				<td><strong>%RATINGS_USERS%</strong> - <?php _e('Display the total number of users rated for the post'); ?></td>						
 			</tr>
 			<tr>
-				<td><b>%RATINGS_MAX%</b> - <?php _e('Display the max number of ratings'); ?></td>
-				<td><b>%RATINGS_PERCENTAGE%</b> - <?php _e('Display the ratings percentage'); ?></td>
+				<td><strong>%RATINGS_MAX%</strong> - <?php _e('Display the max number of ratings'); ?></td>
+				<td><strong>%RATINGS_PERCENTAGE%</strong> - <?php _e('Display the ratings percentage'); ?></td>
 			</tr>
 		</table>
 	</fieldset>
@@ -190,7 +190,7 @@ if($_POST['Submit']) {
 		<table width="100%"  border="0" cellspacing="3" cellpadding="3">
 			 <tr valign="top">
 				<td align="left" width="30%">
-					<b><?php _e('Ratings Vote Text:'); ?></b><br /><br />
+					<strong><?php _e('Ratings Vote Text:'); ?></strong><br /><br />
 					<?php _e('Allowed Variables:'); ?><br />
 					- %RATINGS_IMAGES_VOTE%<br />
 					- %RATINGS_MAX%<br />
@@ -203,7 +203,7 @@ if($_POST['Submit']) {
 			</tr>
 			 <tr valign="top">
 				<td align="left" width="30%">
-					<b><?php _e('Ratings Text:'); ?></b><br /><br />
+					<strong><?php _e('Ratings Text:'); ?></strong><br /><br />
 					<?php _e('Allowed Variables:'); ?><br />
 					- %RATINGS_IMAGES%<br />
 					- %RATINGS_MAX%<br />
@@ -216,7 +216,7 @@ if($_POST['Submit']) {
 			</tr>
 			 <tr valign="top">
 				<td align="left" width="30%">
-					<b><?php _e('Ratings None:'); ?></b><br /><br />
+					<strong><?php _e('Ratings None:'); ?></strong><br /><br />
 					<?php _e('Allowed Variables:'); ?><br />
 					- %RATINGS_IMAGES_VOTE%<br />
 					- %RATINGS_MAX%<br />

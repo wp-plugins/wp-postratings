@@ -159,8 +159,8 @@ $postratings_logs = $wpdb->get_results("SELECT * FROM $wpdb->ratings ORDER BY $p
 <!-- Manage Post Ratings -->
 <div class="wrap">
 	<h2><?php _e('Post Ratings Logs'); ?></h2>
-	<p><?php _e('Displaying'); ?> <b><?php echo $display_on_page;?></b> <?php _e('To'); ?> <b><?php echo $max_on_page; ?></b> <?php _e('Of'); ?> <b><?php echo $total_ratings; ?></b> <?php _e('Post Ratings Logs'); ?></p>
-	<p><?php _e('Sorted By'); ?> <b><?php echo $postratings_sortby_text;?></b> <?php _e('In'); ?> <b><?php echo $postratings_sortorder_text;?></b> <?php _e('Order'); ?></p>
+	<p><?php _e('Displaying'); ?> <strong><?php echo $display_on_page;?></strong> <?php _e('To'); ?> <strong><?php echo $max_on_page; ?></strong> <?php _e('Of'); ?> <strong><?php echo $total_ratings; ?></strong> <?php _e('Post Ratings Logs'); ?></p>
+	<p><?php _e('Sorted By'); ?> <strong><?php echo $postratings_sortby_text;?></strong> <?php _e('In'); ?> <strong><?php echo $postratings_sortorder_text;?></strong> <?php _e('Order'); ?></p>
 	<table width="100%"  border="0" cellspacing="3" cellpadding="3">
 	<tr>
 		<th width="2%"><?php _e('ID'); ?></th>
@@ -213,7 +213,7 @@ $postratings_logs = $wpdb->get_results("SELECT * FROM $wpdb->ratings ORDER BY $p
 				$i++;
 			}
 		} else {
-			echo '<tr><td colspan="8" align="center"><b>'.__('No Post Ratings Logs Found').'</b></td></tr>';
+			echo '<tr><td colspan="8" align="center"><strong>'.__('No Post Ratings Logs Found').'</strong></td></tr>';
 		}
 	?>
 	</table>
@@ -227,7 +227,7 @@ $postratings_logs = $wpdb->get_results("SELECT * FROM $wpdb->ratings ORDER BY $p
 				<td align="left" width="50%">
 					<?php
 						if($postratings_page > 1 && ((($postratings_page*$postratings_log_perpage)-($postratings_log_perpage-1)) <= $total_ratings)) {
-							echo '<b>&laquo;</b> <a href="'.$base_page.'&amp;ratingpage='.($postratings_page-1).'" title="&laquo; '.__('Previous Page').'">'.__('Previous Page').'</a>';
+							echo '<strong>&laquo;</strong> <a href="'.$base_page.'&amp;ratingpage='.($postratings_page-1).'" title="&laquo; '.__('Previous Page').'">'.__('Previous Page').'</a>';
 						} else {
 							echo '&nbsp;';
 						}
@@ -236,7 +236,7 @@ $postratings_logs = $wpdb->get_results("SELECT * FROM $wpdb->ratings ORDER BY $p
 				<td align="right" width="50%">
 					<?php
 						if($postratings_page >= 1 && ((($postratings_page*$postratings_log_perpage)+1) <=  $total_ratings)) {
-							echo '<a href="'.$base_page.'&amp;ratingpage='.($postratings_page+1).'" title="'.__('Next Page').' &raquo;">'.__('Next Page').'</a> <b>&raquo;</b>';
+							echo '<a href="'.$base_page.'&amp;ratingpage='.($postratings_page+1).'" title="'.__('Next Page').' &raquo;">'.__('Next Page').'</a> <strong>&raquo;</strong>';
 						} else {
 							echo '&nbsp;';
 						}
@@ -248,25 +248,25 @@ $postratings_logs = $wpdb->get_results("SELECT * FROM $wpdb->ratings ORDER BY $p
 					<?php _e('Pages'); ?> (<?php echo $total_pages; ?>) :
 					<?php
 						if ($postratings_page >= 4) {
-							echo '<b><a href="'.$base_page.'&amp;ratingpage=1'.$postratings_sort_url.$postratings_sort_url.'" title="'.__('Go to First Page').'">&laquo; '.__('First').'</a></b> ... ';
+							echo '<strong><a href="'.$base_page.'&amp;ratingpage=1'.$postratings_sort_url.$postratings_sort_url.'" title="'.__('Go to First Page').'">&laquo; '.__('First').'</a></strong> ... ';
 						}
 						if($postratings_page > 1) {
-							echo ' <b><a href="'.$base_page.'&amp;ratingpage='.($postratings_page-1).$postratings_sort_url.'" title="&laquo; '.__('Go to Page').' '.($postratings_page-1).'">&laquo;</a></b> ';
+							echo ' <strong><a href="'.$base_page.'&amp;ratingpage='.($postratings_page-1).$postratings_sort_url.'" title="&laquo; '.__('Go to Page').' '.($postratings_page-1).'">&laquo;</a></strong> ';
 						}
 						for($i = $postratings_page - 2 ; $i  <= $postratings_page +2; $i++) {
 							if ($i >= 1 && $i <= $total_pages) {
 								if($i == $postratings_page) {
-									echo "<b>[$i]</b> ";
+									echo "<strong>[$i]</strong> ";
 								} else {
 									echo '<a href="'.$base_page.'&amp;ratingpage='.($i).$postratings_sort_url.'" title="'.__('Page').' '.$i.'">'.$i.'</a> ';
 								}
 							}
 						}
 						if($postratings_page < $total_pages) {
-							echo ' <b><a href="'.$base_page.'&amp;ratingpage='.($postratings_page+1).$postratings_sort_url.'" title="'.__('Go to Page').' '.($postratings_page+1).' &raquo;">&raquo;</a></b> ';
+							echo ' <strong><a href="'.$base_page.'&amp;ratingpage='.($postratings_page+1).$postratings_sort_url.'" title="'.__('Go to Page').' '.($postratings_page+1).' &raquo;">&raquo;</a></strong> ';
 						}
 						if (($postratings_page+2) < $total_pages) {
-							echo ' ... <b><a href="'.$base_page.'&amp;ratingpage='.($total_pages).$postratings_sort_url.'" title="'.__('Go to Last Page').'">'.__('Last').' &raquo;</a></b>';
+							echo ' ... <strong><a href="'.$base_page.'&amp;ratingpage='.($total_pages).$postratings_sort_url.'" title="'.__('Go to Last Page').'">'.__('Last').' &raquo;</a></strong>';
 						}
 					?>
 				</td>
@@ -335,7 +335,7 @@ $postratings_logs = $wpdb->get_results("SELECT * FROM $wpdb->ratings ORDER BY $p
 	<h2><?php _e('Post Ratings Logs'); ?></h2>
 	<div align="center">
 		<form action="<?php echo $_SERVER['REQUEST_URI']; ?>" method="post">
-			<b>Are You Sure You Want To Delete All Post Ratings Logs?</b><br /><br />
+			<strong>Are You Sure You Want To Delete All Post Ratings Logs?</strong><br /><br />
 			<input type="checkbox" name="delete_logs_yes" value="yes" />&nbsp;Yes<br /><br />
 			<input type="submit" name="delete_logs" value="Delete All Logs" class="button" onclick="return confirm('You Are About To Delete All Post Ratings Logs.\nThis Action Is Not Reversible.\n\n Choose \'Cancel\' to stop, \'OK\' to delete.')" />
 		</form>
