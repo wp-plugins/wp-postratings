@@ -551,7 +551,7 @@ if(!function_exists('get_highest_rated_sidebar')) {
         if($minimum_votes > 0)  {
           $where_minimum_votes =  "AND $wpdb->posts.ID IN (SELECT rating_postid FROM $wpdb->ratings GROUP BY rating_postid HAVING count(*) >= $minimum_votes)";
 		}                                
-        $highest_rated = $wpdb->get_results("SELECT $wpdb->posts.ID, post_title, post_name, post_status, post_date, (meta_value+0.00) AS ratings_average FROM $wpdb->posts LEFT JOIN $wpdb->postmeta ON $wpdb-> postmeta.post_id = $wpdb->posts.ID WHERE post_date < '".current_time('mysql')."' AND $where AND meta_key = 'ratings_average' AND post_password = '' $where_minimum_votes ORDER BY ratings_average DESC, post_date DESC LIMIT $limit");
+        $highest_rated = $wpdb->get_results("SELECT $wpdb->posts.ID, post_title, post_name, post_status, post_date, (meta_value+0.00) AS ratings_average FROM $wpdb->posts LEFT JOIN $wpdb->postmeta ON $wpdb->postmeta.post_id = $wpdb->posts.ID WHERE post_date < '".current_time('mysql')."' AND $where AND meta_key = 'ratings_average' AND post_password = '' $where_minimum_votes ORDER BY ratings_average DESC, post_date DESC LIMIT $limit");
         if($highest_rated) {
             foreach($highest_rated as $post) {
                 // Variables 
