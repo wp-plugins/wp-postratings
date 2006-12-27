@@ -17,7 +17,7 @@
 
 
 // Variables
-var ratings = new sack(ajax_url);
+var ratings = new sack(ratings_ajax_url);
 var post_id = 0;
 var post_rating = 0;
 var rate_fadein_opacity = 0;
@@ -49,13 +49,15 @@ function rade_fadein_text() {
 
 
 // When User Mouse Over Ratings
-function current_rating(id, rating) {
+function current_rating(id, rating, rating_text) {
 	if(!is_being_rated) {
 		post_id = id;
 		post_rating = rating;
 		for(i = 1; i <= rating; i++) {
 			document.images['rating_' + post_id + '_' + i].src = eval("ratings_mouseover_image.src");
 		}
+		document.getElementById('ratings_' + post_id + '_text').style.display = 'inline';
+		document.getElementById('ratings_' + post_id + '_text').innerHTML = rating_text;
 	}
 }
 
@@ -72,6 +74,8 @@ function ratings_off(rating_score, insert_half) {
 				document.images['rating_' + post_id + '_' + i].src = site_url + '/wp-content/plugins/postratings/images/' + ratings_image + '/rating_off.gif';
 			}
 		}
+		document.getElementById('ratings_' + post_id + '_text').style.display = 'none';
+		document.getElementById('ratings_' + post_id + '_text').innerHTML = '';
 	}
 }
 
@@ -95,7 +99,7 @@ function rate_post() {
 		rate_loading_text();
 		rate_process();		
 	} else {		
-		alert('Please rate only 1 post at a time.');
+		alert(ratings_text_wait);
 	}
 }
 

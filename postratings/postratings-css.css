@@ -36,3 +36,12 @@
 	padding: 0px;
 	margin: 0px;
 }
+.post-ratings-text {
+}
+/* Styles Used In WP-Admin */
+.wp-postratings-usage-pre {
+	margin: 20px;
+	padding: 10px;
+	border: 1px solid #c8c8c8;
+	background-color: #f0f0f0;
+}

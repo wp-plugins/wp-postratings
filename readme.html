@@ -2,7 +2,7 @@
 <html>
 <head>	
 	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
-	<title>WP-PostRatings 1.04 Readme</title>
+	<title>WP-PostRatings 1.05 Readme</title>
 	<style type="text/css" media="screen">
 		/* Default Style */
 		BODY {
@@ -180,7 +180,7 @@
 <body>
 <div id="Container">
 	<!-- Title -->
-	<div id="Title">WP-PostRatings 1.04&nbsp;&nbsp;&nbsp;<span style="color: #aaaaaa;">Readme</span></div>
+	<div id="Title">WP-PostRatings 1.05&nbsp;&nbsp;&nbsp;<span style="color: #aaaaaa;">Readme</span></div>
 
 	<!-- Tabs -->
 	<ul id="Tabs">
@@ -201,7 +201,7 @@
 				<b>EMail:</b><br /><b>&raquo;</b>
 				<script type="text/javascript">
 					/* <![CDATA[*/
-					document.write(' <a href="mailto:gamerz84@hotmail.com?Subject=WP-PostRatings%201.04%20Support" title="EMail To gamerz84@hotmail.com">gamerz84@hotmail.com</a>');
+					document.write(' <a href="mailto:gamerz84@hotmail.com?Subject=WP-PostRatings%201.05%20Support" title="EMail To gamerz84@hotmail.com">gamerz84@hotmail.com</a>');
 					/* ]]> */
 				</script>
 			</p>
@@ -209,13 +209,20 @@
 			<p><b>Demo:</b><br /><b>&raquo;</b> <a href="http://www.lesterchan.net/blogs" title="http://www.lesterchan.net/blogs">http://www.lesterchan.net/blogs</a></p>
 			<p><b>Documentation:</b><br /><b>&raquo;</b> <a href="http://dev.wp-plugins.org/wiki/wp-postratings" title="http://dev.wp-plugins.org/wiki/wp-postratings">http://dev.wp-plugins.org/wiki/wp-postratings</a></p>
 			<p><b>Development:</b><br /><b>&raquo;</b> <a href="http://dev.wp-plugins.org/browser/wp-postratings/" title="http://dev.wp-plugins.org/browser/wp-postratings/">http://dev.wp-plugins.org/browser/wp-postratings/</a></p>
-			<p><b>Support Forums:</b><br /><b>&raquo;</b> <a href="http://forums.lesterchan.net/viewforum.php?f=24" title="http://forums.lesterchan.net/viewforum.php?f=24">http://forums.lesterchan.net/viewforum.php?f=24</a></p>
-			<p><b>Updated:</b><br /><b>&raquo;</b> 11th December 2006</p>
+			<p><b>Support Forums:</b><br /><b>&raquo;</b> <a href="http://forums.lesterchan.net/index.php?board=17.0" title="http://forums.lesterchan.net/index.php?board=17.0">http://forums.lesterchan.net/index.php?board=17.0</a></p>
+			<p><b>Updated:</b><br /><b>&raquo;</b> 2nd January 2007</p>
 			<div class="SubSubTitle">Changelog</div>
 			<ul>
 				<li>
-					<b>Version 1.05 (11-12-2006)</b>
+					<b>Version 1.05 (02-01-2007)</b>
 					<ul>
+						<li>NEW: Added The Ability For Each Rating Star To Have Its Own Text</li>
+						<li>NEW: Highest Rated Post Is Now In The Templates For Easy Modification</li>
+						<li>NEW: Usage Instructions Is Also Included Within The Plugin Itself</li>
+						<li>NEW: Able To Delete Ratings Logs And Data By Post IDs</li>
+						<li>NEW: Able To Uninstall WP-PostRatings</li>
+						<li>NEW: Localization WP-PostRatings</li>
+						<li>FIXED: snippet_text() Function Missing</li>
 						<li>FIXED: AJAX Not Working On Servers Running On PHP CGI</li>
 						<li>FIXED: Added Some Default Styles To postratings-css.css To Ensure That WP-PostRatings Does Not Break</li>
 					</ul>
@@ -295,7 +302,7 @@
 		<!-- Upgrade Instructions -->	
 		<div id="Upgrade" style="display: none;">
 			<div class="SubTitle">&raquo; Upgrade Instructions</div>
-			<div class="SubSubTitle">From v1.0x To v1.04</div>
+			<div class="SubSubTitle">From v1.0x To v1.05</div>
 			<ol>
 				<li>
 					<b>Deactivate</b> WP-PostRatings Plugin
@@ -332,7 +339,7 @@
 					</blockquote>
 				</li>
 				<li>
-					Add Anywhere Below It:
+					Add Anywhere Below It (The Place You Want The Ratings To Show):
 					<blockquote>
 						&lt;?php if(function_exists('the_ratings')) { the_ratings(); } ?&gt;
 					</blockquote>
@@ -369,9 +376,16 @@
 					Use:
 					<blockquote>
 						&lt;?php if (function_exists('get_highest_rated')): ?&gt;<br />
-						&nbsp;&nbsp;&nbsp;&lt;?php get_highest_rated(); ?&gt;<br />
+						&nbsp;&nbsp;&nbsp;&lt;ul&gt;<br />
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;?php get_highest_rated(); ?&gt;<br />
+						&nbsp;&nbsp;&nbsp;&lt;/ul&gt;<br />
 						&lt;?php endif; ?&gt;
 					</blockquote>
+					<p>Default: get_highest_rated('both', 10)</p>
+					<p>The value <b>'both'</b> will display both the highest rated posts and pages.</p>
+					<p>If you want to display the highest rated posts only, replace 'both' with <b>'post'</b>.</p>
+					<p>If you want to display the highest rated pages only, replace 'both' with <b>'page'</b>.</p>
+					<p>The value <b>10</b> will display only the top 10 highest rated posts/pages.</p>
 				</li>
 				<li>
 					To Display <b>Most Rated Post</b>
@@ -380,14 +394,21 @@
 					Use:
 					<blockquote>
 						&lt;?php if (function_exists('get_most_rated')): ?&gt;<br />
-						&nbsp;&nbsp;&nbsp;&lt;?php get_most_rated(); ?&gt;<br />
+						&nbsp;&nbsp;&nbsp;&lt;ul&gt;<br />
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;?php get_most_rated(); ?&gt;<br />
+						&nbsp;&nbsp;&nbsp;&lt;/ul&gt;<br />
 						&lt;?php endif; ?&gt;
 					</blockquote>
+					<p>Default: get_most_rated('both', 10)</p>
+					<p>The value <b>'both'</b> will display both the most rated posts and pages.</p>
+					<p>If you want to display the most rated posts only, replace 'both' with <b>'post'</b>.</p>
+					<p>If you want to display the most rated pages only, replace 'both' with <b>'page'</b>.</p>
+					<p>The value <b>10</b> will display only the top 10 most rated posts/pages.</p>
 				</li>
 			</ul>
 		</div>
 	</div>
 </div>
-<p id="Copyright">WP-PostRatings 1.04<br />Copyright &copy; 2006 Lester 'GaMerZ' Chan. All Rights Reserved.</p>
+<p id="Copyright">WP-PostRatings 1.05<br />Copyright &copy; 2006 Lester 'GaMerZ' Chan. All Rights Reserved.</p>
 </body>
 </html>
