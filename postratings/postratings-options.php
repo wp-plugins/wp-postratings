@@ -91,7 +91,7 @@ if($_POST['Submit']) {
 				default_template = "%RATINGS_IMAGES_VOTE% (<?php _e('No Ratings Yet', 'wp-postratings'); ?>)<br />%RATINGS_TEXT%";
 				break;
 			case "highestrated":
-				default_template = "<li><a href=\"%POST_URL%\">%POST_TITLE%</a> %RATINGS_IMAGES (%RATINGS_AVERAGE% <?php _e('out of', 'wp-postratings'); ?> %RATINGS_MAX%)</li>";
+				default_template = "<li><a href=\"%POST_URL%\">%POST_TITLE%</a> %RATINGS_IMAGES% (%RATINGS_AVERAGE% <?php _e('out of', 'wp-postratings'); ?> %RATINGS_MAX%)</li>";
 				break;
 		}
 		document.getElementById("postratings_template_" + template).value = default_template;
