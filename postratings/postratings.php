@@ -433,6 +433,7 @@ if(!function_exists('get_highest_rated')) {
 		$ratings_max = intval(get_settings('postratings_max'));
 		$where = '';
 		$temp = '';
+		$output = '';
 		if($mode == 'post') {
 			$where = "$wpdb->posts.post_status = 'publish'";
 		} elseif($mode == 'page') {
@@ -477,7 +478,7 @@ if(!function_exists('get_highest_rated')) {
 					$post_ratings_images .= '<img src="'.get_settings('siteurl').'/wp-content/plugins/postratings/images/'.$ratings_image.'/rating_end.gif" alt="" class="post-ratings-image" />';
 				}
 				if($chars > 0) {
-					$temp .= "<li><a href=\"".get_permalink()."\">".snippet_text($post_title, $chars)."</a> ".$post_ratings_images."</li>\n";
+					$temp = "<li><a href=\"".get_permalink()."\">".snippet_text($post_title, $chars)."</a> ".$post_ratings_images."</li>\n";
 				} else {
 					// Display The Contents
 					$temp = stripslashes(get_settings('postratings_template_highestrated'));
@@ -488,14 +489,15 @@ if(!function_exists('get_highest_rated')) {
 					$temp = str_replace("%POST_TITLE%", $post_title, $temp);
 					$temp = str_replace("%POST_URL%", get_permalink(), $temp);
 				}
+				$output .= $temp;
 			}
 		} else {
-			$temp = '<li>'.__('N/A', 'wp-postratings').'</li>'."\n";
+			$output = '<li>'.__('N/A', 'wp-postratings').'</li>'."\n";
 		}
 		if($display) {
-			echo $temp;
+			echo $output;
 		} else {
-			return $temp;
+			return $output;
 		}
 	}
 }
