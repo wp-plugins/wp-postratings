@@ -97,7 +97,7 @@ function the_ratings_header() {
 	echo '<script type="text/javascript">'."\n";
 	echo '/* <![CDATA[ */'."\n";
 	echo "\t".'var site_url = \''.get_settings('siteurl').'\';'."\n";
-	echo "\t".'var ratings_ajax_url = \''.$ratings_ajax_url.'/wp-content/plugins/postratings/postratings/postratings.php\';'."\n";
+	echo "\t".'var ratings_ajax_url = \''.$ratings_ajax_url.'/wp-content/plugins/postratings/postratings.php\';'."\n";
 	echo "\t".'var ratings_text_wait = \''.__('Please rate only 1 post at a time.', 'wp-postratings').'\';'."\n";
 	echo "\t".'var ratings_image = \''.get_settings('postratings_image').'\';'."\n";
 	echo "\t".'var ratings_max = \''.intval(get_settings('postratings_max')).'\';'."\n";
