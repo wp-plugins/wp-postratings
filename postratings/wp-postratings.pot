@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WP-PostRatings 1.05\n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2006-12-30 02:32+0800\n"
+"PO-Revision-Date: 2007-01-02 01:09+0800\n"
 "Last-Translator: Lester 'GaMerZ' Chan <gamerz84@hotmail.com>\n"
 "Language-Team: Lester Chan <gamerz84@hotmail.com>\n"
 "MIME-Version: 1.0\n"
@@ -573,6 +573,7 @@ msgstr ""
 
 #: postratings-usage.php:32
 #: postratings-usage.php:83
+#: postratings-usage.php:102
 msgid "Find:"
 msgstr ""
 
@@ -649,11 +650,24 @@ msgid "Open <b>postratings-css.css</b>"
 msgstr ""
 
 #: postratings-usage.php:87
+#: postratings-usage.php:106
 msgid "Replace:"
 msgstr ""
 
 #: postratings-usage.php:89
 msgid "Where <b>#ffffff</b> should be your background color for the ratings."
+msgstr ""
+
+#: postratings-usage.php:96
+msgid "The AJAX feature might not work if your blog homepage directory is different from the directory you installed WordPress in. To solve this issue,"
+msgstr ""
+
+#: postratings-usage.php:99
+msgid "Open <b>postratings.php</b>"
+msgstr ""
+
+#: postratings-usage.php:108
+msgid "Where <b>WORDPRESS_DIRECTORY</b> should be the directory name which you installed WordPress in. Note the backslash after your WordPress Directory, you need that."
 msgstr ""
 
 #: postratings.php:48

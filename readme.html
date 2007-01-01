@@ -19,6 +19,7 @@
 			padding: 10px;
 			border: 1px solid #8d8d8d;
 			background-color: #f5f5f5;
+			overflow: auto;
 		}
 		LI {
 			margin-top: 20px;
@@ -346,6 +347,9 @@
 					</blockquote>
 					<p>If you DO NOT want the ratings to appear in every post, DO NOT use the code above. Just type in <b>[ratings]</b> into the selected post content and it will embed ratings into that post only.</p>
 				</li>
+			</ol>
+			<div class="SubSubTitle">Note</div>
+			<ul>
 				<li>
 					Note: In IE, some of the post ratings' text may appear jagged (this is normal in IE). To solve this issue,
 					<ol>
@@ -367,7 +371,30 @@
 						</li>
 					</ol>
 				</li>
-			</ol>
+			</ul>
+			<ul>
+				<li>
+					The AJAX feature might not work if your blog homepage directory is different from the directory you installed WordPress in. To solve this issue,
+					<ol>
+						<li>
+							Open <b>postratings.php</b>
+						</li>
+						<li>
+							Find:
+							<blockquote>
+								echo "\t".'var ratings_ajax_url = \''.$ratings_ajax_url.'/wp-content/plugins/postratings/postratings.php\';'."\n";
+							</blockquote>
+						</li>
+						<li>
+							Replace:
+							<blockquote>
+								echo "\t".'var ratings_ajax_url = \''.$ratings_ajax_url.'/WORDPRESS_DIRECTORY/wp-content/plugins/postratings/postratings.php\';'."\n";
+							</blockquote>
+							<p>Where <b>WORDPRESS_DIRECTORY</b> should be the directory name which you installed WordPress in. Note the backslash after your WordPress Directory, you need that.</p>
+						</li>
+					</ol>
+				</li>
+			</ul>
 			<div class="SubSubTitle">Ratings Stats (Outside WP Loop)</div>
 			<ul>
 				<li>

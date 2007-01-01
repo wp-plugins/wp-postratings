@@ -91,4 +91,23 @@ if(!current_user_can('manage_ratings')) {
 			</ol>
 		</li>
 	</ul>
+	<ul>
+		<li>
+			<?php _e("The AJAX feature might not work if your blog homepage directory is different from the directory you installed WordPress in. To solve this issue,", 'wp-postratings'); ?>
+			<ol>
+				<li>
+					<?php _e("Open <b>postratings.php</b>", 'wp-postratings'); ?>
+				</li>
+				<li>
+					<?php _e("Find:", 'wp-postratings'); ?>
+					<blockquote><pre class="wp-postratings-usage-pre">echo "\t".'var ratings_ajax_url = \''.$ratings_ajax_url.'/wp-content/plugins/postratings/postratings.php\';'."\n";</pre></blockquote>
+				</li>
+				<li>
+					<?php _e("Replace:", 'wp-postratings'); ?>
+					<blockquote><pre class="wp-postratings-usage-pre">echo "\t".'var ratings_ajax_url = \''.$ratings_ajax_url.'/WORDPRESS_DIRECTORY/wp-content/plugins/postratings/postratings.php\';'."\n";</pre></blockquote>
+					<?php _e("Where <b>WORDPRESS_DIRECTORY</b> should be the directory name which you installed WordPress in. Note the backslash after your WordPress Directory, you need that.", 'wp-postratings'); ?>
+				</li>
+			</ol>
+		</li>
+	</ul>
 </div>
