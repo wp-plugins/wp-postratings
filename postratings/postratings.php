@@ -466,11 +466,11 @@ if(!function_exists('get_highest_rated')) {
 				// Display Rated Images
 				for($i=1; $i <= $ratings_max; $i++) {
 					if($i <= $post_ratings) {
-						$post_ratings_images .= '<img src="'.get_settings('siteurl').'/wp-content/plugins/postratings/images/'.$ratings_image.'/rating_on.gif" alt="'.__('Average: ').$post_ratings_average.__(' out of ').$ratings_max.'" title="'.__('Average: ').$post_ratings_average.__(' out of ').$ratings_max.'" class="post-ratings-image" />';		
+						$post_ratings_images .= '<img src="'.get_settings('siteurl').'/wp-content/plugins/postratings/images/'.$ratings_image.'/rating_on.gif" alt="'.__('Average: ', 'wp-postratings').$post_ratings_average.__(' out of ', 'wp-postratings').$ratings_max.'" title="'.__('Average: ', 'wp-postratings').$post_ratings_average.__(' out of ', 'wp-postratings').$ratings_max.'" class="post-ratings-image" />';		
 					} elseif($i == $insert_half) {						
-						$post_ratings_images .= '<img src="'.get_settings('siteurl').'/wp-content/plugins/postratings/images/'.$ratings_image.'/rating_half.gif" alt="'.__('Average: ').$post_ratings_average.__(' out of ').$ratings_max.'" title="'.__('Average: ').$post_ratings_average.__(' out of ').$ratings_max.'" class="post-ratings-image" />';
+						$post_ratings_images .= '<img src="'.get_settings('siteurl').'/wp-content/plugins/postratings/images/'.$ratings_image.'/rating_half.gif" alt="'.__('Average: ', 'wp-postratings').$post_ratings_average.__(' out of ', 'wp-postratings').$ratings_max.'" title="'.__('Average: ', 'wp-postratings').$post_ratings_average.__(' out of ', 'wp-postratings').$ratings_max.'" class="post-ratings-image" />';
 					} else {
-						$post_ratings_images .= '<img src="'.get_settings('siteurl').'/wp-content/plugins/postratings/images/'.$ratings_image.'/rating_off.gif" alt="'.__('Average: ').$post_ratings_average.__(' out of ').$ratings_max.'" title="'.__('Average: ').$post_ratings_average.__(' out of ').$ratings_max.'" class="post-ratings-image" />';
+						$post_ratings_images .= '<img src="'.get_settings('siteurl').'/wp-content/plugins/postratings/images/'.$ratings_image.'/rating_off.gif" alt="'.__('Average: ', 'wp-postratings').$post_ratings_average.__(' out of ', 'wp-postratings').$ratings_max.'" title="'.__('Average: ', 'wp-postratings').$post_ratings_average.__(' out of ', 'wp-postratings').$ratings_max.'" class="post-ratings-image" />';
 					}
 				}
 				// Display End Of Rating Image
