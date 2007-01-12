@@ -56,8 +56,10 @@ function current_rating(id, rating, rating_text) {
 		for(i = 1; i <= rating; i++) {
 			document.images['rating_' + post_id + '_' + i].src = eval("ratings_mouseover_image.src");
 		}
-		document.getElementById('ratings_' + post_id + '_text').style.display = 'inline';
-		document.getElementById('ratings_' + post_id + '_text').innerHTML = rating_text;
+		if(document.getElementById('ratings_' + post_id + '_text')) {
+			document.getElementById('ratings_' + post_id + '_text').style.display = 'inline';
+			document.getElementById('ratings_' + post_id + '_text').innerHTML = rating_text;
+		}
 	}
 }
 
@@ -74,8 +76,10 @@ function ratings_off(rating_score, insert_half) {
 				document.images['rating_' + post_id + '_' + i].src = site_url + '/wp-content/plugins/postratings/images/' + ratings_image + '/rating_off.gif';
 			}
 		}
-		document.getElementById('ratings_' + post_id + '_text').style.display = 'none';
-		document.getElementById('ratings_' + post_id + '_text').innerHTML = '';
+		if(document.getElementById('ratings_' + post_id + '_text')) {
+			document.getElementById('ratings_' + post_id + '_text').style.display = 'none';
+			document.getElementById('ratings_' + post_id + '_text').innerHTML = '';
+		}
 	}
 }
 
