@@ -2,8 +2,8 @@
 /*
 +----------------------------------------------------------------+
 |																							|
-|	WordPress 2.0 Plugin: WP-PostRatings 1.05								|
-|	Copyright (c) 2006 Lester "GaMerZ" Chan									|
+|	WordPress 2.1 Plugin: WP-PostRatings 1.10								|
+|	Copyright (c) 2007 Lester "GaMerZ" Chan									|
 |																							|
 |	File Written By:																	|
 |	- Lester "GaMerZ" Chan															|
@@ -276,7 +276,7 @@ switch($mode) {
 	<p><?php _e('Displaying', 'wp-postratings'); ?> <strong><?php echo $display_on_page;?></strong> <?php _e('To', 'wp-postratings'); ?> <strong><?php echo $max_on_page; ?></strong> <?php _e('Of', 'wp-postratings'); ?> <strong><?php echo $total_ratings; ?></strong> <?php _e('Post Ratings Logs', 'wp-postratings'); ?></p>
 	<p><?php _e('Sorted By', 'wp-postratings'); ?> <strong><?php echo $postratings_sortby_text;?></strong> <?php _e('In', 'wp-postratings'); ?> <strong><?php echo $postratings_sortorder_text;?></strong> <?php _e('Order', 'wp-postratings'); ?></p>
 	<table width="100%"  border="0" cellspacing="3" cellpadding="3">
-	<tr>
+	<tr class="thead">
 		<th width="2%"><?php _e('ID', 'wp-postratings'); ?></th>
 		<th width="10%"><?php _e('Username', 'wp-postratings'); ?></th>
 		<th width="10%"><?php _e('Rating', 'wp-postratings'); ?></th>
@@ -500,7 +500,7 @@ switch($mode) {
 				<?php 
 					vprintf(__('<strong>WARNING:</strong><br />Once uninstalled, this cannot be undone. You should use a Database Backup plugin of WordPress to back up all the data first.  Your data is stored in the %1$s, %2$s and %3$s tables.', 'wp-postratings'), array("<strong><em>{$wpdb->ratings}</em></strong>", "<strong><em>{$wpdb->postmeta}</em></strong>", "<strong><em>{$wpdb->options}</em></strong>")); ?>
 			</p>
-			<input type="checkbox" name="uninstall_ratings_yes" value="yes" />&nbsp;<?php _e('Yes'); ?><br /><br />
+			<input type="checkbox" name="uninstall_ratings_yes" value="yes" />&nbsp;<?php _e('Yes', 'wp-postratings'); ?><br /><br />
 			<input type="submit" name="do" value="<?php _e('UNINSTALL Ratings', 'wp-postratings'); ?>" class="button" onclick="return confirm('<?php _e('You Are About To Uninstall WP-PostRatings From WordPress.\nThis Action Is Not Reversible.\n\n Choose [Cancel] To Stop, [OK] To Uninstall.', 'wp-postratings'); ?>')" />
 		</form>
 	</div>

@@ -2,8 +2,8 @@
 /*
 +----------------------------------------------------------------+
 |																							|
-|	WordPress 2.0 Plugin: WP-PostRatings 1.05								|
-|	Copyright (c) 2006 Lester "GaMerZ" Chan									|
+|	WordPress 2.1 Plugin: WP-PostRatings 1.10								|
+|	Copyright (c) 2007 Lester "GaMerZ" Chan									|
 |																							|
 |	File Written By:																	|
 |	- Lester "GaMerZ" Chan															|
@@ -295,7 +295,7 @@ if($_POST['Submit']) {
 		</table>
 	</fieldset>
 	<div align="center">
-		<input type="submit" name="Submit" class="button" value="<?php _e('Update Options'); ?>" />&nbsp;&nbsp;<input type="button" name="cancel" value="<?php _e('Cancel'); ?>" class="button" onclick="javascript:history.go(-1)" />
+		<input type="submit" name="Submit" class="button" value="<?php _e('Update Options', 'wp-postratings'); ?>" />&nbsp;&nbsp;<input type="button" name="cancel" value="<?php _e('Cancel', 'wp-postratings'); ?>" class="button" onclick="javascript:history.go(-1)" />
 	</div>
 	</form>
 </div>

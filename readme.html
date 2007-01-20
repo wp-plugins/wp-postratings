@@ -2,7 +2,7 @@
 <html>
 <head>	
 	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
-	<title>WP-PostRatings 1.05 Readme</title>
+	<title>WP-PostRatings 1.10 Readme</title>
 	<style type="text/css" media="screen">
 		/* Default Style */
 		BODY {
@@ -181,7 +181,7 @@
 <body>
 <div id="Container">
 	<!-- Title -->
-	<div id="Title">WP-PostRatings 1.05&nbsp;&nbsp;&nbsp;<span style="color: #aaaaaa;">Readme</span></div>
+	<div id="Title">WP-PostRatings 1.10&nbsp;&nbsp;&nbsp;<span style="color: #aaaaaa;">Readme</span></div>
 
 	<!-- Tabs -->
 	<ul id="Tabs">
@@ -202,7 +202,7 @@
 				<b>EMail:</b><br /><b>&raquo;</b>
 				<script type="text/javascript">
 					/* <![CDATA[*/
-					document.write(' <a href="mailto:gamerz84@hotmail.com?Subject=WP-PostRatings%201.05%20Support" title="EMail To gamerz84@hotmail.com">gamerz84@hotmail.com</a>');
+					document.write(' <a href="mailto:gamerz84@hotmail.com?Subject=WP-PostRatings%201.10%20Support" title="EMail To gamerz84@hotmail.com">gamerz84@hotmail.com</a>');
 					/* ]]> */
 				</script>
 			</p>
@@ -211,9 +211,17 @@
 			<p><b>Documentation:</b><br /><b>&raquo;</b> <a href="http://dev.wp-plugins.org/wiki/wp-postratings" title="http://dev.wp-plugins.org/wiki/wp-postratings">http://dev.wp-plugins.org/wiki/wp-postratings</a></p>
 			<p><b>Development:</b><br /><b>&raquo;</b> <a href="http://dev.wp-plugins.org/browser/wp-postratings/" title="http://dev.wp-plugins.org/browser/wp-postratings/">http://dev.wp-plugins.org/browser/wp-postratings/</a></p>
 			<p><b>Support Forums:</b><br /><b>&raquo;</b> <a href="http://forums.lesterchan.net/index.php?board=17.0" title="http://forums.lesterchan.net/index.php?board=17.0">http://forums.lesterchan.net/index.php?board=17.0</a></p>
-			<p><b>Updated:</b><br /><b>&raquo;</b> 2nd January 2007</p>
+			<p><b>Updated:</b><br /><b>&raquo;</b> 1st February 2007</p>
+			<p><b>Note:</b><br /><b>&raquo;</b> The <b>Installation</b>, <b>Upgrade</b>, <b>Usage</b> Tab at the top of the page.</p>
 			<div class="SubSubTitle">Changelog</div>
 			<ul>
+				<li>
+					<b>Version 1.10 (01-02-2007)</b>
+					<ul>
+						<li>NEW: Works For WordPress 2.1 Only</li>
+						<li>NEW: Renamed postratings-js.js to postratings-js.php To Enable PHP Parsing</li>
+					</ul>
+				</li>
 				<li>
 					<b>Version 1.05 (02-01-2007)</b>
 					<ul>
@@ -304,7 +312,7 @@
 		<!-- Upgrade Instructions -->	
 		<div id="Upgrade" style="display: none;">
 			<div class="SubTitle">&raquo; Upgrade Instructions</div>
-			<div class="SubSubTitle">From v1.0x To v1.05</div>
+			<div class="SubSubTitle">From v1.0x To v1.10</div>
 			<ol>
 				<li>
 					<b>Deactivate</b> WP-PostRatings Plugin
@@ -317,10 +325,19 @@
 					<blockquote>Folder: postratings</blockquote>
 				</li>
 				<li>
+					Delete these file if exists:
+					<blockquote>
+						File: wp-content/plugins/postratings/postratings-js.js
+					</blockquote>
+				</li>
+				<li>
 					<b>Activate</b> WP-PostRatings Plugin
 				</li>
 				<li>
 					Go to 'WP-Admin -> Ratings -> Ratings Options' and restore all the template variables to <b>Default</b>
+				</li>
+				<li>
+					Refer To <b>Usage</b> For Further Instructions
 				</li>
 			</ol>
 		</div>
@@ -372,29 +389,6 @@
 					</ol>
 				</li>
 			</ul>
-			<ul>
-				<li>
-					The AJAX feature might not work if your blog homepage directory is different from the directory you installed WordPress in. To solve this issue,
-					<ol>
-						<li>
-							Open <b>postratings.php</b>
-						</li>
-						<li>
-							Find:
-							<blockquote>
-								echo "\t".'var ratings_ajax_url = \''.$ratings_ajax_url.'/wp-content/plugins/postratings/postratings.php\';'."\n";
-							</blockquote>
-						</li>
-						<li>
-							Replace:
-							<blockquote>
-								echo "\t".'var ratings_ajax_url = \''.$ratings_ajax_url.'/WORDPRESS_DIRECTORY/wp-content/plugins/postratings/postratings.php\';'."\n";
-							</blockquote>
-							<p>Where <b>WORDPRESS_DIRECTORY</b> should be the directory name which you installed WordPress in. Note the backslash after your WordPress Directory, you need that.</p>
-						</li>
-					</ol>
-				</li>
-			</ul>
 			<div class="SubSubTitle">Ratings Stats (Outside WP Loop)</div>
 			<ul>
 				<li>
@@ -410,6 +404,25 @@
 						&lt;?php endif; ?&gt;
 					</blockquote>
 					<p>Default: get_highest_rated('both', 10)</p>
+					<p>The value <b>'both'</b> will display both the highest rated posts and pages.</p>
+					<p>If you want to display the highest rated posts only, replace 'both' with <b>'post'</b>.</p>
+					<p>If you want to display the highest rated pages only, replace 'both' with <b>'page'</b>.</p>
+					<p>The value <b>10</b> will display only the top 10 highest rated posts/pages.</p>
+				</li>
+				<li>
+					To Display <b>Highest Rated Post In A Category</b>
+				</li>
+				<li>
+					Use:
+					<blockquote>
+						&lt;?php if (function_exists('get_highest_rated_category')): ?&gt;<br />
+						&nbsp;&nbsp;&nbsp;&lt;ul&gt;<br />
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;?php get_highest_rated_category(); ?&gt;<br />
+						&nbsp;&nbsp;&nbsp;&lt;/ul&gt;<br />
+						&lt;?php endif; ?&gt;
+					</blockquote>
+					<p>Default: get_highest_rated_category(0, 'both', 10)</p>
+					<p>The value <b>0</b> will display highest rated post from category id 0.</p>
 					<p>The value <b>'both'</b> will display both the highest rated posts and pages.</p>
 					<p>If you want to display the highest rated posts only, replace 'both' with <b>'post'</b>.</p>
 					<p>If you want to display the highest rated pages only, replace 'both' with <b>'page'</b>.</p>
@@ -437,6 +450,6 @@
 		</div>
 	</div>
 </div>
-<p id="Copyright">WP-PostRatings 1.05<br />Copyright &copy; 2006 Lester 'GaMerZ' Chan. All Rights Reserved.</p>
+<p id="Copyright">WP-PostRatings 1.10<br />Copyright &copy; 2007 Lester 'GaMerZ' Chan. All Rights Reserved.</p>
 </body>
 </html>

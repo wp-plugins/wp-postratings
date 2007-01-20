@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: WP-PostRatings 1.05\n"
+"Project-Id-Version: WP-PostRatings 1.10\n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2007-01-04 23:51+0800\n"
+"PO-Revision-Date: 2007-01-20 21:53+0800\n"
 "Last-Translator: Lester 'GaMerZ' Chan <gamerz84@hotmail.com>\n"
 "Language-Team: Lester Chan <gamerz84@hotmail.com>\n"
 "MIME-Version: 1.0\n"
@@ -13,6 +13,10 @@ msgstr ""
 "X-Poedit-KeywordsList: __;_e\n"
 "X-Poedit-Basepath: .\n"
 "X-Poedit-SearchPath-0: .\n"
+
+#: postratings-js.php:34
+msgid "Please rate only 1 post at a time."
+msgstr ""
 
 #: postratings-manager.php:46
 #: postratings-manager.php:504
@@ -384,32 +388,32 @@ msgstr ""
 
 #: postratings-options.php:85
 #: postratings-options.php:88
-#: postratings.php:159
-#: postratings.php:656
-#: postratings.php:657
+#: postratings.php:140
+#: postratings.php:637
+#: postratings.php:638
 msgid "votes"
 msgstr ""
 
 #: postratings-options.php:85
 #: postratings-options.php:88
-#: postratings.php:159
-#: postratings.php:656
-#: postratings.php:657
+#: postratings.php:140
+#: postratings.php:637
+#: postratings.php:638
 msgid "average"
 msgstr ""
 
 #: postratings-options.php:85
 #: postratings-options.php:88
 #: postratings-options.php:94
-#: postratings.php:159
-#: postratings.php:656
-#: postratings.php:657
-#: postratings.php:666
+#: postratings.php:140
+#: postratings.php:637
+#: postratings.php:638
+#: postratings.php:647
 msgid "out of"
 msgstr ""
 
 #: postratings-options.php:91
-#: postratings.php:658
+#: postratings.php:639
 msgid "No Ratings Yet"
 msgstr ""
 
@@ -573,7 +577,6 @@ msgstr ""
 
 #: postratings-usage.php:32
 #: postratings-usage.php:83
-#: postratings-usage.php:102
 msgid "Find:"
 msgstr ""
 
@@ -650,24 +653,11 @@ msgid "Open <b>postratings-css.css</b>"
 msgstr ""
 
 #: postratings-usage.php:87
-#: postratings-usage.php:106
 msgid "Replace:"
 msgstr ""
 
 #: postratings-usage.php:89
 msgid "Where <b>#ffffff</b> should be your background color for the ratings."
-msgstr ""
-
-#: postratings-usage.php:96
-msgid "The AJAX feature might not work if your blog homepage directory is different from the directory you installed WordPress in. To solve this issue,"
-msgstr ""
-
-#: postratings-usage.php:99
-msgid "Open <b>postratings.php</b>"
-msgstr ""
-
-#: postratings-usage.php:108
-msgid "Where <b>WORDPRESS_DIRECTORY</b> should be the directory name which you installed WordPress in. Note the backslash after your WordPress Directory, you need that."
 msgstr ""
 
 #: postratings.php:48
@@ -690,63 +680,59 @@ msgstr ""
 msgid "Loading"
 msgstr ""
 
-#: postratings.php:101
-msgid "Please rate only 1 post at a time."
-msgstr ""
-
-#: postratings.php:407
-#: postratings.php:413
+#: postratings.php:388
+#: postratings.php:394
 msgid "Votes"
 msgstr ""
 
-#: postratings.php:417
-#: postratings.php:495
+#: postratings.php:398
+#: postratings.php:476
 msgid "N/A"
 msgstr ""
 
-#: postratings.php:469
-#: postratings.php:471
-#: postratings.php:473
+#: postratings.php:450
+#: postratings.php:452
+#: postratings.php:454
 msgid "Average: "
 msgstr ""
 
-#: postratings.php:469
-#: postratings.php:471
-#: postratings.php:473
+#: postratings.php:450
+#: postratings.php:452
+#: postratings.php:454
 msgid " out of "
 msgstr ""
 
-#: postratings.php:610
+#: postratings.php:591
 msgid "Guest"
 msgstr ""
 
-#: postratings.php:624
+#: postratings.php:605
 #, php-format
 msgid "Invalid Post ID. Post ID #%s."
 msgstr ""
 
-#: postratings.php:628
+#: postratings.php:609
 #, php-format
 msgid "You Had Already Rated This Post. Post ID #%s."
 msgstr ""
 
-#: postratings.php:665
+#: postratings.php:646
 msgid "1 Star"
 msgstr ""
 
-#: postratings.php:665
+#: postratings.php:646
 msgid "2 Stars"
 msgstr ""
 
-#: postratings.php:665
+#: postratings.php:646
 msgid "3 Stars"
 msgstr ""
 
-#: postratings.php:665
+#: postratings.php:646
 msgid "4 Stars"
 msgstr ""
 
-#: postratings.php:665
+#: postratings.php:646
 msgid "5 Stars"
 msgstr ""
 

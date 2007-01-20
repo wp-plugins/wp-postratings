@@ -1,8 +1,9 @@
+<?php
 /*
 +----------------------------------------------------------------+
 |																							|
-|	WordPress 2.0 Plugin: WP-PostRatings 1.05								|
-|	Copyright (c) 2006 Lester "GaMerZ" Chan									|
+|	WordPress 2.1 Plugin: WP-PostRatings 1.10								|
+|	Copyright (c) 2007 Lester "GaMerZ" Chan									|
 |																							|
 |	File Written By:																	|
 |	- Lester "GaMerZ" Chan															|
@@ -10,13 +11,31 @@
 |																							|
 |	File Information:																	|
 |	- Post Ratings Javascript File													|
-|	- wp-content/plugins/postratings/postratings-js.js						|
+|	- wp-content/plugins/postratings/postratings-js.php					|
 |																							|
 +----------------------------------------------------------------+
 */
 
 
+### Include wp-config.php
+@require('../../../wp-config.php');
+cache_javascript_headers();
+
+### Determine postratings.php Path
+$ratings_ajax_url = dirname($_SERVER['PHP_SELF']);
+if(substr($ratings_ajax_url, -1) == '/') {
+	$ratings_ajax_url  = substr($ratings_ajax_url, 0, -1);
+}
+?>
+
 // Variables
+var site_url = "<?php echo get_settings('siteurl'); ?>";
+var ratings_ajax_url = "<?php echo $ratings_ajax_url; ?>/postratings.php";
+var ratings_text_wait = "<?php _e('Please rate only 1 post at a time.', 'wp-postratings'); ?>";
+var ratings_image = "<?php echo get_settings('postratings_image'); ?>";
+var ratings_max = "<?php echo intval(get_settings('postratings_max')); ?>";
+var ratings_mouseover_image = new Image();
+ratings_mouseover_image.src = site_url + "/wp-content/plugins/postratings/images/" + ratings_image + "/rating_over.gif";
 var ratings = new sack(ratings_ajax_url);
 var post_id = 0;
 var post_rating = 0;
@@ -58,7 +77,7 @@ function current_rating(id, rating, rating_text) {
 		}
 		if(document.getElementById('ratings_' + post_id + '_text')) {
 			document.getElementById('ratings_' + post_id + '_text').style.display = 'inline';
-			document.getElementById('ratings_' + post_id + '_text').innerHTML = rating_text;
+			ocument.getElementById('ratings_' + post_id + '_text').innerHTML = rating_text;
 		}
 	}
 }
@@ -121,7 +140,8 @@ function rate_process() {
 		}
 		setTimeout("rate_process()", 100); 
 	} else {
-		rate_fadeout_opacity = 0;		
+		rate_fadeout_opacity = 0;
+		ratings.reset();
 		ratings.setVar("pid", post_id);
 		ratings.setVar("rate", post_rating);
 		ratings.method = 'GET';
