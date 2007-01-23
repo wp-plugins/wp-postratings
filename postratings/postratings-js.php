@@ -77,7 +77,7 @@ function current_rating(id, rating, rating_text) {
 		}
 		if(document.getElementById('ratings_' + post_id + '_text')) {
 			document.getElementById('ratings_' + post_id + '_text').style.display = 'inline';
-			ocument.getElementById('ratings_' + post_id + '_text').innerHTML = rating_text;
+			document.getElementById('ratings_' + post_id + '_text').innerHTML = rating_text;
 		}
 	}
 }
