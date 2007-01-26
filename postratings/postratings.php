@@ -2,7 +2,7 @@
 /*
 Plugin Name: WP-PostRatings
 Plugin URI: http://www.lesterchan.net/portfolio/programming.php
-Description: Enables You To Have A Rating System For Your Post
+Description: Adds an AJAX rating system for your WordPress blog's post/page.
 Version: 1.10
 Author: GaMerZ
 Author URI: http://www.lesterchan.net
@@ -372,14 +372,12 @@ if(!function_exists('get_most_rated')) {
 		global $wpdb, $post;
 		$where = '';
 		$temp = '';
-		if($mode == 'post') {
-			$where = "$wpdb->posts.post_status = 'publish'";
-		} elseif($mode == 'page') {
-			$where = "$wpdb->posts.post_status = 'static'";
+		if(!empty($mode) || $mode != 'both') {
+			$where = "$wpdb->posts.post_type = '$mode'";
 		} else {
-			$where = "($wpdb->posts.post_status = 'publish' OR $wpdb->posts.post_status = 'static')";
+			$where = '1=1';
 		}
-		$most_rated = $wpdb->get_results("SELECT $wpdb->posts.ID, post_title, post_name, post_status, post_date, (meta_value+0.00) AS ratings_votes FROM $wpdb->posts LEFT JOIN $wpdb->postmeta ON $wpdb->postmeta.post_id = $wpdb->posts.ID WHERE post_date < '".current_time('mysql')."' AND $where AND meta_key = 'ratings_users' AND post_password = '' ORDER BY ratings_votes DESC LIMIT $limit");
+		$most_rated = $wpdb->get_results("SELECT $wpdb->posts.ID, post_title, post_name, post_status, post_date, (meta_value+0.00) AS ratings_votes FROM $wpdb->posts LEFT JOIN $wpdb->postmeta ON $wpdb->postmeta.post_id = $wpdb->posts.ID WHERE post_date < '".current_time('mysql')."' AND $where AND post_status = 'publish' AND meta_key = 'ratings_users' AND post_password = '' ORDER BY ratings_votes DESC LIMIT $limit");
 		if($most_rated) {
 			if($chars > 0) {
 				foreach ($most_rated as $post) {
@@ -415,14 +413,12 @@ if(!function_exists('get_highest_rated_category')) {
 		$where = '';
 		$temp = '';
 		$output = '';
-		if($mode == 'post') {
-			$where = "$wpdb->posts.post_status = 'publish'";
-		} elseif($mode == 'page') {
-			$where = "$wpdb->posts.post_status = 'static'";
+		if(!empty($mode) || $mode != 'both') {
+			$where = "$wpdb->posts.post_type = '$mode'";
 		} else {
-			$where = "($wpdb->posts.post_status = 'publish' OR $wpdb->posts.post_status = 'static')";
+			$where = '1=1';
 		}
-		$highest_rated = $wpdb->get_results("SELECT $wpdb->posts.ID, $wpdb->posts.post_title, $wpdb->posts.post_name, $wpdb->posts.post_status, $wpdb->posts.post_date, (t1.meta_value+0.00) AS ratings_average, (t2.meta_value+0.00) AS ratings_users FROM $wpdb->posts LEFT JOIN $wpdb->postmeta AS t1 ON t1.post_id = $wpdb->posts.ID LEFT JOIN $wpdb->postmeta As t2 ON t1.post_id = t2.post_id LEFT JOIN $wpdb->post2cat ON $wpdb->post2cat.post_id = $wpdb->posts.ID WHERE t1.meta_key = 'ratings_average' AND t2.meta_key = 'ratings_users' AND $wpdb->posts.post_password = '' AND $wpdb->posts.post_date < '".current_time('mysql')."' AND $wpdb->post2cat.category_id = $category_id AND $where ORDER BY ratings_average DESC, ratings_users DESC LIMIT $limit");
+		$highest_rated = $wpdb->get_results("SELECT $wpdb->posts.ID, $wpdb->posts.post_title, $wpdb->posts.post_name, $wpdb->posts.post_status, $wpdb->posts.post_date, (t1.meta_value+0.00) AS ratings_average, (t2.meta_value+0.00) AS ratings_users FROM $wpdb->posts LEFT JOIN $wpdb->postmeta AS t1 ON t1.post_id = $wpdb->posts.ID LEFT JOIN $wpdb->postmeta As t2 ON t1.post_id = t2.post_id LEFT JOIN $wpdb->post2cat ON $wpdb->post2cat.post_id = $wpdb->posts.ID WHERE t1.meta_key = 'ratings_average' AND t2.meta_key = 'ratings_users' AND $wpdb->posts.post_password = '' AND $wpdb->posts.post_date < '".current_time('mysql')."'  AND $wpdb->posts.post_status = 'publish' AND $wpdb->post2cat.category_id = $category_id AND $where ORDER BY ratings_average DESC, ratings_users DESC LIMIT $limit");
 		if($highest_rated) {
 			foreach($highest_rated as $post) {
 				// Variables
@@ -493,14 +489,12 @@ if(!function_exists('get_highest_rated')) {
 		$where = '';
 		$temp = '';
 		$output = '';
-		if($mode == 'post') {
-			$where = "$wpdb->posts.post_status = 'publish'";
-		} elseif($mode == 'page') {
-			$where = "$wpdb->posts.post_status = 'static'";
+		if(!empty($mode) || $mode != 'both') {
+			$where = "$wpdb->posts.post_type = '$mode'";
 		} else {
-			$where = "($wpdb->posts.post_status = 'publish' OR $wpdb->posts.post_status = 'static')";
+			$where = '1=1';
 		}
-		$highest_rated = $wpdb->get_results("SELECT $wpdb->posts.ID, $wpdb->posts.post_title, $wpdb->posts.post_name, $wpdb->posts.post_status, $wpdb->posts.post_date, (t1.meta_value+0.00) AS ratings_average, (t2.meta_value+0.00) AS ratings_users FROM $wpdb->posts LEFT JOIN $wpdb->postmeta AS t1 ON t1.post_id = $wpdb->posts.ID LEFT JOIN $wpdb->postmeta As t2 ON t1.post_id = t2.post_id WHERE t1.meta_key = 'ratings_average' AND t2.meta_key = 'ratings_users' AND $wpdb->posts.post_password = '' AND $wpdb->posts.post_date < '".current_time('mysql')."' AND $where ORDER BY ratings_average DESC, ratings_users DESC LIMIT $limit");
+		$highest_rated = $wpdb->get_results("SELECT $wpdb->posts.ID, $wpdb->posts.post_title, $wpdb->posts.post_name, $wpdb->posts.post_status, $wpdb->posts.post_date, (t1.meta_value+0.00) AS ratings_average, (t2.meta_value+0.00) AS ratings_users FROM $wpdb->posts LEFT JOIN $wpdb->postmeta AS t1 ON t1.post_id = $wpdb->posts.ID LEFT JOIN $wpdb->postmeta As t2 ON t1.post_id = t2.post_id WHERE t1.meta_key = 'ratings_average' AND t2.meta_key = 'ratings_users' AND $wpdb->posts.post_password = '' AND $wpdb->posts.post_date < '".current_time('mysql')."' AND $wpdb->posts.post_status = 'publish' AND $where ORDER BY ratings_average DESC, ratings_users DESC LIMIT $limit");
 		if($highest_rated) {
 			foreach($highest_rated as $post) {
 				// Variables
@@ -566,7 +560,7 @@ if(!function_exists('get_highest_rated')) {
 if(!function_exists('get_ratings_votes')) {
 	function get_ratings_votes($display = true) {
 		global $wpdb;
-		$ratings_votes = $wpdb->get_var("SELECT SUM(CAST(meta_value AS UNSIGNED)) FROM $wpdb->postmeta WHERE meta_key = 'ratings_score'");
+		$ratings_votes = $wpdb->get_var("SELECT SUM((meta_value+0.00)) FROM $wpdb->postmeta WHERE meta_key = 'ratings_score'");
 		if($display) {
 			echo number_format($ratings_votes);
 		} else {
@@ -580,7 +574,7 @@ if(!function_exists('get_ratings_votes')) {
 if(!function_exists('get_ratings_users')) {
 	function get_ratings_users($display = true) {
 		global $wpdb;
-		$ratings_users = $wpdb->get_var("SELECT SUM(CAST(meta_value AS UNSIGNED)) FROM $wpdb->postmeta WHERE meta_key = 'ratings_users'");
+		$ratings_users = $wpdb->get_var("SELECT SUM((meta_value+0.00)) FROM $wpdb->postmeta WHERE meta_key = 'ratings_users'");
 		if($display) {
 			echo number_format($ratings_users);
 		} else {
