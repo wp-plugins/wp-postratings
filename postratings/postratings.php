@@ -372,7 +372,7 @@ if(!function_exists('get_most_rated')) {
 		global $wpdb, $post;
 		$where = '';
 		$temp = '';
-		if(!empty($mode) || $mode != 'both') {
+		if(!empty($mode) && $mode != 'both') {
 			$where = "$wpdb->posts.post_type = '$mode'";
 		} else {
 			$where = '1=1';
@@ -413,7 +413,7 @@ if(!function_exists('get_highest_rated_category')) {
 		$where = '';
 		$temp = '';
 		$output = '';
-		if(!empty($mode) || $mode != 'both') {
+		if(!empty($mode) && $mode != 'both') {
 			$where = "$wpdb->posts.post_type = '$mode'";
 		} else {
 			$where = '1=1';
@@ -489,7 +489,7 @@ if(!function_exists('get_highest_rated')) {
 		$where = '';
 		$temp = '';
 		$output = '';
-		if(!empty($mode) || $mode != 'both') {
+		if(!empty($mode) && $mode != 'both') {
 			$where = "$wpdb->posts.post_type = '$mode'";
 		} else {
 			$where = '1=1';
