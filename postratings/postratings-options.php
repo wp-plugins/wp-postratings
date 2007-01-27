@@ -109,9 +109,9 @@ if($_POST['Submit']) {
 					<th align="left" width="20%"><?php _e('Ratings Image:', 'wp-postratings'); ?></th>
 					<td align="left">
 						<?php
-							$postratings_url = get_settings('siteurl').'/wp-content/plugins/postratings/images';
+							$postratings_url = get_option('siteurl').'/wp-content/plugins/postratings/images';
 							$postratings_path = ABSPATH.'/wp-content/plugins/postratings/images';
-							$postratings_image = get_settings('postratings_image');
+							$postratings_image = get_option('postratings_image');
 							if($handle = @opendir(ABSPATH.'/wp-content/plugins/postratings/images')) {     
 								while (false !== ($filename = readdir($handle))) {  
 									if ($filename != '.' && $filename != '..') {
@@ -140,7 +140,7 @@ if($_POST['Submit']) {
 								} 
 								closedir($handle);
 							}
-							$postratings_max = get_settings('postratings_max');
+							$postratings_max = get_option('postratings_max');
 						?>
 					</td>
 				</tr>
@@ -153,7 +153,7 @@ if($_POST['Submit']) {
 					<td align="left">
 						<table width="50%"  border="0" cellspacing="3" cellpadding="3">						
 							<?php
-								$postratings_ratingstext = get_settings('postratings_ratingstext');
+								$postratings_ratingstext = get_option('postratings_ratingstext');
 								for($i = 1; $i <= $postratings_max; $i++) {
 									echo '<tr>'."\n";
 									echo '<td>'."\n";
@@ -185,9 +185,9 @@ if($_POST['Submit']) {
 				<th align="left" width="30%"><?php _e('Who Is Allowed To Rate?', 'wp-postratings'); ?></th>
 				<td align="left">
 					<select name="postratings_allowtorate" size="1">
-						<option value="0"<?php selected('0', get_settings('postratings_allowtorate')); ?>><?php _e('Guests Only', 'wp-postratings'); ?></option>
-						<option value="1"<?php selected('1', get_settings('postratings_allowtorate')); ?>><?php _e('Registered Users Only', 'wp-postratings'); ?></option>
-						<option value="2"<?php selected('2', get_settings('postratings_allowtorate')); ?>><?php _e('Registered Users And Guests', 'wp-postratings'); ?></option>
+						<option value="0"<?php selected('0', get_option('postratings_allowtorate')); ?>><?php _e('Guests Only', 'wp-postratings'); ?></option>
+						<option value="1"<?php selected('1', get_option('postratings_allowtorate')); ?>><?php _e('Registered Users Only', 'wp-postratings'); ?></option>
+						<option value="2"<?php selected('2', get_option('postratings_allowtorate')); ?>><?php _e('Registered Users And Guests', 'wp-postratings'); ?></option>
 					</select>
 				</td>
 			</tr>
@@ -200,11 +200,11 @@ if($_POST['Submit']) {
 				<th align="left" width="30%"><?php _e('Ratings Logging Method:', 'wp-postratings'); ?></th>
 				<td align="left">
 					<select name="postratings_logging_method" size="1">
-						<option value="0"<?php selected('0', get_settings('postratings_logging_method')); ?>><?php _e('Do Not Log', 'wp-postratings'); ?></option>
-						<option value="1"<?php selected('1', get_settings('postratings_logging_method')); ?>><?php _e('Logged By Cookie', 'wp-postratings'); ?></option>
-						<option value="2"<?php selected('2', get_settings('postratings_logging_method')); ?>><?php _e('Logged By IP', 'wp-postratings'); ?></option>
-						<option value="3"<?php selected('3', get_settings('postratings_logging_method')); ?>><?php _e('Logged By Cookie And IP', 'wp-postratings'); ?></option>
-						<option value="4"<?php selected('4', get_settings('postratings_logging_method')); ?>><?php _e('Logged By Username', 'wp-postratings'); ?></option>
+						<option value="0"<?php selected('0', get_option('postratings_logging_method')); ?>><?php _e('Do Not Log', 'wp-postratings'); ?></option>
+						<option value="1"<?php selected('1', get_option('postratings_logging_method')); ?>><?php _e('Logged By Cookie', 'wp-postratings'); ?></option>
+						<option value="2"<?php selected('2', get_option('postratings_logging_method')); ?>><?php _e('Logged By IP', 'wp-postratings'); ?></option>
+						<option value="3"<?php selected('3', get_option('postratings_logging_method')); ?>><?php _e('Logged By Cookie And IP', 'wp-postratings'); ?></option>
+						<option value="4"<?php selected('4', get_option('postratings_logging_method')); ?>><?php _e('Logged By Username', 'wp-postratings'); ?></option>
 					</select>
 				</td>
 			</tr>
@@ -247,7 +247,7 @@ if($_POST['Submit']) {
 					- %RATINGS_PERCENTAGE%<br /><br />
 					<input type="button" name="RestoreDefault" value="<?php _e('Restore Default Template', 'wp-postratings'); ?>" onclick="javascript: ratings_default_templates('vote');" class="button" />
 				</td>
-				<td align="left"><textarea cols="80" rows="10" id="postratings_template_vote" name="postratings_template_vote"><?php echo htmlspecialchars(stripslashes(get_settings('postratings_template_vote'))); ?></textarea></td>
+				<td align="left"><textarea cols="80" rows="10" id="postratings_template_vote" name="postratings_template_vote"><?php echo htmlspecialchars(stripslashes(get_option('postratings_template_vote'))); ?></textarea></td>
 			</tr>
 			 <tr valign="top">
 				<td align="left" width="30%">
@@ -261,7 +261,7 @@ if($_POST['Submit']) {
 					- %RATINGS_PERCENTAGE%<br /><br />
 					<input type="button" name="RestoreDefault" value="<?php _e('Restore Default Template', 'wp-postratings'); ?>" onclick="javascript: ratings_default_templates('text');" class="button" />
 				</td>
-				<td align="left"><textarea cols="80" rows="10" id="postratings_template_text" name="postratings_template_text"><?php echo htmlspecialchars(stripslashes(get_settings('postratings_template_text'))); ?></textarea></td>
+				<td align="left"><textarea cols="80" rows="10" id="postratings_template_text" name="postratings_template_text"><?php echo htmlspecialchars(stripslashes(get_option('postratings_template_text'))); ?></textarea></td>
 			</tr>
 			 <tr valign="top">
 				<td align="left" width="30%">
@@ -276,7 +276,7 @@ if($_POST['Submit']) {
 					- %RATINGS_PERCENTAGE%<br /><br />
 					<input type="button" name="RestoreDefault" value="<?php _e('Restore Default Template', 'wp-postratings'); ?>" onclick="javascript: ratings_default_templates('none');" class="button" />
 				</td>
-				<td align="left"><textarea cols="80" rows="10" id="postratings_template_none" name="postratings_template_none"><?php echo htmlspecialchars(stripslashes(get_settings('postratings_template_none'))); ?></textarea></td>
+				<td align="left"><textarea cols="80" rows="10" id="postratings_template_none" name="postratings_template_none"><?php echo htmlspecialchars(stripslashes(get_option('postratings_template_none'))); ?></textarea></td>
 			</tr>
 			 <tr valign="top">
 				<td align="left" width="30%">
@@ -290,7 +290,7 @@ if($_POST['Submit']) {
 					- %POST_URL%<br /><br />
 					<input type="button" name="RestoreDefault" value="<?php _e('Restore Default Template', 'wp-postratings'); ?>" onclick="javascript: ratings_default_templates('highestrated');" class="button" />
 				</td>
-				<td align="left"><textarea cols="80" rows="10" id="postratings_template_highestrated" name="postratings_template_highestrated"><?php echo htmlspecialchars(stripslashes(get_settings('postratings_template_highestrated'))); ?></textarea></td>
+				<td align="left"><textarea cols="80" rows="10" id="postratings_template_highestrated" name="postratings_template_highestrated"><?php echo htmlspecialchars(stripslashes(get_option('postratings_template_highestrated'))); ?></textarea></td>
 			</tr>
 		</table>
 	</fieldset>

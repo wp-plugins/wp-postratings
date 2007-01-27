@@ -29,11 +29,11 @@ if(substr($ratings_ajax_url, -1) == '/') {
 ?>
 
 // Variables
-var site_url = "<?php echo get_settings('siteurl'); ?>";
+var site_url = "<?php echo get_option('siteurl'); ?>";
 var ratings_ajax_url = "<?php echo $ratings_ajax_url; ?>/postratings.php";
 var ratings_text_wait = "<?php _e('Please rate only 1 post at a time.', 'wp-postratings'); ?>";
-var ratings_image = "<?php echo get_settings('postratings_image'); ?>";
-var ratings_max = "<?php echo intval(get_settings('postratings_max')); ?>";
+var ratings_image = "<?php echo get_option('postratings_image'); ?>";
+var ratings_max = "<?php echo intval(get_option('postratings_max')); ?>";
 var ratings_mouseover_image = new Image();
 ratings_mouseover_image.src = site_url + "/wp-content/plugins/postratings/images/" + ratings_image + "/rating_over.gif";
 var ratings = new sack(ratings_ajax_url);
