@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WP-PostRatings 1.10\n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2007-01-27 15:04+0800\n"
+"PO-Revision-Date: 2007-01-28 23:28+0800\n"
 "Last-Translator: Lester 'GaMerZ' Chan <gamerz84@hotmail.com>\n"
 "Language-Team: Lester Chan <gamerz84@hotmail.com>\n"
 "MIME-Version: 1.0\n"
@@ -388,32 +388,32 @@ msgstr ""
 
 #: postratings-options.php:85
 #: postratings-options.php:88
-#: postratings.php:140
-#: postratings.php:709
+#: postratings.php:141
 #: postratings.php:710
+#: postratings.php:711
 msgid "votes"
 msgstr ""
 
 #: postratings-options.php:85
 #: postratings-options.php:88
-#: postratings.php:140
-#: postratings.php:709
+#: postratings.php:141
 #: postratings.php:710
+#: postratings.php:711
 msgid "average"
 msgstr ""
 
 #: postratings-options.php:85
 #: postratings-options.php:88
 #: postratings-options.php:94
-#: postratings.php:140
-#: postratings.php:709
+#: postratings.php:141
 #: postratings.php:710
-#: postratings.php:719
+#: postratings.php:711
+#: postratings.php:720
 msgid "out of"
 msgstr ""
 
 #: postratings-options.php:91
-#: postratings.php:711
+#: postratings.php:712
 msgid "No Ratings Yet"
 msgstr ""
 
@@ -660,86 +660,86 @@ msgstr ""
 msgid "Where <b>#ffffff</b> should be your background color for the ratings."
 msgstr ""
 
-#: postratings.php:48
+#: postratings.php:49
 msgid "Ratings"
 msgstr ""
 
-#: postratings.php:51
+#: postratings.php:52
 msgid "Manage Ratings"
 msgstr ""
 
-#: postratings.php:52
+#: postratings.php:53
 msgid "Ratings Options"
 msgstr ""
 
-#: postratings.php:53
+#: postratings.php:54
 msgid "Ratings Usage"
 msgstr ""
 
-#: postratings.php:62
+#: postratings.php:63
 msgid "Loading"
 msgstr ""
 
-#: postratings.php:386
-#: postratings.php:392
+#: postratings.php:387
+#: postratings.php:393
 msgid "Votes"
 msgstr ""
 
-#: postratings.php:396
-#: postratings.php:472
-#: postratings.php:548
+#: postratings.php:397
+#: postratings.php:473
+#: postratings.php:549
 msgid "N/A"
 msgstr ""
 
-#: postratings.php:446
-#: postratings.php:448
-#: postratings.php:450
-#: postratings.php:522
-#: postratings.php:524
-#: postratings.php:526
+#: postratings.php:447
+#: postratings.php:449
+#: postratings.php:451
+#: postratings.php:523
+#: postratings.php:525
+#: postratings.php:527
 msgid "Average: "
 msgstr ""
 
-#: postratings.php:446
-#: postratings.php:448
-#: postratings.php:450
-#: postratings.php:522
-#: postratings.php:524
-#: postratings.php:526
+#: postratings.php:447
+#: postratings.php:449
+#: postratings.php:451
+#: postratings.php:523
+#: postratings.php:525
+#: postratings.php:527
 msgid " out of "
 msgstr ""
 
-#: postratings.php:663
+#: postratings.php:664
 msgid "Guest"
 msgstr ""
 
-#: postratings.php:677
+#: postratings.php:678
 #, php-format
 msgid "Invalid Post ID. Post ID #%s."
 msgstr ""
 
-#: postratings.php:681
+#: postratings.php:682
 #, php-format
 msgid "You Had Already Rated This Post. Post ID #%s."
 msgstr ""
 
-#: postratings.php:718
+#: postratings.php:719
 msgid "1 Star"
 msgstr ""
 
-#: postratings.php:718
+#: postratings.php:719
 msgid "2 Stars"
 msgstr ""
 
-#: postratings.php:718
+#: postratings.php:719
 msgid "3 Stars"
 msgstr ""
 
-#: postratings.php:718
+#: postratings.php:719
 msgid "4 Stars"
 msgstr ""
 
-#: postratings.php:718
+#: postratings.php:719
 msgid "5 Stars"
 msgstr ""
 

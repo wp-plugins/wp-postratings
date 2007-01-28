@@ -9,7 +9,8 @@ Author URI: http://www.lesterchan.net
 */
 
 
-/*  Copyright 2006  Lester Chan  (email : gamerz84@hotmail.com)
+/* 
+	Copyright 2007  Lester Chan  (email : gamerz84@hotmail.com)
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -383,7 +384,7 @@ if(!function_exists('get_most_rated')) {
 				foreach ($most_rated as $post) {
 					$post_title = htmlspecialchars(stripslashes($post->post_title));
 					$post_votes = intval($post->ratings_votes);
-					$temp .= "<li><a href=\"".get_permalink()."\">".snippet_text($post_title, $chars)."</a> - $post_votes ".__('Votes', 'wp-postratings')."</li>\n";
+					$temp .= "<li><a href=\"".get_permalink()."\">".snippet_chars($post_title, $chars)."</a> - $post_votes ".__('Votes', 'wp-postratings')."</li>\n";
 				}
 			} else {
 				foreach ($most_rated as $post) {
@@ -455,7 +456,7 @@ if(!function_exists('get_highest_rated_category')) {
 					$post_ratings_images .= '<img src="'.get_option('siteurl').'/wp-content/plugins/postratings/images/'.$ratings_image.'/rating_end.gif" alt="" class="post-ratings-image" />';
 				}
 				if($chars > 0) {
-					$temp = "<li><a href=\"".get_permalink()."\">".snippet_text($post_title, $chars)."</a> ".$post_ratings_images."</li>\n";
+					$temp = "<li><a href=\"".get_permalink()."\">".snippet_chars($post_title, $chars)."</a> ".$post_ratings_images."</li>\n";
 				} else {
 					// Display The Contents
 					$temp = stripslashes(get_option('postratings_template_highestrated'));
@@ -531,7 +532,7 @@ if(!function_exists('get_highest_rated')) {
 					$post_ratings_images .= '<img src="'.get_option('siteurl').'/wp-content/plugins/postratings/images/'.$ratings_image.'/rating_end.gif" alt="" class="post-ratings-image" />';
 				}
 				if($chars > 0) {
-					$temp = "<li><a href=\"".get_permalink()."\">".snippet_text($post_title, $chars)."</a> ".$post_ratings_images."</li>\n";
+					$temp = "<li><a href=\"".get_permalink()."\">".snippet_chars($post_title, $chars)."</a> ".$post_ratings_images."</li>\n";
 				} else {
 					// Display The Contents
 					$temp = stripslashes(get_option('postratings_template_highestrated'));
