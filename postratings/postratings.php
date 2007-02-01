@@ -686,6 +686,70 @@ function process_ratings() {
 }
 
 
+### Function: Modify Default WordPress Listing To Make It Sorted By Most Rated
+function ratings_most_join($content) {
+	global $wpdb;
+	$content .= " LEFT JOIN $wpdb->postmeta ON $wpdb->postmeta.post_id = $wpdb->posts.ID";
+	return $content;
+}
+function ratings_most_where($content) {
+	global $wpdb;
+	$content .= " AND $wpdb->postmeta.meta_key = 'ratings_users'";
+	return $content;
+}
+function ratings_most_orderby($content) {
+	global $wpdb;
+	$orderby = trim(addslashes($_GET['orderby']));
+	if(empty($orderby) && ($orderby != 'asc' || $orderby != 'desc')) {
+		$orderby = 'desc';
+	}
+	$content = " $wpdb->postmeta.meta_value $orderby";
+	return $content;
+}
+
+
+### Function: Modify Default WordPress Listing To Make It Sorted By Highest Rated
+function ratings_highest_fields($content) {
+	global $wpdb;
+	$content .= ", (t1.meta_value+0.00) AS ratings_average, (t2.meta_value+0.00) AS ratings_users";
+	return $content;
+}
+function ratings_highest_join($content) {
+	global $wpdb;
+	$content .= " LEFT JOIN $wpdb->postmeta AS t1 ON t1.post_id = $wpdb->posts.ID LEFT JOIN $wpdb->postmeta As t2 ON t1.post_id = t2.post_id";
+	return $content;
+}
+function ratings_highest_where($content) {
+	global $wpdb;
+	$content .= " AND t1.meta_key = 'ratings_average' AND t2.meta_key = 'ratings_users'";
+	return $content;
+}
+function ratings_highest_orderby($content) {
+	global $wpdb;
+	$orderby = trim(addslashes($_GET['orderby']));
+	if(empty($orderby) && ($orderby != 'asc' || $orderby != 'desc')) {
+		$orderby = 'desc';
+	}
+	$content = " ratings_average $orderby, ratings_users $orderby";
+	return $content;
+}
+
+
+### Process The Sorting
+/*
+if($_GET['sortby'] == 'most_rated') {
+	add_filter('posts_join', 'ratings_most_join');
+	add_filter('posts_where', 'ratings_most_where');
+	add_filter('posts_orderby', 'ratings_most_orderby');
+} elseif($_GET['sortby'] == 'highest_rated') {
+	add_filter('posts_fields', 'ratings_highest_fields');
+	add_filter('posts_join', 'ratings_highest_join');
+	add_filter('posts_where', 'ratings_highest_where');
+	add_filter('posts_orderby', 'ratings_highest_orderby');
+}
+*/
+
+
 ### Function: Create Rating Logs Table
 add_action('activate_postratings/postratings.php', 'create_ratinglogs_table');
 function create_ratinglogs_table() {
