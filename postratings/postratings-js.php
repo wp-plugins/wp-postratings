@@ -2,7 +2,7 @@
 /*
 +----------------------------------------------------------------+
 |																							|
-|	WordPress 2.1 Plugin: WP-PostRatings 1.10								|
+|	WordPress 2.1 Plugin: WP-PostRatings 1.11								|
 |	Copyright (c) 2007 Lester "GaMerZ" Chan									|
 |																							|
 |	File Written By:																	|
@@ -26,6 +26,9 @@ $ratings_ajax_url = dirname($_SERVER['PHP_SELF']);
 if(substr($ratings_ajax_url, -1) == '/') {
 	$ratings_ajax_url  = substr($ratings_ajax_url, 0, -1);
 }
+
+### Get Ratings AJAX Style
+$postratings_ajax_style = get_option('postratings_ajax_style');
 ?>
 
 // Variables
@@ -41,6 +44,8 @@ var post_id = 0;
 var post_rating = 0;
 var rate_fadein_opacity = 0;
 var rate_fadeout_opacity = 100;
+var ratings_show_loading = <?php echo intval($postratings_ajax_style['loading']); ?>;
+var ratings_show_fading = <?php echo intval($postratings_ajax_style['fading']); ?>;
 var is_ie = (document.all && document.getElementById);
 var is_moz = (!document.all && document.getElementById);
 var is_opera = (navigator.userAgent.indexOf("Opera") > -1);
@@ -54,9 +59,17 @@ function rade_fadein_text() {
 		if(is_opera)  {
 			rate_fadein_opacity = 100;
 		} else	 if(is_ie) {
-			document.getElementById('post-ratings-' + post_id).filters.alpha.opacity = rate_fadein_opacity;
+			if(ratings_show_fading) {
+				document.getElementById('post-ratings-' + post_id).filters.alpha.opacity = rate_fadein_opacity;
+			} else {
+				rate_fadein_opacity = 100;
+			}
 		} else	 if(is_moz) {
-			document.getElementById('post-ratings-' + post_id).style.MozOpacity = (rate_fadein_opacity/100);
+			if(ratings_show_fading) {
+				document.getElementById('post-ratings-' + post_id).style.MozOpacity = (rate_fadein_opacity/100);
+			} else {
+				rate_fadein_opacity = 100;
+			}
 		}
 		setTimeout("rade_fadein_text()", 100); 
 	} else {
@@ -105,13 +118,17 @@ function ratings_off(rating_score, insert_half) {
 
 // Post Ratings Loading Text
 function rate_loading_text() {
-	document.getElementById('post-ratings-' + post_id + '-loading').style.display = 'block';
+	if(ratings_show_loading) {
+		document.getElementById('post-ratings-' + post_id + '-loading').style.display = 'block';
+	}
 }
 
 
 // Post Ratings Finish Loading Text
 function rate_unloading_text() {
-	document.getElementById('post-ratings-' + post_id + '-loading').style.display = 'none';
+	if(ratings_show_loading) {
+		document.getElementById('post-ratings-' + post_id + '-loading').style.display = 'none';
+	}
 }
 
 
@@ -134,9 +151,17 @@ function rate_process() {
 		if(is_opera) {
 			rate_fadein_opacity = 0;
 		} else if(is_ie) {
-			document.getElementById('post-ratings-' + post_id).filters.alpha.opacity = rate_fadeout_opacity;
+			if(ratings_show_fading) {
+				document.getElementById('post-ratings-' + post_id).filters.alpha.opacity = rate_fadeout_opacity;
+			} else {
+				rate_fadein_opacity = 0;
+			}
 		} else if(is_moz) {
-			document.getElementById('post-ratings-' + post_id).style.MozOpacity = (rate_fadeout_opacity/100);
+			if(ratings_show_fading) {
+				document.getElementById('post-ratings-' + post_id).style.MozOpacity = (rate_fadeout_opacity/100);
+			} else {
+				rate_fadein_opacity = 0;
+			}
 		}
 		setTimeout("rate_process()", 100); 
 	} else {

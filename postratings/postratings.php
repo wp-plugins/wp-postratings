@@ -3,7 +3,7 @@
 Plugin Name: WP-PostRatings
 Plugin URI: http://www.lesterchan.net/portfolio/programming.php
 Description: Adds an AJAX rating system for your WordPress blog's post/page.
-Version: 1.10
+Version: 1.11
 Author: GaMerZ
 Author URI: http://www.lesterchan.net
 */
@@ -60,23 +60,28 @@ function ratings_menu() {
 function the_ratings($start_tag = 'div', $display = true) {
 	global $id;
 	// Loading Style
-	$loading = "<$start_tag id=\"post-ratings-$id-loading\"  class=\"post-ratings-loading\"><img src=\"".get_option('siteurl')."/wp-content/plugins/postratings/images/loading.gif\" width=\"16\" height=\"16\" alt=\"".__('Loading', 'wp-postratings')." ...\" title=\"".__('Loading', 'wp-postratings')." ...\" class=\"post-ratings-image\" />&nbsp;".__('Loading', 'wp-postratings')." ...</".$start_tag.">\n";
+	$postratings_ajax_style = get_option('postratings_ajax_style');
+	if(intval($postratings_ajax_style['loading']) == 1) {
+		$loading = "\n<$start_tag id=\"post-ratings-$id-loading\"  class=\"post-ratings-loading\"><img src=\"".get_option('siteurl')."/wp-content/plugins/postratings/images/loading.gif\" width=\"16\" height=\"16\" alt=\"".__('Loading', 'wp-postratings')." ...\" title=\"".__('Loading', 'wp-postratings')." ...\" class=\"post-ratings-image\" />&nbsp;".__('Loading', 'wp-postratings')." ...</".$start_tag.">\n";
+	} else {
+		$loading = '';
+	}
 	// Check To See Whether User Has Voted
 	$user_voted = check_rated($id);
 	// If User Voted Or Is Not Allowed To Rate
 	if($user_voted || !check_allowtorate()) {
 		if(!$display) {
-			return "<$start_tag id=\"post-ratings-$id\" class=\"post-ratings\">".the_ratings_results($id).'</'.$start_tag.'>'."\n$loading";
+			return "<$start_tag id=\"post-ratings-$id\" class=\"post-ratings\">".the_ratings_results($id).'</'.$start_tag.'>'.$loading;
 		} else {
-			echo "<$start_tag id=\"post-ratings-$id\" class=\"post-ratings\">".the_ratings_results($id).'</'.$start_tag.'>'."\n$loading";
+			echo "<$start_tag id=\"post-ratings-$id\" class=\"post-ratings\">".the_ratings_results($id).'</'.$start_tag.'>'.$loading;
 			return;
 		}
 	// If User Has Not Voted
 	} else {
 		if(!$display) {
-			return "<$start_tag id=\"post-ratings-$id\" class=\"post-ratings\">".the_ratings_vote($id).'</'.$start_tag.'>'."\n$loading";
+			return "<$start_tag id=\"post-ratings-$id\" class=\"post-ratings\">".the_ratings_vote($id).'</'.$start_tag.'>'.$loading;
 		} else {
-			echo "<$start_tag id=\"post-ratings-$id\" class=\"post-ratings\">".the_ratings_vote($id).'</'.$start_tag.'>'."\n$loading\n";
+			echo "<$start_tag id=\"post-ratings-$id\" class=\"post-ratings\">".the_ratings_vote($id).'</'.$start_tag.'>'.$loading;
 			return;
 		}
 	}
@@ -781,7 +786,9 @@ function create_ratinglogs_table() {
 	maybe_add_column($wpdb->ratings, 'rating_userid', "ALTER TABLE $wpdb->ratings ADD rating_userid INT( 10 ) NOT NULL DEFAULT '0';");
 	// Database Uprade For WP-PostRatings 1.05
 	add_option('postratings_ratingstext', array(__('1 Star', 'wp-postratings'), __('2 Stars', 'wp-postratings'), __('3 Stars', 'wp-postratings'), __('4 Stars', 'wp-postratings'), __('5 Stars', 'wp-postratings')), 'Individual Post Rating Text');
-	add_option('postratings_template_highestrated', '<li><a href="%POST_URL%">%POST_TITLE%</a> %RATINGS_IMAGES% (%RATINGS_AVERAGE% '.__('out of', 'wp-postratings').' %RATINGS_MAX%)</li>', 'Template For Highest Rated');	
+	add_option('postratings_template_highestrated', '<li><a href="%POST_URL%">%POST_TITLE%</a> %RATINGS_IMAGES% (%RATINGS_AVERAGE% '.__('out of', 'wp-postratings').' %RATINGS_MAX%)</li>', 'Template For Highest Rated');
+	// Database Uprade For WP-PostRatings 1.11
+	add_option('postratings_ajax_style', array('loading' => 1, 'fading' => 1), 'Ratings AJAX Style');
 	// Set 'manage_ratings' Capabilities To Administrator	
 	$role = get_role('administrator');
 	if(!$role->has_cap('manage_ratings')) {

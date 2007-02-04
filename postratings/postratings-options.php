@@ -2,7 +2,7 @@
 /*
 +----------------------------------------------------------------+
 |																							|
-|	WordPress 2.1 Plugin: WP-PostRatings 1.10								|
+|	WordPress 2.1 Plugin: WP-PostRatings 1.11								|
 |	Copyright (c) 2007 Lester "GaMerZ" Chan									|
 |																							|
 |	File Written By:																	|
@@ -37,6 +37,7 @@ if($_POST['Submit']) {
 	foreach($postratings_ratingstext_array as $ratingstext) {
 		$postratings_ratingstext[] = trim(addslashes($ratingstext));
 	}
+	$postratings_ajax_style = array('loading' => intval($_POST['postratings_ajax_style_loading']), 'fading' => intval($_POST['postratings_ajax_style_fading']));
 	$postratings_template_vote = trim($_POST['postratings_template_vote']);
 	$postratings_template_text = trim($_POST['postratings_template_text']);
 	$postratings_template_none = trim($_POST['postratings_template_none']);
@@ -48,6 +49,7 @@ if($_POST['Submit']) {
 	$update_ratings_queries[] = update_option('postratings_image', $postratings_image);
 	$update_ratings_queries[] = update_option('postratings_max', $postratings_max);
 	$update_ratings_queries[] = update_option('postratings_ratingstext', $postratings_ratingstext);
+	$update_ratings_queries[] = update_option('postratings_ajax_style', $postratings_ajax_style);
 	$update_ratings_queries[] = update_option('postratings_template_vote', $postratings_template_vote);
 	$update_ratings_queries[] = update_option('postratings_template_text', $postratings_template_text);
 	$update_ratings_queries[] = update_option('postratings_template_none', $postratings_template_none);
@@ -57,6 +59,7 @@ if($_POST['Submit']) {
 	$update_ratings_text[] = __('Ratings Image', 'wp-postratings');
 	$update_ratings_text[] = __('Max Ratings', 'wp-postratings');
 	$update_ratings_text[] = __('Individual Rating Text', 'wp-postratings');
+	$update_ratings_text[] = __('Ratings AJAX Style', 'wp-postratings');
 	$update_ratings_text[] = __('Ratings Template Vote', 'wp-postratings');
 	$update_ratings_text[] = __('Ratings Template Text', 'wp-postratings');
 	$update_ratings_text[] = __('Ratings Template For No Ratings', 'wp-postratings');
@@ -175,6 +178,30 @@ if($_POST['Submit']) {
 							?>
 						</table>
 					</td>
+				</tr>
+			</table>
+		</fieldset>
+		<?php $postratings_ajax_style = get_option('postratings_ajax_style'); ?>
+		<fieldset class="options">
+			<legend><?php _e('Ratings AJAX Style', 'wp-postratings'); ?></legend>
+			<table width="100%"  border="0" cellspacing="3" cellpadding="3">
+				 <tr valign="top">
+					<th align="left" width="30%"><?php _e('Show Loading Image With Text', 'wp-postratings'); ?></th>
+					<td align="left">
+						<select name="postratings_ajax_style_loading" size="1">
+							<option value="0"<?php selected('0', $postratings_ajax_style['loading']); ?>><?php _e('No', 'wp-postratings'); ?></option>
+							<option value="1"<?php selected('1', $postratings_ajax_style['loading']); ?>><?php _e('Yes', 'wp-postratings'); ?></option>
+						</select>
+					</td>
+				</tr>
+				<tr valign="top"> 
+					<th align="left" width="30%"><?php _e('Show Fading In And Fading Out Of Ratings', 'wp-postratings'); ?></th>
+					<td align="left">
+						<select name="postratings_ajax_style_fading" size="1">
+							<option value="0"<?php selected('0', $postratings_ajax_style['fading']); ?>><?php _e('No', 'wp-postratings'); ?></option>
+							<option value="1"<?php selected('1', $postratings_ajax_style['fading']); ?>><?php _e('Yes', 'wp-postratings'); ?></option>
+						</select>
+					</td> 
 				</tr>
 			</table>
 		</fieldset>
