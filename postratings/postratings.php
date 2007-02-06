@@ -383,7 +383,7 @@ if(!function_exists('get_most_rated')) {
 		} else {
 			$where = '1=1';
 		}
-		$most_rated = $wpdb->get_results("SELECT $wpdb->posts.ID, post_title, post_name, post_status, post_date, (meta_value+0.00) AS ratings_votes FROM $wpdb->posts LEFT JOIN $wpdb->postmeta ON $wpdb->postmeta.post_id = $wpdb->posts.ID WHERE post_date < '".current_time('mysql')."' AND $where AND post_status = 'publish' AND meta_key = 'ratings_users' AND post_password = '' ORDER BY ratings_votes DESC LIMIT $limit");
+		$most_rated = $wpdb->get_results("SELECT $wpdb->posts.ID, post_title, post_name, post_status, post_date, (meta_value+0) AS ratings_votes FROM $wpdb->posts LEFT JOIN $wpdb->postmeta ON $wpdb->postmeta.post_id = $wpdb->posts.ID WHERE post_date < '".current_time('mysql')."' AND $where AND post_status = 'publish' AND meta_key = 'ratings_users' AND post_password = '' ORDER BY ratings_votes DESC LIMIT $limit");
 		if($most_rated) {
 			if($chars > 0) {
 				foreach ($most_rated as $post) {
@@ -692,6 +692,11 @@ function process_ratings() {
 
 
 ### Function: Modify Default WordPress Listing To Make It Sorted By Most Rated
+function ratings_most_fields($content) {
+	global $wpdb;
+	$content .= ", ($wpdb->postmeta.meta_value+0) AS ratings_votes";
+	return $content;
+}
 function ratings_most_join($content) {
 	global $wpdb;
 	$content .= " LEFT JOIN $wpdb->postmeta ON $wpdb->postmeta.post_id = $wpdb->posts.ID";
@@ -703,19 +708,17 @@ function ratings_most_where($content) {
 	return $content;
 }
 function ratings_most_orderby($content) {
-	global $wpdb;
 	$orderby = trim(addslashes($_GET['orderby']));
 	if(empty($orderby) && ($orderby != 'asc' || $orderby != 'desc')) {
 		$orderby = 'desc';
 	}
-	$content = " $wpdb->postmeta.meta_value $orderby";
+	$content = " ratings_votes $orderby";
 	return $content;
 }
 
 
 ### Function: Modify Default WordPress Listing To Make It Sorted By Highest Rated
 function ratings_highest_fields($content) {
-	global $wpdb;
 	$content .= ", (t1.meta_value+0.00) AS ratings_average, (t2.meta_value+0.00) AS ratings_users";
 	return $content;
 }
@@ -725,12 +728,10 @@ function ratings_highest_join($content) {
 	return $content;
 }
 function ratings_highest_where($content) {
-	global $wpdb;
 	$content .= " AND t1.meta_key = 'ratings_average' AND t2.meta_key = 'ratings_users'";
 	return $content;
 }
 function ratings_highest_orderby($content) {
-	global $wpdb;
 	$orderby = trim(addslashes($_GET['orderby']));
 	if(empty($orderby) && ($orderby != 'asc' || $orderby != 'desc')) {
 		$orderby = 'desc';
@@ -743,6 +744,7 @@ function ratings_highest_orderby($content) {
 ### Process The Sorting
 /*
 if($_GET['sortby'] == 'most_rated') {
+	add_filter('posts_fields', 'ratings_most_fields');
 	add_filter('posts_join', 'ratings_most_join');
 	add_filter('posts_where', 'ratings_most_where');
 	add_filter('posts_orderby', 'ratings_most_orderby');
@@ -753,6 +755,7 @@ if($_GET['sortby'] == 'most_rated') {
 	add_filter('posts_orderby', 'ratings_highest_orderby');
 }
 */
+
 
 
 ### Function: Create Rating Logs Table
