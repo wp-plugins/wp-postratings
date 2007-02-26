@@ -383,17 +383,17 @@ if(!function_exists('get_most_rated')) {
 		} else {
 			$where = '1=1';
 		}
-		$most_rated = $wpdb->get_results("SELECT $wpdb->posts.ID, post_title, post_name, post_status, post_date, (meta_value+0) AS ratings_votes FROM $wpdb->posts LEFT JOIN $wpdb->postmeta ON $wpdb->postmeta.post_id = $wpdb->posts.ID WHERE post_date < '".current_time('mysql')."' AND $where AND post_status = 'publish' AND meta_key = 'ratings_users' AND post_password = '' ORDER BY ratings_votes DESC LIMIT $limit");
+		$most_rated = $wpdb->get_results("SELECT $wpdb->posts.*, (meta_value+0) AS ratings_votes FROM $wpdb->posts LEFT JOIN $wpdb->postmeta ON $wpdb->postmeta.post_id = $wpdb->posts.ID WHERE post_date < '".current_time('mysql')."' AND $where AND post_status = 'publish' AND meta_key = 'ratings_users' AND post_password = '' ORDER BY ratings_votes DESC LIMIT $limit");
 		if($most_rated) {
 			if($chars > 0) {
 				foreach ($most_rated as $post) {
-					$post_title = htmlspecialchars(stripslashes($post->post_title));
+					$post_title = get_the_title();
 					$post_votes = intval($post->ratings_votes);
 					$temp .= "<li><a href=\"".get_permalink()."\">".snippet_chars($post_title, $chars)."</a> - $post_votes ".__('Votes', 'wp-postratings')."</li>\n";
 				}
 			} else {
 				foreach ($most_rated as $post) {
-					$post_title = htmlspecialchars(stripslashes($post->post_title));
+					$post_title = get_the_title();
 					$post_votes = intval($post->ratings_votes);
 					$temp .= "<li><a href=\"".get_permalink()."\">$post_title</a> - $post_votes ".__('Votes', 'wp-postratings')."</li>\n";
 				}
@@ -424,13 +424,13 @@ if(!function_exists('get_highest_rated_category')) {
 		} else {
 			$where = '1=1';
 		}
-		$highest_rated = $wpdb->get_results("SELECT $wpdb->posts.ID, $wpdb->posts.post_title, $wpdb->posts.post_name, $wpdb->posts.post_status, $wpdb->posts.post_date, (t1.meta_value+0.00) AS ratings_average, (t2.meta_value+0.00) AS ratings_users FROM $wpdb->posts LEFT JOIN $wpdb->postmeta AS t1 ON t1.post_id = $wpdb->posts.ID LEFT JOIN $wpdb->postmeta As t2 ON t1.post_id = t2.post_id LEFT JOIN $wpdb->post2cat ON $wpdb->post2cat.post_id = $wpdb->posts.ID WHERE t1.meta_key = 'ratings_average' AND t2.meta_key = 'ratings_users' AND $wpdb->posts.post_password = '' AND $wpdb->posts.post_date < '".current_time('mysql')."'  AND $wpdb->posts.post_status = 'publish' AND $wpdb->post2cat.category_id = $category_id AND $where ORDER BY ratings_average DESC, ratings_users DESC LIMIT $limit");
+		$highest_rated = $wpdb->get_results("SELECT $wpdb->posts.*, (t1.meta_value+0.00) AS ratings_average, (t2.meta_value+0.00) AS ratings_users FROM $wpdb->posts LEFT JOIN $wpdb->postmeta AS t1 ON t1.post_id = $wpdb->posts.ID LEFT JOIN $wpdb->postmeta As t2 ON t1.post_id = t2.post_id LEFT JOIN $wpdb->post2cat ON $wpdb->post2cat.post_id = $wpdb->posts.ID WHERE t1.meta_key = 'ratings_average' AND t2.meta_key = 'ratings_users' AND $wpdb->posts.post_password = '' AND $wpdb->posts.post_date < '".current_time('mysql')."'  AND $wpdb->posts.post_status = 'publish' AND $wpdb->post2cat.category_id = $category_id AND $where ORDER BY ratings_average DESC, ratings_users DESC LIMIT $limit");
 		if($highest_rated) {
 			foreach($highest_rated as $post) {
 				// Variables
 				$post_ratings_users = $post->ratings_users;
 				$post_ratings_images = '';
-				$post_title = htmlspecialchars(stripslashes($post->post_title));
+				$post_title = get_the_title();
 				$post_ratings_average = $post->ratings_average;
 				$post_ratings_whole = intval($post_ratings_average);
 				$post_ratings = floor($post_ratings_average);
@@ -490,6 +490,7 @@ if(!function_exists('get_highest_rated_category')) {
 if(!function_exists('get_highest_rated')) {
 	function get_highest_rated($mode = '', $limit = 10, $chars = 0, $display = true) {
 		global $wpdb, $post;
+		$temp_post = $post;
 		$ratings_image = get_option('postratings_image');
 		$ratings_max = intval(get_option('postratings_max'));
 		$where = '';
@@ -500,13 +501,13 @@ if(!function_exists('get_highest_rated')) {
 		} else {
 			$where = '1=1';
 		}
-		$highest_rated = $wpdb->get_results("SELECT $wpdb->posts.ID, $wpdb->posts.post_title, $wpdb->posts.post_name, $wpdb->posts.post_status, $wpdb->posts.post_date, (t1.meta_value+0.00) AS ratings_average, (t2.meta_value+0.00) AS ratings_users FROM $wpdb->posts LEFT JOIN $wpdb->postmeta AS t1 ON t1.post_id = $wpdb->posts.ID LEFT JOIN $wpdb->postmeta As t2 ON t1.post_id = t2.post_id WHERE t1.meta_key = 'ratings_average' AND t2.meta_key = 'ratings_users' AND $wpdb->posts.post_password = '' AND $wpdb->posts.post_date < '".current_time('mysql')."' AND $wpdb->posts.post_status = 'publish' AND $where ORDER BY ratings_average DESC, ratings_users DESC LIMIT $limit");
+		$highest_rated = $wpdb->get_results("SELECT $wpdb->posts.*, (t1.meta_value+0.00) AS ratings_average, (t2.meta_value+0.00) AS ratings_users FROM $wpdb->posts LEFT JOIN $wpdb->postmeta AS t1 ON t1.post_id = $wpdb->posts.ID LEFT JOIN $wpdb->postmeta As t2 ON t1.post_id = t2.post_id WHERE t1.meta_key = 'ratings_average' AND t2.meta_key = 'ratings_users' AND $wpdb->posts.post_password = '' AND $wpdb->posts.post_date < '".current_time('mysql')."' AND $wpdb->posts.post_status = 'publish' AND $where ORDER BY ratings_average DESC, ratings_users DESC LIMIT $limit");
 		if($highest_rated) {
 			foreach($highest_rated as $post) {
 				// Variables
 				$post_ratings_users = $post->ratings_users;
 				$post_ratings_images = '';
-				$post_title = htmlspecialchars(stripslashes($post->post_title));
+				$post_title = get_the_title();
 				$post_ratings_average = $post->ratings_average;
 				$post_ratings_whole = intval($post_ratings_average);
 				$post_ratings = floor($post_ratings_average);
@@ -553,6 +554,7 @@ if(!function_exists('get_highest_rated')) {
 		} else {
 			$output = '<li>'.__('N/A', 'wp-postratings').'</li>'."\n";
 		}
+		$post = $temp_post;
 		if($display) {
 			echo $output;
 		} else {
@@ -618,8 +620,8 @@ function process_ratings() {
 	$ratings_max = intval(get_option('postratings_max'));
 	$rate = intval($_GET['rate']);
 	$post_id = intval($_GET['pid']);
-	if($rate > 0 && $post_id > 0 && check_allowtorate()) {
-		header('Content-Type: text/html; charset='.get_option('blog_charset'));
+	header('Content-Type: text/html; charset='.get_option('blog_charset').'');
+	if($rate > 0 && $post_id > 0 && check_allowtorate()) {		
 		// Check For Bot
 		$bots_useragent = array('googlebot', 'google', 'msnbot', 'ia_archiver', 'lycos', 'jeeves', 'scooter', 'fast-webcrawler', 'slurp@inktomi', 'turnitinbot', 'technorati', 'yahoo', 'findexa', 'findlinks', 'gaisbo', 'zyborg', 'surveybot', 'bloglines', 'blogsearch', 'ubsub', 'syndic8', 'userland', 'gigabot', 'become.com');
 		$useragent = $_SERVER['HTTP_USER_AGENT'];
