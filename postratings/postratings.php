@@ -367,7 +367,11 @@ if(!function_exists('get_ipaddress')) {
 ### Function: Place Rating In Content
 add_filter('the_content', 'place_ratings', 7);
 function place_ratings($content){
-    $content = preg_replace( "/\[ratings\]/ise", "the_ratings('div', false)", $content);
+	if(!is_feed()) {
+		 $content = preg_replace("/\[ratings\]/ise", "the_ratings('div', false)", $content);
+	} else {
+		$content = preg_replace("/\[ratings\]/ise", __('Note: You can rate this post by visiting the site.', 'wp-postratings'), $content);
+	}   
 	return $content;
 }
 
