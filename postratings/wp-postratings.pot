@@ -1,0 +1,752 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: WP-PostRatings 1.05\n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: 2007-01-04 23:51+0800\n"
+"Last-Translator: Lester 'GaMerZ' Chan <gamerz84@hotmail.com>\n"
+"Language-Team: Lester Chan <gamerz84@hotmail.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: English\n"
+"X-Poedit-Country: SINGAPORE\n"
+"X-Poedit-KeywordsList: __;_e\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: postratings-manager.php:46
+#: postratings-manager.php:504
+msgid "UNINSTALL Ratings"
+msgstr ""
+
+#: postratings-manager.php:53
+#, php-format
+msgid "Table \"%s\" Has Been Dropped."
+msgstr ""
+
+#: postratings-manager.php:61
+#, php-format
+msgid "Setting Key '%s' Has been Errased."
+msgstr ""
+
+#: postratings-manager.php:64
+#, php-format
+msgid "Error Deleting Setting Key '%s'."
+msgstr ""
+
+#: postratings-manager.php:72
+#, php-format
+msgid "Post Meta \"%s\" Has Been Deleted."
+msgstr ""
+
+#: postratings-manager.php:79
+#: postratings-manager.php:476
+msgid "Delete Data/Logs"
+msgstr ""
+
+#: postratings-manager.php:89
+#: postratings-manager.php:119
+msgid "All Post Ratings Logs Have Been Deleted."
+msgstr ""
+
+#: postratings-manager.php:91
+#: postratings-manager.php:121
+msgid "An Error Has Occured While Deleting All Post Ratings Logs."
+msgstr ""
+
+#: postratings-manager.php:96
+#: postratings-manager.php:130
+#, php-format
+msgid "All Post Ratings Logs For Post ID(s) %s Have Been Deleted."
+msgstr ""
+
+#: postratings-manager.php:98
+#: postratings-manager.php:132
+#, php-format
+msgid "An Error Has Occured While Deleting All Post Ratings Logs For Post ID(s) %s."
+msgstr ""
+
+#: postratings-manager.php:106
+#: postratings-manager.php:125
+#, php-format
+msgid "Rating Data \"%s\" Has Been Deleted."
+msgstr ""
+
+#: postratings-manager.php:111
+#: postratings-manager.php:136
+#, php-format
+msgid "Rating Data \"%s\" For Post ID(s) %s Has Been Deleted."
+msgstr ""
+
+#: postratings-manager.php:163
+#: postratings-manager.php:280
+#: postratings-manager.php:400
+msgid "ID"
+msgstr ""
+
+#: postratings-manager.php:167
+#: postratings-manager.php:281
+msgid "Username"
+msgstr ""
+
+#: postratings-manager.php:171
+#: postratings-manager.php:282
+#: postratings-manager.php:402
+msgid "Rating"
+msgstr ""
+
+#: postratings-manager.php:175
+#: postratings-manager.php:283
+#: postratings-manager.php:403
+msgid "Post ID"
+msgstr ""
+
+#: postratings-manager.php:179
+#: postratings-manager.php:284
+#: postratings-manager.php:404
+msgid "Post Title"
+msgstr ""
+
+#: postratings-manager.php:183
+#: postratings-manager.php:406
+msgid "IP"
+msgstr ""
+
+#: postratings-manager.php:187
+#: postratings-manager.php:407
+msgid "Host"
+msgstr ""
+
+#: postratings-manager.php:192
+#: postratings-manager.php:405
+msgid "Date"
+msgstr ""
+
+#: postratings-manager.php:200
+#: postratings-manager.php:411
+msgid "Ascending"
+msgstr ""
+
+#: postratings-manager.php:205
+#: postratings-manager.php:412
+msgid "Descending"
+msgstr ""
+
+#: postratings-manager.php:215
+#: postratings-manager.php:493
+msgid "Uninstall Ratings"
+msgstr ""
+
+#: postratings-manager.php:222
+#, php-format
+msgid "<a href=\"%s\">Click Here</a> To Finish The Uninstallation And WP-PostRatings Will Be Deactivated Automatically."
+msgstr ""
+
+#: postratings-manager.php:275
+#: postratings-manager.php:276
+msgid "Post Ratings Logs"
+msgstr ""
+
+#: postratings-manager.php:276
+msgid "Displaying"
+msgstr ""
+
+#: postratings-manager.php:276
+msgid "To"
+msgstr ""
+
+#: postratings-manager.php:276
+msgid "Of"
+msgstr ""
+
+#: postratings-manager.php:277
+msgid "Sorted By"
+msgstr ""
+
+#: postratings-manager.php:277
+msgid "In"
+msgstr ""
+
+#: postratings-manager.php:277
+msgid "Order"
+msgstr ""
+
+#: postratings-manager.php:285
+msgid "Date / Time"
+msgstr ""
+
+#: postratings-manager.php:286
+msgid "IP / Host"
+msgstr ""
+
+#: postratings-manager.php:315
+#: postratings-manager.php:317
+msgid "User Rate This Post "
+msgstr ""
+
+#: postratings-manager.php:315
+#: postratings-manager.php:317
+msgid " Stars Out Of "
+msgstr ""
+
+#: postratings-manager.php:332
+msgid "No Post Ratings Logs Found"
+msgstr ""
+
+#: postratings-manager.php:346
+msgid "Previous Page"
+msgstr ""
+
+#: postratings-manager.php:355
+msgid "Next Page"
+msgstr ""
+
+#: postratings-manager.php:364
+#, php-format
+msgid "Pages (%s): "
+msgstr ""
+
+#: postratings-manager.php:367
+msgid "Go to First Page"
+msgstr ""
+
+#: postratings-manager.php:367
+msgid "First"
+msgstr ""
+
+#: postratings-manager.php:370
+#: postratings-manager.php:382
+msgid "Go to Page"
+msgstr ""
+
+#: postratings-manager.php:377
+msgid "Page"
+msgstr ""
+
+#: postratings-manager.php:385
+msgid "Go to Last Page"
+msgstr ""
+
+#: postratings-manager.php:385
+msgid "Last"
+msgstr ""
+
+#: postratings-manager.php:401
+msgid "UserName"
+msgstr ""
+
+#: postratings-manager.php:419
+#: postratings-manager.php:421
+msgid "Per Page"
+msgstr ""
+
+#: postratings-manager.php:426
+msgid "Sort"
+msgstr ""
+
+#: postratings-manager.php:432
+msgid "Post Ratings Logs Stats"
+msgstr ""
+
+#: postratings-manager.php:435
+msgid "Total Users Voted:"
+msgstr ""
+
+#: postratings-manager.php:439
+msgid "Total Score:"
+msgstr ""
+
+#: postratings-manager.php:443
+msgid "Total Average:"
+msgstr ""
+
+#: postratings-manager.php:451
+msgid "Post Ratings Data/Logs"
+msgstr ""
+
+#: postratings-manager.php:453
+msgid "Delete Post Ratings Data/Logs"
+msgstr ""
+
+#: postratings-manager.php:457
+msgid "Delete Type: "
+msgstr ""
+
+#: postratings-manager.php:467
+msgid "Post ID(s):"
+msgstr ""
+
+#: postratings-manager.php:470
+msgid "Seperate each Post ID with a comma."
+msgstr ""
+
+#: postratings-manager.php:471
+msgid "To delete ratings data/logs from Post ID 2, 3 and 4. Just type in: <b>2,3,4</b>"
+msgstr ""
+
+#: postratings-manager.php:472
+msgid "To delete ratings data/logs for all posts. Just type in: <b>all</b>"
+msgstr ""
+
+#: postratings-manager.php:476
+msgid ""
+"You Are About To Delete Post Ratings Data/Logs.\\n"
+"This Action Is Not Reversible.\\n"
+"\\n"
+" Choose \\'Cancel\\' to stop, \\'OK\\' to delete."
+msgstr ""
+
+#: postratings-manager.php:482
+msgid "Note:"
+msgstr ""
+
+#: postratings-manager.php:484
+msgid "'Logs Only' means the logs generated when a user rates a post."
+msgstr ""
+
+#: postratings-manager.php:485
+msgid "'Data Only' means the rating data for the post."
+msgstr ""
+
+#: postratings-manager.php:486
+msgid "'Logs And Data' means both the logs generated and the rating data for the post."
+msgstr ""
+
+#: postratings-manager.php:487
+msgid "If your logging method is by IP and Cookie or by Cookie, users may still be unable to rate if they have voted before as the cookie is still stored in their computer."
+msgstr ""
+
+#: postratings-manager.php:497
+msgid "Deactivating WP-PostRatings plugin does not remove any data that may have been created, such as the rating data and the rating's logs. To completely remove this plugin, you can uninstall it here."
+msgstr ""
+
+#: postratings-manager.php:501
+#, php-format
+msgid "<strong>WARNING:</strong><br />Once uninstalled, this cannot be undone. You should use a Database Backup plugin of WordPress to back up all the data first.  Your data is stored in the %1$s, %2$s and %3$s tables."
+msgstr ""
+
+#: postratings-manager.php:503
+msgid "Yes"
+msgstr ""
+
+#: postratings-manager.php:504
+msgid ""
+"You Are About To Uninstall WP-PostRatings From WordPress.\\n"
+"This Action Is Not Reversible.\\n"
+"\\n"
+" Choose [Cancel] To Stop, [OK] To Uninstall."
+msgstr ""
+
+#: postratings-options.php:57
+msgid "Ratings Image"
+msgstr ""
+
+#: postratings-options.php:58
+msgid "Max Ratings"
+msgstr ""
+
+#: postratings-options.php:59
+msgid "Individual Rating Text"
+msgstr ""
+
+#: postratings-options.php:60
+msgid "Ratings Template Vote"
+msgstr ""
+
+#: postratings-options.php:61
+msgid "Ratings Template Text"
+msgstr ""
+
+#: postratings-options.php:62
+msgid "Ratings Template For No Ratings"
+msgstr ""
+
+#: postratings-options.php:63
+msgid "Ratings Template For Highest Rated"
+msgstr ""
+
+#: postratings-options.php:64
+#: postratings-options.php:197
+msgid "Logging Method"
+msgstr ""
+
+#: postratings-options.php:65
+msgid "Allow To Vote Option"
+msgstr ""
+
+#: postratings-options.php:70
+msgid "Updated"
+msgstr ""
+
+#: postratings-options.php:75
+msgid "No Ratings Option Updated"
+msgstr ""
+
+#: postratings-options.php:85
+#: postratings-options.php:88
+#: postratings.php:159
+#: postratings.php:656
+#: postratings.php:657
+msgid "votes"
+msgstr ""
+
+#: postratings-options.php:85
+#: postratings-options.php:88
+#: postratings.php:159
+#: postratings.php:656
+#: postratings.php:657
+msgid "average"
+msgstr ""
+
+#: postratings-options.php:85
+#: postratings-options.php:88
+#: postratings-options.php:94
+#: postratings.php:159
+#: postratings.php:656
+#: postratings.php:657
+#: postratings.php:666
+msgid "out of"
+msgstr ""
+
+#: postratings-options.php:91
+#: postratings.php:658
+msgid "No Ratings Yet"
+msgstr ""
+
+#: postratings-options.php:103
+msgid "Post Rating Options"
+msgstr ""
+
+#: postratings-options.php:106
+msgid "Ratings Settings"
+msgstr ""
+
+#: postratings-options.php:109
+msgid "Ratings Image:"
+msgstr ""
+
+#: postratings-options.php:148
+msgid "Max Ratings:"
+msgstr ""
+
+#: postratings-options.php:152
+msgid "Individual Rating Text:"
+msgstr ""
+
+#: postratings-options.php:182
+msgid "Allow To Rate"
+msgstr ""
+
+#: postratings-options.php:185
+msgid "Who Is Allowed To Rate?"
+msgstr ""
+
+#: postratings-options.php:188
+msgid "Guests Only"
+msgstr ""
+
+#: postratings-options.php:189
+msgid "Registered Users Only"
+msgstr ""
+
+#: postratings-options.php:190
+msgid "Registered Users And Guests"
+msgstr ""
+
+#: postratings-options.php:200
+msgid "Ratings Logging Method:"
+msgstr ""
+
+#: postratings-options.php:203
+msgid "Do Not Log"
+msgstr ""
+
+#: postratings-options.php:204
+msgid "Logged By Cookie"
+msgstr ""
+
+#: postratings-options.php:205
+msgid "Logged By IP"
+msgstr ""
+
+#: postratings-options.php:206
+msgid "Logged By Cookie And IP"
+msgstr ""
+
+#: postratings-options.php:207
+msgid "Logged By Username"
+msgstr ""
+
+#: postratings-options.php:214
+msgid "Template Variables"
+msgstr ""
+
+#: postratings-options.php:217
+msgid "Display the ratings images"
+msgstr ""
+
+#: postratings-options.php:218
+msgid "Display the ratings voting image"
+msgstr ""
+
+#: postratings-options.php:221
+msgid "Display the average ratings"
+msgstr ""
+
+#: postratings-options.php:222
+msgid "Display the total number of users rated for the post"
+msgstr ""
+
+#: postratings-options.php:225
+msgid "Display the max number of ratings"
+msgstr ""
+
+#: postratings-options.php:226
+msgid "Display the ratings percentage"
+msgstr ""
+
+#: postratings-options.php:229
+msgid "Display the total score of the ratings"
+msgstr ""
+
+#: postratings-options.php:230
+msgid "Display the individual rating text. Eg: 1 Star, 2 Stars, etc"
+msgstr ""
+
+#: postratings-options.php:235
+msgid "Ratings Templates"
+msgstr ""
+
+#: postratings-options.php:239
+msgid "Ratings Vote Text:"
+msgstr ""
+
+#: postratings-options.php:240
+#: postratings-options.php:255
+#: postratings-options.php:269
+#: postratings-options.php:284
+msgid "Allowed Variables:"
+msgstr ""
+
+#: postratings-options.php:248
+#: postratings-options.php:262
+#: postratings-options.php:277
+#: postratings-options.php:291
+msgid "Restore Default Template"
+msgstr ""
+
+#: postratings-options.php:254
+msgid "Ratings Text:"
+msgstr ""
+
+#: postratings-options.php:268
+msgid "Ratings None:"
+msgstr ""
+
+#: postratings-options.php:283
+msgid "Highest Rated:"
+msgstr ""
+
+#: postratings-options.php:298
+msgid "Update Options"
+msgstr ""
+
+#: postratings-options.php:298
+msgid "Cancel"
+msgstr ""
+
+#: postratings-usage.php:26
+msgid "General Usage"
+msgstr ""
+
+#: postratings-usage.php:29
+msgid "Open "
+msgstr ""
+
+#: postratings-usage.php:29
+msgid "YOUR THEME NAME"
+msgstr ""
+
+#: postratings-usage.php:29
+msgid "You may place it in <b>single.php</b>, <b>post.php</b> or <b>page.php</b> also."
+msgstr ""
+
+#: postratings-usage.php:32
+#: postratings-usage.php:83
+#: postratings-usage.php:102
+msgid "Find:"
+msgstr ""
+
+#: postratings-usage.php:36
+msgid "Add anywhere below it (the place you want the ratings to show):"
+msgstr ""
+
+#: postratings-usage.php:40
+msgid "If you DO NOT want the ratings to appear in every post, DO NOT use the code above. Just type in <b>[ratings]</b> into the selected post content and it will embed ratings into that post only."
+msgstr ""
+
+#: postratings-usage.php:45
+msgid "Ratings Stats"
+msgstr ""
+
+#: postratings-usage.php:46
+msgid "To Display Highest Rated Post"
+msgstr ""
+
+#: postratings-usage.php:54
+msgid "Default: get_highest_rated('both', 10)"
+msgstr ""
+
+#: postratings-usage.php:55
+msgid "The value <b>'both'</b> will display both the highest rated posts and pages."
+msgstr ""
+
+#: postratings-usage.php:56
+msgid "If you want to display the highest rated posts only, replace 'both' with <b>'post'</b>."
+msgstr ""
+
+#: postratings-usage.php:57
+msgid "If you want to display the highest rated pages only, replace 'both' with <b>'page'</b>."
+msgstr ""
+
+#: postratings-usage.php:58
+msgid "The value <b>10</b> will display only the top 10 highest rated posts/pages."
+msgstr ""
+
+#: postratings-usage.php:59
+msgid "To Display Most Rated Post"
+msgstr ""
+
+#: postratings-usage.php:67
+msgid "Default: get_most_rated('both', 10)"
+msgstr ""
+
+#: postratings-usage.php:68
+msgid "The value <b>'both'</b> will display both the most rated posts and pages."
+msgstr ""
+
+#: postratings-usage.php:69
+msgid "If you want to display the most rated posts only, replace 'both' with <b>'post'</b>."
+msgstr ""
+
+#: postratings-usage.php:70
+msgid "If you want to display the most rated pages only, replace 'both' with <b>'page'</b>."
+msgstr ""
+
+#: postratings-usage.php:71
+msgid "The value <b>10</b> will display only the top 10 most rated posts/pages."
+msgstr ""
+
+#: postratings-usage.php:74
+msgid "Note"
+msgstr ""
+
+#: postratings-usage.php:77
+msgid "In IE, some of the ratings's text may appear jagged (this is normal in IE). To solve this issue,"
+msgstr ""
+
+#: postratings-usage.php:80
+msgid "Open <b>postratings-css.css</b>"
+msgstr ""
+
+#: postratings-usage.php:87
+#: postratings-usage.php:106
+msgid "Replace:"
+msgstr ""
+
+#: postratings-usage.php:89
+msgid "Where <b>#ffffff</b> should be your background color for the ratings."
+msgstr ""
+
+#: postratings-usage.php:96
+msgid "The AJAX feature might not work if your blog homepage directory is different from the directory you installed WordPress in. To solve this issue,"
+msgstr ""
+
+#: postratings-usage.php:99
+msgid "Open <b>postratings.php</b>"
+msgstr ""
+
+#: postratings-usage.php:108
+msgid "Where <b>WORDPRESS_DIRECTORY</b> should be the directory name which you installed WordPress in. Note the backslash after your WordPress Directory, you need that."
+msgstr ""
+
+#: postratings.php:48
+msgid "Ratings"
+msgstr ""
+
+#: postratings.php:51
+msgid "Manage Ratings"
+msgstr ""
+
+#: postratings.php:52
+msgid "Ratings Options"
+msgstr ""
+
+#: postratings.php:53
+msgid "Ratings Usage"
+msgstr ""
+
+#: postratings.php:62
+msgid "Loading"
+msgstr ""
+
+#: postratings.php:101
+msgid "Please rate only 1 post at a time."
+msgstr ""
+
+#: postratings.php:407
+#: postratings.php:413
+msgid "Votes"
+msgstr ""
+
+#: postratings.php:417
+#: postratings.php:495
+msgid "N/A"
+msgstr ""
+
+#: postratings.php:469
+#: postratings.php:471
+#: postratings.php:473
+msgid "Average: "
+msgstr ""
+
+#: postratings.php:469
+#: postratings.php:471
+#: postratings.php:473
+msgid " out of "
+msgstr ""
+
+#: postratings.php:610
+msgid "Guest"
+msgstr ""
+
+#: postratings.php:624
+#, php-format
+msgid "Invalid Post ID. Post ID #%s."
+msgstr ""
+
+#: postratings.php:628
+#, php-format
+msgid "You Had Already Rated This Post. Post ID #%s."
+msgstr ""
+
+#: postratings.php:665
+msgid "1 Star"
+msgstr ""
+
+#: postratings.php:665
+msgid "2 Stars"
+msgstr ""
+
+#: postratings.php:665
+msgid "3 Stars"
+msgstr ""
+
+#: postratings.php:665
+msgid "4 Stars"
+msgstr ""
+
+#: postratings.php:665
+msgid "5 Stars"
+msgstr ""
+
