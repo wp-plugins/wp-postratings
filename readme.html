@@ -1,0 +1,368 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>	
+	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+	<title>WP-PostRatings 1.02a Readme</title>
+	<style type="text/css" media="screen">
+		/* Default Style */
+		BODY {
+			font-family: Verdana, Arial;
+			font-size: 12px;
+			color: #000000;
+			background: #FFFFFF;
+		}
+		P {
+			padding-left: 10px;
+		}
+		BLOCKQUOTE {
+			margin: 10px 20px 0px 20px;
+			padding: 10px;
+			border: 1px solid #8d8d8d;
+			background-color: #f5f5f5;
+		}
+		LI {
+			margin-top: 20px;
+		}
+		UL LI UL LI {
+			margin-top: 10px;
+		}
+		A, A:active, A:link, A:visited {
+			color: #2d3a4c;
+			text-decoration: none;
+		}
+		A:hover {
+			color: #5577a5;
+			text-decoration: underline;
+		}
+		/* Place Holder Style */
+		#Container {
+			width: 780px;
+			margin-left: auto;
+			margin-right: auto; 
+		}
+		#Content {
+			background-color: #fafafa;
+			border: 1px solid #a2b6cb;
+			padding: 10px;
+			margin-top: -13px;
+		}
+		/* Title Style */
+		#Title {
+			font-family: Verdana, Arial;
+			font-size: 22px;
+			font-weight: bold;
+			color: #389aff;
+			border-bottom: 1px solid #389aff;
+			margin-bottom: 10px;
+		}
+		.SubTitle {
+			font-family: Verdana, Arial;
+			font-size: 18px;
+			font-weight: bold;
+			color: #5b87b4;
+		}
+		.SubSubTitle {
+			font-family: Verdana, Arial;
+			font-size: 14px;
+			font-weight: bold;
+			color: #73a4d6;
+		}
+		/* Tabs */
+		UL#Tabs {
+			font-family: Verdana, Arial;
+			font-size: 12px;
+			font-weight: bold;
+			list-style-type: none;
+			padding-bottom: 28px;
+			border-bottom: 1px solid #a2b6cb;
+			margin-bottom: 12px;
+			z-index: 1;
+		}
+		#Tabs LI.Tab {
+			float: right;
+			height: 25px;
+			background-color: #deedfb;
+			margin: 2px 0px 0px 5px;
+			border: 1px solid #a2b6cb;
+		}
+		#Tabs LI.Tab A {
+			float: left;
+			display: block;
+			color: #666666;
+			text-decoration: none;
+			padding: 5px;
+		}
+		#Tabs LI.Tab A:hover {
+			background-color: #bfe0fe;
+			border-bottom: 1px solid #bfe0fe;
+		}
+		/* Selected Tab */
+		#Tabs LI.SelectedTab {
+			float: right;
+			height: 25px;
+			background-color: #fafafa;
+			margin: 2px 0px 0px 5px;
+			border-top: 1px solid #a2b6cb;
+			border-right: 1px solid #a2b6cb;
+			border-bottom: 1px solid #fafafa;
+			border-left: 1px solid #a2b6cb;
+		}
+		#Tabs LI.SelectedTab A {
+			float: left;
+			display: block;
+			color: #666666;
+			text-decoration: none;
+			padding: 5px;
+			cursor: default;
+		}
+		/* Copyright */
+		#Copyright {
+			text-align: center;
+		}
+	</style>
+	<script type="text/javascript">
+		// Index Page
+		function index() {
+			// Tab
+			document.getElementById('IndexTab').className = 'SelectedTab';
+			document.getElementById('InstallTab').className = 'Tab';
+			document.getElementById('UpgradeTab').className = 'Tab';
+			document.getElementById('UsageTab').className = 'Tab';
+			// Page
+			document.getElementById('Index').style.display= 'block';
+			document.getElementById('IndexTab').className = 'SelectedTab';
+			document.getElementById('Install').style.display = 'none';
+			document.getElementById('Upgrade').style.display = 'none';
+			document.getElementById('Usage').style.display = 'none';
+		}
+		// Installation Page
+		function install() {
+			// Tab
+			document.getElementById('IndexTab').className = 'Tab';
+			document.getElementById('InstallTab').className = 'SelectedTab';
+			document.getElementById('UpgradeTab').className = 'Tab';
+			document.getElementById('UsageTab').className = 'Tab';
+			// Page
+			document.getElementById('Index').style.display= 'none';
+			document.getElementById('Install').style.display = 'block';
+			document.getElementById('Upgrade').style.display = 'none';
+			document.getElementById('Usage').style.display = 'none';
+		}
+		// Upgrade Page
+		function upgrade() {
+			// Tab
+			document.getElementById('IndexTab').className = 'Tab';
+			document.getElementById('InstallTab').className = 'Tab';
+			document.getElementById('UpgradeTab').className = 'SelectedTab';
+			document.getElementById('UpgradeTab').href = 'Tab';
+			document.getElementById('UsageTab').className = 'Tab';
+			// Page
+			document.getElementById('Index').style.display= 'none';
+			document.getElementById('Install').style.display = 'none';
+			document.getElementById('Upgrade').style.display = 'block';
+			document.getElementById('Usage').style.display = 'none';
+		}
+		// Usage Page
+		function usage() {
+			// Tab
+			document.getElementById('IndexTab').className = 'Tab';
+			document.getElementById('InstallTab').className = 'Tab';
+			document.getElementById('UpgradeTab').className = 'Tab';
+			document.getElementById('UsageTab').className = 'SelectedTab';
+			// Page
+			document.getElementById('Index').style.display= 'none';		
+			document.getElementById('Install').style.display = 'none';
+			document.getElementById('Upgrade').style.display = 'none';
+			document.getElementById('Usage').style.display = 'block';
+		}
+</script>
+</head>
+<body>
+<div id="Container">
+	<!-- Title -->
+	<div id="Title">WP-PostRatings 1.02a&nbsp;&nbsp;&nbsp;<span style="color: #aaaaaa;">Readme</span></div>
+
+	<!-- Tabs -->
+	<ul id="Tabs">
+		<li id="UsageTab" class="Tab"><a href="#Usage" onclick="usage(); return false;" title="Usage Instructions">Usage</a></li>
+		<li id="UpgradeTab" class="Tab"><a href="#Upgrade" onclick="upgrade(); return false;" title="Upgrade Instructions">Upgrade</a></li>
+		<li id="InstallTab" class="Tab"><a href="#Installation" onclick="install(); return false;" title="Installation Instructions">Installation</a></li>
+		<li id="IndexTab" class="SelectedTab"><a href="#Index" onclick="index(); return false;" title="Index Instructions">Index</a></li>
+	</ul>
+
+	<!-- Content -->
+	<div id="Content">
+		<!-- Index -->
+		<div id="Index">
+			<div class="SubTitle">&raquo; Index</div>
+			<div class="SubSubTitle">Plugin Information</div>
+			<p><b>Author</b><br /><b>&raquo;</b> Lester 'GaMerZ' Chan</p>
+			<p>
+				<b>EMail:</b><br /><b>&raquo;</b>
+				<script type="text/javascript">
+					/* <![CDATA[*/
+					document.write(' <a href="mailto:gamerz84@hotmail.com?Subject=WP-PostRatings%201.02a%20Support" title="EMail To gamerz84@hotmail.com">gamerz84@hotmail.com</a>');
+					/* ]]> */
+				</script>
+			</p>
+			<p><b>Website:</b><br /><b>&raquo;</b> <a href="http://www.lesterchan.net/" title="http://www.lesterchan.net/">http://www.lesterchan.net/</a></p>
+			<p><b>Demo:</b><br /><b>&raquo;</b> <a href="http://www.lesterchan.net/blogs" title="http://www.lesterchan.net/blogs">http://www.lesterchan.net/blogs</a></p>
+			<p><b>Documentation:</b><br /><b>&raquo;</b> <a href="http://dev.wp-plugins.org/wiki/wp-postratings" title="http://dev.wp-plugins.org/wiki/wp-postratings">http://dev.wp-plugins.org/wiki/wp-postratings</a></p>
+			<p><b>Development:</b><br /><b>&raquo;</b> <a href="http://dev.wp-plugins.org/browser/wp-postratings/" title="http://dev.wp-plugins.org/browser/wp-postratings/">http://dev.wp-plugins.org/browser/wp-postratings/</a></p>
+			<p><b>Support Forums:</b><br /><b>&raquo;</b> <a href="http://forums.lesterchan.net/viewforum.php?f=24" title="http://forums.lesterchan.net/viewforum.php?f=24">http://forums.lesterchan.net/viewforum.php?f=24</a></p>
+			<p><b>Updated:</b><br /><b>&raquo;</b> 7th June 2006</p>
+			<div class="SubSubTitle">Changelog</div>
+			<ul>
+				<li>
+					<b>Version 1.02a (07-06-2006)</b>
+					<ul>
+						<li>FIXED: AJAX Not Working In Opera Browser</li>						
+					</ul>
+				</li>
+				<li>
+					<b>Version 1.02 (01-06-2006)</b>
+					<ul>
+						<li>NEW: Fading In/Put Effect After You Rate A Post</li>
+						<li>NEW: Rating Voting And Rating Results Are On The Same Image</li>
+						<li>NEW: Added Rating Option For Logging Method</li>
+						<li>NEW: Added Rating Option For Who Can Rate</li>
+						<li>NEW: Added Rating Results Image To Get Highest Rated Stats</li>
+						<li>NEW: Rating Administration Panel And The Code That WP-PostRatings Generated Is XHTML 1.0 Transitional</li>						
+					</ul>
+				</li>
+				<li>
+					<b>Version 1.01 (01-04-2006)</b>
+					<ul>
+						<li>NEW: AJAX Voting</li>
+						<li>FIXED: Block Search Bots From Voting</li>
+						<li>FIXED: Hard Coded Table Name In Ratings Stats</li>
+					</ul>
+				</li>
+				<li>
+					<b>Version 1.00 (01-03-2006)</b>
+					<ul>
+						<li>NEW: Initial Release</li>
+					</ul>
+				</li>
+			</ul>
+		</div>
+
+		<!-- Installation Instructions -->
+		<div id="Install" style="display: none;">
+			<div class="SubTitle">&raquo; Installation Instructions</div>
+			<ol>
+				<li>
+					Open <b>wp-content/plugins</b> Folder
+				</li>
+				<li>
+					Put:
+					<blockquote>Folder: postratings</blockquote>
+				</li>
+				<li>
+					<b>Activate</b> WP-PostRatings Plugin
+				</li>
+				<li>
+					Refer To <b>Usage</b> For Further Instructions
+				</li>
+			</ol>
+		</div>
+
+		<!-- Upgrade Instructions -->	
+		<div id="Upgrade" style="display: none;">
+			<div class="SubTitle">&raquo; Upgrade Instructions</div>
+			<div class="SubSubTitle">From v1.0x To v1.02</div>
+			<ol>
+				<li>
+					<b>Deactivate</b> WP-PostRatings Plugin
+				</li>
+				<li>
+					Open <b>wp-content/plugins</b> Folder
+				</li>
+				<li>
+					Overwrite:
+					<blockquote>Folder: postratings</blockquote>
+				</li>
+				<li>
+					<b>Activate</b> WP-PostRatings Plugin
+				</li>
+				<li>
+					Go to 'WP-Admin -> Ratings -> Ratings Options' and restore all the template variables to <b>Default</b>
+				</li>
+			</ol>
+		</div>
+
+		<!-- Usage Instructions -->	
+		<div id="Usage" style="display: none;">
+			<div class="SubTitle">&raquo; Usage Instructions</div>
+			<div class="SubSubTitle">General Usage</div>
+			<ol>
+				<li>
+					Open <b>wp-content/themes/&lt;YOUR THEME NAME&gt;/index.php</b>
+					<p>You may place it in <b>single.php</b>, <b>post.php</b> or <b>page.php</b> also.</p>
+				</li>
+				<li>
+					Find:
+					<blockquote>
+						&lt;?php while (have_posts()) : the_post(); ?&gt;
+					</blockquote>
+				</li>
+				<li>
+					Add Anywhere Below It:
+					<blockquote>
+						&lt;?php if(function_exists('the_ratings')) { the_ratings(); } ?&gt;
+					</blockquote>
+					<p>If you DO NOT want the ratings to appear in every post, DO NOT use the code above. Just type in <b>[ratings]</b> into the selected post content and it will embed ratings into that post only.</p>
+				</li>
+				<li>
+					Note: In IE, some of the poll's text may appear jagged (this is normal in IE). To solve this issue,
+					<ol>
+						<li>
+							Open <b>poll-css.css</b>
+						</li>
+						<li>
+							Find:
+							<blockquote>
+									/* background-color: #ffffff; */
+							</blockquote>
+						</li>
+						<li>
+							Replace:
+							<blockquote>
+									background-color: #ffffff;
+							</blockquote>
+							<p>Where <b>#ffffff</b> should be your background color for the poll.</p>
+						</li>
+					</ol>
+				</li>
+			</ol>
+			<div class="SubSubTitle">Ratings Stats (Outside WP Loop)</div>
+			<ul>
+				<li>
+					To Display <b>Highest Rated Post</b>
+				</li>
+				<li>
+					Use:
+					<blockquote>
+						&lt;?php if (function_exists('get_highest_rated')): ?&gt;<br />
+						&nbsp;&nbsp;&nbsp;&lt;?php get_highest_rated(); ?&gt;<br />
+						&lt;?php endif; ?&gt;
+					</blockquote>
+				</li>
+				<li>
+					To Display <b>Most Rated Post</b>
+				</li>
+				<li>
+					Use:
+					<blockquote>
+						&lt;?php if (function_exists('get_most_rated')): ?&gt;<br />
+						&nbsp;&nbsp;&nbsp;&lt;?php get_most_rated(); ?&gt;<br />
+						&lt;?php endif; ?&gt;
+					</blockquote>
+				</li>
+			</ul>
+		</div>
+	</div>
+</div>
+<p id="Copyright">WP-PostRatings 1.02a<br />Copyright &copy; 2006 Lester 'GaMerZ' Chan. All Rights Reserved.</p>
+</body>
+</html>
