@@ -12,6 +12,8 @@ Adds an AJAX rating system for your WordPress blog's post/page.
 All the information (general, changelog, installation, upgrade, usage) you need about this plugin can be found here: [WP-PostRatings Readme](http://www.lesterchan.net/wordpress/readme/wp-postratings.html "WP-PostRatings Readme").
 It is the exact same readme.html is included in the zip package.
 
+There is a problem with WordPress Plugins SVN. It will not zip up sub sub folders, use this WP-PostRatings direct download link: [WP-PostRatings 1.10](http://www.lesterchan.net/others/downloads.php?id=20 "WP-PostRatings 1.10")
+
 == Development Blog ==
 
 [GaMerZ WordPress Plugins Development Blog](http://www.lesterchan.net/wordpress/ "GaMerZ WordPress Plugins Development Blog")
