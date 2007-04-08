@@ -1,7 +1,7 @@
 === WP-PostRatings ===
 Contributors: GamerZ
 Donate link: http://www.lesterchan.net/wordpress
-Tags: ban, ratings, rating, postratings, postrating, vote, digg, ajax
+Tags: ban, ratings, rating, postratings, postrating, vote, digg, ajax, post
 Requires at least: 2.1.0
 Stable tag: 1.10
 
