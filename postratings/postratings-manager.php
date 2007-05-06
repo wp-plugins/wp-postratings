@@ -343,7 +343,7 @@ switch($mode) {
 				<td align="left" width="50%">
 					<?php
 						if($postratings_page > 1 && ((($postratings_page*$postratings_log_perpage)-($postratings_log_perpage-1)) <= $total_ratings)) {
-							echo '<strong>&laquo;</strong> <a href="'.$base_page.'&amp;ratingpage='.($postratings_page-1).'" title="&laquo; '.__('Previous Page', 'wp-postratings').'">'.__('Previous Page', 'wp-postratings').'</a>';
+							echo '<strong>&laquo;</strong> <a href="'.$base_page.'&amp;ratingpage='.($postratings_page-1).$postratings_sort_url.'" title="&laquo; '.__('Previous Page', 'wp-postratings').'">'.__('Previous Page', 'wp-postratings').'</a>';
 						} else {
 							echo '&nbsp;';
 						}
@@ -352,7 +352,7 @@ switch($mode) {
 				<td align="right" width="50%">
 					<?php
 						if($postratings_page >= 1 && ((($postratings_page*$postratings_log_perpage)+1) <=  $total_ratings)) {
-							echo '<a href="'.$base_page.'&amp;ratingpage='.($postratings_page+1).'" title="'.__('Next Page', 'wp-postratings').' &raquo;">'.__('Next Page', 'wp-postratings').'</a> <strong>&raquo;</strong>';
+							echo '<a href="'.$base_page.'&amp;ratingpage='.($postratings_page+1).$postratings_sort_url.'" title="'.__('Next Page', 'wp-postratings').' &raquo;">'.__('Next Page', 'wp-postratings').'</a> <strong>&raquo;</strong>';
 						} else {
 							echo '&nbsp;';
 						}
@@ -393,7 +393,7 @@ switch($mode) {
 			}
 		?>
 	<br />
-	<form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="get">
+	<form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="get">
 		<input type="hidden" name="page" value="<?php echo $base_name; ?>" />
 		Sort Options:&nbsp;&nbsp;&nbsp;
 		<select name="by" size="1">
@@ -451,7 +451,7 @@ switch($mode) {
 	<h2><?php _e('Post Ratings Data/Logs', 'wp-postratings'); ?></h2>
 	<div align="center">
 		<strong><?php _e('Delete Post Ratings Data/Logs', 'wp-postratings'); ?></strong><br /><br />
-		<form action="<?php echo $_SERVER['REQUEST_URI']; ?>" method="post">
+		<form action="<?php echo htmlspecialchars($_SERVER['REQUEST_URI']); ?>" method="post">
 		<table width="100%" border="0" cellspacing="3" cellpadding="3">
 			<tr>
 				<td valign="top" align="left"><b><?php _e('Delete Type: ', 'wp-postratings'); ?></b></td>
@@ -471,6 +471,7 @@ switch($mode) {
 					<p><?php _e('To delete ratings data/logs from Post ID 2, 3 and 4. Just type in: <b>2,3,4</b>', 'wp-postratings'); ?></p>
 					<p><?php _e('To delete ratings data/logs for all posts. Just type in: <b>all</b>', 'wp-postratings'); ?></p>
 				</td>
+			</tr>
 			<tr>
 				<td colspan="2" align="center">
 					<input type="submit" name="do" value="<?php _e('Delete Data/Logs', 'wp-postratings'); ?>" class="button" onclick="return confirm('<?php _e('You Are About To Delete Post Ratings Data/Logs.\nThis Action Is Not Reversible.\n\n Choose \\\'Cancel\\\' to stop, \\\'OK\\\' to delete.', 'wp-postratings'); ?>')" />

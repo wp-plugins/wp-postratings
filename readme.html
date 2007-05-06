@@ -288,12 +288,14 @@
 			<div class="SubTitle">&raquo; Changelog</div>
 			<ul>
 				<li>
-					<strong>Version 1.11 (01-05-2007)</strong>
+					<strong>Version 1.11 (01-06-2007)</strong>
 					<ul>
 						<li>NEW: Added AJAX Style Option: "Show Loading Image With Text"</li>
 						<li>NEW: Added AJAX Style Option: "Show Fading In And Fading Out Of Ratings"</li>
 						<li>NEW: Removed Ratings From Feed If Ratings Is Embedded Into The Post Using [ratings]</li>
 						<li>FIXED: Wrong URL For Page Under Top Rated/Highest Posts Listing</li>
+						<li>FIXED: Next/Previous Paging Bug In WP-Admin -> Manage Ratings</li>
+						<li>FIXED: Sort Most Rated Posts By Number Of Voters Followed By Post Average Ratings</li>
 					</ul>
 				</li>
 				<li>
@@ -444,7 +446,7 @@
 					<blockquote>
 						&lt;?php if(function_exists('the_ratings')) { the_ratings(); } ?&gt;
 					</blockquote>
-					<p>If you DO NOT want the ratings to appear in every post, DO NOT use the code above. Just type in <strong>[ratings]</strong> into the selected post content and it will embed ratings into that post only.</p>
+					<p>If you DO NOT want the ratings to appear in every post/page, DO NOT use the code above. Just type in <strong>[ratings]</strong> into the selected post/page content and it will embed ratings into that post/page only.</p>
 				</li>
 			</ol>
 			<div class="SubSubTitle">Note</div>

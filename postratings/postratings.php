@@ -387,18 +387,18 @@ if(!function_exists('get_most_rated')) {
 		} else {
 			$where = '1=1';
 		}
-		$most_rated = $wpdb->get_results("SELECT $wpdb->posts.*, (meta_value+0) AS ratings_votes FROM $wpdb->posts LEFT JOIN $wpdb->postmeta ON $wpdb->postmeta.post_id = $wpdb->posts.ID WHERE post_date < '".current_time('mysql')."' AND $where AND post_status = 'publish' AND meta_key = 'ratings_users' AND post_password = '' ORDER BY ratings_votes DESC LIMIT $limit");
+		$most_rated = $wpdb->get_results("SELECT $wpdb->posts.*, (t1.meta_value+0.00) AS ratings_average, (t2.meta_value+0.00) AS ratings_users FROM $wpdb->posts LEFT JOIN $wpdb->postmeta AS t1 ON t1.post_id = $wpdb->posts.ID LEFT JOIN $wpdb->postmeta As t2 ON t1.post_id = t2.post_id WHERE t1.meta_key = 'ratings_average' AND t2.meta_key = 'ratings_users' AND $wpdb->posts.post_password = '' AND $wpdb->posts.post_date < '".current_time('mysql')."' AND $wpdb->posts.post_status = 'publish' AND $where ORDER BY ratings_users DESC, ratings_average DESC LIMIT $limit");
 		if($most_rated) {
 			if($chars > 0) {
 				foreach ($most_rated as $post) {
 					$post_title = get_the_title();
-					$post_votes = intval($post->ratings_votes);
+					$post_votes = intval($post->ratings_users);
 					$temp .= "<li><a href=\"".get_permalink()."\">".snippet_chars($post_title, $chars)."</a> - $post_votes ".__('Votes', 'wp-postratings')."</li>\n";
 				}
 			} else {
 				foreach ($most_rated as $post) {
 					$post_title = get_the_title();
-					$post_votes = intval($post->ratings_votes);
+					$post_votes = intval($post->ratings_users);
 					$temp .= "<li><a href=\"".get_permalink()."\">$post_title</a> - $post_votes ".__('Votes', 'wp-postratings')."</li>\n";
 				}
 			}
