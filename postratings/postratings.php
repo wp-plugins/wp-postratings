@@ -621,9 +621,9 @@ if (!function_exists('htmlspecialchars_decode')) {
 add_action('publish_post', 'add_ratings_fields');
 function add_ratings_fields($post_ID) {
 	global $wpdb;
-	add_post_meta($post_ID, 'ratings_users', 1);
-	add_post_meta($post_ID, 'ratings_score', 1);
-	add_post_meta($post_ID, 'ratings_average', 1);	
+	add_post_meta($post_ID, 'ratings_users', 0, true);
+	add_post_meta($post_ID, 'ratings_score', 0, true);
+	add_post_meta($post_ID, 'ratings_average', 0, true);	
 }
 
 
