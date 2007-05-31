@@ -618,7 +618,7 @@ if (!function_exists('htmlspecialchars_decode')) {
 
 
 ### Function: Add Rating Custom Fields
-add_action('save_post', 'add_ratings_fields');
+add_action('publish_post', 'add_ratings_fields');
 function add_ratings_fields($post_ID) {
 	global $wpdb;
 	add_post_meta($post_ID, 'ratings_users', 1);
