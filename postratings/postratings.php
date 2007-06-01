@@ -669,13 +669,23 @@ function process_ratings() {
 				if($rate < 1 || $rate > $ratings_max) {
 					$rate = 0;
 				}
+				// Add Ratings
+				if($post_ratings_users == 0 && $post_ratings_score == 0) {
+					$post_ratings_users = 1;
+					$post_ratings_score = $rate;
+					$post_ratings_average = round($rate/1, 2);
+					add_post_meta($post_id, 'ratings_users', 1, true);
+					add_post_meta($post_id, 'ratings_score', $rate, true);
+					add_post_meta($post_id, 'ratings_average',$post_ratings_average, true);	
 				// Update Ratings
-				$post_ratings_users = ($post_ratings_users+1);
-				$post_ratings_score = ($post_ratings_score+$rate);
-				$post_ratings_average = round($post_ratings_score/$post_ratings_users, 2);					
-				update_post_meta($post_id, 'ratings_users', $post_ratings_users);	
-				update_post_meta($post_id, 'ratings_score', $post_ratings_score);
-				update_post_meta($post_id, 'ratings_average', $post_ratings_average);
+				} else {
+					$post_ratings_users = ($post_ratings_users+1);
+					$post_ratings_score = ($post_ratings_score+$rate);
+					$post_ratings_average = round($post_ratings_score/$post_ratings_users, 2);					
+					update_post_meta($post_id, 'ratings_users', $post_ratings_users);	
+					update_post_meta($post_id, 'ratings_score', $post_ratings_score);
+					update_post_meta($post_id, 'ratings_average', $post_ratings_average);
+				}
 				// Add Log
 				if(!empty($user_identity)) {
 					$rate_user = addslashes($user_identity);

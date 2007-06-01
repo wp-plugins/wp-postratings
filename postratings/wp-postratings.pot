@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WP-PostRatings 1.11\n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2007-05-31 19:40+0800\n"
+"PO-Revision-Date: 2007-06-01 14:06+0800\n"
 "Last-Translator: Lester 'GaMerZ' Chan <gamerz84@hotmail.com>\n"
 "Language-Team: Lester Chan <gamerz84@hotmail.com>\n"
 "MIME-Version: 1.0\n"
@@ -396,16 +396,16 @@ msgstr ""
 #: postratings-options.php:88
 #: postratings-options.php:91
 #: postratings.php:146
-#: postratings.php:798
-#: postratings.php:799
+#: postratings.php:808
+#: postratings.php:809
 msgid "votes"
 msgstr ""
 
 #: postratings-options.php:88
 #: postratings-options.php:91
 #: postratings.php:146
-#: postratings.php:798
-#: postratings.php:799
+#: postratings.php:808
+#: postratings.php:809
 msgid "average"
 msgstr ""
 
@@ -413,14 +413,14 @@ msgstr ""
 #: postratings-options.php:91
 #: postratings-options.php:97
 #: postratings.php:146
-#: postratings.php:798
-#: postratings.php:799
 #: postratings.php:808
+#: postratings.php:809
+#: postratings.php:818
 msgid "out of"
 msgstr ""
 
 #: postratings-options.php:94
-#: postratings.php:800
+#: postratings.php:810
 msgid "No Ratings Yet"
 msgstr ""
 
@@ -733,37 +733,37 @@ msgstr ""
 msgid " out of "
 msgstr ""
 
-#: postratings.php:685
+#: postratings.php:695
 msgid "Guest"
 msgstr ""
 
-#: postratings.php:699
+#: postratings.php:709
 #, php-format
 msgid "Invalid Post ID. Post ID #%s."
 msgstr ""
 
-#: postratings.php:703
+#: postratings.php:713
 #, php-format
 msgid "You Had Already Rated This Post. Post ID #%s."
 msgstr ""
 
-#: postratings.php:807
+#: postratings.php:817
 msgid "1 Star"
 msgstr ""
 
-#: postratings.php:807
+#: postratings.php:817
 msgid "2 Stars"
 msgstr ""
 
-#: postratings.php:807
+#: postratings.php:817
 msgid "3 Stars"
 msgstr ""
 
-#: postratings.php:807
+#: postratings.php:817
 msgid "4 Stars"
 msgstr ""
 
-#: postratings.php:807
+#: postratings.php:817
 msgid "5 Stars"
 msgstr ""
 
