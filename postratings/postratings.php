@@ -387,7 +387,7 @@ if(!function_exists('get_most_rated')) {
 		} else {
 			$where = '1=1';
 		}
-		$most_rated = $wpdb->get_results("SELECT $wpdb->posts.*, (t1.meta_value+0.00) AS ratings_average, (t2.meta_value+0.00) AS ratings_users FROM $wpdb->posts LEFT JOIN $wpdb->postmeta AS t1 ON t1.post_id = $wpdb->posts.ID LEFT JOIN $wpdb->postmeta As t2 ON t1.post_id = t2.post_id WHERE t1.meta_key = 'ratings_average' AND t2.meta_key = 'ratings_users' AND $wpdb->posts.post_password = '' AND $wpdb->posts.post_date < '".current_time('mysql')."' AND $wpdb->posts.post_status = 'publish' AND $where ORDER BY ratings_users DESC, ratings_average DESC LIMIT $limit");
+		$most_rated = $wpdb->get_results("SELECT DISTINCT $wpdb->posts.*, (t1.meta_value+0.00) AS ratings_average, (t2.meta_value+0.00) AS ratings_users FROM $wpdb->posts LEFT JOIN $wpdb->postmeta AS t1 ON t1.post_id = $wpdb->posts.ID LEFT JOIN $wpdb->postmeta As t2 ON t1.post_id = t2.post_id WHERE t1.meta_key = 'ratings_average' AND t2.meta_key = 'ratings_users' AND $wpdb->posts.post_password = '' AND $wpdb->posts.post_date < '".current_time('mysql')."' AND $wpdb->posts.post_status = 'publish' AND $where ORDER BY ratings_users DESC, ratings_average DESC LIMIT $limit");
 		if($most_rated) {
 			if($chars > 0) {
 				foreach ($most_rated as $post) {
@@ -428,7 +428,7 @@ if(!function_exists('get_highest_rated_category')) {
 		} else {
 			$where = '1=1';
 		}
-		$highest_rated = $wpdb->get_results("SELECT $wpdb->posts.*, (t1.meta_value+0.00) AS ratings_average, (t2.meta_value+0.00) AS ratings_users FROM $wpdb->posts LEFT JOIN $wpdb->postmeta AS t1 ON t1.post_id = $wpdb->posts.ID LEFT JOIN $wpdb->postmeta As t2 ON t1.post_id = t2.post_id LEFT JOIN $wpdb->post2cat ON $wpdb->post2cat.post_id = $wpdb->posts.ID WHERE t1.meta_key = 'ratings_average' AND t2.meta_key = 'ratings_users' AND $wpdb->posts.post_password = '' AND $wpdb->posts.post_date < '".current_time('mysql')."'  AND $wpdb->posts.post_status = 'publish' AND $wpdb->post2cat.category_id = $category_id AND $where ORDER BY ratings_average DESC, ratings_users DESC LIMIT $limit");
+		$highest_rated = $wpdb->get_results("SELECT DISTINCT $wpdb->posts.*, (t1.meta_value+0.00) AS ratings_average, (t2.meta_value+0.00) AS ratings_users FROM $wpdb->posts LEFT JOIN $wpdb->postmeta AS t1 ON t1.post_id = $wpdb->posts.ID LEFT JOIN $wpdb->postmeta As t2 ON t1.post_id = t2.post_id LEFT JOIN $wpdb->post2cat ON $wpdb->post2cat.post_id = $wpdb->posts.ID WHERE t1.meta_key = 'ratings_average' AND t2.meta_key = 'ratings_users' AND $wpdb->posts.post_password = '' AND $wpdb->posts.post_date < '".current_time('mysql')."'  AND $wpdb->posts.post_status = 'publish' AND $wpdb->post2cat.category_id = $category_id AND $where ORDER BY ratings_average DESC, ratings_users DESC LIMIT $limit");
 		if($highest_rated) {
 			foreach($highest_rated as $post) {
 				// Variables
@@ -507,7 +507,7 @@ if(!function_exists('get_highest_rated')) {
 		} else {
 			$where = '1=1';
 		}
-		$highest_rated = $wpdb->get_results("SELECT $wpdb->posts.*, (t1.meta_value+0.00) AS ratings_average, (t2.meta_value+0.00) AS ratings_users FROM $wpdb->posts LEFT JOIN $wpdb->postmeta AS t1 ON t1.post_id = $wpdb->posts.ID LEFT JOIN $wpdb->postmeta As t2 ON t1.post_id = t2.post_id WHERE t1.meta_key = 'ratings_average' AND t2.meta_key = 'ratings_users' AND $wpdb->posts.post_password = '' AND $wpdb->posts.post_date < '".current_time('mysql')."' AND $wpdb->posts.post_status = 'publish' AND $where ORDER BY ratings_average DESC, ratings_users DESC LIMIT $limit");
+		$highest_rated = $wpdb->get_results("SELECT DISTINCT $wpdb->posts.*, (t1.meta_value+0.00) AS ratings_average, (t2.meta_value+0.00) AS ratings_users FROM $wpdb->posts LEFT JOIN $wpdb->postmeta AS t1 ON t1.post_id = $wpdb->posts.ID LEFT JOIN $wpdb->postmeta As t2 ON t1.post_id = t2.post_id WHERE t1.meta_key = 'ratings_average' AND t2.meta_key = 'ratings_users' AND $wpdb->posts.post_password = '' AND $wpdb->posts.post_date < '".current_time('mysql')."' AND $wpdb->posts.post_status = 'publish' AND $where ORDER BY ratings_average DESC, ratings_users DESC LIMIT $limit");
 		if($highest_rated) {
 			foreach($highest_rated as $post) {
 				// Variables
