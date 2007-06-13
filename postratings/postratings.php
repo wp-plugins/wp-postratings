@@ -370,7 +370,7 @@ function place_ratings($content){
 	if(!is_feed()) {
 		 $content = preg_replace("/\[ratings\]/ise", "the_ratings('div', false)", $content);
 	} else {
-		$content = preg_replace("/\[ratings\]/ise", __('Note: You can rate this post by visiting the site.', 'wp-postratings'), $content);
+		$content = str_replace("[ratings]", __('Note: You can rate this post by visiting the site.', 'wp-postratings'), $content);
 	}   
 	return $content;
 }
@@ -438,6 +438,7 @@ if(!function_exists('get_highest_rated_category')) {
 				$post_ratings_average = $post->ratings_average;
 				$post_ratings_whole = intval($post_ratings_average);
 				$post_ratings = floor($post_ratings_average);
+				$post_content = stripslashes($post->post_content);
 				// Check For Half Star
 				$insert_half = 0;
 				$average_diff = $post_ratings_average-$post_ratings_whole;
@@ -474,6 +475,7 @@ if(!function_exists('get_highest_rated_category')) {
 					$temp = str_replace("%RATINGS_AVERAGE%", $post_ratings_average, $temp);
 					$temp = str_replace("%RATINGS_USERS%", number_format($post_ratings_users), $temp);
 					$temp = str_replace("%POST_TITLE%", $post_title, $temp);
+					$temp = str_replace("%POST_CONTENT%", $post_content, $temp);
 					$temp = str_replace("%POST_URL%", get_permalink(), $temp);
 				}
 				$output .= $temp;
@@ -515,6 +517,7 @@ if(!function_exists('get_highest_rated')) {
 				$post_ratings_average = $post->ratings_average;
 				$post_ratings_whole = intval($post_ratings_average);
 				$post_ratings = floor($post_ratings_average);
+				$post_content = stripslashes($post->post_content);
 				// Check For Half Star
 				$insert_half = 0;
 				$average_diff = $post_ratings_average-$post_ratings_whole;
@@ -551,6 +554,7 @@ if(!function_exists('get_highest_rated')) {
 					$temp = str_replace("%RATINGS_AVERAGE%", $post_ratings_average, $temp);
 					$temp = str_replace("%RATINGS_USERS%", number_format($post_ratings_users), $temp);
 					$temp = str_replace("%POST_TITLE%", $post_title, $temp);
+					$temp = str_replace("%POST_CONTENT%", $post_content, $temp);
 					$temp = str_replace("%POST_URL%", get_permalink(), $temp);
 				}
 				$output .= $temp;
@@ -669,22 +673,17 @@ function process_ratings() {
 				if($rate < 1 || $rate > $ratings_max) {
 					$rate = 0;
 				}
-				// Add Ratings
-				if($post_ratings_users == 0 && $post_ratings_score == 0) {
-					$post_ratings_users = 1;
-					$post_ratings_score = $rate;
-					$post_ratings_average = round($rate/1, 2);
-					add_post_meta($post_id, 'ratings_users', 1, true);
-					add_post_meta($post_id, 'ratings_score', $rate, true);
+				$post_ratings_users = ($post_ratings_users+1);
+				$post_ratings_score = ($post_ratings_score+$rate);
+				$post_ratings_average = round($post_ratings_score/$post_ratings_users, 2);
+				if (!update_post_meta($post_id, 'ratings_users', $post_ratings_users)) {
+					add_post_meta($post_id, 'ratings_users', $post_ratings_users, true);
+				}
+				if(!update_post_meta($post_id, 'ratings_score', $post_ratings_score)) {
+					add_post_meta($post_id, 'ratings_score', $post_ratings_score, true);
+				}
+				if(!update_post_meta($post_id, 'ratings_average', $post_ratings_average)) {
 					add_post_meta($post_id, 'ratings_average',$post_ratings_average, true);	
-				// Update Ratings
-				} else {
-					$post_ratings_users = ($post_ratings_users+1);
-					$post_ratings_score = ($post_ratings_score+$rate);
-					$post_ratings_average = round($post_ratings_score/$post_ratings_users, 2);					
-					update_post_meta($post_id, 'ratings_users', $post_ratings_users);	
-					update_post_meta($post_id, 'ratings_score', $post_ratings_score);
-					update_post_meta($post_id, 'ratings_average', $post_ratings_average);
 				}
 				// Add Log
 				if(!empty($user_identity)) {
