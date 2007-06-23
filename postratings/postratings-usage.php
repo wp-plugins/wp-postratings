@@ -2,7 +2,7 @@
 /*
 +----------------------------------------------------------------+
 |																							|
-|	WordPress 2.1 Plugin: WP-PostRatings 1.11								|
+|	WordPress 2.1 Plugin: WP-PostRatings 1.20								|
 |	Copyright (c) 2007 Lester "GaMerZ" Chan									|
 |																							|
 |	File Written By:																	|
@@ -42,7 +42,39 @@ if(!current_user_can('manage_ratings')) {
 	</ol>
 </div>
 <div class="wrap"> 
-	<h2><?php _e('Ratings Stats', 'wp-postratings'); ?></h2> 
+	<h2><?php _e('Ratings Stats (With Widgets)', 'wp-postratings'); ?></h2> 
+	<ol>
+		<li>
+			<strong>Activate</strong> WP-PostRatings Widget Plugin
+		</li>
+		<li>
+			Go to '<strong>WP-Admin -> Presentation -> Widgets</strong>'
+		</li>
+		<li>
+			To Display <strong>Highest Rated Post</strong>
+		</li>
+		<li>
+			<strong>Drag</strong> the Highest Rated Widget to your sidebar
+		</li>
+		<li>
+			You can <strong>configure</strong> the Highest Rated Widget by clicking on the configure icon
+		</li>
+		<li>
+			To Display <strong>Most Rated Post</strong>
+		</li>
+		<li>
+			<strong>Drag</strong> the Most Rated Widget to your sidebar
+		</li>
+		<li>
+			You can <strong>configure</strong> the Most Rated Widget by clicking on the configure icon
+		</li>
+		<li>
+			Click 'Save changes'
+		</li>
+	</ol>
+</div>
+<div class="wrap"> 
+	<h2><?php _e('Ratings Stats (Outside WP Loop)', 'wp-postratings'); ?></h2> 
 	<h3><?php _e('To Display Highest Rated Post', 'wp-postratings'); ?></h3>
 	<blockquote>
 		<pre class="wp-postratings-usage-pre">&lt;?php if (function_exists('get_highest_rated')): ?&gt;

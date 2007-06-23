@@ -3,7 +3,7 @@
 Plugin Name: WP-PostRatings
 Plugin URI: http://www.lesterchan.net/portfolio/programming.php
 Description: Adds an AJAX rating system for your WordPress blog's post/page.
-Version: 1.11
+Version: 1.20
 Author: Lester 'GaMerZ' Chan
 Author URI: http://www.lesterchan.net
 */
@@ -52,6 +52,7 @@ function ratings_menu() {
 		add_submenu_page('postratings/postratings-manager.php', __('Manage Ratings', 'wp-postratings'), __('Manage Ratings', 'wp-postratings'), 'manage_ratings', 'postratings/postratings-manager.php');
 		add_submenu_page('postratings/postratings-manager.php', __('Ratings Options', 'wp-postratings'), __('Ratings Options', 'wp-postratings'),  'manage_ratings', 'postratings/postratings-options.php');
 		add_submenu_page('postratings/postratings-manager.php', __('Ratings Usage', 'wp-postratings'), __('Ratings Usage', 'wp-postratings'), 'manage_ratings', 'postratings/postratings-usage.php');
+		add_submenu_page('postratings/postratings-manager.php', __('Uninstall WP-PostRatings', 'wp-postratings'), __('Uninstall WP-PostRatings', 'wp-postratings'), 'manage_ratings', 'postratings/postratings-uninstall.php');
 	}
 }
 

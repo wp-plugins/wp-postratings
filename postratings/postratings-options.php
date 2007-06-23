@@ -2,7 +2,7 @@
 /*
 +----------------------------------------------------------------+
 |																							|
-|	WordPress 2.1 Plugin: WP-PostRatings 1.11								|
+|	WordPress 2.1 Plugin: WP-PostRatings 1.20								|
 |	Copyright (c) 2007 Lester "GaMerZ" Chan									|
 |																							|
 |	File Written By:																	|
@@ -24,7 +24,7 @@ if(!current_user_can('manage_ratings')) {
 
 
 ### Ratings Variables
-$base_name = plugin_basename('postratings/postratings-options.php');
+$base_name = plugin_basename('postratings/postratings-manager.php');
 $base_page = 'admin.php?page='.$base_name;
 
 
