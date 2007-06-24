@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WP-PostRatings 1.20\n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2007-06-23 16:47+0800\n"
+"PO-Revision-Date: 2007-06-25 00:11+0800\n"
 "Last-Translator: Lester 'GaMerZ' Chan <gamerz84@hotmail.com>\n"
 "Language-Team: Lester Chan <gamerz84@hotmail.com>\n"
 "MIME-Version: 1.0\n"
@@ -225,8 +225,8 @@ msgid "Go to Page"
 msgstr ""
 
 #: postratings-manager.php:377
-#: postratings-widgets.php:98
-#: postratings-widgets.php:147
+#: postratings-widget.php:98
+#: postratings-widget.php:147
 msgid "Page"
 msgstr ""
 
@@ -753,51 +753,51 @@ msgstr ""
 msgid "Where <b>#ffffff</b> should be your background color for the ratings."
 msgstr ""
 
-#: postratings-widgets.php:69
+#: postratings-widget.php:69
 msgid "Highest Rated"
 msgstr ""
 
-#: postratings-widgets.php:79
-#: postratings-widgets.php:128
+#: postratings-widget.php:79
+#: postratings-widget.php:128
 msgid "Title"
 msgstr ""
 
-#: postratings-widgets.php:82
-#: postratings-widgets.php:131
+#: postratings-widget.php:82
+#: postratings-widget.php:131
 msgid "Show Ratings For: "
 msgstr ""
 
-#: postratings-widgets.php:88
-#: postratings-widgets.php:137
+#: postratings-widget.php:88
+#: postratings-widget.php:137
 msgid "Post &amp Page"
 msgstr ""
 
-#: postratings-widgets.php:93
-#: postratings-widgets.php:142
+#: postratings-widget.php:93
+#: postratings-widget.php:142
 msgid "Post"
 msgstr ""
 
-#: postratings-widgets.php:101
-#: postratings-widgets.php:150
+#: postratings-widget.php:101
+#: postratings-widget.php:150
 msgid "Only"
 msgstr ""
 
-#: postratings-widgets.php:104
-#: postratings-widgets.php:153
+#: postratings-widget.php:104
+#: postratings-widget.php:153
 msgid "Limit"
 msgstr ""
 
-#: postratings-widgets.php:107
-#: postratings-widgets.php:156
+#: postratings-widget.php:107
+#: postratings-widget.php:156
 msgid "Post Title Length (Characters)"
 msgstr ""
 
-#: postratings-widgets.php:109
-#: postratings-widgets.php:158
+#: postratings-widget.php:109
+#: postratings-widget.php:158
 msgid "(<strong>0</strong> to disable)"
 msgstr ""
 
-#: postratings-widgets.php:118
+#: postratings-widget.php:118
 msgid "Most Rated"
 msgstr ""
 

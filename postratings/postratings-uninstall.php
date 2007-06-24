@@ -109,7 +109,7 @@ switch($mode) {
 	</p>
 	<p style="text-align: left; color: red">
 		<strong><?php _e('WARNING:', 'wp-postratings'); ?></strong><br />
-		<?php _e('Once uninstalled, this cannot be undone. You should use a Database Backup plugin of WordPress to back up all the data first.', 'wp-postratings') ?>
+		<?php _e('Once uninstalled, this cannot be undone. You should use a Database Backup plugin of WordPress to back up all the data first.', 'wp-postratings'); ?>
 	</p>
 	<p style="text-align: left; color: red">
 		<strong><?php _e('The following WordPress Options/Tables/PostMetas will be DELETED:', 'wp-postratings'); ?></strong><br />
