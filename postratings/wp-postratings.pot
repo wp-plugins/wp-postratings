@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WP-PostRatings 1.20\n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2007-06-25 00:11+0800\n"
+"PO-Revision-Date: 2007-06-28 16:04+0800\n"
 "Last-Translator: Lester 'GaMerZ' Chan <gamerz84@hotmail.com>\n"
 "Language-Team: Lester Chan <gamerz84@hotmail.com>\n"
 "MIME-Version: 1.0\n"
@@ -401,16 +401,16 @@ msgstr ""
 #: postratings-options.php:88
 #: postratings-options.php:91
 #: postratings.php:147
-#: postratings.php:808
-#: postratings.php:809
+#: postratings.php:880
+#: postratings.php:881
 msgid "votes"
 msgstr ""
 
 #: postratings-options.php:88
 #: postratings-options.php:91
 #: postratings.php:147
-#: postratings.php:808
-#: postratings.php:809
+#: postratings.php:880
+#: postratings.php:881
 msgid "average"
 msgstr ""
 
@@ -418,14 +418,14 @@ msgstr ""
 #: postratings-options.php:91
 #: postratings-options.php:97
 #: postratings.php:147
-#: postratings.php:808
-#: postratings.php:809
-#: postratings.php:818
+#: postratings.php:880
+#: postratings.php:881
+#: postratings.php:890
 msgid "out of"
 msgstr ""
 
 #: postratings-options.php:94
-#: postratings.php:810
+#: postratings.php:882
 msgid "No Ratings Yet"
 msgstr ""
 
@@ -868,23 +868,55 @@ msgstr ""
 msgid "You Had Already Rated This Post. Post ID #%s."
 msgstr ""
 
+#: postratings.php:799
+#: postratings.php:801
+#: postratings.php:829
+msgid "WP-PostRatings"
+msgstr ""
+
+#: postratings.php:812
+#: postratings.php:814
+msgid "Highest Rated Posts"
+msgstr ""
+
 #: postratings.php:817
+#: postratings.php:819
+msgid "Most Rated Posts"
+msgstr ""
+
+#: postratings.php:831
+msgid "Votes Were Casted."
+msgstr ""
+
+#: postratings.php:832
+msgid "Users Casted Their Vote."
+msgstr ""
+
+#: postratings.php:844
+msgid "Highest Rated Post"
+msgstr ""
+
+#: postratings.php:850
+msgid "Most Rated Post"
+msgstr ""
+
+#: postratings.php:889
 msgid "1 Star"
 msgstr ""
 
-#: postratings.php:817
+#: postratings.php:889
 msgid "2 Stars"
 msgstr ""
 
-#: postratings.php:817
+#: postratings.php:889
 msgid "3 Stars"
 msgstr ""
 
-#: postratings.php:817
+#: postratings.php:889
 msgid "4 Stars"
 msgstr ""
 
-#: postratings.php:817
+#: postratings.php:889
 msgid "5 Stars"
 msgstr ""
 
