@@ -145,13 +145,20 @@ $postratings_image = get_option('postratings_image');
 		}
 	}
 	function set_custom(custom, max) {
-		if(custom == 1 && max == 2) {
+		if(custom == 1) {
 			document.getElementById('postratings_max').value = max;
 			document.getElementById('postratings_max').readOnly = true;
-			document.getElementById('postratings_template_vote').value = ratings_updown_templates('vote', false);
-			document.getElementById('postratings_template_text').value = ratings_updown_templates('text', false);
-			document.getElementById('postratings_template_none').value = ratings_updown_templates('none', false);
-			document.getElementById('postratings_template_highestrated').value = ratings_updown_templates('highestrated', false);
+			if(max == 2) {
+				document.getElementById('postratings_template_vote').value = ratings_updown_templates('vote', false);
+				document.getElementById('postratings_template_text').value = ratings_updown_templates('text', false);
+				document.getElementById('postratings_template_none').value = ratings_updown_templates('none', false);
+				document.getElementById('postratings_template_highestrated').value = ratings_updown_templates('highestrated', false);
+			} else {
+				document.getElementById('postratings_template_vote').value = ratings_default_templates('vote', false);
+				document.getElementById('postratings_template_text').value = ratings_default_templates('text', false);
+				document.getElementById('postratings_template_none').value = ratings_default_templates('none', false);
+				document.getElementById('postratings_template_highestrated').value = ratings_default_templates('highestrated', false);
+			}
 		} else {
 			document.getElementById('postratings_max').value = <?php echo $postratings_max; ?>;
 			document.getElementById('postratings_max').readOnly = false;
