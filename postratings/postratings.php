@@ -408,8 +408,9 @@ if(!function_exists('get_ipaddress')) {
 
 ### Function: Return All Images From A Rating Image Folder
 function ratings_images_folder($folder_name) {
-	$normal_images = array('rating_over.gif', 'rating_on.gif', 'rating_none.gif', 'rating_half.gif', 'rating_off.gif');
+	$normal_images = array('rating_over.gif', 'rating_on.gif', 'rating_half.gif', 'rating_off.gif');
 	$postratings_path = ABSPATH.'/wp-content/plugins/postratings/images/'.$folder_name;
+	$images_count_temp = 1;
 	$images_count = 1;
 	$count = 0;
 	$rating['max'] = 0;
@@ -421,8 +422,8 @@ function ratings_images_folder($folder_name) {
 				if ($filename != '.' && $filename != '..') {
 					if(in_array($filename, $normal_images)) {
 						$count++;
-					} elseif(strpos($filename, "$images_count")) {
-						$rating['max'] = $images_count+1;
+					} elseif(intval(substr($filename,7, -7)) > $rating['max']) {
+						$rating['max'] = intval(substr($filename,7, -7));
 					}
 					$rating['images'][] = $filename;
 					$images_count++;
@@ -761,9 +762,6 @@ function process_ratings() {
 	$ratings_value = get_option('postratings_ratingsvalue');
 	$rate = intval($_GET['rate']);
 	$post_id = intval($_GET['pid']);
-	if(WP_CACHE) {
-		$page_hash = $_GET['page_hash'];
-	}
 	header('Content-Type: text/html; charset='.get_option('blog_charset').'');
 	if($rate > 0 && $post_id > 0 && check_allowtorate()) {		
 		// Check For Bot
@@ -818,6 +816,20 @@ function process_ratings() {
 				// Log Ratings No Matter What
 				$rate_log = $wpdb->query("INSERT INTO $wpdb->ratings VALUES (0, $post_id, '$post_title', $rate,'".current_time('timestamp')."', '".get_ipaddress()."', '".gethostbyaddr(get_ipaddress())."' ,'$rate_user', $rate_userid)");
 				// Output AJAX Result
+				if(defined(WP_CACHE)) {
+					$page_hash = $_GET['page_hash'];
+					include_once(ABSPATH.'/wp-content/plugins/wp-cache/wp-cache.php');
+					if(wp_cache_enable()) {
+						include_once(ABSPATH.'/wp-content/plugins/wp-cache/wp-cache-phase2.php');
+						$prefix = 'wp-cache-'.$page_hash;
+						wp_cache_phase2_clean_cache($prefix);
+						$cache_cookie = 'wordpress_postrating_cache_'.COOKIEHASH;
+						if(!isset($_COOKIE[$cache_cookie])) {
+							$token = md5(uniqid(rand(), true));
+							setcookie($cache_cookie, $token, time() + 30000000, COOKIEPATH, COOKIE_DOMAIN);
+						}
+					}
+				}
 				echo the_ratings_results($post_id, $post_ratings_users, $post_ratings_score, $post_ratings_average);
 				exit();
 			} else {

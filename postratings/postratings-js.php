@@ -28,22 +28,28 @@ if(substr($ratings_ajax_url, -1) == '/') {
 }
 
 ### Variables
+$wp_cache_key = '';
+$using_wp_cache = "false";
 $postratings_max = intval(get_option('postratings_max'));
 $postratings_custom = intval(get_option('postratings_customrating'));
 $postratings_ajax_style = get_option('postratings_ajax_style');
-if(WP_CACHE == true) {
-	include_once(ABSPATH.'/wp-content/plugins/wp-cache/wp-cache-phase1.php');  
-	$key = md5($_SERVER['SERVER_NAME'].preg_replace('/#.*$/', '', $_SERVER['REQUEST_URI']).wp_cache_get_cookies_values());
-	echo 'var ratings_page_hash = \''.$key.'\';';
+if(defined(WP_CACHE)) {
+	if(wp_cache_enable()) {
+		include_once(ABSPATH.'/wp-content/plugins/wp-cache/wp-cache-phase1.php');  
+		$wp_cache_key = md5($_SERVER['SERVER_NAME'].preg_replace('/#.*$/', '', $_SERVER['REQUEST_URI']).wp_cache_get_cookies_values());
+		$using_wp_cache = "true";
+	}
 }
 ?>
 
 // Variables
+var using_wp_cache = <?php echo $using_wp_cache; ?>;
 var site_url = "<?php echo get_option('siteurl'); ?>";
 var ratings_ajax_url = "<?php echo $ratings_ajax_url; ?>/postratings.php";
 var ratings_text_wait = "<?php _e('Please rate only 1 post at a time.', 'wp-postratings'); ?>";
 var ratings_image = "<?php echo get_option('postratings_image'); ?>";
 var ratings_max = "<?php echo $postratings_max; ?>";
+var ratings_page_hash = "<?php echo $wp_cache_key; ?>";
 <?php
 if($postratings_custom) {
 	for($i = 1; $i <= $postratings_max; $i++) {
@@ -214,6 +220,9 @@ function rate_process() {
 		ratings.reset();
 		ratings.setVar("pid", post_id);
 		ratings.setVar("rate", post_rating);
+		if(using_wp_cache) {
+			ratings.setVar("page_hash", ratings_page_hash);
+		}
 		ratings.method = 'GET';
 		ratings.element = 'post-ratings-' + post_id;
 		ratings.onCompletion = rade_fadein_text;

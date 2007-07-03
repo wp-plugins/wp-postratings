@@ -76,7 +76,13 @@ if($postratings_customrating && $postratings_max == 2) {
 				echo '<img src="'.$postratings_url.'/'.$postratings_image.'/rating_start.gif" alt="rating_start.gif" class="post-ratings-image" />';
 			}
 			if($postratings_customrating) {
-				echo '<img src="'.$postratings_url.'/'.$postratings_image.'/rating_'.$i.'_on.gif" alt="rating_'.$i.'_on.gif" class="post-ratings-image" />';
+				if($postratings_max == 2) {
+					echo '<img src="'.$postratings_url.'/'.$postratings_image.'/rating_'.$i.'_on.gif" alt="rating_'.$i.'_on.gif" class="post-ratings-image" />';
+				} else {
+					for($j = 1; $j < ($i+1); $j++) {
+						echo '<img src="'.$postratings_url.'/'.$postratings_image.'/rating_'.$j.'_on.gif" alt="rating_on.gif" class="post-ratings-image" />';
+					}
+				}
 			} else {
 				for($j = 1; $j < ($i+1); $j++) {
 					echo '<img src="'.$postratings_url.'/'.$postratings_image.'/rating_on.gif" alt="rating_on.gif" class="post-ratings-image" />';

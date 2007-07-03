@@ -145,7 +145,7 @@ $postratings_image = get_option('postratings_image');
 		}
 	}
 	function set_custom(custom, max) {
-		if(custom == 1) {
+		if(custom == 1 && max == 2) {
 			document.getElementById('postratings_max').value = max;
 			document.getElementById('postratings_max').readOnly = true;
 			document.getElementById('postratings_template_vote').value = ratings_updown_templates('vote', false);
@@ -210,7 +210,10 @@ $postratings_image = get_option('postratings_image');
 										echo '<input type="radio" name="postratings_image" onclick="set_custom('.$value['custom'].', '.$value['max'].');" value="'.$key.'" />';
 									}
 									echo '&nbsp;&nbsp;&nbsp;';
-									for($i = 1; $i <= $postratings_max; $i++) {
+									if(file_exists($postratings_path.'/'.$key.'/rating_start.gif')) {
+										echo '<img src="'.$postratings_url.'/'.$key.'/rating_start.gif" alt="rating_start.gif" class="post-ratings-image" />';
+									}
+									for($i = 1; $i <= $value['max']; $i++) {
 											if(file_exists($postratings_path.'/'.$key.'/rating_'.$i.'_off.gif')) {
 												echo '<img src="'.$postratings_url.'/'.$key.'/rating_'.$i.'_off.gif" alt="rating_'.$i.'_off.gif" class="post-ratings-image" />';
 											}
@@ -251,7 +254,13 @@ $postratings_image = get_option('postratings_image');
 								echo '<img src="'.$postratings_url.'/'.$postratings_image.'/rating_start.gif" alt="rating_start.gif" class="post-ratings-image" />';
 							}
 							if($postratings_customrating) {
-								echo '<img src="'.$postratings_url.'/'.$postratings_image.'/rating_'.$i.'_on.gif" alt="rating_'.$i.'_on.gif" class="post-ratings-image" />';
+								if($postratings_max == 2) {
+									echo '<img src="'.$postratings_url.'/'.$postratings_image.'/rating_'.$i.'_on.gif" alt="rating_'.$i.'_on.gif" class="post-ratings-image" />';
+								} else {
+									for($j = 1; $j < ($i+1); $j++) {
+										echo '<img src="'.$postratings_url.'/'.$postratings_image.'/rating_'.$j.'_on.gif" alt="rating_on.gif" class="post-ratings-image" />';
+									}
+								}
 							} else {
 								for($j = 1; $j < ($i+1); $j++) {
 									echo '<img src="'.$postratings_url.'/'.$postratings_image.'/rating_on.gif" alt="rating_on.gif" class="post-ratings-image" />';
