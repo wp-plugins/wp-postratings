@@ -147,6 +147,7 @@ function the_ratings_results($post_id, $new_user = 0, $new_score = 0, $new_avera
 		$post_ratings_images .= '<img src="'.get_option('siteurl').'/wp-content/plugins/postratings/images/'.$ratings_image.'/rating_start.gif" alt="" class="post-ratings-image" />';
 	}
 	// Display Rated Images
+	$post_ratings_score = intval($post_ratings_score);
 	if($postratings_custom && $ratings_max == 2) {
 		if($post_ratings_score > 0) {
 			$post_ratings_score = '+'.$post_ratings_score;
@@ -235,6 +236,7 @@ function the_ratings_vote($post_id, $new_user = 0, $new_score = 0, $new_average 
 		$post_ratings_images .= '<img src="'.get_option('siteurl').'/wp-content/plugins/postratings/images/'.$ratings_image.'/rating_start.gif" alt="" class="post-ratings-image" />';
 	}
 	// Display Rated Images
+	$post_ratings_score = intval($post_ratings_score);
 	if($postratings_custom && $ratings_max == 2) {
 		if($post_ratings_score > 0) {
 			$post_ratings_score = '+'.$post_ratings_score;
@@ -712,20 +714,6 @@ if(!function_exists('get_highest_rated')) {
 }
 
 
-### Function: Display Total Rating Votes
-if(!function_exists('get_ratings_votes')) {
-	function get_ratings_votes($display = true) {
-		global $wpdb;
-		$ratings_votes = $wpdb->get_var("SELECT SUM((meta_value+0.00)) FROM $wpdb->postmeta WHERE meta_key = 'ratings_score'");
-		if($display) {
-			echo number_format($ratings_votes);
-		} else {
-			return number_format($ratings_votes);
-		}
-	}
-}
-
-
 ### Function: Display Total Rating Users
 if(!function_exists('get_ratings_users')) {
 	function get_ratings_users($display = true) {
@@ -842,7 +830,7 @@ function process_ratings() {
 					$rate_cookie = setcookie("rated_".$post_id, 1, time() + 30000000, COOKIEPATH);
 				}
 				// Log Ratings No Matter What
-				$rate_log = $wpdb->query("INSERT INTO $wpdb->ratings VALUES (0, $post_id, '$post_title', $rate,'".current_time('timestamp')."', '".get_ipaddress()."', '".gethostbyaddr(get_ipaddress())."' ,'$rate_user', $rate_userid)");
+				$rate_log = $wpdb->query("INSERT INTO $wpdb->ratings VALUES (0, $post_id, '$post_title', ".$ratings_value[$rate-1].",'".current_time('timestamp')."', '".get_ipaddress()."', '".gethostbyaddr(get_ipaddress())."' ,'$rate_user', $rate_userid)");
 				// Output AJAX Result
 				if(defined(WP_CACHE)) {
 					$page_hash = $_GET['page_hash'];
@@ -983,7 +971,6 @@ function postratings_page_general_stats($content) {
 	if($stats_display['ratings'] == 1) {
 		$content .= '<p><strong>'.__('WP-PostRatings', 'wp-stats').'</strong></p>'."\n";
 		$content .= '<ul>'."\n";
-		$content .= '<li><strong>'.get_ratings_votes(false).'</strong> '.__('votes were casted.', 'wp-postratings').'</li>'."\n";
 		$content .= '<li><strong>'.get_ratings_users(false).'</strong> '.__('users casted their vote.', 'wp-postratings').'</li>'."\n";
 		$content .= '</ul>'."\n";
 	}
@@ -1032,8 +1019,8 @@ function create_ratinglogs_table() {
 	// Add In Options (4 Records)
 	add_option('postratings_image', 'stars', 'Your Ratings Image');
 	add_option('postratings_max', '5', 'Your Max Ratings');
-	add_option('postratings_template_vote', '%RATINGS_IMAGES_VOTE% (<b>%RATINGS_USERS%</b> '.__('votes', 'wp-postratings').', '.__('average', 'wp-postratings').': <b>%RATINGS_AVERAGE%</b> '.__('out of', 'wp-postratings').' %RATINGS_MAX%)<br />%RATINGS_TEXT%', 'Ratings Vote Template Text');
-	add_option('postratings_template_text', '%RATINGS_IMAGES% (<b>%RATINGS_USERS%</b> '.__('votes', 'wp-postratings').', '.__('average', 'wp-postratings').': <b>%RATINGS_AVERAGE%</b> '.__('out of', 'wp-postratings').' %RATINGS_MAX%)', 'Ratings Template Text');
+	add_option('postratings_template_vote', '%RATINGS_IMAGES_VOTE% (<strong>%RATINGS_USERS%</strong> '.__('votes', 'wp-postratings').', '.__('average', 'wp-postratings').': <strong>%RATINGS_AVERAGE%</strong> '.__('out of', 'wp-postratings').' %RATINGS_MAX%)<br />%RATINGS_TEXT%', 'Ratings Vote Template Text');
+	add_option('postratings_template_text', '%RATINGS_IMAGES% (<em><strong>%RATINGS_USERS%</strong> '.__('votes', 'wp-postratings').', '.__('average', 'wp-postratings').': <strong>%RATINGS_AVERAGE%</strong> '.__('out of', 'wp-postratings').' %RATINGS_MAX%, <strong>'.__('rated', 'wp-postratings').'</strong></em>)', 'Ratings Template Text');
 	add_option('postratings_template_none', '%RATINGS_IMAGES_VOTE% ('.__('No Ratings Yet', 'wp-postratings').')<br />%RATINGS_TEXT%', 'Ratings Template For No Ratings');
 	// Database Upgrade For WP-PostRatings 1.02
 	add_option('postratings_logging_method', '3', 'Logging Method Of User Rated\'s Answer');

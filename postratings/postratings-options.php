@@ -107,7 +107,7 @@ $postratings_image = get_option('postratings_image');
 				default_template = "%RATINGS_IMAGES_VOTE% (<strong>%RATINGS_SCORE%</strong> <?php _e('rating', 'wp-postratings'); ?>, <strong>%RATINGS_USERS%</strong> <?php _e('votes', 'wp-postratings'); ?>)<br />%RATINGS_TEXT%";
 				break;
 			case "text":
-				default_template = "%RATINGS_IMAGES% (<strong>%RATINGS_SCORE%</strong> <?php _e('rating', 'wp-postratings'); ?>, <strong>%RATINGS_USERS%</strong> <?php _e('votes', 'wp-postratings'); ?>)";
+				default_template = "%RATINGS_IMAGES% (<em><strong>%RATINGS_SCORE%</strong> <?php _e('rating', 'wp-postratings'); ?>, <strong>%RATINGS_USERS%</strong> <?php _e('votes', 'wp-postratings'); ?>, <strong><?php _e('rated', 'wp-postratings'); ?></strong></em>)";
 				break;
 			case "none":
 				default_template = "%RATINGS_IMAGES_VOTE% (<?php _e('No Ratings Yet', 'wp-postratings'); ?>)<br />%RATINGS_TEXT%";
@@ -129,7 +129,7 @@ $postratings_image = get_option('postratings_image');
 				default_template = "%RATINGS_IMAGES_VOTE% (<strong>%RATINGS_USERS%</strong> <?php _e('votes', 'wp-postratings'); ?>, <?php _e('average', 'wp-postratings'); ?>: <strong>%RATINGS_AVERAGE%</strong> <?php _e('out of', 'wp-postratings'); ?> %RATINGS_MAX%)<br />%RATINGS_TEXT%";
 				break;
 			case "text":
-				default_template = "%RATINGS_IMAGES% (<strong>%RATINGS_USERS%</strong> <?php _e('votes', 'wp-postratings'); ?>, <?php _e('average', 'wp-postratings'); ?>: <strong>%RATINGS_AVERAGE%</strong> <?php _e('out of', 'wp-postratings'); ?> %RATINGS_MAX%)";
+				default_template = "%RATINGS_IMAGES% (<em><strong>%RATINGS_USERS%</strong> <?php _e('votes', 'wp-postratings'); ?>, <?php _e('average', 'wp-postratings'); ?>: <strong>%RATINGS_AVERAGE%</strong> <?php _e('out of', 'wp-postratings'); ?> %RATINGS_MAX%, <strong><?php _e('rated', 'wp-postratings'); ?></strong></em>)";
 				break;
 			case "none":
 				default_template = "%RATINGS_IMAGES_VOTE% (<?php _e('No Ratings Yet', 'wp-postratings'); ?>)<br />%RATINGS_TEXT%";
