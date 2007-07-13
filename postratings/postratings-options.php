@@ -384,9 +384,11 @@ $postratings_image = get_option('postratings_image');
 					- %RATINGS_USERS%<br />							
 					- %RATINGS_AVERAGE%<br />
 					- %RATINGS_PERCENTAGE%<br /><br />
-					<input type="button" name="RestoreDefault" value="<?php _e('Restore Default Template', 'wp-postratings'); ?>" onclick="javascript: ratings_default_templates('vote', true);" class="button" />
+					<input type="button" name="RestoreDefault" value="<?php _e('Restore Default Template (Normal Rating)', 'wp-postratings'); ?>" onclick="ratings_default_templates('vote', true);" class="button" />
+					<br />
+					<input type="button" name="RestoreDefault" value="<?php _e('Restore Default Template (Up/Down Rating)', 'wp-postratings'); ?>" onclick="ratings_updown_templates('vote', true);" class="button" />
 				</td>
-				<td align="left"><textarea cols="80" rows="10" id="postratings_template_vote" name="postratings_template_vote"><?php echo htmlspecialchars(stripslashes(get_option('postratings_template_vote'))); ?></textarea></td>
+				<td align="left"><textarea cols="80" rows="15" id="postratings_template_vote" name="postratings_template_vote"><?php echo htmlspecialchars(stripslashes(get_option('postratings_template_vote'))); ?></textarea></td>
 			</tr>
 			 <tr valign="top">
 				<td align="left" width="30%">
@@ -398,9 +400,10 @@ $postratings_image = get_option('postratings_image');
 					- %RATINGS_USERS%<br />							
 					- %RATINGS_AVERAGE%<br />
 					- %RATINGS_PERCENTAGE%<br /><br />
-					<input type="button" name="RestoreDefault" value="<?php _e('Restore Default Template', 'wp-postratings'); ?>" onclick="javascript: ratings_default_templates('text', true);" class="button" />
+					<input type="button" name="RestoreDefault" value="<?php _e('Restore Default Template (Normal Rating)', 'wp-postratings'); ?>" onclick="ratings_default_templates('text', true);" class="button" /><br />
+					<input type="button" name="RestoreDefault" value="<?php _e('Restore Default Template (Up/Down Rating)', 'wp-postratings'); ?>" onclick="ratings_updown_templates('text', true);" class="button" />
 				</td>
-				<td align="left"><textarea cols="80" rows="10" id="postratings_template_text" name="postratings_template_text"><?php echo htmlspecialchars(stripslashes(get_option('postratings_template_text'))); ?></textarea></td>
+				<td align="left"><textarea cols="80" rows="15" id="postratings_template_text" name="postratings_template_text"><?php echo htmlspecialchars(stripslashes(get_option('postratings_template_text'))); ?></textarea></td>
 			</tr>
 			 <tr valign="top">
 				<td align="left" width="30%">
@@ -413,9 +416,10 @@ $postratings_image = get_option('postratings_image');
 					- %RATINGS_USERS%<br />							
 					- %RATINGS_AVERAGE%<br />
 					- %RATINGS_PERCENTAGE%<br /><br />
-					<input type="button" name="RestoreDefault" value="<?php _e('Restore Default Template', 'wp-postratings'); ?>" onclick="javascript: ratings_default_templates('none', true);" class="button" />
+					<input type="button" name="RestoreDefault" value="<?php _e('Restore Default Template (Normal Rating)', 'wp-postratings'); ?>" onclick="ratings_default_templates('none', true);" class="button" /><br />
+					<input type="button" name="RestoreDefault" value="<?php _e('Restore Default Template (Up/Down Rating)', 'wp-postratings'); ?>" onclick="ratings_updown_templates('none', true);" class="button" />
 				</td>
-				<td align="left"><textarea cols="80" rows="10" id="postratings_template_none" name="postratings_template_none"><?php echo htmlspecialchars(stripslashes(get_option('postratings_template_none'))); ?></textarea></td>
+				<td align="left"><textarea cols="80" rows="15" id="postratings_template_none" name="postratings_template_none"><?php echo htmlspecialchars(stripslashes(get_option('postratings_template_none'))); ?></textarea></td>
 			</tr>
 			 <tr valign="top">
 				<td align="left" width="30%">
@@ -428,9 +432,10 @@ $postratings_image = get_option('postratings_image');
 					- %RATINGS_AVERAGE%<br />
 					- %POST_TITLE%<br />
 					- %POST_URL%<br /><br />
-					<input type="button" name="RestoreDefault" value="<?php _e('Restore Default Template', 'wp-postratings'); ?>" onclick="javascript: ratings_default_templates('highestrated', true);" class="button" />
+					<input type="button" name="RestoreDefault" value="<?php _e('Restore Default Template (Normal Rating)', 'wp-postratings'); ?>" onclick="ratings_default_templates('highestrated', true);" class="button" /><br />
+					<input type="button" name="RestoreDefault" value="<?php _e('Restore Default Template (Up/Down Rating)', 'wp-postratings'); ?>" onclick="ratings_updown_templates('highestrated', true);" class="button" />
 				</td>
-				<td align="left"><textarea cols="80" rows="10" id="postratings_template_highestrated" name="postratings_template_highestrated"><?php echo htmlspecialchars(stripslashes(get_option('postratings_template_highestrated'))); ?></textarea></td>
+				<td align="left"><textarea cols="80" rows="15" id="postratings_template_highestrated" name="postratings_template_highestrated"><?php echo htmlspecialchars(stripslashes(get_option('postratings_template_highestrated'))); ?></textarea></td>
 			</tr>
 		</table>
 	</fieldset>
