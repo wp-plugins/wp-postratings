@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WP-PostRatings 1.20\n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2007-07-13 02:25+0800\n"
+"PO-Revision-Date: 2007-07-14 02:28+0800\n"
 "Last-Translator: Lester 'GaMerZ' Chan <gamerz84@hotmail.com>\n"
 "Language-Team: Lester Chan <gamerz84@hotmail.com>\n"
 "MIME-Version: 1.0\n"
@@ -605,36 +605,43 @@ msgid "Ratings Vote Text:"
 msgstr ""
 
 #: postratings-options.php:379
-#: postratings-options.php:394
-#: postratings-options.php:408
-#: postratings-options.php:423
+#: postratings-options.php:396
+#: postratings-options.php:411
+#: postratings-options.php:427
 msgid "Allowed Variables:"
 msgstr ""
 
 #: postratings-options.php:387
-#: postratings-options.php:401
-#: postratings-options.php:416
-#: postratings-options.php:431
-msgid "Restore Default Template"
+#: postratings-options.php:403
+#: postratings-options.php:419
+#: postratings-options.php:435
+msgid "Restore Default Template (Normal Rating)"
 msgstr ""
 
-#: postratings-options.php:393
+#: postratings-options.php:389
+#: postratings-options.php:404
+#: postratings-options.php:420
+#: postratings-options.php:436
+msgid "Restore Default Template (Up/Down Rating)"
+msgstr ""
+
+#: postratings-options.php:395
 msgid "Ratings Voted Text:"
 msgstr ""
 
-#: postratings-options.php:407
+#: postratings-options.php:410
 msgid "Ratings None:"
 msgstr ""
 
-#: postratings-options.php:422
+#: postratings-options.php:426
 msgid "Highest Rated:"
 msgstr ""
 
-#: postratings-options.php:438
+#: postratings-options.php:443
 msgid "Update Options"
 msgstr ""
 
-#: postratings-options.php:438
+#: postratings-options.php:443
 msgid "Cancel"
 msgstr ""
 
