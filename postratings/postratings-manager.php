@@ -315,8 +315,7 @@ switch($mode) {
 				$postratings_rating = intval($postratings_log->rating_rating);
 				$postratings_postid = intval($postratings_log->rating_postid);
 				$postratings_posttitle = stripslashes($postratings_log->rating_posttitle);
-				$postratings_date = gmdate("jS F Y", $postratings_log->rating_timestamp);
-				$postratings_time = gmdate("H:i", $postratings_log->rating_timestamp);
+				$postratings_date = gmdate(sprintf(__('%s @ %s', 'wp-postratings'), get_option('date_format'), get_option('time_format')), $postratings_log->rating_timestamp);
 				$postratings_ip = $postratings_log->rating_ip;
 				$postratings_host = $postratings_log->rating_host;				
 				echo "<tr $style>\n";
@@ -346,7 +345,7 @@ switch($mode) {
 				echo '</td>'."\n";
 				echo "<td>$postratings_postid</td>\n";
 				echo "<td>$postratings_posttitle</td>\n";
-				echo "<td>$postratings_date, $postratings_time</td>\n";
+				echo "<td>$postratings_date</td>\n";
 				echo "<td>$postratings_ip / $postratings_host</td>\n";
 				echo '</tr>';
 				$i++;
