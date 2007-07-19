@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WP-PostRatings 1.20\n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2007-07-14 02:28+0800\n"
+"PO-Revision-Date: 2007-07-19 16:37+0800\n"
 "Last-Translator: Lester 'GaMerZ' Chan <gamerz84@hotmail.com>\n"
 "Language-Team: Lester Chan <gamerz84@hotmail.com>\n"
 "MIME-Version: 1.0\n"
@@ -36,284 +36,313 @@ msgstr ""
 msgid "Please rate only 1 post at a time."
 msgstr ""
 
-#: postratings-manager.php:46
-#: postratings-manager.php:513
+#: postratings-manager.php:49
+#: postratings-manager.php:583
 msgid "UNINSTALL Ratings"
 msgstr ""
 
-#: postratings-manager.php:53
+#: postratings-manager.php:56
 #, php-format
 msgid "Table \"%s\" Has Been Dropped."
 msgstr ""
 
-#: postratings-manager.php:61
+#: postratings-manager.php:64
 #, php-format
 msgid "Setting Key '%s' Has been Errased."
 msgstr ""
 
-#: postratings-manager.php:64
+#: postratings-manager.php:67
 #, php-format
 msgid "Error Deleting Setting Key '%s'."
 msgstr ""
 
-#: postratings-manager.php:72
+#: postratings-manager.php:75
 #, php-format
 msgid "Post Meta \"%s\" Has Been Deleted."
 msgstr ""
 
-#: postratings-manager.php:79
-#: postratings-manager.php:485
+#: postratings-manager.php:82
+#: postratings-manager.php:555
 msgid "Delete Data/Logs"
 msgstr ""
 
-#: postratings-manager.php:89
-#: postratings-manager.php:119
+#: postratings-manager.php:92
+#: postratings-manager.php:122
 msgid "All Post Ratings Logs Have Been Deleted."
 msgstr ""
 
-#: postratings-manager.php:91
-#: postratings-manager.php:121
+#: postratings-manager.php:94
+#: postratings-manager.php:124
 msgid "An Error Has Occured While Deleting All Post Ratings Logs."
 msgstr ""
 
-#: postratings-manager.php:96
-#: postratings-manager.php:130
+#: postratings-manager.php:99
+#: postratings-manager.php:133
 #, php-format
 msgid "All Post Ratings Logs For Post ID(s) %s Have Been Deleted."
 msgstr ""
 
-#: postratings-manager.php:98
-#: postratings-manager.php:132
+#: postratings-manager.php:101
+#: postratings-manager.php:135
 #, php-format
 msgid "An Error Has Occured While Deleting All Post Ratings Logs For Post ID(s) %s."
 msgstr ""
 
-#: postratings-manager.php:106
-#: postratings-manager.php:125
+#: postratings-manager.php:109
+#: postratings-manager.php:128
 #, php-format
 msgid "Rating Data \"%s\" Has Been Deleted."
 msgstr ""
 
-#: postratings-manager.php:111
-#: postratings-manager.php:136
+#: postratings-manager.php:114
+#: postratings-manager.php:139
 #, php-format
 msgid "Rating Data \"%s\" For Post ID(s) %s Has Been Deleted."
 msgstr ""
 
-#: postratings-manager.php:163
-#: postratings-manager.php:281
-#: postratings-manager.php:408
+#: postratings-manager.php:178
+#: postratings-manager.php:296
+#: postratings-manager.php:473
 msgid "ID"
 msgstr ""
 
-#: postratings-manager.php:167
-#: postratings-manager.php:282
+#: postratings-manager.php:182
+#: postratings-manager.php:297
 msgid "Username"
 msgstr ""
 
-#: postratings-manager.php:171
-#: postratings-manager.php:283
-#: postratings-manager.php:410
+#: postratings-manager.php:186
+#: postratings-manager.php:298
+#: postratings-manager.php:475
 msgid "Rating"
 msgstr ""
 
-#: postratings-manager.php:175
-#: postratings-manager.php:284
-#: postratings-manager.php:411
+#: postratings-manager.php:190
+#: postratings-manager.php:299
+#: postratings-manager.php:476
 msgid "Post ID"
 msgstr ""
 
-#: postratings-manager.php:179
-#: postratings-manager.php:285
-#: postratings-manager.php:412
+#: postratings-manager.php:194
+#: postratings-manager.php:300
+#: postratings-manager.php:477
 msgid "Post Title"
 msgstr ""
 
-#: postratings-manager.php:183
-#: postratings-manager.php:414
+#: postratings-manager.php:198
+#: postratings-manager.php:479
 msgid "IP"
 msgstr ""
 
-#: postratings-manager.php:187
-#: postratings-manager.php:415
+#: postratings-manager.php:202
+#: postratings-manager.php:480
 msgid "Host"
 msgstr ""
 
-#: postratings-manager.php:192
-#: postratings-manager.php:413
+#: postratings-manager.php:207
+#: postratings-manager.php:478
 msgid "Date"
 msgstr ""
 
-#: postratings-manager.php:200
-#: postratings-manager.php:419
+#: postratings-manager.php:215
+#: postratings-manager.php:484
 msgid "Ascending"
 msgstr ""
 
-#: postratings-manager.php:205
-#: postratings-manager.php:420
+#: postratings-manager.php:220
+#: postratings-manager.php:485
 msgid "Descending"
 msgstr ""
 
-#: postratings-manager.php:215
-#: postratings-manager.php:502
+#: postratings-manager.php:230
+#: postratings-manager.php:572
 msgid "Uninstall Ratings"
 msgstr ""
 
-#: postratings-manager.php:222
+#: postratings-manager.php:237
 #: postratings-uninstall.php:97
 #, php-format
 msgid "<a href=\"%s\">Click Here</a> To Finish The Uninstallation And WP-PostRatings Will Be Deactivated Automatically."
 msgstr ""
 
-#: postratings-manager.php:276
-#: postratings-manager.php:277
+#: postratings-manager.php:291
+#: postratings-manager.php:292
 msgid "Post Ratings Logs"
 msgstr ""
 
-#: postratings-manager.php:277
+#: postratings-manager.php:292
 msgid "Displaying"
 msgstr ""
 
-#: postratings-manager.php:277
+#: postratings-manager.php:292
 msgid "To"
 msgstr ""
 
-#: postratings-manager.php:277
+#: postratings-manager.php:292
 msgid "Of"
 msgstr ""
 
-#: postratings-manager.php:278
+#: postratings-manager.php:293
 msgid "Sorted By"
 msgstr ""
 
-#: postratings-manager.php:278
+#: postratings-manager.php:293
 msgid "In"
 msgstr ""
 
-#: postratings-manager.php:278
+#: postratings-manager.php:293
 msgid "Order"
 msgstr ""
 
-#: postratings-manager.php:286
+#: postratings-manager.php:301
 msgid "Date / Time"
 msgstr ""
 
-#: postratings-manager.php:287
+#: postratings-manager.php:302
 msgid "IP / Host"
 msgstr ""
 
-#: postratings-manager.php:322
-#: postratings-manager.php:324
+#: postratings-manager.php:337
+#: postratings-manager.php:339
 msgid "User Rate This Post "
 msgstr ""
 
-#: postratings-manager.php:322
-#: postratings-manager.php:324
+#: postratings-manager.php:337
+#: postratings-manager.php:339
 msgid " Stars Out Of "
 msgstr ""
 
-#: postratings-manager.php:340
+#: postratings-manager.php:355
 msgid "No Post Ratings Logs Found"
 msgstr ""
 
-#: postratings-manager.php:354
+#: postratings-manager.php:369
 msgid "Previous Page"
 msgstr ""
 
-#: postratings-manager.php:363
+#: postratings-manager.php:378
 msgid "Next Page"
 msgstr ""
 
-#: postratings-manager.php:372
+#: postratings-manager.php:387
 #, php-format
 msgid "Pages (%s): "
 msgstr ""
 
-#: postratings-manager.php:375
+#: postratings-manager.php:390
 msgid "Go to First Page"
 msgstr ""
 
-#: postratings-manager.php:375
+#: postratings-manager.php:390
 msgid "First"
 msgstr ""
 
-#: postratings-manager.php:378
-#: postratings-manager.php:390
+#: postratings-manager.php:393
+#: postratings-manager.php:405
 msgid "Go to Page"
 msgstr ""
 
-#: postratings-manager.php:385
+#: postratings-manager.php:400
 #: postratings-widget.php:98
 #: postratings-widget.php:147
 msgid "Page"
 msgstr ""
 
-#: postratings-manager.php:393
+#: postratings-manager.php:408
 msgid "Go to Last Page"
 msgstr ""
 
-#: postratings-manager.php:393
+#: postratings-manager.php:408
 msgid "Last"
 msgstr ""
 
-#: postratings-manager.php:409
+#: postratings-manager.php:423
+msgid "Filter Options:"
+msgstr ""
+
+#: postratings-manager.php:425
+msgid "Post ID:"
+msgstr ""
+
+#: postratings-manager.php:430
+#: postratings.php:824
+msgid "Guest"
+msgstr ""
+
+#: postratings-manager.php:436
+msgid "Registered User: "
+msgstr ""
+
+#: postratings-manager.php:438
+msgid "Comment Author: "
+msgstr ""
+
+#: postratings-manager.php:457
+msgid "Rating: "
+msgstr ""
+
+#: postratings-manager.php:470
+msgid "Sort Options:"
+msgstr ""
+
+#: postratings-manager.php:474
 msgid "UserName"
 msgstr ""
 
-#: postratings-manager.php:427
-#: postratings-manager.php:429
+#: postratings-manager.php:492
+#: postratings-manager.php:494
 msgid "Per Page"
 msgstr ""
 
-#: postratings-manager.php:434
-msgid "Sort"
+#: postratings-manager.php:502
+msgid "Go"
 msgstr ""
 
-#: postratings-manager.php:440
+#: postratings-manager.php:510
 msgid "Post Ratings Logs Stats"
 msgstr ""
 
-#: postratings-manager.php:443
+#: postratings-manager.php:513
 msgid "Total Users Voted:"
 msgstr ""
 
-#: postratings-manager.php:447
+#: postratings-manager.php:517
 msgid "Total Score:"
 msgstr ""
 
-#: postratings-manager.php:451
+#: postratings-manager.php:521
 msgid "Total Average:"
 msgstr ""
 
-#: postratings-manager.php:459
+#: postratings-manager.php:529
 msgid "Post Ratings Data/Logs"
 msgstr ""
 
-#: postratings-manager.php:461
+#: postratings-manager.php:531
 msgid "Delete Post Ratings Data/Logs"
 msgstr ""
 
-#: postratings-manager.php:465
+#: postratings-manager.php:535
 msgid "Delete Type: "
 msgstr ""
 
-#: postratings-manager.php:475
+#: postratings-manager.php:545
 msgid "Post ID(s):"
 msgstr ""
 
-#: postratings-manager.php:478
+#: postratings-manager.php:548
 msgid "Seperate each Post ID with a comma."
 msgstr ""
 
-#: postratings-manager.php:479
+#: postratings-manager.php:549
 msgid "To delete ratings data/logs from Post ID 2, 3 and 4. Just type in: <b>2,3,4</b>"
 msgstr ""
 
-#: postratings-manager.php:480
+#: postratings-manager.php:550
 msgid "To delete ratings data/logs for all posts. Just type in: <b>all</b>"
 msgstr ""
 
-#: postratings-manager.php:485
+#: postratings-manager.php:555
 msgid ""
 "You Are About To Delete Post Ratings Data/Logs.\\n"
 "This Action Is Not Reversible.\\n"
@@ -321,43 +350,43 @@ msgid ""
 " Choose \\'Cancel\\' to stop, \\'OK\\' to delete."
 msgstr ""
 
-#: postratings-manager.php:491
+#: postratings-manager.php:561
 msgid "Note:"
 msgstr ""
 
-#: postratings-manager.php:493
+#: postratings-manager.php:563
 msgid "'Logs Only' means the logs generated when a user rates a post."
 msgstr ""
 
-#: postratings-manager.php:494
+#: postratings-manager.php:564
 msgid "'Data Only' means the rating data for the post."
 msgstr ""
 
-#: postratings-manager.php:495
+#: postratings-manager.php:565
 msgid "'Logs And Data' means both the logs generated and the rating data for the post."
 msgstr ""
 
-#: postratings-manager.php:496
+#: postratings-manager.php:566
 msgid "If your logging method is by IP and Cookie or by Cookie, users may still be unable to rate if they have voted before as the cookie is still stored in their computer."
 msgstr ""
 
-#: postratings-manager.php:506
+#: postratings-manager.php:576
 msgid "Deactivating WP-PostRatings plugin does not remove any data that may have been created, such as the rating data and the rating's logs. To completely remove this plugin, you can uninstall it here."
 msgstr ""
 
-#: postratings-manager.php:510
+#: postratings-manager.php:580
 #, php-format
 msgid "<strong>WARNING:</strong><br />Once uninstalled, this cannot be undone. You should use a Database Backup plugin of WordPress to back up all the data first.  Your data is stored in the %1$s, %2$s and %3$s tables."
 msgstr ""
 
-#: postratings-manager.php:512
+#: postratings-manager.php:582
 #: postratings-options.php:305
 #: postratings-options.php:314
 #: postratings-uninstall.php:155
 msgid "Yes"
 msgstr ""
 
-#: postratings-manager.php:513
+#: postratings-manager.php:583
 #: postratings-uninstall.php:156
 msgid ""
 "You Are About To Uninstall WP-PostRatings From WordPress.\\n"
@@ -890,10 +919,6 @@ msgstr ""
 #: postratings.php:595
 #: postratings.php:705
 msgid "N/A"
-msgstr ""
-
-#: postratings.php:824
-msgid "Guest"
 msgstr ""
 
 #: postratings.php:852

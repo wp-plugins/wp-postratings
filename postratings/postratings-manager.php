@@ -28,6 +28,9 @@ $base_name = plugin_basename('postratings/postratings-manager.php');
 $base_page = 'admin.php?page='.$base_name;
 $mode = trim($_GET['mode']);
 $postratings_page = intval($_GET['ratingpage']);
+$postratings_filterid = trim(addslashes($_GET['id']));
+$postratings_filteruser = trim(addslashes($_GET['user']));
+$postratings_filterrating = trim(addslashes($_GET['rating']));
 $postratings_sortby = trim($_GET['by']);
 $postratings_sortby_text = '';
 $postratings_sortorder = trim($_GET['order']);
@@ -145,6 +148,17 @@ if(!empty($_POST['do'])) {
 
 
 ### Form Sorting URL
+if(!empty($postratings_filterid)) {
+	$postratings_filterid = intval($postratings_filterid);
+	$postratings_sort_url .= '&amp;id='.$postratings_filterid;
+}
+if(!empty($postratings_filteruser)) {
+	$postratings_sort_url .= '&amp;user='.$postratings_filteruser;
+}
+if($_GET['rating'] != '') {
+	$postratings_filterrating = intval($postratings_filterrating);
+	$postratings_sort_url .= '&amp;rating='.$postratings_filterrating;
+}
 if(!empty($postratings_sortby)) {
 	$postratings_sort_url .= '&amp;by='.$postratings_sortby;
 }
@@ -152,6 +166,7 @@ if(!empty($postratings_sortorder)) {
 	$postratings_sort_url .= '&amp;order='.$postratings_sortorder;
 }
 if(!empty($postratings_log_perpage)) {
+	$postratings_log_perpage = intval($postratings_log_perpage);
 	$postratings_sort_url .= '&amp;perpage='.$postratings_log_perpage;
 }
 
@@ -225,8 +240,19 @@ switch($mode) {
 			echo '</div>';
 			break;
 	default:
+		// Where
+		$postratings_where = '';
+		if(!empty($postratings_filterid)) {
+			$postratings_where = "AND rating_postid =$postratings_filterid";
+		}
+		if(!empty($postratings_filteruser)) {
+			$postratings_where .= " AND rating_username = '$postratings_filteruser'";
+		}
+		if($_GET['rating'] != '') {
+			$postratings_where .= " AND rating_rating = '$postratings_filterrating'";
+		}
 		// Get Post Ratings Logs Data
-		$total_ratings = $wpdb->get_var("SELECT COUNT(rating_id) FROM $wpdb->ratings");
+		$total_ratings = $wpdb->get_var("SELECT COUNT(rating_id) FROM $wpdb->ratings WHERE 1=1 $postratings_where");
 		$total_users = $wpdb->get_var("SELECT SUM(meta_value) FROM $wpdb->postmeta WHERE meta_key = 'ratings_users'");
 		$total_score = $wpdb->get_var("SELECT SUM((meta_value+0.00)) FROM $wpdb->postmeta WHERE meta_key = 'ratings_score'");
 		$ratings_custom = intval(get_option('postratings_customrating'));
@@ -235,40 +261,29 @@ switch($mode) {
 		} else {
 			$total_average = $total_score/$total_users;
 		}
-
-
 		// Checking $postratings_page and $offset
 		if(empty($postratings_page) || $postratings_page == 0) { $postratings_page = 1; }
 		if(empty($offset)) { $offset = 0; }
 		if(empty($postratings_log_perpage) || $postratings_log_perpage == 0) { $postratings_log_perpage = 20; }
-
-
 		// Determin $offset
 		$offset = ($postratings_page-1) * $postratings_log_perpage;
-
-
 		// Determine Max Number Of Ratings To Display On Page
 		if(($offset + $postratings_log_perpage) > $total_ratings) { 
 			$max_on_page = $total_ratings; 
 		} else { 
 			$max_on_page = ($offset + $postratings_log_perpage); 
 		}
-
-
 		// Determine Number Of Ratings To Display On Page
 		if (($offset + 1) > ($total_ratings)) { 
 			$display_on_page = $total_ratings; 
 		} else { 
 			$display_on_page = ($offset + 1); 
 		}
-
-
 		// Determing Total Amount Of Pages
 		$total_pages = ceil($total_ratings / $postratings_log_perpage);
-
-
+		
 		// Get The Logs
-		$postratings_logs = $wpdb->get_results("SELECT * FROM $wpdb->ratings ORDER BY $postratings_sortby $postratings_sortorder LIMIT $offset, $postratings_log_perpage");
+		$postratings_logs = $wpdb->get_results("SELECT * FROM $wpdb->ratings WHERE 1=1 $postratings_where ORDER BY $postratings_sortby $postratings_sortorder LIMIT $offset, $postratings_log_perpage");
 ?>
 <?php if(!empty($text)) { echo '<!-- Last Action --><div id="message" class="updated fade"><p>'.$text.'</p></div>'; } ?>
 <!-- Manage Post Ratings -->
@@ -403,35 +418,90 @@ switch($mode) {
 	<br />
 	<form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="get">
 		<input type="hidden" name="page" value="<?php echo $base_name; ?>" />
-		Sort Options:&nbsp;&nbsp;&nbsp;
-		<select name="by" size="1">
-			<option value="id"<?php if($postratings_sortby == 'rating_id') { echo ' selected="selected"'; }?>><?php _e('ID', 'wp-postratings'); ?></option>
-			<option value="username"<?php if($postratings_sortby == 'rating_username') { echo ' selected="selected"'; }?>><?php _e('UserName', 'wp-postratings'); ?></option>
-			<option value="rating"<?php if($postratings_sortby == 'rating_rating') { echo ' selected="selected"'; }?>><?php _e('Rating', 'wp-postratings'); ?></option>
-			<option value="postid"<?php if($postratings_sortby == 'rating_postid') { echo ' selected="selected"'; }?>><?php _e('Post ID', 'wp-postratings'); ?></option>
-			<option value="posttitle"<?php if($postratings_sortby == 'rating_posttitle') { echo ' selected="selected"'; }?>><?php _e('Post Title', 'wp-postratings'); ?></option>
-			<option value="date"<?php if($postratings_sortby == 'rating_timestamp') { echo ' selected="selected"'; }?>><?php _e('Date', 'wp-postratings'); ?></option>
-			<option value="ip"<?php if($postratings_sortby == 'rating_ip') { echo ' selected="selected"'; }?>><?php _e('IP', 'wp-postratings'); ?></option>
-			<option value="host"<?php if($postratings_sortby == 'rating_host') { echo ' selected="selected"'; }?>><?php _e('Host', 'wp-postratings'); ?></option>
-		</select>
-		&nbsp;&nbsp;&nbsp;
-		<select name="order" size="1">
-			<option value="asc"<?php if($postratings_sortorder == 'ASC') { echo ' selected="selected"'; }?>><?php _e('Ascending', 'wp-postratings'); ?></option>
-			<option value="desc"<?php if($postratings_sortorder == 'DESC') { echo ' selected="selected"'; } ?>><?php _e('Descending', 'wp-postratings'); ?></option>
-		</select>
-		&nbsp;&nbsp;&nbsp;
-		<select name="perpage" size="1">
-		<?php
-			for($i=10; $i <= 100; $i+=10) {
-				if($postratings_log_perpage == $i) {
-					echo "<option value=\"$i\" selected=\"selected\">".__('Per Page', 'wp-postratings').": $i</option>\n";
-				} else {
-					echo "<option value=\"$i\">".__('Per Page', 'wp-postratings').": $i</option>\n";
-				}
-			}
-		?>
-		</select>
-		<input type="submit" value="<?php _e('Sort', 'wp-postratings'); ?>" class="button" />
+		<table border="0" cellspacing="3" cellpadding="3">
+			<tr>
+				<td><?php _e('Filter Options:', 'wp-postratings'); ?></td>
+				<td>
+					<?php _e('Post ID:', 'wp-postratings'); ?>&nbsp;<input type="text" name="id" value="<?php echo $postratings_filterid; ?>" size="5" maxlength="5" />
+					&nbsp;&nbsp;&nbsp;
+					<select name="user" size="1">
+						<option value=""></option>
+						<?php
+							$filter_users = $wpdb->get_results("SELECT DISTINCT rating_username, rating_userid FROM $wpdb->ratings WHERE rating_username != '".__('Guest', 'wp-postratings')."' ORDER BY rating_userid ASC, rating_username ASC");
+							if($filter_users) {
+								foreach($filter_users as $filter_user) {
+									$rating_username = stripslashes($filter_user->rating_username);
+									$rating_userid = intval($filter_user->rating_userid);
+									if($rating_userid > 0) {
+										$prefix = __('Registered User: ', 'wp-postratings');
+									} else {
+										$prefix = __('Comment Author: ', 'wp-postratings');
+									}
+									if($rating_username == $postratings_filteruser) {
+										echo '<option value="'.htmlspecialchars($rating_username).'" selected="selected">'.$prefix.' '.$rating_username.'</option>'."\n";
+									} else {
+										echo '<option value="'.htmlspecialchars($rating_username).'">'.$prefix.' '.$rating_username.'</option>'."\n";
+									}
+								}
+							}
+						?>
+					</select>
+					&nbsp;&nbsp;&nbsp;
+					<select name="rating" size="1">
+						<option value=""></option>
+						<?php
+							$filter_ratings = $wpdb->get_results("SELECT DISTINCT rating_rating FROM $wpdb->ratings ORDER BY rating_rating ASC");
+							if($filter_ratings) {
+								foreach($filter_ratings as $filter_rating) {
+									$rating_rating = $filter_rating->rating_rating;
+									$prefix = __('Rating: ', 'wp-postratings');
+									if($rating_rating == $postratings_filterrating) {
+										echo '<option value="'.$rating_rating.'" selected="selected">'.$prefix.' '.$rating_rating.'</option>'."\n";
+									} else {
+										echo '<option value="'.$rating_rating.'">'.$prefix.' '.$rating_rating.'</option>'."\n";
+									}
+								}
+							}
+						?>
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<td><?php _e('Sort Options:', 'wp-postratings'); ?></td>
+				<td>
+					<select name="by" size="1">
+						<option value="id"<?php if($postratings_sortby == 'rating_id') { echo ' selected="selected"'; }?>><?php _e('ID', 'wp-postratings'); ?></option>
+						<option value="username"<?php if($postratings_sortby == 'rating_username') { echo ' selected="selected"'; }?>><?php _e('UserName', 'wp-postratings'); ?></option>
+						<option value="rating"<?php if($postratings_sortby == 'rating_rating') { echo ' selected="selected"'; }?>><?php _e('Rating', 'wp-postratings'); ?></option>
+						<option value="postid"<?php if($postratings_sortby == 'rating_postid') { echo ' selected="selected"'; }?>><?php _e('Post ID', 'wp-postratings'); ?></option>
+						<option value="posttitle"<?php if($postratings_sortby == 'rating_posttitle') { echo ' selected="selected"'; }?>><?php _e('Post Title', 'wp-postratings'); ?></option>
+						<option value="date"<?php if($postratings_sortby == 'rating_timestamp') { echo ' selected="selected"'; }?>><?php _e('Date', 'wp-postratings'); ?></option>
+						<option value="ip"<?php if($postratings_sortby == 'rating_ip') { echo ' selected="selected"'; }?>><?php _e('IP', 'wp-postratings'); ?></option>
+						<option value="host"<?php if($postratings_sortby == 'rating_host') { echo ' selected="selected"'; }?>><?php _e('Host', 'wp-postratings'); ?></option>
+					</select>
+					&nbsp;&nbsp;&nbsp;
+					<select name="order" size="1">
+						<option value="asc"<?php if($postratings_sortorder == 'ASC') { echo ' selected="selected"'; }?>><?php _e('Ascending', 'wp-postratings'); ?></option>
+						<option value="desc"<?php if($postratings_sortorder == 'DESC') { echo ' selected="selected"'; } ?>><?php _e('Descending', 'wp-postratings'); ?></option>
+					</select>
+					&nbsp;&nbsp;&nbsp;
+					<select name="perpage" size="1">
+					<?php
+						for($i=10; $i <= 100; $i+=10) {
+							if($postratings_log_perpage == $i) {
+								echo "<option value=\"$i\" selected=\"selected\">".__('Per Page', 'wp-postratings').": $i</option>\n";
+							} else {
+								echo "<option value=\"$i\">".__('Per Page', 'wp-postratings').": $i</option>\n";
+							}
+						}
+					?>
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2" align="center"><input type="submit" value="<?php _e('Go', 'wp-postratings'); ?>" class="button" /></td>
+			</tr>
+		</table>
 	</form>
 </div>
 
@@ -439,18 +509,18 @@ switch($mode) {
 <div class="wrap">
 	<h2><?php _e('Post Ratings Logs Stats', 'wp-postratings'); ?></h2>
 	<table border="0" cellspacing="3" cellpadding="3">
-	<tr>
-		<th align="left"><?php _e('Total Users Voted:', 'wp-postratings'); ?></th>
-		<td align="left"><?php echo number_format($total_users); ?></td>
-	</tr>
-	<tr>
-		<th align="left"><?php _e('Total Score:', 'wp-postratings'); ?></th>
-		<td align="left"><?php echo number_format($total_score); ?></td>
-	</tr>
-	<tr>
-		<th align="left"><?php _e('Total Average:', 'wp-postratings'); ?></th>
-		<td align="left"><?php echo number_format($total_average, 2); ?></td>
-	</tr>
+		<tr>
+			<th align="left"><?php _e('Total Users Voted:', 'wp-postratings'); ?></th>
+			<td align="left"><?php echo number_format($total_users); ?></td>
+		</tr>
+		<tr>
+			<th align="left"><?php _e('Total Score:', 'wp-postratings'); ?></th>
+			<td align="left"><?php echo number_format($total_score); ?></td>
+		</tr>
+		<tr>
+			<th align="left"><?php _e('Total Average:', 'wp-postratings'); ?></th>
+			<td align="left"><?php echo number_format($total_average, 2); ?></td>
+		</tr>
 	</table>
 </div>
 
