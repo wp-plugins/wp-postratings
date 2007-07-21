@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WP-PostRatings 1.20\n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2007-07-20 04:38+0800\n"
+"PO-Revision-Date: 2007-07-22 01:15+0800\n"
 "Last-Translator: Lester 'GaMerZ' Chan <gamerz84@hotmail.com>\n"
 "Language-Team: Lester Chan <gamerz84@hotmail.com>\n"
 "MIME-Version: 1.0\n"
@@ -270,7 +270,7 @@ msgid "Post ID:"
 msgstr ""
 
 #: postratings-manager.php:429
-#: postratings.php:824
+#: postratings.php:836
 msgid "Guest"
 msgstr ""
 
@@ -385,8 +385,8 @@ msgid "<strong>WARNING:</strong><br />Once uninstalled, this cannot be undone. Y
 msgstr ""
 
 #: postratings-manager.php:581
-#: postratings-options.php:305
-#: postratings-options.php:314
+#: postratings-options.php:317
+#: postratings-options.php:326
 #: postratings-uninstall.php:155
 msgid "Yes"
 msgstr ""
@@ -400,282 +400,312 @@ msgid ""
 " Choose [Cancel] To Stop, [OK] To Uninstall."
 msgstr ""
 
-#: postratings-options.php:67
-msgid "Ratings Image"
-msgstr ""
-
-#: postratings-options.php:68
-msgid "Max Ratings"
-msgstr ""
-
 #: postratings-options.php:69
-msgid "Individual Rating Text"
+msgid "Custom Rating"
 msgstr ""
 
 #: postratings-options.php:70
-msgid "Individual Rating Value"
+msgid "Ratings Image"
 msgstr ""
 
 #: postratings-options.php:71
-#: postratings-options.php:298
-msgid "Ratings AJAX Style"
+msgid "Max Ratings"
 msgstr ""
 
 #: postratings-options.php:72
-msgid "Ratings Template Vote"
+msgid "Individual Rating Text"
 msgstr ""
 
 #: postratings-options.php:73
-msgid "Ratings Template Voted"
+msgid "Individual Rating Value"
 msgstr ""
 
 #: postratings-options.php:74
-msgid "Ratings Template For No Ratings"
+#: postratings-options.php:310
+msgid "Ratings AJAX Style"
 msgstr ""
 
 #: postratings-options.php:75
-msgid "Ratings Template For Highest Rated"
+msgid "Ratings Template Vote"
 msgstr ""
 
 #: postratings-options.php:76
-#: postratings-options.php:336
-msgid "Logging Method"
+msgid "Ratings Template Voted"
 msgstr ""
 
 #: postratings-options.php:77
+msgid "Ratings Template No Permission"
+msgstr ""
+
+#: postratings-options.php:78
+msgid "Ratings Template For No Ratings"
+msgstr ""
+
+#: postratings-options.php:79
+msgid "Ratings Template For Highest Rated"
+msgstr ""
+
+#: postratings-options.php:80
+#: postratings-options.php:348
+msgid "Logging Method"
+msgstr ""
+
+#: postratings-options.php:81
 msgid "Allow To Vote Option"
 msgstr ""
 
-#: postratings-options.php:82
+#: postratings-options.php:86
 msgid "Updated"
 msgstr ""
 
-#: postratings-options.php:87
+#: postratings-options.php:91
 msgid "No Ratings Option Updated"
 msgstr ""
 
-#: postratings-options.php:107
-#: postratings-options.php:110
-#: postratings-options.php:116
-#: postratings.php:155
-#: postratings.php:541
-#: postratings.php:651
+#: postratings-options.php:111
+#: postratings-options.php:114
+#: postratings-options.php:117
+#: postratings-options.php:123
+#: postratings.php:163
+#: postratings.php:553
+#: postratings.php:663
 msgid "rating"
 msgstr ""
 
-#: postratings-options.php:107
-#: postratings-options.php:110
-#: postratings-options.php:116
-#: postratings-options.php:129
-#: postratings-options.php:132
-#: postratings.php:155
-#: postratings.php:157
-#: postratings.php:476
-#: postratings.php:482
-#: postratings.php:543
-#: postratings.php:653
-#: postratings.php:1022
-#: postratings.php:1023
+#: postratings-options.php:111
+#: postratings-options.php:114
+#: postratings-options.php:117
+#: postratings-options.php:123
+#: postratings-options.php:136
+#: postratings-options.php:139
+#: postratings-options.php:142
+#: postratings.php:163
+#: postratings.php:165
+#: postratings.php:488
+#: postratings.php:494
+#: postratings.php:555
+#: postratings.php:665
+#: postratings.php:1034
+#: postratings.php:1035
+#: postratings.php:1050
 msgid "votes"
 msgstr ""
 
-#: postratings-options.php:110
-#: postratings-options.php:132
-#: postratings.php:1023
+#: postratings-options.php:114
+#: postratings-options.php:117
+#: postratings-options.php:139
+#: postratings.php:1035
 msgid "rated"
 msgstr ""
 
-#: postratings-options.php:113
-#: postratings-options.php:135
-#: postratings.php:1024
+#: postratings-options.php:117
+#: postratings-options.php:142
+#: postratings.php:1050
+msgid "You need to be a registered member to rate this post."
+msgstr ""
+
+#: postratings-options.php:120
+#: postratings-options.php:145
+#: postratings.php:1036
 msgid "No Ratings Yet"
 msgstr ""
 
-#: postratings-options.php:129
-#: postratings-options.php:132
-#: postratings.php:157
-#: postratings.php:543
-#: postratings.php:653
-#: postratings.php:1022
-#: postratings.php:1023
+#: postratings-options.php:136
+#: postratings-options.php:139
+#: postratings-options.php:142
+#: postratings.php:165
+#: postratings.php:555
+#: postratings.php:665
+#: postratings.php:1034
+#: postratings.php:1035
+#: postratings.php:1050
 msgid "average"
 msgstr ""
 
-#: postratings-options.php:129
-#: postratings-options.php:132
-#: postratings-options.php:138
-#: postratings.php:157
-#: postratings.php:543
-#: postratings.php:653
-#: postratings.php:1022
-#: postratings.php:1023
-#: postratings.php:1032
+#: postratings-options.php:136
+#: postratings-options.php:139
+#: postratings-options.php:142
+#: postratings-options.php:148
+#: postratings.php:165
+#: postratings.php:555
+#: postratings.php:665
+#: postratings.php:1034
+#: postratings.php:1035
+#: postratings.php:1044
+#: postratings.php:1050
 msgid "out of"
 msgstr ""
 
-#: postratings-options.php:176
+#: postratings-options.php:188
 msgid "Post Rating Options"
 msgstr ""
 
-#: postratings-options.php:180
+#: postratings-options.php:192
 msgid "Ratings Settings"
 msgstr ""
 
-#: postratings-options.php:183
+#: postratings-options.php:195
 msgid "Ratings Image:"
 msgstr ""
 
-#: postratings-options.php:239
+#: postratings-options.php:251
 msgid "Max Ratings:"
 msgstr ""
 
-#: postratings-options.php:243
+#: postratings-options.php:255
 msgid "Update 'Individual Rating Text/Value' Display"
 msgstr ""
 
-#: postratings-options.php:248
+#: postratings-options.php:260
 msgid "Individual Rating Text/Value"
 msgstr ""
 
-#: postratings-options.php:301
+#: postratings-options.php:313
 msgid "Show Loading Image With Text"
 msgstr ""
 
-#: postratings-options.php:304
-#: postratings-options.php:313
+#: postratings-options.php:316
+#: postratings-options.php:325
 msgid "No"
 msgstr ""
 
-#: postratings-options.php:310
+#: postratings-options.php:322
 msgid "Show Fading In And Fading Out Of Ratings"
 msgstr ""
 
-#: postratings-options.php:321
+#: postratings-options.php:333
 msgid "Allow To Rate"
 msgstr ""
 
-#: postratings-options.php:324
+#: postratings-options.php:336
 msgid "Who Is Allowed To Rate?"
 msgstr ""
 
-#: postratings-options.php:327
+#: postratings-options.php:339
 msgid "Guests Only"
 msgstr ""
 
-#: postratings-options.php:328
+#: postratings-options.php:340
 msgid "Registered Users Only"
 msgstr ""
 
-#: postratings-options.php:329
+#: postratings-options.php:341
 msgid "Registered Users And Guests"
 msgstr ""
 
-#: postratings-options.php:339
+#: postratings-options.php:351
 msgid "Ratings Logging Method:"
 msgstr ""
 
-#: postratings-options.php:342
+#: postratings-options.php:354
 msgid "Do Not Log"
 msgstr ""
 
-#: postratings-options.php:343
+#: postratings-options.php:355
 msgid "Logged By Cookie"
 msgstr ""
 
-#: postratings-options.php:344
+#: postratings-options.php:356
 msgid "Logged By IP"
 msgstr ""
 
-#: postratings-options.php:345
+#: postratings-options.php:357
 msgid "Logged By Cookie And IP"
 msgstr ""
 
-#: postratings-options.php:346
+#: postratings-options.php:358
 msgid "Logged By Username"
 msgstr ""
 
-#: postratings-options.php:353
+#: postratings-options.php:365
 msgid "Template Variables"
 msgstr ""
 
-#: postratings-options.php:356
+#: postratings-options.php:368
 msgid "Display the ratings images"
 msgstr ""
 
-#: postratings-options.php:357
+#: postratings-options.php:369
 msgid "Display the ratings voting image"
 msgstr ""
 
-#: postratings-options.php:360
+#: postratings-options.php:372
 msgid "Display the average ratings"
 msgstr ""
 
-#: postratings-options.php:361
+#: postratings-options.php:373
 msgid "Display the total number of users rated for the post"
 msgstr ""
 
-#: postratings-options.php:364
+#: postratings-options.php:376
 msgid "Display the max number of ratings"
 msgstr ""
 
-#: postratings-options.php:365
+#: postratings-options.php:377
 msgid "Display the ratings percentage"
 msgstr ""
 
-#: postratings-options.php:368
+#: postratings-options.php:380
 msgid "Display the total score of the ratings"
 msgstr ""
 
-#: postratings-options.php:369
+#: postratings-options.php:381
 msgid "Display the individual rating text. Eg: 1 Star, 2 Stars, etc"
 msgstr ""
 
-#: postratings-options.php:374
+#: postratings-options.php:386
 msgid "Ratings Templates"
 msgstr ""
 
-#: postratings-options.php:378
+#: postratings-options.php:390
 msgid "Ratings Vote Text:"
 msgstr ""
 
-#: postratings-options.php:379
-#: postratings-options.php:396
-#: postratings-options.php:411
-#: postratings-options.php:427
+#: postratings-options.php:391
+#: postratings-options.php:408
+#: postratings-options.php:423
+#: postratings-options.php:438
+#: postratings-options.php:454
 msgid "Allowed Variables:"
 msgstr ""
 
-#: postratings-options.php:387
-#: postratings-options.php:403
-#: postratings-options.php:419
-#: postratings-options.php:435
+#: postratings-options.php:399
+#: postratings-options.php:415
+#: postratings-options.php:430
+#: postratings-options.php:446
+#: postratings-options.php:462
 msgid "Restore Default Template (Normal Rating)"
 msgstr ""
 
-#: postratings-options.php:389
-#: postratings-options.php:404
-#: postratings-options.php:420
-#: postratings-options.php:436
+#: postratings-options.php:401
+#: postratings-options.php:416
+#: postratings-options.php:431
+#: postratings-options.php:447
+#: postratings-options.php:463
 msgid "Restore Default Template (Up/Down Rating)"
 msgstr ""
 
-#: postratings-options.php:395
+#: postratings-options.php:407
 msgid "Ratings Voted Text:"
 msgstr ""
 
-#: postratings-options.php:410
+#: postratings-options.php:422
+msgid "Ratings No Permission Text:"
+msgstr ""
+
+#: postratings-options.php:437
 msgid "Ratings None:"
 msgstr ""
 
-#: postratings-options.php:426
+#: postratings-options.php:453
 msgid "Highest Rated:"
 msgstr ""
 
-#: postratings-options.php:443
+#: postratings-options.php:470
 msgid "Update Options"
 msgstr ""
 
-#: postratings-options.php:443
+#: postratings-options.php:470
 msgid "Cancel"
 msgstr ""
 
@@ -916,71 +946,71 @@ msgstr ""
 msgid "Loading"
 msgstr ""
 
-#: postratings.php:453
+#: postratings.php:465
 msgid "Note: There is a rating embedded within this post, please visit this post to rate it."
 msgstr ""
 
-#: postratings.php:486
-#: postratings.php:595
-#: postratings.php:705
+#: postratings.php:498
+#: postratings.php:607
+#: postratings.php:717
 msgid "N/A"
 msgstr ""
 
-#: postratings.php:852
+#: postratings.php:864
 #, php-format
 msgid "Invalid Post ID. Post ID #%s."
 msgstr ""
 
-#: postratings.php:856
+#: postratings.php:868
 #, php-format
 msgid "You Had Already Rated This Post. Post ID #%s."
 msgstr ""
 
-#: postratings.php:942
-#: postratings.php:944
-#: postratings.php:972
+#: postratings.php:954
+#: postratings.php:956
+#: postratings.php:984
 msgid "WP-PostRatings"
 msgstr ""
 
-#: postratings.php:955
-#: postratings.php:957
+#: postratings.php:967
+#: postratings.php:969
 msgid "Highest Rated Posts"
 msgstr ""
 
-#: postratings.php:960
-#: postratings.php:962
+#: postratings.php:972
+#: postratings.php:974
 msgid "Most Rated Posts"
 msgstr ""
 
-#: postratings.php:974
+#: postratings.php:986
 msgid "users casted their vote."
 msgstr ""
 
-#: postratings.php:986
+#: postratings.php:998
 msgid "Highest Rated Post"
 msgstr ""
 
-#: postratings.php:992
+#: postratings.php:1004
 msgid "Most Rated Post"
 msgstr ""
 
-#: postratings.php:1031
+#: postratings.php:1043
 msgid "1 Star"
 msgstr ""
 
-#: postratings.php:1031
+#: postratings.php:1043
 msgid "2 Stars"
 msgstr ""
 
-#: postratings.php:1031
+#: postratings.php:1043
 msgid "3 Stars"
 msgstr ""
 
-#: postratings.php:1031
+#: postratings.php:1043
 msgid "4 Stars"
 msgstr ""
 
-#: postratings.php:1031
+#: postratings.php:1043
 msgid "5 Stars"
 msgstr ""
 

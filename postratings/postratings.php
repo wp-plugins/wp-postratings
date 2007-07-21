@@ -70,11 +70,19 @@ function the_ratings($start_tag = 'div', $display = true) {
 	// Check To See Whether User Has Voted
 	$user_voted = check_rated($id);
 	// If User Voted Or Is Not Allowed To Rate
-	if($user_voted || !check_allowtorate()) {
+	if($user_voted) {
 		if(!$display) {
 			return "<$start_tag id=\"post-ratings-$id\" class=\"post-ratings\">".the_ratings_results($id).'</'.$start_tag.'>'.$loading;
 		} else {
 			echo "<$start_tag id=\"post-ratings-$id\" class=\"post-ratings\">".the_ratings_results($id).'</'.$start_tag.'>'.$loading;
+			return;
+		}
+	// If User Is Not Allowed To Rate
+	} else if(!check_allowtorate()) {
+		if(!$display) {
+			return "<$start_tag id=\"post-ratings-$id\" class=\"post-ratings\">".the_ratings_results($id, 0, 0, 0, 1).'</'.$start_tag.'>'.$loading;
+		} else {
+			echo "<$start_tag id=\"post-ratings-$id\" class=\"post-ratings\">".the_ratings_results($id, 0, 0, 0, 1).'</'.$start_tag.'>'.$loading;
 			return;
 		}
 	// If User Has Not Voted
@@ -110,7 +118,7 @@ function ratings_header_admin() {
 
 
 ### Function: Display Ratings Results 
-function the_ratings_results($post_id, $new_user = 0, $new_score = 0, $new_average = 0) {
+function the_ratings_results($post_id, $new_user = 0, $new_score = 0, $new_average = 0, $type = 0) {
 	$ratings_image = get_option('postratings_image');
 	$ratings_max = intval(get_option('postratings_max'));
 	$postratings_custom = intval(get_option('postratings_customrating'));
@@ -181,14 +189,15 @@ function the_ratings_results($post_id, $new_user = 0, $new_score = 0, $new_avera
 	if(file_exists(ABSPATH.'/wp-content/plugins/postratings/images/'.$ratings_image.'/rating_end.gif')) {
 		$post_ratings_images .= '<img src="'.get_option('siteurl').'/wp-content/plugins/postratings/images/'.$ratings_image.'/rating_end.gif" alt="" class="post-ratings-image" />';
 	}
-	// Display User Rated Text
-	$post_ratings_user_rated = '';
 	// Display The Contents
-	$template_postratings_text = stripslashes(get_option('postratings_template_text'));
+	if($type == 1) {
+		$template_postratings_text = stripslashes(get_option('postratings_template_permission'));
+	} else {
+		$template_postratings_text = stripslashes(get_option('postratings_template_text'));
+	}
 	$template_postratings_text = str_replace("%RATINGS_IMAGES%", $post_ratings_images, $template_postratings_text);
 	$template_postratings_text = str_replace("%RATINGS_MAX%", $ratings_max, $template_postratings_text);
 	$template_postratings_text = str_replace("%RATINGS_SCORE%", $post_ratings_score, $template_postratings_text);
-	$template_postratings_text = str_replace("%RATINGS_USER_RATED%", $post_ratings_user_rated, $template_postratings_text);
 	$template_postratings_text = str_replace("%RATINGS_AVERAGE%", $post_ratings_average, $template_postratings_text);
 	$template_postratings_text = str_replace("%RATINGS_PERCENTAGE%", $post_ratings_percentage, $template_postratings_text);
 	$template_postratings_text = str_replace("%RATINGS_USERS%", number_format($post_ratings_users), $template_postratings_text);
@@ -365,8 +374,11 @@ function check_rated($post_id) {
 
 ### Function: Check Rated By Cookie
 function check_rated_cookie($post_id) {
-	// 0: False | > 0: True
-	return intval($_COOKIE["rated_$post_id"]);
+	if(isset($_COOKIE["rated_$post_id"])) {
+		return true;
+	} else {
+		return false;
+	}
 }
 
 
@@ -827,7 +839,7 @@ function process_ratings() {
 				// Only Create Cookie If User Choose Logging Method 1 Or 3
 				$postratings_logging_method = intval(get_option('postratings_logging_method'));
 				if($postratings_logging_method == 1 || $postratings_logging_method == 3) {
-					$rate_cookie = setcookie("rated_".$post_id, 1, time() + 30000000, COOKIEPATH);
+					$rate_cookie = setcookie("rated_".$post_id, $ratings_value[$rate-1], time() + 30000000, COOKIEPATH);
 				}
 				// Log Ratings No Matter What
 				$rate_log = $wpdb->query("INSERT INTO $wpdb->ratings VALUES (0, $post_id, '$post_title', ".$ratings_value[$rate-1].",'".current_time('timestamp')."', '".get_ipaddress()."', '".gethostbyaddr(get_ipaddress())."' ,'$rate_user', $rate_userid)");
@@ -1035,6 +1047,7 @@ function create_ratinglogs_table() {
 	// Database Upgrade For WP-PostRatings 1.20
 	add_option('postratings_ratingsvalue', array(1,2,3,4,5), 'Individual Post Rating Value');
 	add_option('postratings_customrating', 0, 'Use Custom Ratings');
+	add_option('postratings_template_permission', '%RATINGS_IMAGES% (<em><strong>%RATINGS_USERS%</strong> '.__('votes', 'wp-postratings').', '.__('average', 'wp-postratings').': <strong>%RATINGS_AVERAGE%</strong> '.__('out of', 'wp-postratings').' %RATINGS_MAX%</em>)<br /><em>'.__('You need to be a registered member to rate this post.', 'wp-postratings').'</em>', 'Ratings Template Text');
 	// Set 'manage_ratings' Capabilities To Administrator	
 	$role = get_role('administrator');
 	if(!$role->has_cap('manage_ratings')) {
