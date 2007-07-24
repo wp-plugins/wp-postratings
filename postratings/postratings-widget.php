@@ -1,11 +1,11 @@
 <?php
 /*
 Plugin Name: WP-PostRatings Widget
-Plugin URI: http://www.lesterchan.net/portfolio/programming.php
+Plugin URI: http://lesterchan.net/portfolio/programming.php
 Description: Adds a PostRatings Widget to display most rated and/or highest rated posts and/or pages on your sidebar. You will need to activate WP-PostRatings first.
 Version: 1.20
 Author: Lester 'GaMerZ' Chan
-Author URI: http://www.lesterchan.net
+Author URI: http://lesterchan.net
 */
 
 

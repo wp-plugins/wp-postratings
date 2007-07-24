@@ -1,11 +1,11 @@
 <?php
 /*
 Plugin Name: WP-PostRatings
-Plugin URI: http://www.lesterchan.net/portfolio/programming.php
+Plugin URI: http://lesterchan.net/portfolio/programming.php
 Description: Adds an AJAX rating system for your WordPress blog's post/page.
 Version: 1.20
 Author: Lester 'GaMerZ' Chan
-Author URI: http://www.lesterchan.net
+Author URI: http://lesterchan.net
 */
 
 
