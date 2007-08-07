@@ -57,6 +57,16 @@ function ratings_menu() {
 }
 
 
+### Function: Add PostRatings To Post/Page Automatically
+add_action('the_content', 'add_ratings_to_content');
+function add_ratings_to_content($content) {
+	if (!is_feed() && get_option('postratings_add')) {
+		$content .= the_ratings('div', false);
+	}
+	return $content;
+}
+
+
 ### Function: Display The Rating For The Post
 function the_ratings($start_tag = 'div', $display = true) {
 	global $id;
@@ -458,6 +468,7 @@ function ratings_images_folder($folder_name) {
 
 ### Function: Place Rating In Content
 add_filter('the_content', 'place_ratings', 7);
+add_filter('the_excerpt', 'place_ratings', 7);
 function place_ratings($content){
 	if(!is_feed()) {
 		 $content = preg_replace("/\[ratings\]/ise", "the_ratings('div', false)", $content);
@@ -537,6 +548,7 @@ if(!function_exists('get_highest_rated_category')) {
 				$post_ratings_score = $post->ratings_score;
 				$post_ratings_whole = intval($post_ratings_average);
 				$post_ratings = floor($post_ratings_average);
+				$post_excerpt = stripslashes($post->post_excerpt);
 				$post_content = stripslashes($post->post_content);
 				// Check For Half Star
 				$insert_half = 0;
@@ -598,6 +610,7 @@ if(!function_exists('get_highest_rated_category')) {
 					$temp = str_replace("%RATINGS_SCORE%", $post_ratings_score, $temp);
 					$temp = str_replace("%RATINGS_USERS%", number_format($post_ratings_users), $temp);
 					$temp = str_replace("%POST_TITLE%", $post_title, $temp);
+					$temp = str_replace("%POST_EXCERPT%", $post_excerpt, $temp);
 					$temp = str_replace("%POST_CONTENT%", $post_content, $temp);
 					$temp = str_replace("%POST_URL%", get_permalink(), $temp);
 				}
@@ -647,6 +660,7 @@ if(!function_exists('get_highest_rated')) {
 				$post_ratings_score = $post->ratings_score;
 				$post_ratings_whole = intval($post_ratings_average);
 				$post_ratings = floor($post_ratings_average);
+				$post_excerpt = stripslashes($post->post_excerpt);
 				$post_content = stripslashes($post->post_content);
 				// Check For Half Star
 				$insert_half = 0;
@@ -708,6 +722,7 @@ if(!function_exists('get_highest_rated')) {
 					$temp = str_replace("%RATINGS_SCORE%", $post_ratings_score, $temp);
 					$temp = str_replace("%RATINGS_USERS%", number_format($post_ratings_users), $temp);
 					$temp = str_replace("%POST_TITLE%", $post_title, $temp);
+					$temp = str_replace("%POST_EXCERPT%", $post_excerpt, $temp);
 					$temp = str_replace("%POST_CONTENT%", $post_content, $temp);
 					$temp = str_replace("%POST_URL%", get_permalink(), $temp);
 				}
