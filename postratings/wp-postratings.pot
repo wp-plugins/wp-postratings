@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WP-PostRatings 1.20\n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2007-08-07 19:48+0800\n"
+"PO-Revision-Date: 2007-08-08 22:25+0800\n"
 "Last-Translator: Lester 'GaMerZ' Chan <gamerz84@hotmail.com>\n"
 "Language-Team: Lester Chan <gamerz84@hotmail.com>\n"
 "MIME-Version: 1.0\n"
@@ -786,7 +786,7 @@ msgid "YOUR THEME NAME"
 msgstr ""
 
 #: postratings-usage.php:29
-msgid "You may place it in <b>single.php</b>, <b>post.php</b> or <b>page.php</b> also."
+msgid "You may place it in <strong>single.php</strong>, <strong>post.php</strong> or <strong>page.php</strong> also."
 msgstr ""
 
 #: postratings-usage.php:32
@@ -799,11 +799,48 @@ msgid "Add anywhere below it (the place you want the ratings to show):"
 msgstr ""
 
 #: postratings-usage.php:40
-msgid "If you DO NOT want the ratings to appear in every post, DO NOT use the code above. Just type in <b>[ratings]</b> into the selected post content and it will embed ratings into that post only."
+#, php-format
+msgid "If you DO NOT want the ratings to appear in every post, DO NOT use the code above. Just type in <strong>%s</strong> into the selected post content and it will embed ratings into that post only."
 msgstr ""
 
 #: postratings-usage.php:45
 msgid "Ratings Stats (With Widgets)"
+msgstr ""
+
+#: postratings-usage.php:48
+msgid "<strong>Activate</strong> WP-PostRatings Widget Plugin"
+msgstr ""
+
+#: postratings-usage.php:51
+msgid "Go to '<strong>WP-Admin -> Presentation -> Widgets</strong>'"
+msgstr ""
+
+#: postratings-usage.php:54
+msgid "To Display <strong>Highest Rated Post</strong>"
+msgstr ""
+
+#: postratings-usage.php:57
+msgid "<strong>Drag</strong> the Highest Rated Widget to your sidebar"
+msgstr ""
+
+#: postratings-usage.php:60
+msgid "You can <strong>configure</strong> the Highest Rated Widget by clicking on the configure icon"
+msgstr ""
+
+#: postratings-usage.php:63
+msgid "To Display <strong>Most Rated Post</strong>"
+msgstr ""
+
+#: postratings-usage.php:66
+msgid "<strong>Drag</strong> the Most Rated Widget to your sidebar"
+msgstr ""
+
+#: postratings-usage.php:69
+msgid "You can <strong>configure</strong> the Most Rated Widget by clicking on the configure icon"
+msgstr ""
+
+#: postratings-usage.php:72
+msgid "Click 'Save changes'"
 msgstr ""
 
 #: postratings-usage.php:77
@@ -819,19 +856,19 @@ msgid "Default: get_highest_rated('both', 10)"
 msgstr ""
 
 #: postratings-usage.php:87
-msgid "The value <b>'both'</b> will display both the highest rated posts and pages."
+msgid "The value <strong>'both'</strong> will display both the highest rated posts and pages."
 msgstr ""
 
 #: postratings-usage.php:88
-msgid "If you want to display the highest rated posts only, replace 'both' with <b>'post'</b>."
+msgid "If you want to display the highest rated posts only, replace 'both' with <strong>'post'</strong>."
 msgstr ""
 
 #: postratings-usage.php:89
-msgid "If you want to display the highest rated pages only, replace 'both' with <b>'page'</b>."
+msgid "If you want to display the highest rated pages only, replace 'both' with <strong>'page'</strong>."
 msgstr ""
 
 #: postratings-usage.php:90
-msgid "The value <b>10</b> will display only the top 10 highest rated posts/pages."
+msgid "The value <strong>10</strong> will display only the top 10 highest rated posts/pages."
 msgstr ""
 
 #: postratings-usage.php:91
@@ -843,19 +880,19 @@ msgid "Default: get_most_rated('both', 10)"
 msgstr ""
 
 #: postratings-usage.php:100
-msgid "The value <b>'both'</b> will display both the most rated posts and pages."
+msgid "The value <strong>'both'</strong> will display both the most rated posts and pages."
 msgstr ""
 
 #: postratings-usage.php:101
-msgid "If you want to display the most rated posts only, replace 'both' with <b>'post'</b>."
+msgid "If you want to display the most rated posts only, replace 'both' with <strong>'post'</strong>."
 msgstr ""
 
 #: postratings-usage.php:102
-msgid "If you want to display the most rated pages only, replace 'both' with <b>'page'</b>."
+msgid "If you want to display the most rated pages only, replace 'both' with <strong>'page'</strong>."
 msgstr ""
 
 #: postratings-usage.php:103
-msgid "The value <b>10</b> will display only the top 10 most rated posts/pages."
+msgid "The value <strong>10</strong> will display only the top 10 most rated posts/pages."
 msgstr ""
 
 #: postratings-usage.php:106
@@ -867,7 +904,7 @@ msgid "In IE, some of the ratings's text may appear jagged (this is normal in IE
 msgstr ""
 
 #: postratings-usage.php:112
-msgid "Open <b>postratings-css.css</b>"
+msgid "Open <strong>postratings-css.css</strong>"
 msgstr ""
 
 #: postratings-usage.php:119
@@ -875,7 +912,7 @@ msgid "Replace:"
 msgstr ""
 
 #: postratings-usage.php:121
-msgid "Where <b>#ffffff</b> should be your background color for the ratings."
+msgid "Where <strong>#ffffff</strong> should be your background color for the ratings."
 msgstr ""
 
 #: postratings-widget.php:69
