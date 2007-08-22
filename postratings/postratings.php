@@ -57,19 +57,13 @@ function ratings_menu() {
 }
 
 
-### Function: Add PostRatings To Post/Page Automatically
-add_action('the_content', 'add_ratings_to_content');
-function add_ratings_to_content($content) {
-	if (!is_feed() && get_option('postratings_add')) {
-		$content .= the_ratings('div', false);
-	}
-	return $content;
-}
-
-
 ### Function: Display The Rating For The Post
-function the_ratings($start_tag = 'div', $display = true) {
+function the_ratings($start_tag = 'div', $custom_id = 0, $display = true) {
 	global $id;
+	// Allow Custom ID
+	if(intval($custom_id) > 0) {
+		$id = $custom_id;
+	}
 	// Loading Style
 	$postratings_ajax_style = get_option('postratings_ajax_style');
 	if(intval($postratings_ajax_style['loading']) == 1) {
@@ -466,14 +460,28 @@ function ratings_images_folder($folder_name) {
 }
 
 
+### Function: Add PostRatings To Post/Page Automatically
+//add_action('the_content', 'add_ratings_to_content');
+function add_ratings_to_content($content) {
+	if (!is_feed() && get_option('postratings_add')) {
+		$content .= the_ratings('div', 0, false);
+	}
+	return $content;
+}
+
+
 ### Function: Place Rating In Content
 add_filter('the_content', 'place_ratings', 7);
 add_filter('the_excerpt', 'place_ratings', 7);
 function place_ratings($content){
 	if(!is_feed()) {
-		 $content = preg_replace("/\[ratings\]/ise", "the_ratings('div', false)", $content);
+		$content = preg_replace("/\[ratings\]/ise", "the_ratings('span', 0, false)", $content);
+		$content = preg_replace("/\[ratings=(\d+)\]/ise", "the_ratings('span', '\\1', false)", $content);
+		$content = preg_replace("/\[ratings_results=(\d+)\]/ise", "the_ratings_results('\\1')", $content);
 	} else {
 		$content = str_replace("[ratings]", __('Note: There is a rating embedded within this post, please visit this post to rate it.', 'wp-postratings'), $content);
+		$content = preg_replace("/\[ratings=(\d+)\]/i", __('Note: There is a rating embedded within this post, please visit this post to rate it.', 'wp-postratings'), $content);
+		$content = preg_replace("/\[ratings_results=(\d+)\]/i", __('Note: There is a rating result embedded within this post, please visit this post to view it.', 'wp-postratings'), $content);
 	}   
 	return $content;
 }
@@ -527,6 +535,12 @@ if(!function_exists('get_highest_rated_category')) {
 		$where = '';
 		$temp = '';
 		$output = '';
+		// Code By: Dirceu P. Junior (http://pomoti.com)
+		if(is_array($category_id)) {
+			$category_sql = "$wpdb->post2cat.category_id IN (".join(',', $category_id).')';
+		} else {
+			$category_sq = "$wpdb->post2cat.category_id = $category_id";
+		}
 		if(!empty($mode) && $mode != 'both') {
 			$where = "$wpdb->posts.post_type = '$mode'";
 		} else {
@@ -537,7 +551,7 @@ if(!function_exists('get_highest_rated_category')) {
 		} else {
 			$order_by = 'ratings_average';
 		}
-		$highest_rated = $wpdb->get_results("SELECT DISTINCT $wpdb->posts.*, (t1.meta_value+0.00) AS ratings_average, (t2.meta_value+0.00) AS ratings_users, (t3.meta_value+0.00) AS ratings_score FROM $wpdb->posts LEFT JOIN $wpdb->postmeta AS t1 ON t1.post_id = $wpdb->posts.ID LEFT JOIN $wpdb->postmeta AS t2 ON t1.post_id = t2.post_id LEFT JOIN $wpdb->postmeta AS t3 ON t3.post_id = $wpdb->posts.ID LEFT JOIN $wpdb->post2cat ON $wpdb->post2cat.post_id = $wpdb->posts.ID WHERE t1.meta_key = 'ratings_average' AND t2.meta_key = 'ratings_users' AND t3.meta_key = 'ratings_score' AND $wpdb->posts.post_password = '' AND $wpdb->posts.post_date < '".current_time('mysql')."'  AND $wpdb->posts.post_status = 'publish' AND $wpdb->post2cat.category_id = $category_id AND $where ORDER BY $order_by DESC, ratings_users DESC LIMIT $limit");
+		$highest_rated = $wpdb->get_results("SELECT DISTINCT $wpdb->posts.*, (t1.meta_value+0.00) AS ratings_average, (t2.meta_value+0.00) AS ratings_users, (t3.meta_value+0.00) AS ratings_score FROM $wpdb->posts LEFT JOIN $wpdb->postmeta AS t1 ON t1.post_id = $wpdb->posts.ID LEFT JOIN $wpdb->postmeta AS t2 ON t1.post_id = t2.post_id LEFT JOIN $wpdb->postmeta AS t3 ON t3.post_id = $wpdb->posts.ID LEFT JOIN $wpdb->post2cat ON $wpdb->post2cat.post_id = $wpdb->posts.ID WHERE t1.meta_key = 'ratings_average' AND t2.meta_key = 'ratings_users' AND t3.meta_key = 'ratings_score' AND $wpdb->posts.post_password = '' AND $wpdb->posts.post_date < '".current_time('mysql')."'  AND $wpdb->posts.post_status = 'publish' AND $category_sql AND $where ORDER BY $order_by DESC, ratings_users DESC LIMIT $limit");
 		if($highest_rated) {
 			foreach($highest_rated as $post) {
 				// Variables
