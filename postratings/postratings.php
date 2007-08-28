@@ -537,9 +537,9 @@ if(!function_exists('get_highest_rated_category')) {
 		$output = '';
 		// Code By: Dirceu P. Junior (http://pomoti.com)
 		if(is_array($category_id)) {
-			$category_sql = "$wpdb->post2cat.category_id IN (".join(',', $category_id).')';
+			$category_sql = "$wpdb->term_relationships.term_taxonomy_id IN (".join(',', $category_id).')';
 		} else {
-			$category_sq = "$wpdb->post2cat.category_id = $category_id";
+			$category_sql = "$wpdb->term_relationships.term_taxonomy_id = $category_id";
 		}
 		if(!empty($mode) && $mode != 'both') {
 			$where = "$wpdb->posts.post_type = '$mode'";
@@ -551,7 +551,7 @@ if(!function_exists('get_highest_rated_category')) {
 		} else {
 			$order_by = 'ratings_average';
 		}
-		$highest_rated = $wpdb->get_results("SELECT DISTINCT $wpdb->posts.*, (t1.meta_value+0.00) AS ratings_average, (t2.meta_value+0.00) AS ratings_users, (t3.meta_value+0.00) AS ratings_score FROM $wpdb->posts LEFT JOIN $wpdb->postmeta AS t1 ON t1.post_id = $wpdb->posts.ID LEFT JOIN $wpdb->postmeta AS t2 ON t1.post_id = t2.post_id LEFT JOIN $wpdb->postmeta AS t3 ON t3.post_id = $wpdb->posts.ID LEFT JOIN $wpdb->post2cat ON $wpdb->post2cat.post_id = $wpdb->posts.ID WHERE t1.meta_key = 'ratings_average' AND t2.meta_key = 'ratings_users' AND t3.meta_key = 'ratings_score' AND $wpdb->posts.post_password = '' AND $wpdb->posts.post_date < '".current_time('mysql')."'  AND $wpdb->posts.post_status = 'publish' AND $category_sql AND $where ORDER BY $order_by DESC, ratings_users DESC LIMIT $limit");
+		$highest_rated = $wpdb->get_results("SELECT DISTINCT $wpdb->posts.*, (t1.meta_value+0.00) AS ratings_average, (t2.meta_value+0.00) AS ratings_users, (t3.meta_value+0.00) AS ratings_score FROM $wpdb->posts LEFT JOIN $wpdb->postmeta AS t1 ON t1.post_id = $wpdb->posts.ID LEFT JOIN $wpdb->postmeta AS t2 ON t1.post_id = t2.post_id LEFT JOIN $wpdb->postmeta AS t3 ON t3.post_id = $wpdb->posts.ID LEFT JOIN $wpdb->term_relationships ON $wpdb->term_relationships.object_id = $wpdb->posts.ID WHERE t1.meta_key = 'ratings_average' AND t2.meta_key = 'ratings_users' AND t3.meta_key = 'ratings_score' AND $wpdb->posts.post_password = '' AND $wpdb->posts.post_date < '".current_time('mysql')."'  AND $wpdb->posts.post_status = 'publish' AND $category_sql AND $where ORDER BY $order_by DESC, ratings_users DESC LIMIT $limit");
 		if($highest_rated) {
 			foreach($highest_rated as $post) {
 				// Variables
@@ -943,7 +943,7 @@ function ratings_highest_where($content) {
 }
 function ratings_highest_orderby($content) {
 	$orderby = trim(addslashes($_GET['orderby']));
-	if(empty($orderby) && ($orderby != 'asc' || $orderby != 'desc')) {
+	if(empty($orderby) || ($orderby != 'asc' && $orderby != 'desc')) {
 		$orderby = 'desc';
 	}
 	$content = " ratings_average $orderby, ratings_users $orderby";
@@ -980,9 +980,9 @@ if(strpos(get_option('stats_url'), $_SERVER['REQUEST_URI']) || strpos($_SERVER['
 function postratings_page_admin_general_stats($content) {
 	$stats_display = get_option('stats_display');
 	if($stats_display['ratings'] == 1) {
-		$content .= '<input type="checkbox" name="stats_display[]" value="ratings" checked="checked" />&nbsp;&nbsp;'.__('WP-PostRatings', 'wp-postratings').'<br />'."\n";
+		$content .= '<input type="checkbox" name="stats_display[]" id="wpstats_ratings" value="ratings" checked="checked" />&nbsp;&nbsp;<label for="wpstats_ratings">'.__('WP-PostRatings', 'wp-postratings').'</label><br />'."\n";
 	} else {
-		$content .= '<input type="checkbox" name="stats_display[]" value="ratings" />&nbsp;&nbsp;'.__('WP-PostRatings', 'wp-postratings').'<br />'."\n";
+		$content .= '<input type="checkbox" name="stats_display[]" id="wpstats_ratings" value="ratings" />&nbsp;&nbsp;<label for="wpstats_ratings">'.__('WP-PostRatings', 'wp-postratings').'</label><br />'."\n";
 	}
 	return $content;
 }
@@ -993,14 +993,14 @@ function postratings_page_admin_most_stats($content) {
 	$stats_display = get_option('stats_display');
 	$stats_mostlimit = intval(get_option('stats_mostlimit'));
 	if($stats_display['rated_highest'] == 1) {
-		$content .= '<input type="checkbox" name="stats_display[]" value="rated_highest" checked="checked" />&nbsp;&nbsp;'.$stats_mostlimit.' '.__('Highest Rated Posts', 'wp-postratings').'<br />'."\n";
+		$content .= '<input type="checkbox" name="stats_display[]" id="wpstats_rated_highest" value="rated_highest" checked="checked" />&nbsp;&nbsp;<label for="wpstats_rated_highest">'.$stats_mostlimit.' '.__('Highest Rated Posts', 'wp-postratings').'</label><br />'."\n";
 	} else {
-		$content .= '<input type="checkbox" name="stats_display[]" value="rated_highest" />&nbsp;&nbsp;'.$stats_mostlimit.' '.__('Highest Rated Posts', 'wp-postratings').'<br />'."\n";
+		$content .= '<input type="checkbox" name="stats_display[]" id="wpstats_rated_highest" value="rated_highest" />&nbsp;&nbsp;<label for="wpstats_rated_highest">'.$stats_mostlimit.' '.__('Highest Rated Posts', 'wp-postratings').'</label><br />'."\n";
 	}
 	if($stats_display['rated_most'] == 1) {
-		$content .= '<input type="checkbox" name="stats_display[]" value="rated_most" checked="checked" />&nbsp;&nbsp;'.$stats_mostlimit.' '.__('Most Rated Posts', 'wp-postratings').'<br />'."\n";
+		$content .= '<input type="checkbox" name="stats_display[]" id="wpstats_rated_most" value="rated_most" checked="checked" />&nbsp;&nbsp;<label for="wpstats_rated_most">'.$stats_mostlimit.' '.__('Most Rated Posts', 'wp-postratings').'</label><br />'."\n";
 	} else {
-		$content .= '<input type="checkbox" name="stats_display[]" value="rated_most" />&nbsp;&nbsp;'.$stats_mostlimit.' '.__('Most Rated Posts', 'wp-postratings').'<br />'."\n";
+		$content .= '<input type="checkbox" name="stats_display[]" id="wpstats_rated_most" value="rated_most" />&nbsp;&nbsp;<label for="wpstats_rated_most">'.$stats_mostlimit.' '.__('Most Rated Posts', 'wp-postratings').'</label><br />'."\n";
 	}
 	return $content;
 }
@@ -1043,7 +1043,13 @@ function postratings_page_most_stats($content) {
 add_action('activate_postratings/postratings.php', 'create_ratinglogs_table');
 function create_ratinglogs_table() {
 	global $wpdb;
-	include_once(ABSPATH.'/wp-admin/upgrade-functions.php');
+	if(@is_file(ABSPATH.'/wp-admin/upgrade-functions.php')) {
+		include_once(ABSPATH.'/wp-admin/upgrade-functions.php');
+	} elseif(@is_file(ABSPATH.'/wp-admin/includes/upgrade.php')) {
+		include_once(ABSPATH.'/wp-admin/includes/upgrade.php');
+	} else {
+		die('We have problem finding your \'/wp-admin/upgrade-functions.php\' and \'/wp-admin/includes/upgrade.php\'');
+	}
 	// Create Post Ratings Table
 	$create_ratinglogs_sql = "CREATE TABLE $wpdb->ratings (".
 			"rating_id INT(11) NOT NULL auto_increment,".

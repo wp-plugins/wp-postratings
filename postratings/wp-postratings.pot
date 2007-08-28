@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WP-PostRatings 1.20\n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2007-08-23 00:57+0800\n"
+"PO-Revision-Date: 2007-08-29 00:52+0800\n"
 "Last-Translator: Lester 'GaMerZ' Chan <gamerz84@hotmail.com>\n"
 "Language-Team: Lester Chan <gamerz84@hotmail.com>\n"
 "MIME-Version: 1.0\n"
@@ -485,28 +485,28 @@ msgstr ""
 #: postratings.php:513
 #: postratings.php:581
 #: postratings.php:693
-#: postratings.php:1063
-#: postratings.php:1064
-#: postratings.php:1079
+#: postratings.php:1069
+#: postratings.php:1070
+#: postratings.php:1085
 msgid "votes"
 msgstr ""
 
 #: postratings-options.php:114
 #: postratings-options.php:117
 #: postratings-options.php:139
-#: postratings.php:1064
+#: postratings.php:1070
 msgid "rated"
 msgstr ""
 
 #: postratings-options.php:117
 #: postratings-options.php:142
-#: postratings.php:1079
+#: postratings.php:1085
 msgid "You need to be a registered member to rate this post."
 msgstr ""
 
 #: postratings-options.php:120
 #: postratings-options.php:145
-#: postratings.php:1065
+#: postratings.php:1071
 msgid "No Ratings Yet"
 msgstr ""
 
@@ -516,9 +516,9 @@ msgstr ""
 #: postratings.php:169
 #: postratings.php:581
 #: postratings.php:693
-#: postratings.php:1063
-#: postratings.php:1064
-#: postratings.php:1079
+#: postratings.php:1069
+#: postratings.php:1070
+#: postratings.php:1085
 msgid "average"
 msgstr ""
 
@@ -529,10 +529,10 @@ msgstr ""
 #: postratings.php:169
 #: postratings.php:581
 #: postratings.php:693
-#: postratings.php:1063
-#: postratings.php:1064
-#: postratings.php:1073
+#: postratings.php:1069
+#: postratings.php:1070
 #: postratings.php:1079
+#: postratings.php:1085
 msgid "out of"
 msgstr ""
 
@@ -1036,23 +1036,23 @@ msgstr ""
 msgid "Most Rated Post"
 msgstr ""
 
-#: postratings.php:1072
+#: postratings.php:1078
 msgid "1 Star"
 msgstr ""
 
-#: postratings.php:1072
+#: postratings.php:1078
 msgid "2 Stars"
 msgstr ""
 
-#: postratings.php:1072
+#: postratings.php:1078
 msgid "3 Stars"
 msgstr ""
 
-#: postratings.php:1072
+#: postratings.php:1078
 msgid "4 Stars"
 msgstr ""
 
-#: postratings.php:1072
+#: postratings.php:1078
 msgid "5 Stars"
 msgstr ""
 
