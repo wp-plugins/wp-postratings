@@ -35,7 +35,10 @@ if (!function_exists('add_action')) {
 
 
 ### Create Text Domain For Translations
-load_plugin_textdomain('wp-postratings', 'wp-content/plugins/postratings');
+add_action('init', 'postratings_textdomain');
+function postratings_textdomain() {
+	load_plugin_textdomain('wp-postratings', 'wp-content/plugins/postratings');
+}
 
 
 ### Rating Logs Table Name
