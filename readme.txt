@@ -3,7 +3,7 @@ Contributors: GamerZ
 Donate link: http://lesterchan.net/wordpress
 Tags: ban, ratings, rating, postratings, postrating, vote, digg, ajax, post
 Requires at least: 2.3.0
-Stable tag: 1.11
+Stable tag: 1.20
 
 Adds an AJAX rating system for your WordPress blog's post/page.
 
