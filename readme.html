@@ -2,7 +2,7 @@
 <html>
 <head>	
 	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
-	<title>WP-PostRatings 1.20 Readme</title>
+	<title>WP-PostRatings 1.21 Readme</title>
 	<style type="text/css" media="screen">
 		/* Default Style */
 		BODY {
@@ -204,7 +204,7 @@
 <body>
 <div id="Container">
 	<!-- Title -->
-	<div id="Title">WP-PostRatings 1.20&nbsp;&nbsp;&nbsp;<span style="color: #aaaaaa;">Readme</span></div>
+	<div id="Title">WP-PostRatings 1.21&nbsp;&nbsp;&nbsp;<span style="color: #aaaaaa;">Readme</span></div>
 
 	<!-- Tabs -->
 	<ul id="Tabs">
@@ -226,15 +226,6 @@
 				<strong>&raquo;</strong> Lester 'GaMerZ' Chan
 			</p>
 			<p>
-				<strong>EMail:</strong><br />
-				<strong>&raquo;</strong>
-				<script type="text/javascript">
-					/* <![CDATA[*/
-					document.write(' <a href="mailto:gamerz84@hotmail.com?Subject=WP-PostRatings%201.20%20Support" title="EMail To gamerz84@hotmail.com">gamerz84@hotmail.com</a>');
-					/* ]]> */
-				</script>
-			</p>
-			<p>
 				<strong>Website:</strong><br />
 				<strong>&raquo;</strong> <a href="http://lesterchan.net/" title="http://lesterchan.net/">http://lesterchan.net/</a>
 			</p>
@@ -244,7 +235,7 @@
 			</p>
 			<p>
 				<strong>Download:</strong><br />
-				<strong>&raquo;</strong> <a href="http://lesterchan.net/others/downloads.php?id=20" title="http://lesterchan.net/others/downloads.php?id=20">WP-PostRatings 1.20 For WordPress 2.3.x</a><br />
+				<strong>&raquo;</strong> <a href="http://lesterchan.net/others/downloads.php?id=20" title="http://lesterchan.net/others/downloads.php?id=20">WP-PostRatings 1.21 For WordPress 2.3.x</a><br />
 				<strong>&raquo;</strong> <a href="http://lesterchan.net/others/downloads/wp-postratings111.zip" title="http://lesterchan.net/others/downloads/wp-postratings111.zip">WP-PostRatings 1.11 For WordPress 2.1.x And 2.2.x</a><br />
 				<strong>&raquo;</strong> <a href="http://lesterchan.net/others/downloads/wp-postratings105.zip" title="http://lesterchan.net/others/downloads/wp-postratings105.zip">WP-PostRatings 1.05 For WordPress 2.0.x</a><br />
 				<strong>&raquo;</strong> <a href="http://lesterchan.net/others/downloads/wp-postratings103-(wp152).zip" title="http://lesterchan.net/others/downloads/wp-postratings103-(wp152).zip">WP-PostRatings 1.03 For WordPress 1.5.2</a>
@@ -271,7 +262,7 @@
 			</p>
 			<p>
 				<strong>Updated:</strong><br />
-				<strong>&raquo;</strong> 1st October 2007
+				<strong>&raquo;</strong> 1st January 2008
 			</p>
 			<p>
 				<strong>Note:</strong><br />
@@ -292,6 +283,12 @@
 		<div id="Changelog" style="display: none;">
 			<div class="SubTitle">&raquo; Changelog</div>
 			<ul>
+				<li>
+					<strong>Version 1.21 (01-01-2008)</strong>
+					<ul>
+						<li>NEW: Added get_lowest_rated() Function</li>
+					</ul>
+				</li>
 				<li>
 					<strong>Version 1.20 (01-10-2007)</strong>
 					<ul>
@@ -422,7 +419,7 @@
 		<!-- Upgrade Instructions -->	
 		<div id="Upgrade" style="display: none;">
 			<div class="SubTitle">&raquo; Upgrade Instructions</div>
-			<div class="SubSubTitle">From v1.0x To v1.20</div>
+			<div class="SubSubTitle">From v1.0x To v1.21</div>
 			<ol>
 				<li>
 					<strong>Deactivate</strong> WP-PostRatings Plugin
@@ -534,6 +531,24 @@
 			<div class="SubSubTitle">Ratings Stats (Outside WP Loop)</div>
 			<ul>
 				<li>
+					To Display <strong>Lowest Rated Post</strong>
+				</li>
+				<li>
+					Use:
+					<blockquote>
+						&lt;?php if (function_exists('get_lowest_rated')): ?&gt;<br />
+						&nbsp;&nbsp;&nbsp;&lt;ul&gt;<br />
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;?php get_lowest_rated(); ?&gt;<br />
+						&nbsp;&nbsp;&nbsp;&lt;/ul&gt;<br />
+						&lt;?php endif; ?&gt;
+					</blockquote>
+					<p>Default: get_lowest_rated('both', 10)</p>
+					<p>The value <strong>'both'</strong> will display both the lowest rated posts and pages.</p>
+					<p>If you want to display the lowest rated posts only, replace 'both' with <strong>'post'</strong>.</p>
+					<p>If you want to display the lowest rated pages only, replace 'both' with <strong>'page'</strong>.</p>
+					<p>The value <strong>10</strong> will display only the top 10 lowest rated posts/pages.</p>
+				</li>
+				<li>
 					To Display <strong>Highest Rated Post</strong>
 				</li>
 				<li>
@@ -593,6 +608,6 @@
 		</div>
 	</div>
 </div>
-<p id="Copyright">WP-PostRatings 1.20<br />Copyright &copy; 2007 Lester 'GaMerZ' Chan. All Rights Reserved.</p>
+<p id="Copyright">WP-PostRatings 1.21<br />Copyright &copy; 2007 Lester 'GaMerZ' Chan. All Rights Reserved.</p>
 </body>
 </html>

@@ -2,7 +2,7 @@
 /*
 +----------------------------------------------------------------+
 |																							|
-|	WordPress 2.1 Plugin: WP-PostRatings 1.20								|
+|	WordPress 2.1 Plugin: WP-PostRatings 1.21								|
 |	Copyright (c) 2007 Lester "GaMerZ" Chan									|
 |																							|
 |	File Written By:																	|
@@ -74,7 +74,20 @@ if(!current_user_can('manage_ratings')) {
 	</ol>
 </div>
 <div class="wrap"> 
-	<h2><?php _e('Ratings Stats (Outside WP Loop)', 'wp-postratings'); ?></h2> 
+	<h2><?php _e('Ratings Stats (Outside WP Loop)', 'wp-postratings'); ?></h2>
+	<h3><?php _e('To Display Lowest Rated Post', 'wp-postratings'); ?></h3>
+	<blockquote>
+		<pre class="wp-postratings-usage-pre">&lt;?php if (function_exists('get_lowest_rated')): ?&gt;
+&nbsp;&nbsp;&nbsp;&lt;ul&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;?php get_lowest_rated(); ?&gt;
+&nbsp;&nbsp;&nbsp;&lt;/ul&gt;
+&lt;?php endif; ?&gt;</pre>
+	</blockquote>
+	<p><?php _e('Default: get_lowest_rated(\'both\', 10)', 'wp-postratings'); ?></p>
+	<p><?php _e('The value <strong>\'both\'</strong> will display both the lowest rated posts and pages.', 'wp-postratings'); ?></p>
+	<p><?php _e('If you want to display the lowest rated posts only, replace \'both\' with <strong>\'post\'</strong>.', 'wp-postratings'); ?></p>
+	<p><?php _e('If you want to display the lowest rated pages only, replace \'both\' with <strong>\'page\'</strong>.', 'wp-postratings'); ?></p>
+	<p><?php _e('The value <strong>10</strong> will display only the top 10 lowest rated posts/pages.', 'wp-postratings'); ?></p>
 	<h3><?php _e('To Display Highest Rated Post', 'wp-postratings'); ?></h3>
 	<blockquote>
 		<pre class="wp-postratings-usage-pre">&lt;?php if (function_exists('get_highest_rated')): ?&gt;
