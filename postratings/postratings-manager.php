@@ -2,7 +2,7 @@
 /*
 +----------------------------------------------------------------+
 |																							|
-|	WordPress 2.1 Plugin: WP-PostRatings 1.21								|
+|	WordPress 2.3 Plugin: WP-PostRatings 1.21								|
 |	Copyright (c) 2007 Lester "GaMerZ" Chan									|
 |																							|
 |	File Written By:																	|
@@ -315,7 +315,7 @@ switch($mode) {
 				$postratings_rating = intval($postratings_log->rating_rating);
 				$postratings_postid = intval($postratings_log->rating_postid);
 				$postratings_posttitle = stripslashes($postratings_log->rating_posttitle);
-				$postratings_date = gmdate(sprintf(__('%s @ %s', 'wp-postratings'), get_option('date_format'), get_option('time_format')), $postratings_log->rating_timestamp);
+				$postratings_date = date_i18n(sprintf(__('%s @ %s', 'wp-postratings'), get_option('date_format'), get_option('time_format')), $postratings_log->rating_timestamp);
 				$postratings_ip = $postratings_log->rating_ip;
 				$postratings_host = $postratings_log->rating_host;				
 				echo "<tr $style>\n";
@@ -510,15 +510,15 @@ switch($mode) {
 	<table border="0" cellspacing="3" cellpadding="3">
 		<tr>
 			<th align="left"><?php _e('Total Users Voted:', 'wp-postratings'); ?></th>
-			<td align="left"><?php echo number_format($total_users); ?></td>
+			<td align="left"><?php echo number_format_i18n($total_users); ?></td>
 		</tr>
 		<tr>
 			<th align="left"><?php _e('Total Score:', 'wp-postratings'); ?></th>
-			<td align="left"><?php echo number_format($total_score); ?></td>
+			<td align="left"><?php echo number_format_i18n($total_score); ?></td>
 		</tr>
 		<tr>
 			<th align="left"><?php _e('Total Average:', 'wp-postratings'); ?></th>
-			<td align="left"><?php echo number_format($total_average, 2); ?></td>
+			<td align="left"><?php echo number_format_i18n($total_average, 2); ?></td>
 		</tr>
 	</table>
 </div>

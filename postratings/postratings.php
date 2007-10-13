@@ -207,7 +207,7 @@ function the_ratings_results($post_id, $new_user = 0, $new_score = 0, $new_avera
 	$template_postratings_text = str_replace("%RATINGS_SCORE%", $post_ratings_score, $template_postratings_text);
 	$template_postratings_text = str_replace("%RATINGS_AVERAGE%", $post_ratings_average, $template_postratings_text);
 	$template_postratings_text = str_replace("%RATINGS_PERCENTAGE%", $post_ratings_percentage, $template_postratings_text);
-	$template_postratings_text = str_replace("%RATINGS_USERS%", number_format($post_ratings_users), $template_postratings_text);
+	$template_postratings_text = str_replace("%RATINGS_USERS%", number_format_i18n($post_ratings_users), $template_postratings_text);
 	// Return Post Ratings Template
 	return $template_postratings_text;
 }
@@ -309,7 +309,7 @@ function the_ratings_vote($post_id, $new_user = 0, $new_score = 0, $new_average 
 		$template_postratings_vote = str_replace("%RATINGS_TEXT%", $post_ratings_text, $template_postratings_vote);
 		$template_postratings_vote = str_replace("%RATINGS_AVERAGE%", $post_ratings_average, $template_postratings_vote);
 		$template_postratings_vote = str_replace("%RATINGS_PERCENTAGE%", $post_ratings_percentage, $template_postratings_vote);
-		$template_postratings_vote = str_replace("%RATINGS_USERS%", number_format($post_ratings_users), $template_postratings_vote);
+		$template_postratings_vote = str_replace("%RATINGS_USERS%", number_format_i18n($post_ratings_users), $template_postratings_vote);
 		// Return Post Ratings Voting Template
 		return $template_postratings_vote;
 	}
@@ -625,7 +625,7 @@ if(!function_exists('get_highest_rated_category')) {
 					$temp = str_replace("%RATINGS_MAX%", $ratings_max, $temp);
 					$temp = str_replace("%RATINGS_AVERAGE%", $post_ratings_average, $temp);
 					$temp = str_replace("%RATINGS_SCORE%", $post_ratings_score, $temp);
-					$temp = str_replace("%RATINGS_USERS%", number_format($post_ratings_users), $temp);
+					$temp = str_replace("%RATINGS_USERS%", number_format_i18n($post_ratings_users), $temp);
 					$temp = str_replace("%POST_TITLE%", $post_title, $temp);
 					$temp = str_replace("%POST_EXCERPT%", $post_excerpt, $temp);
 					$temp = str_replace("%POST_CONTENT%", $post_content, $temp);
@@ -737,7 +737,7 @@ if(!function_exists('get_highest_rated')) {
 					$temp = str_replace("%RATINGS_MAX%", $ratings_max, $temp);
 					$temp = str_replace("%RATINGS_AVERAGE%", $post_ratings_average, $temp);
 					$temp = str_replace("%RATINGS_SCORE%", $post_ratings_score, $temp);
-					$temp = str_replace("%RATINGS_USERS%", number_format($post_ratings_users), $temp);
+					$temp = str_replace("%RATINGS_USERS%", number_format_i18n($post_ratings_users), $temp);
 					$temp = str_replace("%POST_TITLE%", $post_title, $temp);
 					$temp = str_replace("%POST_EXCERPT%", $post_excerpt, $temp);
 					$temp = str_replace("%POST_CONTENT%", $post_content, $temp);
@@ -850,7 +850,7 @@ if(!function_exists('get_lowest_rated')) {
 					$temp = str_replace("%RATINGS_MAX%", $ratings_max, $temp);
 					$temp = str_replace("%RATINGS_AVERAGE%", $post_ratings_average, $temp);
 					$temp = str_replace("%RATINGS_SCORE%", $post_ratings_score, $temp);
-					$temp = str_replace("%RATINGS_USERS%", number_format($post_ratings_users), $temp);
+					$temp = str_replace("%RATINGS_USERS%", number_format_i18n($post_ratings_users), $temp);
 					$temp = str_replace("%POST_TITLE%", $post_title, $temp);
 					$temp = str_replace("%POST_EXCERPT%", $post_excerpt, $temp);
 					$temp = str_replace("%POST_CONTENT%", $post_content, $temp);
@@ -877,9 +877,9 @@ if(!function_exists('get_ratings_users')) {
 		global $wpdb;
 		$ratings_users = $wpdb->get_var("SELECT SUM((meta_value+0.00)) FROM $wpdb->postmeta WHERE meta_key = 'ratings_users'");
 		if($display) {
-			echo number_format($ratings_users);
+			echo number_format_i18n($ratings_users);
 		} else {
-			return number_format($ratings_users);
+			return number_format_i18n($ratings_users);
 		}
 	}
 }

@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: WP-PostRatings 1.20\n"
+"Project-Id-Version: WP-PostRatings 1.21\n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2007-09-19 00:20+0800\n"
+"PO-Revision-Date: 2007-10-13 15:40+0800\n"
 "Last-Translator: Lester 'GaMerZ' Chan <gamerz84@hotmail.com>\n"
 "Language-Team: Lester Chan <gamerz84@hotmail.com>\n"
 "MIME-Version: 1.0\n"
@@ -270,7 +270,7 @@ msgid "Post ID:"
 msgstr ""
 
 #: postratings-manager.php:429
-#: postratings.php:868
+#: postratings.php:981
 msgid "Guest"
 msgstr ""
 
@@ -469,6 +469,7 @@ msgstr ""
 #: postratings.php:170
 #: postratings.php:582
 #: postratings.php:694
+#: postratings.php:807
 msgid "rating"
 msgstr ""
 
@@ -485,28 +486,29 @@ msgstr ""
 #: postratings.php:516
 #: postratings.php:584
 #: postratings.php:696
-#: postratings.php:1072
-#: postratings.php:1073
-#: postratings.php:1088
+#: postratings.php:809
+#: postratings.php:1185
+#: postratings.php:1186
+#: postratings.php:1201
 msgid "votes"
 msgstr ""
 
 #: postratings-options.php:114
 #: postratings-options.php:117
 #: postratings-options.php:139
-#: postratings.php:1073
+#: postratings.php:1186
 msgid "rated"
 msgstr ""
 
 #: postratings-options.php:117
 #: postratings-options.php:142
-#: postratings.php:1088
+#: postratings.php:1201
 msgid "You need to be a registered member to rate this post."
 msgstr ""
 
 #: postratings-options.php:120
 #: postratings-options.php:145
-#: postratings.php:1074
+#: postratings.php:1187
 msgid "No Ratings Yet"
 msgstr ""
 
@@ -516,9 +518,10 @@ msgstr ""
 #: postratings.php:172
 #: postratings.php:584
 #: postratings.php:696
-#: postratings.php:1072
-#: postratings.php:1073
-#: postratings.php:1088
+#: postratings.php:809
+#: postratings.php:1185
+#: postratings.php:1186
+#: postratings.php:1201
 msgid "average"
 msgstr ""
 
@@ -529,10 +532,11 @@ msgstr ""
 #: postratings.php:172
 #: postratings.php:584
 #: postratings.php:696
-#: postratings.php:1072
-#: postratings.php:1073
-#: postratings.php:1082
-#: postratings.php:1088
+#: postratings.php:809
+#: postratings.php:1185
+#: postratings.php:1186
+#: postratings.php:1195
+#: postratings.php:1201
 msgid "out of"
 msgstr ""
 
@@ -790,7 +794,7 @@ msgid "You may place it in <strong>single.php</strong>, <strong>post.php</strong
 msgstr ""
 
 #: postratings-usage.php:32
-#: postratings-usage.php:115
+#: postratings-usage.php:128
 msgid "Find:"
 msgstr ""
 
@@ -848,70 +852,94 @@ msgid "Ratings Stats (Outside WP Loop)"
 msgstr ""
 
 #: postratings-usage.php:78
-msgid "To Display Highest Rated Post"
+msgid "To Display Lowest Rated Post"
 msgstr ""
 
 #: postratings-usage.php:86
-msgid "Default: get_highest_rated('both', 10)"
+msgid "Default: get_lowest_rated('both', 10)"
 msgstr ""
 
 #: postratings-usage.php:87
-msgid "The value <strong>'both'</strong> will display both the highest rated posts and pages."
+msgid "The value <strong>'both'</strong> will display both the lowest rated posts and pages."
 msgstr ""
 
 #: postratings-usage.php:88
-msgid "If you want to display the highest rated posts only, replace 'both' with <strong>'post'</strong>."
+msgid "If you want to display the lowest rated posts only, replace 'both' with <strong>'post'</strong>."
 msgstr ""
 
 #: postratings-usage.php:89
-msgid "If you want to display the highest rated pages only, replace 'both' with <strong>'page'</strong>."
+msgid "If you want to display the lowest rated pages only, replace 'both' with <strong>'page'</strong>."
 msgstr ""
 
 #: postratings-usage.php:90
-msgid "The value <strong>10</strong> will display only the top 10 highest rated posts/pages."
+msgid "The value <strong>10</strong> will display only the top 10 lowest rated posts/pages."
 msgstr ""
 
 #: postratings-usage.php:91
-msgid "To Display Most Rated Post"
+msgid "To Display Highest Rated Post"
 msgstr ""
 
 #: postratings-usage.php:99
-msgid "Default: get_most_rated('both', 10)"
+msgid "Default: get_highest_rated('both', 10)"
 msgstr ""
 
 #: postratings-usage.php:100
-msgid "The value <strong>'both'</strong> will display both the most rated posts and pages."
+msgid "The value <strong>'both'</strong> will display both the highest rated posts and pages."
 msgstr ""
 
 #: postratings-usage.php:101
-msgid "If you want to display the most rated posts only, replace 'both' with <strong>'post'</strong>."
+msgid "If you want to display the highest rated posts only, replace 'both' with <strong>'post'</strong>."
 msgstr ""
 
 #: postratings-usage.php:102
-msgid "If you want to display the most rated pages only, replace 'both' with <strong>'page'</strong>."
+msgid "If you want to display the highest rated pages only, replace 'both' with <strong>'page'</strong>."
 msgstr ""
 
 #: postratings-usage.php:103
-msgid "The value <strong>10</strong> will display only the top 10 most rated posts/pages."
+msgid "The value <strong>10</strong> will display only the top 10 highest rated posts/pages."
 msgstr ""
 
-#: postratings-usage.php:106
-msgid "Note"
-msgstr ""
-
-#: postratings-usage.php:109
-msgid "In IE, some of the ratings's text may appear jagged (this is normal in IE). To solve this issue,"
+#: postratings-usage.php:104
+msgid "To Display Most Rated Post"
 msgstr ""
 
 #: postratings-usage.php:112
-msgid "Open <strong>postratings-css.css</strong>"
+msgid "Default: get_most_rated('both', 10)"
+msgstr ""
+
+#: postratings-usage.php:113
+msgid "The value <strong>'both'</strong> will display both the most rated posts and pages."
+msgstr ""
+
+#: postratings-usage.php:114
+msgid "If you want to display the most rated posts only, replace 'both' with <strong>'post'</strong>."
+msgstr ""
+
+#: postratings-usage.php:115
+msgid "If you want to display the most rated pages only, replace 'both' with <strong>'page'</strong>."
+msgstr ""
+
+#: postratings-usage.php:116
+msgid "The value <strong>10</strong> will display only the top 10 most rated posts/pages."
 msgstr ""
 
 #: postratings-usage.php:119
+msgid "Note"
+msgstr ""
+
+#: postratings-usage.php:122
+msgid "In IE, some of the ratings's text may appear jagged (this is normal in IE). To solve this issue,"
+msgstr ""
+
+#: postratings-usage.php:125
+msgid "Open <strong>postratings-css.css</strong>"
+msgstr ""
+
+#: postratings-usage.php:132
 msgid "Replace:"
 msgstr ""
 
-#: postratings-usage.php:121
+#: postratings-usage.php:134
 msgid "Where <strong>#ffffff</strong> should be your background color for the ratings."
 msgstr ""
 
@@ -995,64 +1023,65 @@ msgstr ""
 #: postratings.php:520
 #: postratings.php:637
 #: postratings.php:749
+#: postratings.php:862
 msgid "N/A"
 msgstr ""
 
-#: postratings.php:896
+#: postratings.php:1009
 #, php-format
 msgid "Invalid Post ID. Post ID #%s."
 msgstr ""
 
-#: postratings.php:900
+#: postratings.php:1013
 #, php-format
 msgid "You Had Already Rated This Post. Post ID #%s."
 msgstr ""
 
-#: postratings.php:986
-#: postratings.php:988
-#: postratings.php:1016
+#: postratings.php:1099
+#: postratings.php:1101
+#: postratings.php:1129
 msgid "WP-PostRatings"
 msgstr ""
 
-#: postratings.php:999
-#: postratings.php:1001
+#: postratings.php:1112
+#: postratings.php:1114
 msgid "Highest Rated Posts"
 msgstr ""
 
-#: postratings.php:1004
-#: postratings.php:1006
+#: postratings.php:1117
+#: postratings.php:1119
 msgid "Most Rated Posts"
 msgstr ""
 
-#: postratings.php:1018
+#: postratings.php:1131
 msgid "users casted their vote."
 msgstr ""
 
-#: postratings.php:1030
+#: postratings.php:1143
 msgid "Highest Rated Post"
 msgstr ""
 
-#: postratings.php:1036
+#: postratings.php:1149
 msgid "Most Rated Post"
 msgstr ""
 
-#: postratings.php:1081
+#: postratings.php:1194
 msgid "1 Star"
 msgstr ""
 
-#: postratings.php:1081
+#: postratings.php:1194
 msgid "2 Stars"
 msgstr ""
 
-#: postratings.php:1081
+#: postratings.php:1194
 msgid "3 Stars"
 msgstr ""
 
-#: postratings.php:1081
+#: postratings.php:1194
 msgid "4 Stars"
 msgstr ""
 
-#: postratings.php:1081
+#: postratings.php:1194
 msgid "5 Stars"
 msgstr ""
 
