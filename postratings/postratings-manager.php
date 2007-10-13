@@ -289,7 +289,7 @@ switch($mode) {
 <!-- Manage Post Ratings -->
 <div class="wrap">
 	<h2><?php _e('Post Ratings Logs', 'wp-postratings'); ?></h2>
-	<p><?php _e('Displaying', 'wp-postratings'); ?> <strong><?php echo $display_on_page;?></strong> <?php _e('To', 'wp-postratings'); ?> <strong><?php echo $max_on_page; ?></strong> <?php _e('Of', 'wp-postratings'); ?> <strong><?php echo $total_ratings; ?></strong> <?php _e('Post Ratings Logs', 'wp-postratings'); ?></p>
+	<p><?php _e('Displaying', 'wp-postratings'); ?> <strong><?php echo number_format_i18n($display_on_page);?></strong> <?php _e('To', 'wp-postratings'); ?> <strong><?php echo number_format_i18n($max_on_page); ?></strong> <?php _e('Of', 'wp-postratings'); ?> <strong><?php echo number_format_i18n($total_ratings); ?></strong> <?php _e('Post Ratings Logs', 'wp-postratings'); ?></p>
 	<p><?php _e('Sorted By', 'wp-postratings'); ?> <strong><?php echo $postratings_sortby_text;?></strong> <?php _e('In', 'wp-postratings'); ?> <strong><?php echo $postratings_sortorder_text;?></strong> <?php _e('Order', 'wp-postratings'); ?></p>
 	<table width="100%"  border="0" cellspacing="3" cellpadding="3">
 	<tr class="thead">

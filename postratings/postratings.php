@@ -987,7 +987,7 @@ function process_ratings() {
 					$rate_cookie = setcookie("rated_".$post_id, $ratings_value[$rate-1], time() + 30000000, COOKIEPATH);
 				}
 				// Log Ratings No Matter What
-				$rate_log = $wpdb->query("INSERT INTO $wpdb->ratings VALUES (0, $post_id, '$post_title', ".$ratings_value[$rate-1].",'".current_time('timestamp', 1)."', '".get_ipaddress()."', '".gethostbyaddr(get_ipaddress())."' ,'$rate_user', $rate_userid)");
+				$rate_log = $wpdb->query("INSERT INTO $wpdb->ratings VALUES (0, $post_id, '$post_title', ".$ratings_value[$rate-1].",'".current_time('timestamp')."', '".get_ipaddress()."', '".gethostbyaddr(get_ipaddress())."' ,'$rate_user', $rate_userid)");
 				// Output AJAX Result
 				if(defined(WP_CACHE)) {
 					$page_hash = $_GET['page_hash'];
