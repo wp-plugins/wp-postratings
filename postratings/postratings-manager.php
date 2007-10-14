@@ -315,7 +315,7 @@ switch($mode) {
 				$postratings_rating = intval($postratings_log->rating_rating);
 				$postratings_postid = intval($postratings_log->rating_postid);
 				$postratings_posttitle = stripslashes($postratings_log->rating_posttitle);
-				$postratings_date = date_i18n(sprintf(__('%s @ %s', 'wp-postratings'), get_option('date_format'), get_option('time_format')), $postratings_log->rating_timestamp);
+				$postratings_date = mysql2date(sprintf(__('%s @ %s', 'wp-postratings'), get_option('date_format'), get_option('time_format')), gmdate('Y-m-d H:i:s', $postratings_log->rating_timestamp));
 				$postratings_ip = $postratings_log->rating_ip;
 				$postratings_host = $postratings_log->rating_host;				
 				echo "<tr $style>\n";
