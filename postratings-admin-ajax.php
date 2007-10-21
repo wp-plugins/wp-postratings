@@ -2,7 +2,7 @@
 /*
 +----------------------------------------------------------------+
 |																							|
-|	WordPress 2.3 Plugin: WP-PostRatings 1.21								|
+|	WordPress 2.3 Plugin: WP-PostRatings 1.30								|
 |	Copyright (c) 2007 Lester "GaMerZ" Chan									|
 |																							|
 |	File Written By:																	|
@@ -11,7 +11,7 @@
 |																							|
 |	File Information:																	|
 |	- Post Ratings AJAX For Admin Backend									|
-|	- wp-content/plugins/postratings/postratings-admin-ajax.php		|
+|	- wp-content/plugins/wp-postratings/postratings-admin-ajax.php	|
 |																							|
 +----------------------------------------------------------------+
 */
@@ -28,8 +28,8 @@ if(!current_user_can('manage_ratings')) {
 
 
 ### Variables
-$postratings_url = get_option('siteurl').'/wp-content/plugins/postratings/images';
-$postratings_path = ABSPATH.'/wp-content/plugins/postratings/images';
+$postratings_url = get_option('siteurl').'/wp-content/plugins/wp-postratings/images';
+$postratings_path = ABSPATH.'/wp-content/plugins/wp-postratings/images';
 $postratings_ratingstext = get_option('postratings_ratingstext');
 $postratings_ratingsvalue = get_option('postratings_ratingsvalue');
 

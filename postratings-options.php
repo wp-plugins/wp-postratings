@@ -2,7 +2,7 @@
 /*
 +----------------------------------------------------------------+
 |																							|
-|	WordPress 2.3 Plugin: WP-PostRatings 1.21								|
+|	WordPress 2.3 Plugin: WP-PostRatings 1.30								|
 |	Copyright (c) 2007 Lester "GaMerZ" Chan									|
 |																							|
 |	File Written By:																	|
@@ -11,7 +11,7 @@
 |																							|
 |	File Information:																	|
 |	- Configure Post Ratings Options												|
-|	- wp-content/plugins/postratings/postratings-options.php			|
+|	- wp-content/plugins/wp-postratings/postratings-options.php		|
 |																							|
 +----------------------------------------------------------------+
 */
@@ -24,7 +24,7 @@ if(!current_user_can('manage_ratings')) {
 
 
 ### Ratings Variables
-$base_name = plugin_basename('postratings/postratings-manager.php');
+$base_name = plugin_basename('wp-postratings/postratings-manager.php');
 $base_page = 'admin.php?page='.$base_name;
 
 
@@ -96,8 +96,8 @@ if($_POST['Submit']) {
 ### Needed Variables
 $postratings_max = intval(get_option('postratings_max'));
 $postratings_customrating = intval(get_option('postratings_customrating'));
-$postratings_url = get_option('siteurl').'/wp-content/plugins/postratings/images';
-$postratings_path = ABSPATH.'/wp-content/plugins/postratings/images';
+$postratings_url = get_option('siteurl').'/wp-content/plugins/wp-postratings/images';
+$postratings_path = ABSPATH.'/wp-content/plugins/wp-postratings/images';
 $postratings_ratingstext = get_option('postratings_ratingstext');
 $postratings_ratingsvalue = get_option('postratings_ratingsvalue');
 $postratings_image = get_option('postratings_image');
@@ -187,7 +187,10 @@ $postratings_image = get_option('postratings_image');
 <div class="wrap"> 
 	<h2><?php _e('Post Rating Options', 'wp-postratings'); ?></h2> 
 	<form method="post" action="<?php echo $_SERVER['REQUEST_URI']; ?>"> 
-	<input type="hidden" id="postratings_customrating" name="postratings_customrating" value="<?php echo $postratings_customrating; ?>" />
+		<input type="hidden" id="postratings_customrating" name="postratings_customrating" value="<?php echo $postratings_customrating; ?>" />
+		<p class="submit">
+			<input type="submit" name="Submit" class="button" value="<?php _e('Update Options &raquo;', 'wp-postratings'); ?>" />
+		</p>
 		<fieldset class="options">
 			<legend><?php _e('Ratings Settings', 'wp-postratings'); ?></legend>
 			<table width="100%"  border="0" cellspacing="3" cellpadding="3">
@@ -466,8 +469,8 @@ $postratings_image = get_option('postratings_image');
 			</tr>
 		</table>
 	</fieldset>
-	<div align="center">
-		<input type="submit" name="Submit" class="button" value="<?php _e('Update Options', 'wp-postratings'); ?>" />&nbsp;&nbsp;<input type="button" name="cancel" value="<?php _e('Cancel', 'wp-postratings'); ?>" class="button" onclick="javascript:history.go(-1)" />
-	</div>
+	<p class="submit">
+		<input type="submit" name="Submit" class="button" value="<?php _e('Update Options &raquo;', 'wp-postratings'); ?>" />
+	</p>
 	</form>
 </div>

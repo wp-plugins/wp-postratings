@@ -2,7 +2,7 @@
 /*
 +----------------------------------------------------------------+
 |																							|
-|	WordPress 2.3 Plugin: WP-PostRatings 1.21								|
+|	WordPress 2.3 Plugin: WP-PostRatings 1.30								|
 |	Copyright (c) 2007 Lester "GaMerZ" Chan									|
 |																							|
 |	File Written By:																	|
@@ -11,7 +11,7 @@
 |																							|
 |	File Information:																	|
 |	- Uninstall WP-PostRatings														|
-|	- wp-content/plugins/postratings/postratings-uninstall.php			|
+|	- wp-content/plugins/wp-postratings/postratings-uninstall.php		|
 |																							|
 +----------------------------------------------------------------+
 */
@@ -24,7 +24,7 @@ if(!current_user_can('manage_ratings')) {
 
 
 ### Ratings Variables
-$base_name = plugin_basename('postratings/postratings-manager.php');
+$base_name = plugin_basename('wp-postratings/postratings-manager.php');
 $base_page = 'admin.php?page='.$base_name;
 $mode = trim($_GET['mode']);
 $ratings_tables = array($wpdb->ratings);
@@ -88,9 +88,9 @@ if(!empty($_POST['do'])) {
 switch($mode) {
 		//  Deactivating WP-PostRatings
 		case 'end-UNINSTALL':
-			$deactivate_url = 'plugins.php?action=deactivate&amp;plugin=postratings/postratings.php';
+			$deactivate_url = 'plugins.php?action=deactivate&amp;plugin=wp-postratings/wp-postratings.php';
 			if(function_exists('wp_nonce_url')) { 
-				$deactivate_url = wp_nonce_url($deactivate_url, 'deactivate-plugin_postratings/postratings.php');
+				$deactivate_url = wp_nonce_url($deactivate_url, 'deactivate-plugin_wp-postratings/wp-postratings.php');
 			}
 			echo '<div class="wrap">';
 			echo '<h2>'.__('Uninstall WP-PostRatings', 'wp-postratings').'</h2>';

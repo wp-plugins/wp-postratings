@@ -2,7 +2,7 @@
 /*
 +----------------------------------------------------------------+
 |																							|
-|	WordPress 2.3 Plugin: WP-PostRatings 1.21								|
+|	WordPress 2.3 Plugin: WP-PostRatings 1.30								|
 |	Copyright (c) 2007 Lester "GaMerZ" Chan									|
 |																							|
 |	File Written By:																	|
@@ -11,7 +11,7 @@
 |																							|
 |	File Information:																	|
 |	- Manage Post Ratings Logs													|
-|	- wp-content/plugins/postratings/postratings-manager.php			|
+|	- wp-content/plugins/wp-postratings/postratings-manager.php		|
 |																							|
 +----------------------------------------------------------------+
 */
@@ -24,7 +24,7 @@ if(!current_user_can('manage_ratings')) {
 
 
 ### Ratings Variables
-$base_name = plugin_basename('postratings/postratings-manager.php');
+$base_name = plugin_basename('wp-postratings/postratings-manager.php');
 $base_page = 'admin.php?page='.$base_name;
 $mode = trim($_GET['mode']);
 $postratings_page = intval($_GET['ratingpage']);
@@ -230,9 +230,9 @@ switch($mode) {
 			_e('Uninstall Ratings', 'wp-postratings');			
 			echo'</h2>';
 			echo '<p><strong>';
-			$deactivate_url = "plugins.php?action=deactivate&amp;plugin=postratings/postratings.php";
+			$deactivate_url = "plugins.php?action=deactivate&amp;plugin=wp-postratings/wp-postratings.php";
 			if(function_exists('wp_nonce_url')) { 
-				$deactivate_url = wp_nonce_url($deactivate_url, 'deactivate-plugin_postratings/postratingss.php');
+				$deactivate_url = wp_nonce_url($deactivate_url, 'deactivate-plugin_wp-postratings/wp-postratings.php');
 			}
 			printf(__('<a href="%s">Click Here</a> To Finish The Uninstallation And WP-PostRatings Will Be Deactivated Automatically.', 'wp-postratings'), $deactivate_url);
 			echo '</a>';
@@ -328,18 +328,18 @@ switch($mode) {
 					}
 					echo $postratings_rating;
 				} else {
-					if(file_exists(ABSPATH.'/wp-content/plugins/postratings/images/'.$ratings_image.'/rating_start.gif')) {
-						echo '<img src="'.get_option('siteurl').'/wp-content/plugins/postratings/images/'.$ratings_image.'/rating_start.gif" alt="" class="post-ratings-image" />';
+					if(file_exists(ABSPATH.'/wp-content/plugins/wp-postratings/images/'.$ratings_image.'/rating_start.gif')) {
+						echo '<img src="'.get_option('siteurl').'/wp-content/plugins/wp-postratings/images/'.$ratings_image.'/rating_start.gif" alt="" class="post-ratings-image" />';
 					}
 					for($j=1; $j <= $ratings_max; $j++) {
 						if($j <= $postratings_rating) {
-							echo '<img src="'.get_option('siteurl').'/wp-content/plugins/postratings/images/'.$ratings_image.'/rating_on.gif" alt="'.__('User Rate This Post ').$postratings_rating.__(' Stars Out Of ').$ratings_max.'" title="'.__('User Rate This Post ').$postratings_rating.__(' Stars Out Of ').$ratings_max.'" class="post-ratings-image" />';
+							echo '<img src="'.get_option('siteurl').'/wp-content/plugins/wp-postratings/images/'.$ratings_image.'/rating_on.gif" alt="'.__('User Rate This Post ').$postratings_rating.__(' Stars Out Of ').$ratings_max.'" title="'.__('User Rate This Post ').$postratings_rating.__(' Stars Out Of ').$ratings_max.'" class="post-ratings-image" />';
 						} else {
-							echo '<img src="'.get_option('siteurl').'/wp-content/plugins/postratings/images/'.$ratings_image.'/rating_off.gif" alt="'.__('User Rate This Post ').$postratings_rating.__(' Stars Out Of ').$ratings_max.'" title="'.__('User Rate This Post ').$postratings_rating.__(' Stars Out Of ').$ratings_max.'" class="post-ratings-image" />';
+							echo '<img src="'.get_option('siteurl').'/wp-content/plugins/wp-postratings/images/'.$ratings_image.'/rating_off.gif" alt="'.__('User Rate This Post ').$postratings_rating.__(' Stars Out Of ').$ratings_max.'" title="'.__('User Rate This Post ').$postratings_rating.__(' Stars Out Of ').$ratings_max.'" class="post-ratings-image" />';
 						}
 					}
-					if(file_exists(ABSPATH.'/wp-content/plugins/postratings/images/'.$ratings_image.'/rating_end.gif')) {
-						echo '<img src="'.get_option('siteurl').'/wp-content/plugins/postratings/images/'.$ratings_image.'/rating_end.gif" alt="" class="post-ratings-image" />';
+					if(file_exists(ABSPATH.'/wp-content/plugins/wp-postratings/images/'.$ratings_image.'/rating_end.gif')) {
+						echo '<img src="'.get_option('siteurl').'/wp-content/plugins/wp-postratings/images/'.$ratings_image.'/rating_end.gif" alt="" class="post-ratings-image" />';
 					}
 				}
 				echo '</td>'."\n";

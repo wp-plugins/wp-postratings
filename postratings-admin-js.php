@@ -2,7 +2,7 @@
 /*
 +----------------------------------------------------------------+
 |																							|
-|	WordPress 2.3 Plugin: WP-PostRatings 1.21								|
+|	WordPress 2.3 Plugin: WP-PostRatings 1.30								|
 |	Copyright (c) 2007 Lester "GaMerZ" Chan									|
 |																							|
 |	File Written By:																	|
@@ -11,7 +11,7 @@
 |																							|
 |	File Information:																	|
 |	- Post Ratings Admin Javascript File											|
-|	- wp-content/plugins/postratings/postratings-admin-js.php			|
+|	- wp-content/plugins/wp-postratings/postratings-admin-js.php		|
 |																							|
 +----------------------------------------------------------------+
 */

@@ -2,7 +2,7 @@
 /*
 +----------------------------------------------------------------+
 |																							|
-|	WordPress 2.3 Plugin: WP-PostRatings 1.21								|
+|	WordPress 2.3 Plugin: WP-PostRatings 1.30								|
 |	Copyright (c) 2007 Lester "GaMerZ" Chan									|
 |																							|
 |	File Written By:																	|
@@ -11,7 +11,7 @@
 |																							|
 |	File Information:																	|
 |	- Post Ratings Javascript File													|
-|	- wp-content/plugins/postratings/postratings-js.php					|
+|	- wp-content/plugins/wp-postratings/postratings-js.php				|
 |																							|
 +----------------------------------------------------------------+
 */
@@ -21,7 +21,7 @@
 @require('../../../wp-config.php');
 cache_javascript_headers();
 
-### Determine postratings.php Path
+### Determine wp-postratings.php Path
 $ratings_ajax_url = dirname($_SERVER['PHP_SELF']);
 if(substr($ratings_ajax_url, -1) == '/') {
 	$ratings_ajax_url  = substr($ratings_ajax_url, 0, -1);
@@ -45,7 +45,7 @@ if(defined(WP_CACHE)) {
 // Variables
 var using_wp_cache = <?php echo $using_wp_cache; ?>;
 var site_url = "<?php echo get_option('siteurl'); ?>";
-var ratings_ajax_url = "<?php echo $ratings_ajax_url; ?>/postratings.php";
+var ratings_ajax_url = "<?php echo $ratings_ajax_url; ?>/wp-postratings.php";
 var ratings_text_wait = "<?php _e('Please rate only 1 post at a time.', 'wp-postratings'); ?>";
 var ratings_image = "<?php echo get_option('postratings_image'); ?>";
 var ratings_max = "<?php echo $postratings_max; ?>";
@@ -54,11 +54,11 @@ var ratings_page_hash = "<?php echo $wp_cache_key; ?>";
 if($postratings_custom) {
 	for($i = 1; $i <= $postratings_max; $i++) {
 		echo 'var ratings_'.$i.'_mouseover_image = new Image();'."\n";
-		echo 'ratings_'.$i.'_mouseover_image.src = site_url + "/wp-content/plugins/postratings/images/" + ratings_image + "/rating_'.$i.'_over.gif";'."\n";
+		echo 'ratings_'.$i.'_mouseover_image.src = site_url + "/wp-content/plugins/wp-postratings/images/" + ratings_image + "/rating_'.$i.'_over.gif";'."\n";
 	}
 } else {
 	echo 'var ratings_mouseover_image = new Image();';
-	echo 'ratings_mouseover_image.src = site_url + "/wp-content/plugins/postratings/images/" + ratings_image + "/rating_over.gif";'."\n";
+	echo 'ratings_mouseover_image.src = site_url + "/wp-content/plugins/wp-postratings/images/" + ratings_image + "/rating_over.gif";'."\n";
 }
 ?>
 var ratings = new sack(ratings_ajax_url);
@@ -136,25 +136,25 @@ function ratings_off(rating_score, insert_half) {
 			if(i <= rating_score) {
 				<?php
 					if($postratings_custom) {
-						echo  "document.images['rating_' + post_id + '_' + i].src = site_url + '/wp-content/plugins/postratings/images/' + ratings_image + '/rating_' + i + '_on.gif';\n";
+						echo  "document.images['rating_' + post_id + '_' + i].src = site_url + '/wp-content/plugins/wp-postratings/images/' + ratings_image + '/rating_' + i + '_on.gif';\n";
 					} else {
-						echo "document.images['rating_' + post_id + '_' + i].src = site_url + '/wp-content/plugins/postratings/images/' + ratings_image + '/rating_on.gif';\n";
+						echo "document.images['rating_' + post_id + '_' + i].src = site_url + '/wp-content/plugins/wp-postratings/images/' + ratings_image + '/rating_on.gif';\n";
 					}
 				?>
 			} else if(i == insert_half) {
 				<?php
 					if($postratings_custom) {
-						echo   "document.images['rating_' + post_id + '_' + i].src = site_url + '/wp-content/plugins/postratings/images/' + ratings_image + '/rating_' + i + '_half.gif';\n";
+						echo   "document.images['rating_' + post_id + '_' + i].src = site_url + '/wp-content/plugins/wp-postratings/images/' + ratings_image + '/rating_' + i + '_half.gif';\n";
 					} else {
-						echo "document.images['rating_' + post_id + '_' + i].src = site_url + '/wp-content/plugins/postratings/images/' + ratings_image + '/rating_half.gif';\n";
+						echo "document.images['rating_' + post_id + '_' + i].src = site_url + '/wp-content/plugins/wp-postratings/images/' + ratings_image + '/rating_half.gif';\n";
 					}
 				?>
 			} else {
 				<?php
 					if($postratings_custom) {
-						echo "document.images['rating_' + post_id + '_' + i].src = site_url + '/wp-content/plugins/postratings/images/' + ratings_image + '/rating_' + i + '_off.gif';\n";
+						echo "document.images['rating_' + post_id + '_' + i].src = site_url + '/wp-content/plugins/wp-postratings/images/' + ratings_image + '/rating_' + i + '_off.gif';\n";
 					} else {
-						echo "document.images['rating_' + post_id + '_' + i].src = site_url + '/wp-content/plugins/postratings/images/' + ratings_image + '/rating_off.gif';\n";
+						echo "document.images['rating_' + post_id + '_' + i].src = site_url + '/wp-content/plugins/wp-postratings/images/' + ratings_image + '/rating_off.gif';\n";
 					}
 				?>
 			}

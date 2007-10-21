@@ -2,7 +2,7 @@
 <html>
 <head>	
 	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
-	<title>WP-PostRatings 1.21 Readme</title>
+	<title>WP-PostRatings 1.30 Readme</title>
 	<style type="text/css" media="screen">
 		/* Default Style */
 		BODY {
@@ -204,7 +204,7 @@
 <body>
 <div id="Container">
 	<!-- Title -->
-	<div id="Title">WP-PostRatings 1.21&nbsp;&nbsp;&nbsp;<span style="color: #aaaaaa;">Readme</span></div>
+	<div id="Title">WP-PostRatings 1.30&nbsp;&nbsp;&nbsp;<span style="color: #aaaaaa;">Readme</span></div>
 
 	<!-- Tabs -->
 	<ul id="Tabs">
@@ -235,7 +235,7 @@
 			</p>
 			<p>
 				<strong>Download:</strong><br />
-				<strong>&raquo;</strong> <a href="http://lesterchan.net/others/downloads.php?id=20" title="http://lesterchan.net/others/downloads.php?id=20">WP-PostRatings 1.21 For WordPress 2.3.x</a><br />
+				<strong>&raquo;</strong> <a href="http://lesterchan.net/others/downloads.php?id=20" title="http://lesterchan.net/others/downloads.php?id=20">WP-PostRatings 1.30 For WordPress 2.3.x</a><br />
 				<strong>&raquo;</strong> <a href="http://lesterchan.net/others/downloads/wp-postratings111.zip" title="http://lesterchan.net/others/downloads/wp-postratings111.zip">WP-PostRatings 1.11 For WordPress 2.1.x And 2.2.x</a><br />
 				<strong>&raquo;</strong> <a href="http://lesterchan.net/others/downloads/wp-postratings105.zip" title="http://lesterchan.net/others/downloads/wp-postratings105.zip">WP-PostRatings 1.05 For WordPress 2.0.x</a><br />
 				<strong>&raquo;</strong> <a href="http://lesterchan.net/others/downloads/wp-postratings103-(wp152).zip" title="http://lesterchan.net/others/downloads/wp-postratings103-(wp152).zip">WP-PostRatings 1.03 For WordPress 1.5.2</a>
@@ -284,10 +284,12 @@
 			<div class="SubTitle">&raquo; Changelog</div>
 			<ul>
 				<li>
-					<strong>Version 1.21 (01-01-2008)</strong>
+					<strong>Version 1.30 (01-01-2008)</strong>
 					<ul>
 						<li>NEW: Use number_format_i18n() Instead Of number_format()</li>
 						<li>NEW: Added get_lowest_rated() Function</li>
+						<li>NEW: Uses /wp-postratings/ Folder Instead Of /postratings/</li>
+						<li>NEW: Uses wp-postratings.php Instead Of postratings.php</li>
 					</ul>
 				</li>
 				<li>
@@ -406,7 +408,7 @@
 				</li>
 				<li>
 					Put:
-					<blockquote>Folder: postratings</blockquote>
+					<blockquote>Folder: wp-postratings</blockquote>
 				</li>
 				<li>
 					<strong>Activate</strong> WP-PostRatings Plugin
@@ -420,7 +422,7 @@
 		<!-- Upgrade Instructions -->	
 		<div id="Upgrade" style="display: none;">
 			<div class="SubTitle">&raquo; Upgrade Instructions</div>
-			<div class="SubSubTitle">From v1.0x To v1.21</div>
+			<div class="SubSubTitle">From v1.0x To v1.30</div>
 			<ol>
 				<li>
 					<strong>Deactivate</strong> WP-PostRatings Plugin
@@ -429,13 +431,13 @@
 					Open <strong>wp-content/plugins</strong> Folder
 				</li>
 				<li>
-					Overwrite:
-					<blockquote>Folder: postratings</blockquote>
+					Put/Overwrite:
+					<blockquote>Folder: wp-postratings</blockquote>
 				</li>
 				<li>
-					Delete these file if exists:
+					Delete this folder if exists:
 					<blockquote>
-						File: wp-content/plugins/postratings/postratings-js.js
+						Folder: postratings
 					</blockquote>
 				</li>
 				<li>
@@ -609,6 +611,6 @@
 		</div>
 	</div>
 </div>
-<p id="Copyright">WP-PostRatings 1.21<br />Copyright &copy; 2007 Lester 'GaMerZ' Chan. All Rights Reserved.</p>
+<p id="Copyright">WP-PostRatings 1.30<br />Copyright &copy; 2008 Lester 'GaMerZ' Chan. All Rights Reserved.</p>
 </body>
 </html>
