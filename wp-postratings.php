@@ -167,9 +167,9 @@ function the_ratings_results($post_id, $new_user = 0, $new_score = 0, $new_avera
 		if($post_ratings_score > 0) {
 			$post_ratings_score = '+'.$post_ratings_score;
 		}
-		$image_alt = $post_ratings_score.' '.__('rating', 'wp-postratings').', '.$post_ratings_users.' '.__('votes', 'wp-postratings');
+		$image_alt = $post_ratings_score.' '.__('rating', 'wp-postratings').', '.number_format_i18n($post_ratings_users).' '.__('votes', 'wp-postratings');
 	} else {
-		$image_alt = $post_ratings_users.' '.__('votes', 'wp-postratings').', '.__('average', 'wp-postratings').': '.$post_ratings_average.' '.__('out of', 'wp-postratings').' '.$ratings_max;
+		$image_alt = number_format_i18n($post_ratings_users).' '.__('votes', 'wp-postratings').', '.__('average', 'wp-postratings').': '.$post_ratings_average.' '.__('out of', 'wp-postratings').' '.$ratings_max;
 	}
 	if($postratings_custom) {
 		for($i=1; $i <= $ratings_max; $i++) {
@@ -1084,7 +1084,7 @@ if($_GET['sortby'] == 'most_rated') {
 
 
 ### Function: Plug Into WP-Stats
-if(strpos(get_option('stats_url'), $_SERVER['REQUEST_URI']) || strpos($_SERVER['REQUEST_URI'], 'stats-options.php') || strpos($_SERVER['REQUEST_URI'], 'stats/stats.php')) {
+if(strpos(get_option('stats_url'), $_SERVER['REQUEST_URI']) || strpos($_SERVER['REQUEST_URI'], 'stats-options.php') || strpos($_SERVER['REQUEST_URI'], 'wp-stats/wp-stats.php')) {
 	add_filter('wp_stats_page_admin_plugins', 'postratings_page_admin_general_stats');
 	add_filter('wp_stats_page_admin_most', 'postratings_page_admin_most_stats');
 	add_filter('wp_stats_page_plugins', 'postratings_page_general_stats');
