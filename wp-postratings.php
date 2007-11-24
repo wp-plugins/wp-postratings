@@ -888,21 +888,23 @@ if(!function_exists('get_ratings_users')) {
 ### Function: Snippet Text
 if(!function_exists('snippet_chars')) {
 	function snippet_chars($text, $length = 0) {
-		$text = htmlspecialchars_decode($text);
+		$text = html_entity_decode($text);
 		 if (strlen($text) > $length){       
-			return htmlspecialchars(substr($text,0,$length)).'...';             
+			return htmlentities(substr($text,0,$length)).'...';             
 		 } else {
-			return htmlspecialchars($text);
+			return htmlentities($text);
 		 }
 	}
 }
 
 
-### Function: HTML Special Chars Decode
-if (!function_exists('htmlspecialchars_decode')) {
-   function htmlspecialchars_decode($text) {
-       return strtr($text, array_flip(get_html_translation_table(HTML_SPECIALCHARS)));
-   }
+### Function: HTML Entity Decode
+if (!function_exists('html_entity_decode')) {
+	function html_entity_decode($given_html, $quote_style = ENT_QUOTES) {
+		$trans_table = array_flip(get_html_translation_table(HTML_SPECIALCHARS, $quote_style));
+		$trans_table['&#39;'] = "'";
+		return (strtr($given_html, $trans_table));
+	}
 }
 
 
