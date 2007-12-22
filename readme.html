@@ -288,8 +288,14 @@
 					<ul>
 						<li>NEW: Use number_format_i18n() Instead Of number_format()</li>
 						<li>NEW: Added get_lowest_rated() Function</li>
+						<li>NEW: Added get_lowest_rated_category() Function</li>
+						<li>NEW: Added get_most_rated_category() Function</li>
+						<li>NEW: Get Most Rated Is Now Under The Templates</li>
+						<li>NEW: Minimum Votes Options/Parameters Added To get_lowest_rated(), get_lowest_rated_category(), get_highest_rated(), get_highest_rated_category(), get_most_rated() and get_most_rated_category() Functions</li>
 						<li>NEW: Uses /wp-postratings/ Folder Instead Of /postratings/</li>
 						<li>NEW: Uses wp-postratings.php Instead Of postratings.php</li>
+						<li>FIXED: Thumbs Up/Down Post Should Get Sorted By Score Instead Of Average</li>
+						<li>FIXED: Increased The Length Of The Input Box For Individual Rating Value</li>
 					</ul>
 				</li>
 				<li>
@@ -545,10 +551,31 @@
 						&nbsp;&nbsp;&nbsp;&lt;/ul&gt;<br />
 						&lt;?php endif; ?&gt;
 					</blockquote>
-					<p>Default: get_lowest_rated('both', 10)</p>
+					<p>Default: get_lowest_rated('both', 0, 10)</p>
 					<p>The value <strong>'both'</strong> will display both the lowest rated posts and pages.</p>
 					<p>If you want to display the lowest rated posts only, replace 'both' with <strong>'post'</strong>.</p>
 					<p>If you want to display the lowest rated pages only, replace 'both' with <strong>'page'</strong>.</p>
+					<p>The value <strong>0</strong> refers to the minimum votes required before the post get shown.</p>
+					<p>The value <strong>10</strong> will display only the top 10 lowest rated posts/pages.</p>
+				</li>
+				<li>
+					To Display <strong>Lowest Rated Post In A Category</strong>
+				</li>
+				<li>
+					Use:
+					<blockquote>
+						&lt;?php if (function_exists('get_lowest_rated_category')): ?&gt;<br />
+						&nbsp;&nbsp;&nbsp;&lt;ul&gt;<br />
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;?php get_lowest_rated_category(CATEGORY_ID); ?&gt;<br />
+						&nbsp;&nbsp;&nbsp;&lt;/ul&gt;<br />
+						&lt;?php endif; ?&gt;
+					</blockquote>
+					<p>Default: get_lowest_rated_category(CATEGORY_ID, 'both', 0, 10)</p>
+					<p>Replace <strong>CATEGORY_ID</strong> will your category ID. If you want it to span several categories, replace <strong>CATEGORY_ID</strong> with <strong>array(1, 2)</strong> where <strong>1</strong> and <strong>2</strong> are your categories ID.</p>
+					<p>The value <strong>'both'</strong> will display both the lowest rated posts and pages.</p>
+					<p>If you want to display the lowest rated posts only, replace 'both' with <strong>'post'</strong>.</p>
+					<p>If you want to display the lowest rated pages only, replace 'both' with <strong>'page'</strong>.</p>
+					<p>The value <strong>0</strong> refers to the minimum votes required before the post get shown.</p>
 					<p>The value <strong>10</strong> will display only the top 10 lowest rated posts/pages.</p>
 				</li>
 				<li>
@@ -563,10 +590,11 @@
 						&nbsp;&nbsp;&nbsp;&lt;/ul&gt;<br />
 						&lt;?php endif; ?&gt;
 					</blockquote>
-					<p>Default: get_highest_rated('both', 10)</p>
+					<p>Default: get_highest_rated('both', 0, 10)</p>
 					<p>The value <strong>'both'</strong> will display both the highest rated posts and pages.</p>
 					<p>If you want to display the highest rated posts only, replace 'both' with <strong>'post'</strong>.</p>
 					<p>If you want to display the highest rated pages only, replace 'both' with <strong>'page'</strong>.</p>
+					<p>The value <strong>0</strong> refers to the minimum votes required before the post get shown.</p>
 					<p>The value <strong>10</strong> will display only the top 10 highest rated posts/pages.</p>
 				</li>
 				<li>
@@ -577,16 +605,16 @@
 					<blockquote>
 						&lt;?php if (function_exists('get_highest_rated_category')): ?&gt;<br />
 						&nbsp;&nbsp;&nbsp;&lt;ul&gt;<br />
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;?php get_highest_rated_category(); ?&gt;<br />
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;?php get_highest_rated_category(CATEGORY_ID); ?&gt;<br />
 						&nbsp;&nbsp;&nbsp;&lt;/ul&gt;<br />
 						&lt;?php endif; ?&gt;
 					</blockquote>
-					<p>Default: get_highest_rated_category(0, 'both', 10)</p>
-					<p>The value <strong>0</strong> will display highest rated post from category id 0.</p>
-					<p>You can define multiple categories by replacing <strong>0</strong> with <strong>array(1,2,3)</strong>. This will include ratings from category 1, 2 and 3.</p>
+					<p>Default: get_highest_rated_category(CATEGORY_ID, 'both', 0, 10)</p>
+					<p>Replace <strong>CATEGORY_ID</strong> will your category ID. If you want it to span several categories, replace <strong>CATEGORY_ID</strong> with <strong>array(1, 2)</strong> where <strong>1</strong> and <strong>2</strong> are your categories ID.</p>
 					<p>The value <strong>'both'</strong> will display both the highest rated posts and pages.</p>					
 					<p>If you want to display the highest rated posts only, replace 'both' with <strong>'post'</strong>.</p>
 					<p>If you want to display the highest rated pages only, replace 'both' with <strong>'page'</strong>.</p>
+					<p>The value <strong>0</strong> refers to the minimum votes required before the post get shown.</p>
 					<p>The value <strong>10</strong> will display only the top 10 highest rated posts/pages.</p>
 				</li>
 				<li>
@@ -601,10 +629,31 @@
 						&nbsp;&nbsp;&nbsp;&lt;/ul&gt;<br />
 						&lt;?php endif; ?&gt;
 					</blockquote>
-					<p>Default: get_most_rated('both', 10)</p>
+					<p>Default: get_most_rated('both', 0, 10)</p>
 					<p>The value <strong>'both'</strong> will display both the most rated posts and pages.</p>
 					<p>If you want to display the most rated posts only, replace 'both' with <strong>'post'</strong>.</p>
 					<p>If you want to display the most rated pages only, replace 'both' with <strong>'page'</strong>.</p>
+					<p>The value <strong>0</strong> refers to the minimum votes required before the post get shown.</p>
+					<p>The value <strong>10</strong> will display only the top 10 most rated posts/pages.</p>
+				</li>
+				<li>
+					To Display <strong>Most Rated Post In A Category</strong>
+				</li>
+				<li>
+					Use:
+					<blockquote>
+						&lt;?php if (function_exists('get_most_rated_category')): ?&gt;<br />
+						&nbsp;&nbsp;&nbsp;&lt;ul&gt;<br />
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;?php get_most_rated_category(CATEGORY_ID); ?&gt;<br />
+						&nbsp;&nbsp;&nbsp;&lt;/ul&gt;<br />
+						&lt;?php endif; ?&gt;
+					</blockquote>
+					<p>Default: get_most_rated_category(CATEGORY_ID, 'both', 0, 10)</p>
+					<p>Replace <strong>CATEGORY_ID</strong> will your category ID. If you want it to span several categories, replace <strong>CATEGORY_ID</strong> with <strong>array(1, 2)</strong> where <strong>1</strong> and <strong>2</strong> are your categories ID.</p>
+					<p>The value <strong>'both'</strong> will display both the most rated posts and pages.</p>
+					<p>If you want to display the most rated posts only, replace 'both' with <strong>'post'</strong>.</p>
+					<p>If you want to display the most rated pages only, replace 'both' with <strong>'page'</strong>.</p>
+					<p>The value <strong>0</strong> refers to the minimum votes required before the post get shown.</p>
 					<p>The value <strong>10</strong> will display only the top 10 most rated posts/pages.</p>
 				</li>
 			</ul>

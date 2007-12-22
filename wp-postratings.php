@@ -492,37 +492,203 @@ function place_ratings($content){
 
 ### Function: Display Most Rated Page/Post
 if(!function_exists('get_most_rated')) {
-	function get_most_rated($mode = '', $limit = 10, $chars = 0, $display = true) {
+	function get_most_rated($mode = '', $min_votes = 0, $limit = 10, $chars = 0, $display = true) {
 		global $wpdb, $post;
 		$where = '';
 		$temp = '';
+		$output = '';
 		if(!empty($mode) && $mode != 'both') {
 			$where = "$wpdb->posts.post_type = '$mode'";
 		} else {
 			$where = '1=1';
 		}
-		$most_rated = $wpdb->get_results("SELECT DISTINCT $wpdb->posts.*, (t1.meta_value+0.00) AS ratings_average, (t2.meta_value+0.00) AS ratings_users FROM $wpdb->posts LEFT JOIN $wpdb->postmeta AS t1 ON t1.post_id = $wpdb->posts.ID LEFT JOIN $wpdb->postmeta As t2 ON t1.post_id = t2.post_id WHERE t1.meta_key = 'ratings_average' AND t2.meta_key = 'ratings_users' AND $wpdb->posts.post_password = '' AND $wpdb->posts.post_date < '".current_time('mysql')."' AND $wpdb->posts.post_status = 'publish' AND $where ORDER BY ratings_users DESC, ratings_average DESC LIMIT $limit");
+		$most_rated = $wpdb->get_results("SELECT DISTINCT $wpdb->posts.*, (t1.meta_value+0.00) AS ratings_average, (t2.meta_value+0.00) AS ratings_users FROM $wpdb->posts LEFT JOIN $wpdb->postmeta AS t1 ON t1.post_id = $wpdb->posts.ID LEFT JOIN $wpdb->postmeta As t2 ON t1.post_id = t2.post_id WHERE t1.meta_key = 'ratings_average' AND t2.meta_key = 'ratings_users' AND $wpdb->posts.post_password = '' AND $wpdb->posts.post_date < '".current_time('mysql')."' AND $wpdb->posts.post_status = 'publish' AND t2.meta_value >= $min_votes AND $where ORDER BY ratings_users DESC, ratings_average DESC LIMIT $limit");
 		if($most_rated) {
-			if($chars > 0) {
-				foreach ($most_rated as $post) {
-					$post_title = get_the_title();
-					$post_votes = intval($post->ratings_users);
-					$temp .= "<li><a href=\"".get_permalink()."\">".snippet_chars($post_title, $chars)."</a> - $post_votes ".__('votes', 'wp-postratings')."</li>\n";
-				}
-			} else {
-				foreach ($most_rated as $post) {
-					$post_title = get_the_title();
-					$post_votes = intval($post->ratings_users);
-					$temp .= "<li><a href=\"".get_permalink()."\">$post_title</a> - $post_votes ".__('votes', 'wp-postratings')."</li>\n";
-				}
+			foreach ($most_rated as $post) {
+				$post_ratings_users = number_format_i18n($post->ratings_users);
+				$post_title = get_the_title();
+				$post_excerpt = get_the_excerpt();
+				$post_content = get_the_content();
+				if($chars > 0) {
+					$temp = "<li><a href=\"".get_permalink()."\">".snippet_text($post_title, $chars)."</a> - $post_ratings_users ".__('votes', 'wp-postratings')."</li>\n";
+				} else {
+					$temp = stripslashes(get_option('postratings_template_mostrated'));
+					$temp = str_replace("%RATINGS_USERS%", $post_ratings_users, $temp);
+					$temp = str_replace("%POST_TITLE%", $post_title, $temp);
+					$temp = str_replace("%POST_EXCERPT%", $post_excerpt, $temp);
+					$temp = str_replace("%POST_CONTENT%", $post_content, $temp);
+					$temp = str_replace("%POST_URL%", get_permalink(), $temp);					
+				}				
+				$output .= $temp;
 			}
 		} else {
-			$temp = '<li>'.__('N/A', 'wp-postratings').'</li>'."\n";
+			$output = '<li>'.__('N/A', 'wp-postratings').'</li>'."\n";
 		}
 		if($display) {
-			echo $temp;
+			echo $output;
 		} else {
-			return $temp;
+			return $output;
+		}
+	}
+}
+
+
+### Function: Display Most Rated Page/Post By Category ID
+if(!function_exists('get_most_rated_category')) {
+	function get_most_rated_category($category_id = 0, $mode = '', $min_votes = 0, $limit = 10, $chars = 0, $display = true) {
+		global $wpdb, $post;
+		$where = '';
+		$temp = '';
+		$output = '';
+		if(is_array($category_id)) {
+			$category_sql = "$wpdb->term_relationships.term_taxonomy_id IN (".join(',', $category_id).')';
+		} else {
+			$category_sql = "$wpdb->term_relationships.term_taxonomy_id = $category_id";
+		}
+		if(!empty($mode) && $mode != 'both') {
+			$where = "$wpdb->posts.post_type = '$mode'";
+		} else {
+			$where = '1=1';
+		}
+		$most_rated = $wpdb->get_results("SELECT DISTINCT $wpdb->posts.*, (t1.meta_value+0.00) AS ratings_average, (t2.meta_value+0.00) AS ratings_users FROM $wpdb->posts LEFT JOIN $wpdb->postmeta AS t1 ON t1.post_id = $wpdb->posts.ID LEFT JOIN $wpdb->postmeta As t2 ON t1.post_id = t2.post_id LEFT JOIN $wpdb->term_relationships ON $wpdb->term_relationships.object_id = $wpdb->posts.ID WHERE t1.meta_key = 'ratings_average' AND t2.meta_key = 'ratings_users' AND $wpdb->posts.post_password = '' AND $wpdb->posts.post_date < '".current_time('mysql')."' AND $wpdb->posts.post_status = 'publish' AND $category_sql AND t2.meta_value >= $min_votes AND $where ORDER BY ratings_users DESC, ratings_average DESC LIMIT $limit");
+		if($most_rated) {
+			foreach ($most_rated as $post) {
+				$post_ratings_users = number_format_i18n($post->ratings_users);
+				$post_title = get_the_title();
+				$post_excerpt = get_the_excerpt();
+				$post_content = get_the_content();
+				if($chars > 0) {
+					$temp = "<li><a href=\"".get_permalink()."\">".snippet_text($post_title, $chars)."</a> - $post_ratings_users ".__('votes', 'wp-postratings')."</li>\n";
+				} else {
+					$temp = stripslashes(get_option('postratings_template_mostrated'));
+					$temp = str_replace("%RATINGS_USERS%", $post_ratings_users, $temp);
+					$temp = str_replace("%POST_TITLE%", $post_title, $temp);
+					$temp = str_replace("%POST_EXCERPT%", $post_excerpt, $temp);
+					$temp = str_replace("%POST_CONTENT%", $post_content, $temp);
+					$temp = str_replace("%POST_URL%", get_permalink(), $temp);					
+				}				
+				$output .= $temp;
+			}
+		} else {
+			$output = '<li>'.__('N/A', 'wp-postratings').'</li>'."\n";
+		}
+		if($display) {
+			echo $output;
+		} else {
+			return $output;
+		}
+	}
+}
+
+
+### Function: Display Highest Rated Page/Post
+if(!function_exists('get_highest_rated')) {
+	function get_highest_rated($mode = '', $min_votes = 0, $limit = 10, $chars = 0, $display = true) {
+		global $wpdb, $post;
+		$temp_post = $post;
+		$ratings_image = get_option('postratings_image');
+		$ratings_max = intval(get_option('postratings_max'));
+		$ratings_custom = intval(get_option('postratings_customrating'));
+		$where = '';
+		$temp = '';
+		$output = '';
+		if(!empty($mode) && $mode != 'both') {
+			$where = "$wpdb->posts.post_type = '$mode'";
+		} else {
+			$where = '1=1';
+		}
+		if($ratings_custom && $ratings_max == 2) {
+			$order_by = 'ratings_score';
+		} else {
+			$order_by = 'ratings_average';
+		}
+		$highest_rated = $wpdb->get_results("SELECT DISTINCT $wpdb->posts.*, (t1.meta_value+0.00) AS ratings_average, (t2.meta_value+0.00) AS ratings_users, (t3.meta_value+0.00) AS ratings_score FROM $wpdb->posts LEFT JOIN $wpdb->postmeta AS t1 ON t1.post_id = $wpdb->posts.ID LEFT JOIN $wpdb->postmeta As t2 ON t1.post_id = t2.post_id LEFT JOIN $wpdb->postmeta AS t3 ON t3.post_id = $wpdb->posts.ID WHERE t1.meta_key = 'ratings_average' AND t2.meta_key = 'ratings_users' AND t3.meta_key = 'ratings_score' AND $wpdb->posts.post_password = '' AND $wpdb->posts.post_date < '".current_time('mysql')."' AND $wpdb->posts.post_status = 'publish' AND t2.meta_value >= $min_votes AND $where ORDER BY $order_by DESC, ratings_users DESC LIMIT $limit");
+		if($highest_rated) {
+			foreach($highest_rated as $post) {
+				// Variables
+				$post_ratings_users = $post->ratings_users;
+				$post_ratings_images = '';
+				$post_title = get_the_title();
+				$post_ratings_average = $post->ratings_average;
+				$post_ratings_score = $post->ratings_score;
+				$post_ratings_whole = intval($post_ratings_average);
+				$post_ratings = floor($post_ratings_average);
+				$post_excerpt = get_the_excerpt();
+				$post_content = get_the_content();
+				// Check For Half Star
+				$insert_half = 0;
+				$average_diff = $post_ratings_average-$post_ratings_whole;
+				if($average_diff >= 0.25 && $average_diff <= 0.75) {
+					$insert_half = $post_ratings_whole+1;
+				} elseif($average_diff > 0.75) {
+					$post_ratings = $post_ratings+1;
+				}
+				if($ratings_custom && $ratings_max == 2) {
+					if($post_ratings_score > 0) {
+						$post_ratings_score = '+'.$post_ratings_score;
+					}
+					$image_alt = $post_ratings_score.' '.__('rating', 'wp-postratings');
+				} else {
+					$image_alt = $post_ratings_users.' '.__('votes', 'wp-postratings').', '.__('average', 'wp-postratings').': '.$post_ratings_average.' '.__('out of', 'wp-postratings').' '.$ratings_max;
+				}
+				// Display Start Of Rating Images
+				if(file_exists(ABSPATH.'/wp-content/plugins/wp-postratings/images/'.$ratings_image.'/rating_start.gif')) {
+					$post_ratings_images .= '<img src="'.get_option('siteurl').'/wp-content/plugins/wp-postratings/images/'.$ratings_image.'/rating_start.gif" alt="" class="post-ratings-image" />';
+				}
+				if(!$ratings_custom) { 
+					for($i=1; $i <= $ratings_max; $i++) {
+						if($i <= $post_ratings) {
+							$post_ratings_images .= '<img src="'.get_option('siteurl').'/wp-content/plugins/wp-postratings/images/'.$ratings_image.'/rating_on.gif" alt="'.$image_alt.'" title="'.$image_alt.'" class="post-ratings-image" />';		
+						} elseif($i == $insert_half) {						
+							$post_ratings_images .= '<img src="'.get_option('siteurl').'/wp-content/plugins/wp-postratings/images/'.$ratings_image.'/rating_half.gif" alt="'.$image_alt.'" title="'.$image_alt.'" class="post-ratings-image" />';
+						} else {
+							$post_ratings_images .= '<img src="'.get_option('siteurl').'/wp-content/plugins/wp-postratings/images/'.$ratings_image.'/rating_off.gif" alt="'.$image_alt.'" title="'.$image_alt.'" class="post-ratings-image" />';
+						}
+					}
+				} else {
+					for($i=1; $i <= $ratings_max; $i++) {
+						if($i <= $post_ratings) {
+							$post_ratings_images .= '<img src="'.get_option('siteurl').'/wp-content/plugins/wp-postratings/images/'.$ratings_image.'/rating_'.$i.'_on.gif" alt="'.$image_alt.'" title="'.$image_alt.'" class="post-ratings-image" />';		
+						} elseif($i == $insert_half) {						
+							$post_ratings_images .= '<img src="'.get_option('siteurl').'/wp-content/plugins/wp-postratings/images/'.$ratings_image.'/rating_'.$i.'_half.gif" alt="'.$image_alt.'" title="'.$image_alt.'" class="post-ratings-image" />';
+						} else {
+							$post_ratings_images .= '<img src="'.get_option('siteurl').'/wp-content/plugins/wp-postratings/images/'.$ratings_image.'/rating_'.$i.'_off.gif" alt="'.$image_alt.'" title="'.$image_alt.'" class="post-ratings-image" />';
+						}
+					}
+				}
+				// Display End Of Rating Image
+				if(file_exists(ABSPATH.'/wp-content/plugins/wp-postratings/images/'.$ratings_image.'/rating_end.gif')) {
+					$post_ratings_images .= '<img src="'.get_option('siteurl').'/wp-content/plugins/wp-postratings/images/'.$ratings_image.'/rating_end.gif" alt="" class="post-ratings-image" />';
+				}
+				if($chars > 0) {
+					if($ratings_custom && $ratings_max == 2) {
+						$temp = "<li><a href=\"".get_permalink()."\">".snippet_text($post_title, $chars)."</a> ".$image_alt."</li>\n";
+					} else {
+						$temp = "<li><a href=\"".get_permalink()."\">".snippet_text($post_title, $chars)."</a> ".$post_ratings_images."</li>\n";
+					}
+				} else {
+					// Display The Contents
+					$temp = stripslashes(get_option('postratings_template_highestrated'));
+					$temp = str_replace("%RATINGS_IMAGES%", $post_ratings_images, $temp);
+					$temp = str_replace("%RATINGS_MAX%", $ratings_max, $temp);
+					$temp = str_replace("%RATINGS_AVERAGE%", $post_ratings_average, $temp);
+					$temp = str_replace("%RATINGS_SCORE%", $post_ratings_score, $temp);
+					$temp = str_replace("%RATINGS_USERS%", number_format_i18n($post_ratings_users), $temp);
+					$temp = str_replace("%POST_TITLE%", $post_title, $temp);
+					$temp = str_replace("%POST_EXCERPT%", $post_excerpt, $temp);
+					$temp = str_replace("%POST_CONTENT%", $post_content, $temp);
+					$temp = str_replace("%POST_URL%", get_permalink(), $temp);
+				}
+				$output .= $temp;
+			}
+		} else {
+			$output = '<li>'.__('N/A', 'wp-postratings').'</li>'."\n";
+		}
+		$post = $temp_post;
+		if($display) {
+			echo $output;
+		} else {
+			return $output;
 		}
 	}
 }
@@ -530,7 +696,7 @@ if(!function_exists('get_most_rated')) {
 
 ### Function: Display Highest Rated Page/Post By Category ID
 if(!function_exists('get_highest_rated_category')) {
-	function get_highest_rated_category($category_id = 0, $mode = '', $limit = 10, $chars = 0, $display = true) {
+	function get_highest_rated_category($category_id = 0, $mode = '', $min_votes = 0, $limit = 10, $chars = 0, $display = true) {
 		global $wpdb, $post;
 		$ratings_image = get_option('postratings_image');
 		$ratings_max = intval(get_option('postratings_max'));
@@ -554,7 +720,7 @@ if(!function_exists('get_highest_rated_category')) {
 		} else {
 			$order_by = 'ratings_average';
 		}
-		$highest_rated = $wpdb->get_results("SELECT DISTINCT $wpdb->posts.*, (t1.meta_value+0.00) AS ratings_average, (t2.meta_value+0.00) AS ratings_users, (t3.meta_value+0.00) AS ratings_score FROM $wpdb->posts LEFT JOIN $wpdb->postmeta AS t1 ON t1.post_id = $wpdb->posts.ID LEFT JOIN $wpdb->postmeta AS t2 ON t1.post_id = t2.post_id LEFT JOIN $wpdb->postmeta AS t3 ON t3.post_id = $wpdb->posts.ID LEFT JOIN $wpdb->term_relationships ON $wpdb->term_relationships.object_id = $wpdb->posts.ID WHERE t1.meta_key = 'ratings_average' AND t2.meta_key = 'ratings_users' AND t3.meta_key = 'ratings_score' AND $wpdb->posts.post_password = '' AND $wpdb->posts.post_date < '".current_time('mysql')."'  AND $wpdb->posts.post_status = 'publish' AND $category_sql AND $where ORDER BY $order_by DESC, ratings_users DESC LIMIT $limit");
+		$highest_rated = $wpdb->get_results("SELECT DISTINCT $wpdb->posts.*, (t1.meta_value+0.00) AS ratings_average, (t2.meta_value+0.00) AS ratings_users, (t3.meta_value+0.00) AS ratings_score FROM $wpdb->posts LEFT JOIN $wpdb->postmeta AS t1 ON t1.post_id = $wpdb->posts.ID LEFT JOIN $wpdb->postmeta AS t2 ON t1.post_id = t2.post_id LEFT JOIN $wpdb->postmeta AS t3 ON t3.post_id = $wpdb->posts.ID LEFT JOIN $wpdb->term_relationships ON $wpdb->term_relationships.object_id = $wpdb->posts.ID WHERE t1.meta_key = 'ratings_average' AND t2.meta_key = 'ratings_users' AND t3.meta_key = 'ratings_score' AND $wpdb->posts.post_password = '' AND $wpdb->posts.post_date < '".current_time('mysql')."'  AND $wpdb->posts.post_status = 'publish' AND $category_sql AND t2.meta_value >= $min_votes AND $where ORDER BY $order_by DESC, ratings_users DESC LIMIT $limit");
 		if($highest_rated) {
 			foreach($highest_rated as $post) {
 				// Variables
@@ -565,8 +731,8 @@ if(!function_exists('get_highest_rated_category')) {
 				$post_ratings_score = $post->ratings_score;
 				$post_ratings_whole = intval($post_ratings_average);
 				$post_ratings = floor($post_ratings_average);
-				$post_excerpt = stripslashes($post->post_excerpt);
-				$post_content = stripslashes($post->post_content);
+				$post_excerpt = get_the_excerpt();
+				$post_content = get_the_content();
 				// Check For Half Star
 				$insert_half = 0;
 				$average_diff = $post_ratings_average-$post_ratings_whole;
@@ -614,9 +780,9 @@ if(!function_exists('get_highest_rated_category')) {
 				}
 				if($chars > 0) {
 					if($ratings_custom && $ratings_max == 2) {
-						$temp = "<li><a href=\"".get_permalink()."\">".snippet_chars($post_title, $chars)."</a> ".$image_alt."</li>\n";
+						$temp = "<li><a href=\"".get_permalink()."\">".snippet_text($post_title, $chars)."</a> ".$image_alt."</li>\n";
 					} else {
-						$temp = "<li><a href=\"".get_permalink()."\">".snippet_chars($post_title, $chars)."</a> ".$post_ratings_images."</li>\n";
+						$temp = "<li><a href=\"".get_permalink()."\">".snippet_text($post_title, $chars)."</a> ".$post_ratings_images."</li>\n";
 					}
 				} else {
 					// Display The Contents
@@ -636,119 +802,6 @@ if(!function_exists('get_highest_rated_category')) {
 		} else {
 			$output = '<li>'.__('N/A', 'wp-postratings').'</li>'."\n";
 		}
-		if($display) {
-			echo $output;
-		} else {
-			return $output;
-		}
-	}
-}
-
-
-### Function: Display Highest Rated Page/Post
-if(!function_exists('get_highest_rated')) {
-	function get_highest_rated($mode = '', $limit = 10, $chars = 0, $display = true) {
-		global $wpdb, $post;
-		$temp_post = $post;
-		$ratings_image = get_option('postratings_image');
-		$ratings_max = intval(get_option('postratings_max'));
-		$ratings_custom = intval(get_option('postratings_customrating'));
-		$where = '';
-		$temp = '';
-		$output = '';
-		if(!empty($mode) && $mode != 'both') {
-			$where = "$wpdb->posts.post_type = '$mode'";
-		} else {
-			$where = '1=1';
-		}
-		if($ratings_custom && $ratings_max == 2) {
-			$order_by = 'ratings_score';
-		} else {
-			$order_by = 'ratings_average';
-		}
-		$highest_rated = $wpdb->get_results("SELECT DISTINCT $wpdb->posts.*, (t1.meta_value+0.00) AS ratings_average, (t2.meta_value+0.00) AS ratings_users, (t3.meta_value+0.00) AS ratings_score FROM $wpdb->posts LEFT JOIN $wpdb->postmeta AS t1 ON t1.post_id = $wpdb->posts.ID LEFT JOIN $wpdb->postmeta As t2 ON t1.post_id = t2.post_id LEFT JOIN $wpdb->postmeta AS t3 ON t3.post_id = $wpdb->posts.ID WHERE t1.meta_key = 'ratings_average' AND t2.meta_key = 'ratings_users' AND t3.meta_key = 'ratings_score' AND $wpdb->posts.post_password = '' AND $wpdb->posts.post_date < '".current_time('mysql')."' AND $wpdb->posts.post_status = 'publish' AND $where ORDER BY $order_by DESC, ratings_users DESC LIMIT $limit");
-		if($highest_rated) {
-			foreach($highest_rated as $post) {
-				// Variables
-				$post_ratings_users = $post->ratings_users;
-				$post_ratings_images = '';
-				$post_title = get_the_title();
-				$post_ratings_average = $post->ratings_average;
-				$post_ratings_score = $post->ratings_score;
-				$post_ratings_whole = intval($post_ratings_average);
-				$post_ratings = floor($post_ratings_average);
-				$post_excerpt = stripslashes($post->post_excerpt);
-				$post_content = stripslashes($post->post_content);
-				// Check For Half Star
-				$insert_half = 0;
-				$average_diff = $post_ratings_average-$post_ratings_whole;
-				if($average_diff >= 0.25 && $average_diff <= 0.75) {
-					$insert_half = $post_ratings_whole+1;
-				} elseif($average_diff > 0.75) {
-					$post_ratings = $post_ratings+1;
-				}
-				if($ratings_custom && $ratings_max == 2) {
-					if($post_ratings_score > 0) {
-						$post_ratings_score = '+'.$post_ratings_score;
-					}
-					$image_alt = $post_ratings_score.' '.__('rating', 'wp-postratings');
-				} else {
-					$image_alt = $post_ratings_users.' '.__('votes', 'wp-postratings').', '.__('average', 'wp-postratings').': '.$post_ratings_average.' '.__('out of', 'wp-postratings').' '.$ratings_max;
-				}
-				// Display Start Of Rating Images
-				if(file_exists(ABSPATH.'/wp-content/plugins/wp-postratings/images/'.$ratings_image.'/rating_start.gif')) {
-					$post_ratings_images .= '<img src="'.get_option('siteurl').'/wp-content/plugins/wp-postratings/images/'.$ratings_image.'/rating_start.gif" alt="" class="post-ratings-image" />';
-				}
-				if(!$ratings_custom) { 
-					for($i=1; $i <= $ratings_max; $i++) {
-						if($i <= $post_ratings) {
-							$post_ratings_images .= '<img src="'.get_option('siteurl').'/wp-content/plugins/wp-postratings/images/'.$ratings_image.'/rating_on.gif" alt="'.$image_alt.'" title="'.$image_alt.'" class="post-ratings-image" />';		
-						} elseif($i == $insert_half) {						
-							$post_ratings_images .= '<img src="'.get_option('siteurl').'/wp-content/plugins/wp-postratings/images/'.$ratings_image.'/rating_half.gif" alt="'.$image_alt.'" title="'.$image_alt.'" class="post-ratings-image" />';
-						} else {
-							$post_ratings_images .= '<img src="'.get_option('siteurl').'/wp-content/plugins/wp-postratings/images/'.$ratings_image.'/rating_off.gif" alt="'.$image_alt.'" title="'.$image_alt.'" class="post-ratings-image" />';
-						}
-					}
-				} else {
-					for($i=1; $i <= $ratings_max; $i++) {
-						if($i <= $post_ratings) {
-							$post_ratings_images .= '<img src="'.get_option('siteurl').'/wp-content/plugins/wp-postratings/images/'.$ratings_image.'/rating_'.$i.'_on.gif" alt="'.$image_alt.'" title="'.$image_alt.'" class="post-ratings-image" />';		
-						} elseif($i == $insert_half) {						
-							$post_ratings_images .= '<img src="'.get_option('siteurl').'/wp-content/plugins/wp-postratings/images/'.$ratings_image.'/rating_'.$i.'_half.gif" alt="'.$image_alt.'" title="'.$image_alt.'" class="post-ratings-image" />';
-						} else {
-							$post_ratings_images .= '<img src="'.get_option('siteurl').'/wp-content/plugins/wp-postratings/images/'.$ratings_image.'/rating_'.$i.'_off.gif" alt="'.$image_alt.'" title="'.$image_alt.'" class="post-ratings-image" />';
-						}
-					}
-				}
-				// Display End Of Rating Image
-				if(file_exists(ABSPATH.'/wp-content/plugins/wp-postratings/images/'.$ratings_image.'/rating_end.gif')) {
-					$post_ratings_images .= '<img src="'.get_option('siteurl').'/wp-content/plugins/wp-postratings/images/'.$ratings_image.'/rating_end.gif" alt="" class="post-ratings-image" />';
-				}
-				if($chars > 0) {
-					if($ratings_custom && $ratings_max == 2) {
-						$temp = "<li><a href=\"".get_permalink()."\">".snippet_chars($post_title, $chars)."</a> ".$image_alt."</li>\n";
-					} else {
-						$temp = "<li><a href=\"".get_permalink()."\">".snippet_chars($post_title, $chars)."</a> ".$post_ratings_images."</li>\n";
-					}
-				} else {
-					// Display The Contents
-					$temp = stripslashes(get_option('postratings_template_highestrated'));
-					$temp = str_replace("%RATINGS_IMAGES%", $post_ratings_images, $temp);
-					$temp = str_replace("%RATINGS_MAX%", $ratings_max, $temp);
-					$temp = str_replace("%RATINGS_AVERAGE%", $post_ratings_average, $temp);
-					$temp = str_replace("%RATINGS_SCORE%", $post_ratings_score, $temp);
-					$temp = str_replace("%RATINGS_USERS%", number_format_i18n($post_ratings_users), $temp);
-					$temp = str_replace("%POST_TITLE%", $post_title, $temp);
-					$temp = str_replace("%POST_EXCERPT%", $post_excerpt, $temp);
-					$temp = str_replace("%POST_CONTENT%", $post_content, $temp);
-					$temp = str_replace("%POST_URL%", get_permalink(), $temp);
-				}
-				$output .= $temp;
-			}
-		} else {
-			$output = '<li>'.__('N/A', 'wp-postratings').'</li>'."\n";
-		}
-		$post = $temp_post;
 		if($display) {
 			echo $output;
 		} else {
@@ -760,7 +813,7 @@ if(!function_exists('get_highest_rated')) {
 
 ### Function: Display Lowest Rated Page/Post
 if(!function_exists('get_lowest_rated')) {
-	function get_lowest_rated($mode = '', $limit = 10, $chars = 0, $display = true) {
+	function get_lowest_rated($mode = '', $min_votes = 0, $limit = 10, $chars = 0, $display = true) {
 		global $wpdb, $post;
 		$temp_post = $post;
 		$ratings_image = get_option('postratings_image');
@@ -779,7 +832,7 @@ if(!function_exists('get_lowest_rated')) {
 		} else {
 			$order_by = 'ratings_average';
 		}
-		$highest_rated = $wpdb->get_results("SELECT DISTINCT $wpdb->posts.*, (t1.meta_value+0.00) AS ratings_average, (t2.meta_value+0.00) AS ratings_users, (t3.meta_value+0.00) AS ratings_score FROM $wpdb->posts LEFT JOIN $wpdb->postmeta AS t1 ON t1.post_id = $wpdb->posts.ID LEFT JOIN $wpdb->postmeta As t2 ON t1.post_id = t2.post_id LEFT JOIN $wpdb->postmeta AS t3 ON t3.post_id = $wpdb->posts.ID WHERE t1.meta_key = 'ratings_average' AND t2.meta_key = 'ratings_users' AND t3.meta_key = 'ratings_score' AND $wpdb->posts.post_password = '' AND $wpdb->posts.post_date < '".current_time('mysql')."' AND $wpdb->posts.post_status = 'publish' AND $where ORDER BY $order_by ASC, ratings_users DESC LIMIT $limit");
+		$highest_rated = $wpdb->get_results("SELECT DISTINCT $wpdb->posts.*, (t1.meta_value+0.00) AS ratings_average, (t2.meta_value+0.00) AS ratings_users, (t3.meta_value+0.00) AS ratings_score FROM $wpdb->posts LEFT JOIN $wpdb->postmeta AS t1 ON t1.post_id = $wpdb->posts.ID LEFT JOIN $wpdb->postmeta As t2 ON t1.post_id = t2.post_id LEFT JOIN $wpdb->postmeta AS t3 ON t3.post_id = $wpdb->posts.ID WHERE t1.meta_key = 'ratings_average' AND t2.meta_key = 'ratings_users' AND t3.meta_key = 'ratings_score' AND $wpdb->posts.post_password = '' AND $wpdb->posts.post_date < '".current_time('mysql')."' AND $wpdb->posts.post_status = 'publish' AND t2.meta_value >= $min_votes AND $where ORDER BY $order_by ASC, ratings_users DESC LIMIT $limit");
 		if($highest_rated) {
 			foreach($highest_rated as $post) {
 				// Variables
@@ -790,8 +843,8 @@ if(!function_exists('get_lowest_rated')) {
 				$post_ratings_score = $post->ratings_score;
 				$post_ratings_whole = intval($post_ratings_average);
 				$post_ratings = floor($post_ratings_average);
-				$post_excerpt = stripslashes($post->post_excerpt);
-				$post_content = stripslashes($post->post_content);
+				$post_excerpt = get_the_excerpt();
+				$post_content = get_the_content();
 				// Check For Half Star
 				$insert_half = 0;
 				$average_diff = $post_ratings_average-$post_ratings_whole;
@@ -839,9 +892,9 @@ if(!function_exists('get_lowest_rated')) {
 				}
 				if($chars > 0) {
 					if($ratings_custom && $ratings_max == 2) {
-						$temp = "<li><a href=\"".get_permalink()."\">".snippet_chars($post_title, $chars)."</a> ".$image_alt."</li>\n";
+						$temp = "<li><a href=\"".get_permalink()."\">".snippet_text($post_title, $chars)."</a> ".$image_alt."</li>\n";
 					} else {
-						$temp = "<li><a href=\"".get_permalink()."\">".snippet_chars($post_title, $chars)."</a> ".$post_ratings_images."</li>\n";
+						$temp = "<li><a href=\"".get_permalink()."\">".snippet_text($post_title, $chars)."</a> ".$post_ratings_images."</li>\n";
 					}
 				} else {
 					// Display The Contents
@@ -862,6 +915,123 @@ if(!function_exists('get_lowest_rated')) {
 			$output = '<li>'.__('N/A', 'wp-postratings').'</li>'."\n";
 		}
 		$post = $temp_post;
+		if($display) {
+			echo $output;
+		} else {
+			return $output;
+		}
+	}
+}
+
+
+### Function: Display Lowest Rated Page/Post By Category ID
+if(!function_exists('get_lowest_rated_category')) {
+	function get_lowest_rated_category($category_id = 0, $mode = '', $min_votes = 0, $limit = 10, $chars = 0, $display = true) {
+		global $wpdb, $post;
+		$ratings_image = get_option('postratings_image');
+		$ratings_max = intval(get_option('postratings_max'));
+		$ratings_custom = intval(get_option('postratings_customrating'));
+		$where = '';
+		$temp = '';
+		$output = '';
+		// Code By: Dirceu P. Junior (http://pomoti.com)
+		if(is_array($category_id)) {
+			$category_sql = "$wpdb->term_relationships.term_taxonomy_id IN (".join(',', $category_id).')';
+		} else {
+			$category_sql = "$wpdb->term_relationships.term_taxonomy_id = $category_id";
+		}
+		if(!empty($mode) && $mode != 'both') {
+			$where = "$wpdb->posts.post_type = '$mode'";
+		} else {
+			$where = '1=1';
+		}
+		if($ratings_custom && $ratings_max == 2) {
+			$order_by = 'ratings_score';
+		} else {
+			$order_by = 'ratings_average';
+		}
+		$highest_rated = $wpdb->get_results("SELECT DISTINCT $wpdb->posts.*, (t1.meta_value+0.00) AS ratings_average, (t2.meta_value+0.00) AS ratings_users, (t3.meta_value+0.00) AS ratings_score FROM $wpdb->posts LEFT JOIN $wpdb->postmeta AS t1 ON t1.post_id = $wpdb->posts.ID LEFT JOIN $wpdb->postmeta AS t2 ON t1.post_id = t2.post_id LEFT JOIN $wpdb->postmeta AS t3 ON t3.post_id = $wpdb->posts.ID LEFT JOIN $wpdb->term_relationships ON $wpdb->term_relationships.object_id = $wpdb->posts.ID WHERE t1.meta_key = 'ratings_average' AND t2.meta_key = 'ratings_users' AND t3.meta_key = 'ratings_score' AND $wpdb->posts.post_password = '' AND $wpdb->posts.post_date < '".current_time('mysql')."'  AND $wpdb->posts.post_status = 'publish' AND $category_sql AND t2.meta_value >= $min_votes AND $where ORDER BY $order_by ASC, ratings_users DESC LIMIT $limit");
+		if($highest_rated) {
+			foreach($highest_rated as $post) {
+				// Variables
+				$post_ratings_users = $post->ratings_users;
+				$post_ratings_images = '';
+				$post_title = get_the_title();
+				$post_ratings_average = $post->ratings_average;
+				$post_ratings_score = $post->ratings_score;
+				$post_ratings_whole = intval($post_ratings_average);
+				$post_ratings = floor($post_ratings_average);
+				$post_excerpt = get_the_excerpt();
+				$post_content = get_the_content();
+				// Check For Half Star
+				$insert_half = 0;
+				$average_diff = $post_ratings_average-$post_ratings_whole;
+				if($average_diff >= 0.25 && $average_diff <= 0.75) {
+					$insert_half = $post_ratings_whole+1;
+				} elseif($average_diff > 0.75) {
+					$post_ratings = $post_ratings+1;
+				}
+				if($ratings_custom && $ratings_max == 2) {
+					if($post_ratings_score > 0) {
+						$post_ratings_score = '+'.$post_ratings_score;
+					}
+					$image_alt = $post_ratings_score.' '.__('rating', 'wp-postratings');
+				} else {
+					$image_alt = $post_ratings_users.' '.__('votes', 'wp-postratings').', '.__('average', 'wp-postratings').': '.$post_ratings_average.' '.__('out of', 'wp-postratings').' '.$ratings_max;
+				}
+				// Display Start Of Rating Image
+				if(file_exists(ABSPATH.'/wp-content/plugins/wp-postratings/images/'.$ratings_image.'/rating_start.gif')) {
+					$post_ratings_images .= '<img src="'.get_option('siteurl').'/wp-content/plugins/wp-postratings/images/'.$ratings_image.'/rating_start.gif" alt="" class="post-ratings-image" />';
+				}
+				if(!$ratings_custom) { 
+					for($i=1; $i <= $ratings_max; $i++) {
+						if($i <= $post_ratings) {
+							$post_ratings_images .= '<img src="'.get_option('siteurl').'/wp-content/plugins/wp-postratings/images/'.$ratings_image.'/rating_on.gif" alt="'.$image_alt.'" title="'.$image_alt.'" class="post-ratings-image" />';		
+						} elseif($i == $insert_half) {						
+							$post_ratings_images .= '<img src="'.get_option('siteurl').'/wp-content/plugins/wp-postratings/images/'.$ratings_image.'/rating_half.gif" alt="'.$image_alt.'" title="'.$image_alt.'" class="post-ratings-image" />';
+						} else {
+							$post_ratings_images .= '<img src="'.get_option('siteurl').'/wp-content/plugins/wp-postratings/images/'.$ratings_image.'/rating_off.gif" alt="'.$image_alt.'" title="'.$image_alt.'" class="post-ratings-image" />';
+						}
+					}
+				} else {
+					for($i=1; $i <= $ratings_max; $i++) {
+						if($i <= $post_ratings) {
+							$post_ratings_images .= '<img src="'.get_option('siteurl').'/wp-content/plugins/wp-postratings/images/'.$ratings_image.'/rating_'.$i.'_on.gif" alt="'.$image_alt.'" title="'.$image_alt.'" class="post-ratings-image" />';		
+						} elseif($i == $insert_half) {						
+							$post_ratings_images .= '<img src="'.get_option('siteurl').'/wp-content/plugins/wp-postratings/images/'.$ratings_image.'/rating_'.$i.'_half.gif" alt="'.$image_alt.'" title="'.$image_alt.'" class="post-ratings-image" />';
+						} else {
+							$post_ratings_images .= '<img src="'.get_option('siteurl').'/wp-content/plugins/wp-postratings/images/'.$ratings_image.'/rating_'.$i.'_off.gif" alt="'.$image_alt.'" title="'.$image_alt.'" class="post-ratings-image" />';
+						}
+					}
+				}
+				// Display End Of Rating Image
+				if(file_exists(ABSPATH.'/wp-content/plugins/wp-postratings/images/'.$ratings_image.'/rating_end.gif')) {
+					$post_ratings_images .= '<img src="'.get_option('siteurl').'/wp-content/plugins/wp-postratings/images/'.$ratings_image.'/rating_end.gif" alt="" class="post-ratings-image" />';
+				}
+				if($chars > 0) {
+					if($ratings_custom && $ratings_max == 2) {
+						$temp = "<li><a href=\"".get_permalink()."\">".snippet_text($post_title, $chars)."</a> ".$image_alt."</li>\n";
+					} else {
+						$temp = "<li><a href=\"".get_permalink()."\">".snippet_text($post_title, $chars)."</a> ".$post_ratings_images."</li>\n";
+					}
+				} else {
+					// Display The Contents
+					$temp = stripslashes(get_option('postratings_template_highestrated'));
+					$temp = str_replace("%RATINGS_IMAGES%", $post_ratings_images, $temp);
+					$temp = str_replace("%RATINGS_MAX%", $ratings_max, $temp);
+					$temp = str_replace("%RATINGS_AVERAGE%", $post_ratings_average, $temp);
+					$temp = str_replace("%RATINGS_SCORE%", $post_ratings_score, $temp);
+					$temp = str_replace("%RATINGS_USERS%", number_format_i18n($post_ratings_users), $temp);
+					$temp = str_replace("%POST_TITLE%", $post_title, $temp);
+					$temp = str_replace("%POST_EXCERPT%", $post_excerpt, $temp);
+					$temp = str_replace("%POST_CONTENT%", $post_content, $temp);
+					$temp = str_replace("%POST_URL%", get_permalink(), $temp);
+				}
+				$output .= $temp;
+			}
+		} else {
+			$output = '<li>'.__('N/A', 'wp-postratings').'</li>'."\n";
+		}
 		if($display) {
 			echo $output;
 		} else {
@@ -886,24 +1056,14 @@ if(!function_exists('get_ratings_users')) {
 
 
 ### Function: Snippet Text
-if(!function_exists('snippet_chars')) {
-	function snippet_chars($text, $length = 0) {
-		$text = html_entity_decode($text);
+if(!function_exists('snippet_text')) {
+	function snippet_text($text, $length = 0) {
+		$text = html_entity_decode($text, ENT_QUOTES);
 		 if (strlen($text) > $length){       
-			return htmlentities(substr($text,0,$length)).'...';             
+			return substr($text,0,$length).'...';             
 		 } else {
-			return htmlentities($text);
+			return $text;
 		 }
-	}
-}
-
-
-### Function: HTML Entity Decode
-if (!function_exists('html_entity_decode')) {
-	function html_entity_decode($given_html, $quote_style = ENT_QUOTES) {
-		$trans_table = array_flip(get_html_translation_table(HTML_SPECIALCHARS, $quote_style));
-		$trans_table['&#39;'] = "'";
-		return (strtr($given_html, $trans_table));
 	}
 }
 
@@ -1056,7 +1216,13 @@ function ratings_highest_join($content) {
 	return $content;
 }
 function ratings_highest_where($content) {
-	$content .= " AND t1.meta_key = 'ratings_average' AND t2.meta_key = 'ratings_users'";
+	$ratings_max = intval(get_option('postratings_max'));
+	$ratings_custom = intval(get_option('postratings_customrating'));
+	if($ratings_custom && $ratings_max == 2) {
+		$content .= " AND t1.meta_key = 'ratings_score' AND t2.meta_key = 'ratings_users'";
+	} else {
+		$content .= " AND t1.meta_key = 'ratings_average' AND t2.meta_key = 'ratings_users'";
+	}	
 	return $content;
 }
 function ratings_highest_orderby($content) {
@@ -1144,13 +1310,13 @@ function postratings_page_most_stats($content) {
 	if($stats_display['rated_highest'] == 1) {
 		$content .= '<p><strong>'.$stats_mostlimit.' '.__('Highest Rated Post', 'wp-postratings').'</strong></p>'."\n";
 		$content .= '<ul>'."\n";
-		$content .= get_highest_rated('post', $stats_mostlimit, 0, false);
+		$content .= get_highest_rated('post', 0, $stats_mostlimit, 0, false);
 		$content .= '</ul>'."\n";
 	}
 	if($stats_display['rated_most'] == 1) {
 		$content .= '<p><strong>'.$stats_mostlimit.' '.__('Most Rated Post', 'wp-postratings').'</strong></p>'."\n";
 		$content .= '<ul>'."\n";
-		$content .= get_most_rated('post', $stats_mostlimit, 0, false);
+		$content .= get_most_rated('post', 0, $stats_mostlimit, 0, false);
 		$content .= '</ul>'."\n";
 	}
 	return $content;
@@ -1201,6 +1367,8 @@ function create_ratinglogs_table() {
 	add_option('postratings_ratingsvalue', array(1,2,3,4,5), 'Individual Post Rating Value');
 	add_option('postratings_customrating', 0, 'Use Custom Ratings');
 	add_option('postratings_template_permission', '%RATINGS_IMAGES% (<em><strong>%RATINGS_USERS%</strong> '.__('votes', 'wp-postratings').', '.__('average', 'wp-postratings').': <strong>%RATINGS_AVERAGE%</strong> '.__('out of', 'wp-postratings').' %RATINGS_MAX%</em>)<br /><em>'.__('You need to be a registered member to rate this post.', 'wp-postratings').'</em>', 'Ratings Template Text');
+	// Database Upgrade For WP-PostRatings 1.30
+	add_option('postratings_template_mostrated', '<li><a href="%POST_URL%"  title="%POST_TITLE%">%POST_TITLE%</a> - %RATINGS_USERS% '.__('votes', 'wp-postratings').'</li>', 'Most Rated Template Text');
 	// Set 'manage_ratings' Capabilities To Administrator	
 	$role = get_role('administrator');
 	if(!$role->has_cap('manage_ratings')) {

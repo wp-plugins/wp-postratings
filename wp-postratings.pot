@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WP-PostRatings 1.30\n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2007-10-21 22:57+0800\n"
+"PO-Revision-Date: 2007-12-23 03:02+0800\n"
 "Last-Translator: Lester 'GaMerZ' Chan <gamerz84@hotmail.com>\n"
 "Language-Team: Lester Chan <gamerz84@hotmail.com>\n"
 "MIME-Version: 1.0\n"
@@ -248,8 +248,8 @@ msgid "Go to Page"
 msgstr ""
 
 #: postratings-manager.php:399
-#: wp-postratings-widget.php:98
-#: wp-postratings-widget.php:147
+#: wp-postratings-widget.php:99
+#: wp-postratings-widget.php:152
 msgid "Page"
 msgstr ""
 
@@ -270,7 +270,7 @@ msgid "Post ID:"
 msgstr ""
 
 #: postratings-manager.php:429
-#: wp-postratings.php:981
+#: wp-postratings.php:1143
 msgid "Guest"
 msgstr ""
 
@@ -385,8 +385,8 @@ msgid "<strong>WARNING:</strong><br />Once uninstalled, this cannot be undone. Y
 msgstr ""
 
 #: postratings-manager.php:581
-#: postratings-options.php:320
-#: postratings-options.php:329
+#: postratings-options.php:332
+#: postratings-options.php:341
 #: postratings-uninstall.php:155
 msgid "Yes"
 msgstr ""
@@ -400,314 +400,332 @@ msgid ""
 " Choose [Cancel] To Stop, [OK] To Uninstall."
 msgstr ""
 
-#: postratings-options.php:69
+#: postratings-options.php:71
 msgid "Custom Rating"
 msgstr ""
 
-#: postratings-options.php:70
+#: postratings-options.php:72
 msgid "Ratings Image"
 msgstr ""
 
-#: postratings-options.php:71
+#: postratings-options.php:73
 msgid "Max Ratings"
 msgstr ""
 
-#: postratings-options.php:72
+#: postratings-options.php:74
 msgid "Individual Rating Text"
 msgstr ""
 
-#: postratings-options.php:73
+#: postratings-options.php:75
 msgid "Individual Rating Value"
 msgstr ""
 
-#: postratings-options.php:74
-#: postratings-options.php:313
+#: postratings-options.php:76
+#: postratings-options.php:325
 msgid "Ratings AJAX Style"
 msgstr ""
 
-#: postratings-options.php:75
+#: postratings-options.php:77
 msgid "Ratings Template Vote"
 msgstr ""
 
-#: postratings-options.php:76
+#: postratings-options.php:78
 msgid "Ratings Template Voted"
 msgstr ""
 
-#: postratings-options.php:77
+#: postratings-options.php:79
 msgid "Ratings Template No Permission"
 msgstr ""
 
-#: postratings-options.php:78
+#: postratings-options.php:80
 msgid "Ratings Template For No Ratings"
 msgstr ""
 
-#: postratings-options.php:79
+#: postratings-options.php:81
 msgid "Ratings Template For Highest Rated"
 msgstr ""
 
-#: postratings-options.php:80
-#: postratings-options.php:351
+#: postratings-options.php:82
+msgid "Ratings Template For Most Rated"
+msgstr ""
+
+#: postratings-options.php:83
+#: postratings-options.php:363
 msgid "Logging Method"
 msgstr ""
 
-#: postratings-options.php:81
+#: postratings-options.php:84
 msgid "Allow To Vote Option"
 msgstr ""
 
-#: postratings-options.php:86
+#: postratings-options.php:89
 msgid "Updated"
 msgstr ""
 
-#: postratings-options.php:91
+#: postratings-options.php:94
 msgid "No Ratings Option Updated"
 msgstr ""
 
-#: postratings-options.php:111
 #: postratings-options.php:114
 #: postratings-options.php:117
-#: postratings-options.php:123
+#: postratings-options.php:120
+#: postratings-options.php:126
 #: wp-postratings.php:170
-#: wp-postratings.php:582
-#: wp-postratings.php:694
-#: wp-postratings.php:807
+#: wp-postratings.php:630
+#: wp-postratings.php:748
+#: wp-postratings.php:860
+#: wp-postratings.php:978
 msgid "rating"
 msgstr ""
 
-#: postratings-options.php:111
 #: postratings-options.php:114
 #: postratings-options.php:117
-#: postratings-options.php:123
-#: postratings-options.php:136
-#: postratings-options.php:139
+#: postratings-options.php:120
+#: postratings-options.php:126
+#: postratings-options.php:129
 #: postratings-options.php:142
+#: postratings-options.php:145
+#: postratings-options.php:148
+#: postratings-options.php:157
 #: wp-postratings.php:170
 #: wp-postratings.php:172
-#: wp-postratings.php:510
-#: wp-postratings.php:516
-#: wp-postratings.php:584
-#: wp-postratings.php:696
-#: wp-postratings.php:809
-#: wp-postratings.php:1185
-#: wp-postratings.php:1186
-#: wp-postratings.php:1201
+#: wp-postratings.php:513
+#: wp-postratings.php:561
+#: wp-postratings.php:632
+#: wp-postratings.php:750
+#: wp-postratings.php:862
+#: wp-postratings.php:980
+#: wp-postratings.php:1353
+#: wp-postratings.php:1354
+#: wp-postratings.php:1369
+#: wp-postratings.php:1371
 msgid "votes"
 msgstr ""
 
-#: postratings-options.php:114
 #: postratings-options.php:117
-#: postratings-options.php:139
-#: wp-postratings.php:1186
+#: postratings-options.php:120
+#: postratings-options.php:145
+#: wp-postratings.php:1354
 msgid "rated"
 msgstr ""
 
-#: postratings-options.php:117
-#: postratings-options.php:142
-#: wp-postratings.php:1201
+#: postratings-options.php:120
+#: postratings-options.php:148
+#: wp-postratings.php:1369
 msgid "You need to be a registered member to rate this post."
 msgstr ""
 
-#: postratings-options.php:120
-#: postratings-options.php:145
-#: wp-postratings.php:1187
+#: postratings-options.php:123
+#: postratings-options.php:151
+#: wp-postratings.php:1355
 msgid "No Ratings Yet"
 msgstr ""
 
-#: postratings-options.php:136
-#: postratings-options.php:139
 #: postratings-options.php:142
+#: postratings-options.php:145
+#: postratings-options.php:148
 #: wp-postratings.php:172
-#: wp-postratings.php:584
-#: wp-postratings.php:696
-#: wp-postratings.php:809
-#: wp-postratings.php:1185
-#: wp-postratings.php:1186
-#: wp-postratings.php:1201
+#: wp-postratings.php:632
+#: wp-postratings.php:750
+#: wp-postratings.php:862
+#: wp-postratings.php:980
+#: wp-postratings.php:1353
+#: wp-postratings.php:1354
+#: wp-postratings.php:1369
 msgid "average"
 msgstr ""
 
-#: postratings-options.php:136
-#: postratings-options.php:139
 #: postratings-options.php:142
+#: postratings-options.php:145
 #: postratings-options.php:148
+#: postratings-options.php:154
 #: wp-postratings.php:172
-#: wp-postratings.php:584
-#: wp-postratings.php:696
-#: wp-postratings.php:809
-#: wp-postratings.php:1185
-#: wp-postratings.php:1186
-#: wp-postratings.php:1195
-#: wp-postratings.php:1201
+#: wp-postratings.php:632
+#: wp-postratings.php:750
+#: wp-postratings.php:862
+#: wp-postratings.php:980
+#: wp-postratings.php:1353
+#: wp-postratings.php:1354
+#: wp-postratings.php:1363
+#: wp-postratings.php:1369
 msgid "out of"
 msgstr ""
 
-#: postratings-options.php:188
+#: postratings-options.php:200
 msgid "Post Rating Options"
 msgstr ""
 
-#: postratings-options.php:192
-#: postratings-options.php:473
+#: postratings-options.php:204
+#: postratings-options.php:501
 msgid "Update Options &raquo;"
 msgstr ""
 
-#: postratings-options.php:195
+#: postratings-options.php:207
 msgid "Ratings Settings"
 msgstr ""
 
-#: postratings-options.php:198
+#: postratings-options.php:210
 msgid "Ratings Image:"
 msgstr ""
 
-#: postratings-options.php:254
+#: postratings-options.php:266
 msgid "Max Ratings:"
 msgstr ""
 
-#: postratings-options.php:258
+#: postratings-options.php:270
 msgid "Update 'Individual Rating Text/Value' Display"
 msgstr ""
 
-#: postratings-options.php:263
+#: postratings-options.php:275
 msgid "Individual Rating Text/Value"
 msgstr ""
 
-#: postratings-options.php:316
+#: postratings-options.php:328
 msgid "Show Loading Image With Text"
 msgstr ""
 
-#: postratings-options.php:319
-#: postratings-options.php:328
+#: postratings-options.php:331
+#: postratings-options.php:340
 msgid "No"
 msgstr ""
 
-#: postratings-options.php:325
+#: postratings-options.php:337
 msgid "Show Fading In And Fading Out Of Ratings"
 msgstr ""
 
-#: postratings-options.php:336
+#: postratings-options.php:348
 msgid "Allow To Rate"
 msgstr ""
 
-#: postratings-options.php:339
+#: postratings-options.php:351
 msgid "Who Is Allowed To Rate?"
 msgstr ""
 
-#: postratings-options.php:342
+#: postratings-options.php:354
 msgid "Guests Only"
 msgstr ""
 
-#: postratings-options.php:343
+#: postratings-options.php:355
 msgid "Registered Users Only"
 msgstr ""
 
-#: postratings-options.php:344
+#: postratings-options.php:356
 msgid "Registered Users And Guests"
 msgstr ""
 
-#: postratings-options.php:354
+#: postratings-options.php:366
 msgid "Ratings Logging Method:"
 msgstr ""
 
-#: postratings-options.php:357
+#: postratings-options.php:369
 msgid "Do Not Log"
 msgstr ""
 
-#: postratings-options.php:358
+#: postratings-options.php:370
 msgid "Logged By Cookie"
 msgstr ""
 
-#: postratings-options.php:359
+#: postratings-options.php:371
 msgid "Logged By IP"
 msgstr ""
 
-#: postratings-options.php:360
+#: postratings-options.php:372
 msgid "Logged By Cookie And IP"
 msgstr ""
 
-#: postratings-options.php:361
+#: postratings-options.php:373
 msgid "Logged By Username"
 msgstr ""
 
-#: postratings-options.php:368
+#: postratings-options.php:380
 msgid "Template Variables"
 msgstr ""
 
-#: postratings-options.php:371
+#: postratings-options.php:383
 msgid "Display the ratings images"
 msgstr ""
 
-#: postratings-options.php:372
+#: postratings-options.php:384
 msgid "Display the ratings voting image"
 msgstr ""
 
-#: postratings-options.php:375
+#: postratings-options.php:387
 msgid "Display the average ratings"
 msgstr ""
 
-#: postratings-options.php:376
+#: postratings-options.php:388
 msgid "Display the total number of users rated for the post"
 msgstr ""
 
-#: postratings-options.php:379
+#: postratings-options.php:391
 msgid "Display the max number of ratings"
 msgstr ""
 
-#: postratings-options.php:380
+#: postratings-options.php:392
 msgid "Display the ratings percentage"
 msgstr ""
 
-#: postratings-options.php:383
+#: postratings-options.php:395
 msgid "Display the total score of the ratings"
 msgstr ""
 
-#: postratings-options.php:384
+#: postratings-options.php:396
 msgid "Display the individual rating text. Eg: 1 Star, 2 Stars, etc"
 msgstr ""
 
-#: postratings-options.php:389
+#: postratings-options.php:401
 msgid "Ratings Templates"
 msgstr ""
 
-#: postratings-options.php:393
+#: postratings-options.php:405
 msgid "Ratings Vote Text:"
 msgstr ""
 
-#: postratings-options.php:394
-#: postratings-options.php:411
-#: postratings-options.php:426
-#: postratings-options.php:441
-#: postratings-options.php:457
+#: postratings-options.php:406
+#: postratings-options.php:423
+#: postratings-options.php:438
+#: postratings-options.php:453
+#: postratings-options.php:469
+#: postratings-options.php:487
 msgid "Allowed Variables:"
 msgstr ""
 
-#: postratings-options.php:402
-#: postratings-options.php:418
-#: postratings-options.php:433
-#: postratings-options.php:449
-#: postratings-options.php:465
+#: postratings-options.php:414
+#: postratings-options.php:430
+#: postratings-options.php:445
+#: postratings-options.php:461
+#: postratings-options.php:479
+#: postratings-options.php:493
 msgid "Restore Default Template (Normal Rating)"
 msgstr ""
 
-#: postratings-options.php:404
-#: postratings-options.php:419
-#: postratings-options.php:434
-#: postratings-options.php:450
-#: postratings-options.php:466
+#: postratings-options.php:416
+#: postratings-options.php:431
+#: postratings-options.php:446
+#: postratings-options.php:462
+#: postratings-options.php:480
+#: postratings-options.php:494
 msgid "Restore Default Template (Up/Down Rating)"
 msgstr ""
 
-#: postratings-options.php:410
+#: postratings-options.php:422
 msgid "Ratings Voted Text:"
 msgstr ""
 
-#: postratings-options.php:425
+#: postratings-options.php:437
 msgid "Ratings No Permission Text:"
 msgstr ""
 
-#: postratings-options.php:440
+#: postratings-options.php:452
 msgid "Ratings None:"
 msgstr ""
 
-#: postratings-options.php:456
+#: postratings-options.php:468
 msgid "Highest Rated:"
+msgstr ""
+
+#: postratings-options.php:486
+msgid "Most Rated:"
 msgstr ""
 
 #: postratings-uninstall.php:40
@@ -791,7 +809,7 @@ msgid "You may place it in <strong>single.php</strong>, <strong>post.php</strong
 msgstr ""
 
 #: postratings-usage.php:32
-#: postratings-usage.php:128
+#: postratings-usage.php:176
 msgid "Find:"
 msgstr ""
 
@@ -799,9 +817,16 @@ msgstr ""
 msgid "Add anywhere below it (the place you want the ratings to show):"
 msgstr ""
 
+#: postratings-usage.php:38
+msgid "If you DO NOT want the ratings to appear in every post/page, DO NOT use the code above. Just type in <strong>[ratings]</strong> into the selected post/page content and it will embed ratings into that post/page only."
+msgstr ""
+
+#: postratings-usage.php:39
+msgid "If you want to embed other <strong>post ratings</strong>, use <strong>[ratings=1]</strong>, where <strong>1</strong> is the ID of the post/page ratings that you want to display."
+msgstr ""
+
 #: postratings-usage.php:40
-#, php-format
-msgid "If you DO NOT want the ratings to appear in every post, DO NOT use the code above. Just type in <strong>%s</strong> into the selected post content and it will embed ratings into that post only."
+msgid "If you want to embed other <strong>post ratings results</strong>, use <strong>[ratings_results=1]</strong>, where <strong>1</strong> is the ID of the post/page ratings resilts that you want to display."
 msgstr ""
 
 #: postratings-usage.php:45
@@ -853,90 +878,141 @@ msgid "To Display Lowest Rated Post"
 msgstr ""
 
 #: postratings-usage.php:86
-msgid "Default: get_lowest_rated('both', 10)"
+msgid "Default: get_lowest_rated('both', 0, 10)"
 msgstr ""
 
 #: postratings-usage.php:87
+#: postratings-usage.php:102
 msgid "The value <strong>'both'</strong> will display both the lowest rated posts and pages."
 msgstr ""
 
 #: postratings-usage.php:88
+#: postratings-usage.php:103
 msgid "If you want to display the lowest rated posts only, replace 'both' with <strong>'post'</strong>."
 msgstr ""
 
 #: postratings-usage.php:89
+#: postratings-usage.php:104
 msgid "If you want to display the lowest rated pages only, replace 'both' with <strong>'page'</strong>."
 msgstr ""
 
 #: postratings-usage.php:90
-msgid "The value <strong>10</strong> will display only the top 10 lowest rated posts/pages."
+#: postratings-usage.php:105
+#: postratings-usage.php:119
+#: postratings-usage.php:134
+#: postratings-usage.php:148
+#: postratings-usage.php:163
+msgid "The value <strong>0</strong> refers to the minimum votes required before the post get shown."
 msgstr ""
 
 #: postratings-usage.php:91
-msgid "To Display Highest Rated Post"
+#: postratings-usage.php:106
+msgid "The value <strong>10</strong> will display only the top 10 lowest rated posts/pages."
 msgstr ""
 
-#: postratings-usage.php:99
-msgid "Default: get_highest_rated('both', 10)"
+#: postratings-usage.php:92
+msgid "To Display Lowest Rated Post In A Category"
 msgstr ""
 
 #: postratings-usage.php:100
-msgid "The value <strong>'both'</strong> will display both the highest rated posts and pages."
+msgid "Default: get_lowest_rated(CATEGORY_ID, 'both', 0, 10)"
 msgstr ""
 
 #: postratings-usage.php:101
-msgid "If you want to display the highest rated posts only, replace 'both' with <strong>'post'</strong>."
+#: postratings-usage.php:130
+#: postratings-usage.php:159
+msgid "Replace <strong>CATEGORY_ID</strong> will your category ID. If you want it to span several categories, replace <strong>CATEGORY_ID</strong> with <strong>array(1, 2)</strong> where <strong>1</strong> and <strong>2</strong> are your categories ID."
 msgstr ""
 
-#: postratings-usage.php:102
-msgid "If you want to display the highest rated pages only, replace 'both' with <strong>'page'</strong>."
-msgstr ""
-
-#: postratings-usage.php:103
-msgid "The value <strong>10</strong> will display only the top 10 highest rated posts/pages."
-msgstr ""
-
-#: postratings-usage.php:104
-msgid "To Display Most Rated Post"
-msgstr ""
-
-#: postratings-usage.php:112
-msgid "Default: get_most_rated('both', 10)"
-msgstr ""
-
-#: postratings-usage.php:113
-msgid "The value <strong>'both'</strong> will display both the most rated posts and pages."
-msgstr ""
-
-#: postratings-usage.php:114
-msgid "If you want to display the most rated posts only, replace 'both' with <strong>'post'</strong>."
+#: postratings-usage.php:107
+msgid "To Display Highest Rated Post"
 msgstr ""
 
 #: postratings-usage.php:115
-msgid "If you want to display the most rated pages only, replace 'both' with <strong>'page'</strong>."
+msgid "Default: get_highest_rated('both', 0, 10)"
 msgstr ""
 
 #: postratings-usage.php:116
+#: postratings-usage.php:131
+msgid "The value <strong>'both'</strong> will display both the highest rated posts and pages."
+msgstr ""
+
+#: postratings-usage.php:117
+#: postratings-usage.php:132
+msgid "If you want to display the highest rated posts only, replace 'both' with <strong>'post'</strong>."
+msgstr ""
+
+#: postratings-usage.php:118
+#: postratings-usage.php:133
+msgid "If you want to display the highest rated pages only, replace 'both' with <strong>'page'</strong>."
+msgstr ""
+
+#: postratings-usage.php:120
+#: postratings-usage.php:135
+msgid "The value <strong>10</strong> will display only the top 10 highest rated posts/pages."
+msgstr ""
+
+#: postratings-usage.php:121
+msgid "To Display Highest Rated Post In A Category"
+msgstr ""
+
+#: postratings-usage.php:129
+msgid "Default: get_highest_rated_category(CATEGORY_ID, 'both', 0, 10)"
+msgstr ""
+
+#: postratings-usage.php:136
+msgid "To Display Most Rated Post"
+msgstr ""
+
+#: postratings-usage.php:144
+msgid "Default: get_most_rated('both', 0, 10)"
+msgstr ""
+
+#: postratings-usage.php:145
+#: postratings-usage.php:160
+msgid "The value <strong>'both'</strong> will display both the most rated posts and pages."
+msgstr ""
+
+#: postratings-usage.php:146
+#: postratings-usage.php:161
+msgid "If you want to display the most rated posts only, replace 'both' with <strong>'post'</strong>."
+msgstr ""
+
+#: postratings-usage.php:147
+#: postratings-usage.php:162
+msgid "If you want to display the most rated pages only, replace 'both' with <strong>'page'</strong>."
+msgstr ""
+
+#: postratings-usage.php:149
+#: postratings-usage.php:164
 msgid "The value <strong>10</strong> will display only the top 10 most rated posts/pages."
 msgstr ""
 
-#: postratings-usage.php:119
+#: postratings-usage.php:150
+msgid "To Display Most Rated Post In A Category"
+msgstr ""
+
+#: postratings-usage.php:158
+msgid "Default: get_most_rated_category(CATEGORY_ID, 'both', 0, 10)"
+msgstr ""
+
+#: postratings-usage.php:167
 msgid "Note"
 msgstr ""
 
-#: postratings-usage.php:122
+#: postratings-usage.php:170
 msgid "In IE, some of the ratings's text may appear jagged (this is normal in IE). To solve this issue,"
 msgstr ""
 
-#: postratings-usage.php:125
+#: postratings-usage.php:173
 msgid "Open <strong>postratings-css.css</strong>"
 msgstr ""
 
-#: postratings-usage.php:132
+#: postratings-usage.php:180
 msgid "Replace:"
 msgstr ""
 
-#: postratings-usage.php:134
+#: postratings-usage.php:182
 msgid "Where <strong>#ffffff</strong> should be your background color for the ratings."
 msgstr ""
 
@@ -944,47 +1020,52 @@ msgstr ""
 msgid "Highest Rated"
 msgstr ""
 
-#: wp-postratings-widget.php:79
-#: wp-postratings-widget.php:128
+#: wp-postratings-widget.php:80
+#: wp-postratings-widget.php:133
 msgid "Title"
 msgstr ""
 
-#: wp-postratings-widget.php:82
-#: wp-postratings-widget.php:131
+#: wp-postratings-widget.php:83
+#: wp-postratings-widget.php:136
 msgid "Show Ratings For: "
 msgstr ""
 
-#: wp-postratings-widget.php:88
-#: wp-postratings-widget.php:137
+#: wp-postratings-widget.php:89
+#: wp-postratings-widget.php:142
 msgid "Post &amp Page"
 msgstr ""
 
-#: wp-postratings-widget.php:93
-#: wp-postratings-widget.php:142
+#: wp-postratings-widget.php:94
+#: wp-postratings-widget.php:147
 msgid "Post"
 msgstr ""
 
-#: wp-postratings-widget.php:101
-#: wp-postratings-widget.php:150
+#: wp-postratings-widget.php:102
+#: wp-postratings-widget.php:155
 msgid "Only"
 msgstr ""
 
-#: wp-postratings-widget.php:104
-#: wp-postratings-widget.php:153
+#: wp-postratings-widget.php:105
+#: wp-postratings-widget.php:158
+msgid "Minimum Votes"
+msgstr ""
+
+#: wp-postratings-widget.php:108
+#: wp-postratings-widget.php:161
 msgid "Limit"
 msgstr ""
 
-#: wp-postratings-widget.php:107
-#: wp-postratings-widget.php:156
+#: wp-postratings-widget.php:111
+#: wp-postratings-widget.php:164
 msgid "Post Title Length (Characters)"
 msgstr ""
 
-#: wp-postratings-widget.php:109
-#: wp-postratings-widget.php:158
+#: wp-postratings-widget.php:113
+#: wp-postratings-widget.php:166
 msgid "(<strong>0</strong> to disable)"
 msgstr ""
 
-#: wp-postratings-widget.php:118
+#: wp-postratings-widget.php:122
 msgid "Most Rated"
 msgstr ""
 
@@ -1017,68 +1098,70 @@ msgstr ""
 msgid "Note: There is a rating result embedded within this post, please visit this post to view it."
 msgstr ""
 
-#: wp-postratings.php:520
-#: wp-postratings.php:637
-#: wp-postratings.php:749
-#: wp-postratings.php:862
+#: wp-postratings.php:525
+#: wp-postratings.php:573
+#: wp-postratings.php:685
+#: wp-postratings.php:803
+#: wp-postratings.php:915
+#: wp-postratings.php:1033
 msgid "N/A"
 msgstr ""
 
-#: wp-postratings.php:1009
+#: wp-postratings.php:1171
 #, php-format
 msgid "Invalid Post ID. Post ID #%s."
 msgstr ""
 
-#: wp-postratings.php:1013
+#: wp-postratings.php:1175
 #, php-format
 msgid "You Had Already Rated This Post. Post ID #%s."
 msgstr ""
 
-#: wp-postratings.php:1099
-#: wp-postratings.php:1101
-#: wp-postratings.php:1129
+#: wp-postratings.php:1267
+#: wp-postratings.php:1269
+#: wp-postratings.php:1297
 msgid "WP-PostRatings"
 msgstr ""
 
-#: wp-postratings.php:1112
-#: wp-postratings.php:1114
+#: wp-postratings.php:1280
+#: wp-postratings.php:1282
 msgid "Highest Rated Posts"
 msgstr ""
 
-#: wp-postratings.php:1117
-#: wp-postratings.php:1119
+#: wp-postratings.php:1285
+#: wp-postratings.php:1287
 msgid "Most Rated Posts"
 msgstr ""
 
-#: wp-postratings.php:1131
+#: wp-postratings.php:1299
 msgid "users casted their vote."
 msgstr ""
 
-#: wp-postratings.php:1143
+#: wp-postratings.php:1311
 msgid "Highest Rated Post"
 msgstr ""
 
-#: wp-postratings.php:1149
+#: wp-postratings.php:1317
 msgid "Most Rated Post"
 msgstr ""
 
-#: wp-postratings.php:1194
+#: wp-postratings.php:1362
 msgid "1 Star"
 msgstr ""
 
-#: wp-postratings.php:1194
+#: wp-postratings.php:1362
 msgid "2 Stars"
 msgstr ""
 
-#: wp-postratings.php:1194
+#: wp-postratings.php:1362
 msgid "3 Stars"
 msgstr ""
 
-#: wp-postratings.php:1194
+#: wp-postratings.php:1362
 msgid "4 Stars"
 msgstr ""
 
-#: wp-postratings.php:1194
+#: wp-postratings.php:1362
 msgid "5 Stars"
 msgstr ""
 

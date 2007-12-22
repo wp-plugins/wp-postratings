@@ -49,6 +49,7 @@ if($_POST['Submit']) {
 	$postratings_template_permission = trim($_POST['postratings_template_permission']);
 	$postratings_template_none = trim($_POST['postratings_template_none']);
 	$postratings_template_highestrated = trim($_POST['postratings_template_highestrated']);
+	$postratings_template_mostrated = trim($_POST['postratings_template_mostrated']);
 	$postratings_logging_method = intval($_POST['postratings_logging_method']);
 	$postratings_allowtorate = intval($_POST['postratings_allowtorate']);
 	$update_ratings_queries = array();
@@ -64,6 +65,7 @@ if($_POST['Submit']) {
 	$update_ratings_queries[] = update_option('postratings_template_permission', $postratings_template_permission);
 	$update_ratings_queries[] = update_option('postratings_template_none', $postratings_template_none);
 	$update_ratings_queries[] = update_option('postratings_template_highestrated', $postratings_template_highestrated);
+	$update_ratings_queries[] = update_option('postratings_template_mostrated', $postratings_template_mostrated);
 	$update_ratings_queries[] = update_option('postratings_logging_method', $postratings_logging_method);
 	$update_ratings_queries[] = update_option('postratings_allowtorate', $postratings_allowtorate);
 	$update_ratings_text[] = __('Custom Rating', 'wp-postratings');
@@ -77,6 +79,7 @@ if($_POST['Submit']) {
 	$update_ratings_text[] = __('Ratings Template No Permission', 'wp-postratings');
 	$update_ratings_text[] = __('Ratings Template For No Ratings', 'wp-postratings');
 	$update_ratings_text[] = __('Ratings Template For Highest Rated', 'wp-postratings');
+	$update_ratings_text[] = __('Ratings Template For Most Rated', 'wp-postratings');
 	$update_ratings_text[] = __('Logging Method', 'wp-postratings');
 	$update_ratings_text[] = __('Allow To Vote Option', 'wp-postratings');
 	$i = 0;
@@ -122,6 +125,9 @@ $postratings_image = get_option('postratings_image');
 			case "highestrated":
 				default_template = "<li><a href=\"%POST_URL%\" title=\"%POST_TITLE%\">%POST_TITLE%</a> (%RATINGS_SCORE% <?php _e('rating', 'wp-postratings'); ?>, %RATINGS_USERS% <?php _e('votes', 'wp-postratings'); ?>)</li>";
 				break;
+			case "mostrated":
+				default_template = "<li><a href=\"%POST_URL%\"  title=\"%POST_TITLE%\">%POST_TITLE%</a> - %RATINGS_USERS% <?php _e('votes', 'wp-postratings'); ?></li>";
+				break;
 		}
 		if(print) {
 			document.getElementById("postratings_template_" + template).value = default_template;
@@ -147,6 +153,9 @@ $postratings_image = get_option('postratings_image');
 			case "highestrated":
 				default_template = "<li><a href=\"%POST_URL%\" title=\"%POST_TITLE%\">%POST_TITLE%</a> %RATINGS_IMAGES% (%RATINGS_AVERAGE% <?php _e('out of', 'wp-postratings'); ?> %RATINGS_MAX%)</li>";
 				break;
+			case "mostrated":
+				default_template = "<li><a href=\"%POST_URL%\"  title=\"%POST_TITLE%\">%POST_TITLE%</a> - %RATINGS_USERS% <?php _e('votes', 'wp-postratings'); ?></li>";
+				break;
 		}
 		if(print) {
 			document.getElementById("postratings_template_" + template).value = default_template;
@@ -164,11 +173,13 @@ $postratings_image = get_option('postratings_image');
 				document.getElementById('postratings_template_permission').value = ratings_updown_templates('permission', false);
 				document.getElementById('postratings_template_none').value = ratings_updown_templates('none', false);
 				document.getElementById('postratings_template_highestrated').value = ratings_updown_templates('highestrated', false);
+				document.getElementById('postratings_template_mostrated').value = ratings_updown_templates('mostrated', false);
 			} else {
 				document.getElementById('postratings_template_vote').value = ratings_default_templates('vote', false);
 				document.getElementById('postratings_template_text').value = ratings_default_templates('text', false);
 				document.getElementById('postratings_template_none').value = ratings_default_templates('none', false);
 				document.getElementById('postratings_template_highestrated').value = ratings_default_templates('highestrated', false);
+				document.getElementById('postratings_template_mostrated').value = ratings_default_templates('mostrated', false);
 			}
 		} else {
 			document.getElementById('postratings_max').value = <?php echo $postratings_max; ?>;
@@ -178,6 +189,7 @@ $postratings_image = get_option('postratings_image');
 			document.getElementById('postratings_template_permission').value = ratings_default_templates('permission', false);
 			document.getElementById('postratings_template_none').value = ratings_default_templates('none', false);
 			document.getElementById('postratings_template_highestrated').value = ratings_default_templates('highestrated', false);
+			document.getElementById('postratings_template_mostrated').value = ratings_default_templates('mostrated', false);
 		}
 		document.getElementById('postratings_customrating').value = custom;
 	}
@@ -300,7 +312,7 @@ $postratings_image = get_option('postratings_image');
 							if($postratings_ratingsvalue[$i-1] > 0 && $postratings_customrating) {
 								echo '+';
 							}
-							echo $postratings_ratingsvalue[$i-1].'" size="2" maxlength="2" />'."\n";
+							echo $postratings_ratingsvalue[$i-1].'" size="3" maxlength="5" />'."\n";
 							echo '</td>'."\n";
 							echo '</tr>'."\n";
 						}								
@@ -451,7 +463,7 @@ $postratings_image = get_option('postratings_image');
 				</td>
 				<td align="left"><textarea cols="80" rows="15" id="postratings_template_none" name="postratings_template_none"><?php echo htmlspecialchars(stripslashes(get_option('postratings_template_none'))); ?></textarea></td>
 			</tr>
-			 <tr valign="top">
+			<tr valign="top">
 				<td align="left" width="30%">
 					<strong><?php _e('Highest Rated:', 'wp-postratings'); ?></strong><br /><br />
 					<?php _e('Allowed Variables:', 'wp-postratings'); ?><br />
@@ -461,11 +473,27 @@ $postratings_image = get_option('postratings_image');
 					- %RATINGS_USERS%<br />							
 					- %RATINGS_AVERAGE%<br />
 					- %POST_TITLE%<br />
+					- %POST_EXCERPT%<br />
+					- %POST_CONTENT%<br />
 					- %POST_URL%<br /><br />
 					<input type="button" name="RestoreDefault" value="<?php _e('Restore Default Template (Normal Rating)', 'wp-postratings'); ?>" onclick="ratings_default_templates('highestrated', true);" class="button" /><br />
 					<input type="button" name="RestoreDefault" value="<?php _e('Restore Default Template (Up/Down Rating)', 'wp-postratings'); ?>" onclick="ratings_updown_templates('highestrated', true);" class="button" />
 				</td>
 				<td align="left"><textarea cols="80" rows="15" id="postratings_template_highestrated" name="postratings_template_highestrated"><?php echo htmlspecialchars(stripslashes(get_option('postratings_template_highestrated'))); ?></textarea></td>
+			</tr>
+			<tr valign="top">
+				<td align="left" width="30%">
+					<strong><?php _e('Most Rated:', 'wp-postratings'); ?></strong><br /><br />
+					<?php _e('Allowed Variables:', 'wp-postratings'); ?><br />
+					- %RATINGS_USERS%<br />							
+					- %POST_TITLE%<br />
+					- %POST_EXCERPT%<br />
+					- %POST_CONTENT%<br />
+					- %POST_URL%<br /><br />
+					<input type="button" name="RestoreDefault" value="<?php _e('Restore Default Template (Normal Rating)', 'wp-postratings'); ?>" onclick="ratings_default_templates('mostrated', true);" class="button" /><br />
+					<input type="button" name="RestoreDefault" value="<?php _e('Restore Default Template (Up/Down Rating)', 'wp-postratings'); ?>" onclick="ratings_updown_templates('mostrated', true);" class="button" />
+				</td>
+				<td align="left"><textarea cols="80" rows="15" id="postratings_template_mostrated" name="postratings_template_mostrated"><?php echo htmlspecialchars(stripslashes(get_option('postratings_template_mostrated'))); ?></textarea></td>
 			</tr>
 		</table>
 	</fieldset>

@@ -42,7 +42,7 @@ function widget_ratings_init() {
 		if (function_exists('get_highest_rated')) {
 			echo $before_widget.$before_title.$title.$after_title;
 			echo '<ul>'."\n";
-			get_highest_rated($options['mode'], $options['limit'], $options['chars']);
+			get_highest_rated($options['mode'], $options['min_votes'], $options['limit'], $options['chars']);
 			echo '</ul>'."\n";
 			echo $after_widget;
 		}		
@@ -56,7 +56,7 @@ function widget_ratings_init() {
 		if (function_exists('get_highest_rated')) {
 			echo $before_widget.$before_title.$title.$after_title;
 			echo '<ul>'."\n";
-			get_most_rated($options['mode'], $options['limit'], $options['chars']);
+			get_most_rated($options['mode'], $options['min_votes'], $options['limit'], $options['chars']);
 			echo '</ul>'."\n";
 			echo $after_widget;
 		}		
@@ -71,6 +71,7 @@ function widget_ratings_init() {
 		if ($_POST['highest_rated-submit']) {
 			$options['title'] = strip_tags(addslashes($_POST['highest_rated-title']));
 			$options['mode'] = strip_tags(addslashes($_POST['highest_rated-mode']));
+			$options['min_votes'] = intval($_POST['highest_rated-min_votes']);
 			$options['limit'] = intval($_POST['highest_rated-limit']);
 			$options['chars'] = intval($_POST['highest_rated-chars']);
 			update_option('widget_ratings_highest_rated', $options);
@@ -100,6 +101,9 @@ function widget_ratings_init() {
 		echo '</select>&nbsp;&nbsp;';
 		_e('Only', 'wp-postratings');
 		echo '</p>'."\n";
+		echo '<p style="text-align: left;"><label for="highest_rated-min_votes">';
+		_e('Minimum Votes', 'wp-postratings');
+		echo ': </label><input type="text" id="highest_rated-min_votes" name="highest_rated-min_votes" value="'.intval($options['min_votes']).'" size="3" /></p>'."\n";
 		echo '<p style="text-align: left;"><label for="highest_rated-limit">';
 		_e('Limit', 'wp-postratings');
 		echo ': </label><input type="text" id="highest_rated-limit" name="highest_rated-limit" value="'.intval($options['limit']).'" size="3" /></p>'."\n";
@@ -120,6 +124,7 @@ function widget_ratings_init() {
 		if ($_POST['most_rated-submit']) {
 			$options['title'] = strip_tags(addslashes($_POST['most_rated-title']));
 			$options['mode'] = strip_tags(addslashes($_POST['most_rated-mode']));
+			$options['min_votes'] = intval($_POST['most_rated-min_votes']);
 			$options['limit'] = intval($_POST['most_rated-limit']);
 			$options['chars'] = intval($_POST['most_rated-chars']);
 			update_option('widget_ratings_most_rated', $options);
@@ -149,6 +154,9 @@ function widget_ratings_init() {
 		echo '</select>&nbsp;&nbsp;';
 		_e('Only', 'wp-postratings');
 		echo '</p>'."\n";
+		echo '<p style="text-align: left;"><label for="most_rated-min_votes">';
+		_e('Minimum Votes', 'wp-postratings');
+		echo ': </label><input type="text" id="most_rated-min_votes" name="most_rated-min_votes" value="'.intval($options['min_votes']).'" size="3" /></p>'."\n";
 		echo '<p style="text-align: left;"><label for="most_rated-limit">';
 		_e('Limit', 'wp-postratings');
 		echo ': </label><input type="text" id="most_rated-limit" name="most_rated-limit" value="'.intval($options['limit']).'" size="3" /></p>'."\n";

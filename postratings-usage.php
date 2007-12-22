@@ -35,9 +35,9 @@ if(!current_user_can('manage_ratings')) {
 			</blockquote>
 			<?php _e('Add anywhere below it (the place you want the ratings to show):', 'wp-postratings'); ?>
 			<blockquote><pre class="wp-postratings-usage-pre">&lt;?php if(function_exists('the_ratings')) { the_ratings(); } ?&gt;</pre></blockquote>
-		</li>
-		<li>
-			<?php printf(__('If you DO NOT want the ratings to appear in every post, DO NOT use the code above. Just type in <strong>%s</strong> into the selected post content and it will embed ratings into that post only.', 'wp-postratings'), '[ratings]'); ?>
+			<p><?php _e('If you DO NOT want the ratings to appear in every post/page, DO NOT use the code above. Just type in <strong>[ratings]</strong> into the selected post/page content and it will embed ratings into that post/page only.', 'wp-postratings'); ?></p>
+			<p><?php _e('If you want to embed other <strong>post ratings</strong>, use <strong>[ratings=1]</strong>, where <strong>1</strong> is the ID of the post/page ratings that you want to display.', 'wp-postratings'); ?></p>
+			<p><?php _e('If you want to embed other <strong>post ratings results</strong>, use <strong>[ratings_results=1]</strong>, where <strong>1</strong> is the ID of the post/page ratings resilts that you want to display.', 'wp-postratings'); ?></p>
 		</li>
 	</ol>
 </div>
@@ -83,10 +83,26 @@ if(!current_user_can('manage_ratings')) {
 &nbsp;&nbsp;&nbsp;&lt;/ul&gt;
 &lt;?php endif; ?&gt;</pre>
 	</blockquote>
-	<p><?php _e('Default: get_lowest_rated(\'both\', 10)', 'wp-postratings'); ?></p>
+	<p><?php _e('Default: get_lowest_rated(\'both\', 0, 10)', 'wp-postratings'); ?></p>
 	<p><?php _e('The value <strong>\'both\'</strong> will display both the lowest rated posts and pages.', 'wp-postratings'); ?></p>
 	<p><?php _e('If you want to display the lowest rated posts only, replace \'both\' with <strong>\'post\'</strong>.', 'wp-postratings'); ?></p>
 	<p><?php _e('If you want to display the lowest rated pages only, replace \'both\' with <strong>\'page\'</strong>.', 'wp-postratings'); ?></p>
+	<p><?php _e('The value <strong>0</strong> refers to the minimum votes required before the post get shown.', 'wp-postratings'); ?></p>
+	<p><?php _e('The value <strong>10</strong> will display only the top 10 lowest rated posts/pages.', 'wp-postratings'); ?></p>
+	<h3><?php _e('To Display Lowest Rated Post In A Category', 'wp-postratings'); ?></h3>
+	<blockquote>
+		<pre class="wp-postratings-usage-pre">&lt;?php if (function_exists('get_lowest_rated_category')): ?&gt;
+&nbsp;&nbsp;&nbsp;&lt;ul&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;?php get_lowest_rated_category(CATEGORY_ID); ?&gt;
+&nbsp;&nbsp;&nbsp;&lt;/ul&gt;
+&lt;?php endif; ?&gt;</pre>
+	</blockquote>
+	<p><?php _e('Default: get_lowest_rated(CATEGORY_ID, \'both\', 0, 10)', 'wp-postratings'); ?></p>
+	<p><?php _e('Replace <strong>CATEGORY_ID</strong> will your category ID. If you want it to span several categories, replace <strong>CATEGORY_ID</strong> with <strong>array(1, 2)</strong> where <strong>1</strong> and <strong>2</strong> are your categories ID.', 'wp-postratings'); ?></p>
+	<p><?php _e('The value <strong>\'both\'</strong> will display both the lowest rated posts and pages.', 'wp-postratings'); ?></p>
+	<p><?php _e('If you want to display the lowest rated posts only, replace \'both\' with <strong>\'post\'</strong>.', 'wp-postratings'); ?></p>
+	<p><?php _e('If you want to display the lowest rated pages only, replace \'both\' with <strong>\'page\'</strong>.', 'wp-postratings'); ?></p>
+	<p><?php _e('The value <strong>0</strong> refers to the minimum votes required before the post get shown.', 'wp-postratings'); ?></p>
 	<p><?php _e('The value <strong>10</strong> will display only the top 10 lowest rated posts/pages.', 'wp-postratings'); ?></p>
 	<h3><?php _e('To Display Highest Rated Post', 'wp-postratings'); ?></h3>
 	<blockquote>
@@ -96,10 +112,26 @@ if(!current_user_can('manage_ratings')) {
 &nbsp;&nbsp;&nbsp;&lt;/ul&gt;
 &lt;?php endif; ?&gt;</pre>
 	</blockquote>
-	<p><?php _e('Default: get_highest_rated(\'both\', 10)', 'wp-postratings'); ?></p>
+	<p><?php _e('Default: get_highest_rated(\'both\', 0, 10)', 'wp-postratings'); ?></p>
 	<p><?php _e('The value <strong>\'both\'</strong> will display both the highest rated posts and pages.', 'wp-postratings'); ?></p>
 	<p><?php _e('If you want to display the highest rated posts only, replace \'both\' with <strong>\'post\'</strong>.', 'wp-postratings'); ?></p>
 	<p><?php _e('If you want to display the highest rated pages only, replace \'both\' with <strong>\'page\'</strong>.', 'wp-postratings'); ?></p>
+	<p><?php _e('The value <strong>0</strong> refers to the minimum votes required before the post get shown.', 'wp-postratings'); ?></p>
+	<p><?php _e('The value <strong>10</strong> will display only the top 10 highest rated posts/pages.', 'wp-postratings'); ?></p>
+	<h3><?php _e('To Display Highest Rated Post In A Category', 'wp-postratings'); ?></h3>
+	<blockquote>
+		<pre class="wp-postratings-usage-pre">&lt;?php if (function_exists('get_highest_rated_category')): ?&gt;
+&nbsp;&nbsp;&nbsp;&lt;ul&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;?php get_highest_rated_category(CATEGORY_ID); ?&gt;
+&nbsp;&nbsp;&nbsp;&lt;/ul&gt;
+&lt;?php endif; ?&gt;</pre>
+	</blockquote>
+	<p><?php _e('Default: get_highest_rated_category(CATEGORY_ID, \'both\', 0, 10)', 'wp-postratings'); ?></p>
+	<p><?php _e('Replace <strong>CATEGORY_ID</strong> will your category ID. If you want it to span several categories, replace <strong>CATEGORY_ID</strong> with <strong>array(1, 2)</strong> where <strong>1</strong> and <strong>2</strong> are your categories ID.', 'wp-postratings'); ?></p>
+	<p><?php _e('The value <strong>\'both\'</strong> will display both the highest rated posts and pages.', 'wp-postratings'); ?></p>
+	<p><?php _e('If you want to display the highest rated posts only, replace \'both\' with <strong>\'post\'</strong>.', 'wp-postratings'); ?></p>
+	<p><?php _e('If you want to display the highest rated pages only, replace \'both\' with <strong>\'page\'</strong>.', 'wp-postratings'); ?></p>
+	<p><?php _e('The value <strong>0</strong> refers to the minimum votes required before the post get shown.', 'wp-postratings'); ?></p>
 	<p><?php _e('The value <strong>10</strong> will display only the top 10 highest rated posts/pages.', 'wp-postratings'); ?></p>
 	<h3><?php _e('To Display Most Rated Post', 'wp-postratings'); ?></h3>
 	<blockquote>
@@ -109,10 +141,26 @@ if(!current_user_can('manage_ratings')) {
 &nbsp;&nbsp;&nbsp;&lt;/ul&gt;
 &lt;?php endif; ?&gt;	</pre>
 	</blockquote>
-	<p><?php _e('Default: get_most_rated(\'both\', 10)', 'wp-postratings'); ?></p>
+	<p><?php _e('Default: get_most_rated(\'both\', 0, 10)', 'wp-postratings'); ?></p>
 	<p><?php _e('The value <strong>\'both\'</strong> will display both the most rated posts and pages.', 'wp-postratings'); ?></p>
 	<p><?php _e('If you want to display the most rated posts only, replace \'both\' with <strong>\'post\'</strong>.', 'wp-postratings'); ?></p>
 	<p><?php _e('If you want to display the most rated pages only, replace \'both\' with <strong>\'page\'</strong>.', 'wp-postratings'); ?></p>
+	<p><?php _e('The value <strong>0</strong> refers to the minimum votes required before the post get shown.', 'wp-postratings'); ?></p>
+	<p><?php _e('The value <strong>10</strong> will display only the top 10 most rated posts/pages.', 'wp-postratings'); ?></p>
+	<h3><?php _e('To Display Most Rated Post In A Category', 'wp-postratings'); ?></h3>
+	<blockquote>
+		<pre class="wp-postratings-usage-pre">&lt;?php if (function_exists('get_most_rated_category')): ?&gt;
+&nbsp;&nbsp;&nbsp;&lt;ul&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;?php get_most_rated_category(CATEGORY_ID); ?&gt;
+&nbsp;&nbsp;&nbsp;&lt;/ul&gt;
+&lt;?php endif; ?&gt;	</pre>
+	</blockquote>
+	<p><?php _e('Default: get_most_rated_category(CATEGORY_ID, \'both\', 0, 10)', 'wp-postratings'); ?></p>
+	<p><?php _e('Replace <strong>CATEGORY_ID</strong> will your category ID. If you want it to span several categories, replace <strong>CATEGORY_ID</strong> with <strong>array(1, 2)</strong> where <strong>1</strong> and <strong>2</strong> are your categories ID.', 'wp-postratings'); ?></p>
+	<p><?php _e('The value <strong>\'both\'</strong> will display both the most rated posts and pages.', 'wp-postratings'); ?></p>
+	<p><?php _e('If you want to display the most rated posts only, replace \'both\' with <strong>\'post\'</strong>.', 'wp-postratings'); ?></p>
+	<p><?php _e('If you want to display the most rated pages only, replace \'both\' with <strong>\'page\'</strong>.', 'wp-postratings'); ?></p>
+	<p><?php _e('The value <strong>0</strong> refers to the minimum votes required before the post get shown.', 'wp-postratings'); ?></p>
 	<p><?php _e('The value <strong>10</strong> will display only the top 10 most rated posts/pages.', 'wp-postratings'); ?></p>
 </div>
 <div class="wrap"> 
