@@ -53,7 +53,7 @@ function widget_ratings_init() {
 		extract($args);
 		$options = get_option('widget_ratings_most_rated');
 		$title = htmlspecialchars($options['title']);		
-		if (function_exists('get_highest_rated')) {
+		if (function_exists('get_most_rated')) {
 			echo $before_widget.$before_title.$title.$after_title;
 			echo '<ul>'."\n";
 			get_most_rated($options['mode'], $options['min_votes'], $options['limit'], $options['chars']);
