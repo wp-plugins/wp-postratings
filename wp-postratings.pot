@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WP-PostRatings 1.30\n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2008-01-24 16:51+0800\n"
+"PO-Revision-Date: 2008-03-11 21:50+0800\n"
 "Last-Translator: Lester 'GaMerZ' Chan <gamerz84@hotmail.com>\n"
 "Language-Team: Lester Chan <gamerz84@hotmail.com>\n"
 "MIME-Version: 1.0\n"
@@ -474,12 +474,12 @@ msgstr ""
 #: postratings-options.php:117
 #: postratings-options.php:120
 #: postratings-options.php:126
-#: postratings-stats.php:278
-#: postratings-stats.php:396
-#: postratings-stats.php:509
-#: postratings-stats.php:628
-#: postratings-stats.php:740
-#: postratings-stats.php:858
+#: postratings-stats.php:279
+#: postratings-stats.php:397
+#: postratings-stats.php:510
+#: postratings-stats.php:629
+#: postratings-stats.php:741
+#: postratings-stats.php:859
 #: wp-postratings.php:170
 msgid "rating"
 msgstr ""
@@ -496,54 +496,54 @@ msgstr ""
 #: postratings-stats.php:47
 #: postratings-stats.php:102
 #: postratings-stats.php:153
-#: postratings-stats.php:209
-#: postratings-stats.php:280
-#: postratings-stats.php:398
-#: postratings-stats.php:511
-#: postratings-stats.php:630
-#: postratings-stats.php:742
-#: postratings-stats.php:860
+#: postratings-stats.php:210
+#: postratings-stats.php:281
+#: postratings-stats.php:399
+#: postratings-stats.php:512
+#: postratings-stats.php:631
+#: postratings-stats.php:743
+#: postratings-stats.php:861
 #: wp-postratings.php:170
 #: wp-postratings.php:172
-#: wp-postratings.php:788
-#: wp-postratings.php:789
+#: wp-postratings.php:786
+#: wp-postratings.php:787
+#: wp-postratings.php:802
 #: wp-postratings.php:804
-#: wp-postratings.php:806
 msgid "votes"
 msgstr ""
 
 #: postratings-options.php:117
 #: postratings-options.php:120
 #: postratings-options.php:145
-#: wp-postratings.php:789
+#: wp-postratings.php:787
 msgid "rated"
 msgstr ""
 
 #: postratings-options.php:120
 #: postratings-options.php:148
-#: wp-postratings.php:804
+#: wp-postratings.php:802
 msgid "You need to be a registered member to rate this post."
 msgstr ""
 
 #: postratings-options.php:123
 #: postratings-options.php:151
-#: wp-postratings.php:790
+#: wp-postratings.php:788
 msgid "No Ratings Yet"
 msgstr ""
 
 #: postratings-options.php:142
 #: postratings-options.php:145
 #: postratings-options.php:148
-#: postratings-stats.php:280
-#: postratings-stats.php:398
-#: postratings-stats.php:511
-#: postratings-stats.php:630
-#: postratings-stats.php:742
-#: postratings-stats.php:860
+#: postratings-stats.php:281
+#: postratings-stats.php:399
+#: postratings-stats.php:512
+#: postratings-stats.php:631
+#: postratings-stats.php:743
+#: postratings-stats.php:861
 #: wp-postratings.php:172
-#: wp-postratings.php:788
-#: wp-postratings.php:789
-#: wp-postratings.php:804
+#: wp-postratings.php:786
+#: wp-postratings.php:787
+#: wp-postratings.php:802
 msgid "average"
 msgstr ""
 
@@ -551,17 +551,17 @@ msgstr ""
 #: postratings-options.php:145
 #: postratings-options.php:148
 #: postratings-options.php:154
-#: postratings-stats.php:280
-#: postratings-stats.php:398
-#: postratings-stats.php:511
-#: postratings-stats.php:630
-#: postratings-stats.php:742
-#: postratings-stats.php:860
+#: postratings-stats.php:281
+#: postratings-stats.php:399
+#: postratings-stats.php:512
+#: postratings-stats.php:631
+#: postratings-stats.php:743
+#: postratings-stats.php:861
 #: wp-postratings.php:172
-#: wp-postratings.php:788
-#: wp-postratings.php:789
-#: wp-postratings.php:798
-#: wp-postratings.php:804
+#: wp-postratings.php:786
+#: wp-postratings.php:787
+#: wp-postratings.php:796
+#: wp-postratings.php:802
 msgid "out of"
 msgstr ""
 
@@ -745,13 +745,13 @@ msgstr ""
 #: postratings-stats.php:59
 #: postratings-stats.php:114
 #: postratings-stats.php:165
-#: postratings-stats.php:221
-#: postratings-stats.php:333
-#: postratings-stats.php:451
-#: postratings-stats.php:564
-#: postratings-stats.php:683
-#: postratings-stats.php:795
-#: postratings-stats.php:913
+#: postratings-stats.php:222
+#: postratings-stats.php:334
+#: postratings-stats.php:452
+#: postratings-stats.php:565
+#: postratings-stats.php:684
+#: postratings-stats.php:796
+#: postratings-stats.php:914
 msgid "N/A"
 msgstr ""
 
@@ -1135,51 +1135,51 @@ msgstr ""
 msgid "You Had Already Rated This Post. Post ID #%s."
 msgstr ""
 
+#: wp-postratings.php:700
 #: wp-postratings.php:702
-#: wp-postratings.php:704
-#: wp-postratings.php:732
+#: wp-postratings.php:730
 msgid "WP-PostRatings"
 msgstr ""
 
+#: wp-postratings.php:713
 #: wp-postratings.php:715
-#: wp-postratings.php:717
 msgid "Highest Rated Posts"
 msgstr ""
 
+#: wp-postratings.php:718
 #: wp-postratings.php:720
-#: wp-postratings.php:722
 msgid "Most Rated Posts"
 msgstr ""
 
-#: wp-postratings.php:734
+#: wp-postratings.php:732
 msgid "users casted their vote."
 msgstr ""
 
-#: wp-postratings.php:746
+#: wp-postratings.php:744
 msgid "Highest Rated Post"
 msgstr ""
 
-#: wp-postratings.php:752
+#: wp-postratings.php:750
 msgid "Most Rated Post"
 msgstr ""
 
-#: wp-postratings.php:797
+#: wp-postratings.php:795
 msgid "1 Star"
 msgstr ""
 
-#: wp-postratings.php:797
+#: wp-postratings.php:795
 msgid "2 Stars"
 msgstr ""
 
-#: wp-postratings.php:797
+#: wp-postratings.php:795
 msgid "3 Stars"
 msgstr ""
 
-#: wp-postratings.php:797
+#: wp-postratings.php:795
 msgid "4 Stars"
 msgstr ""
 
-#: wp-postratings.php:797
+#: wp-postratings.php:795
 msgid "5 Stars"
 msgstr ""
 

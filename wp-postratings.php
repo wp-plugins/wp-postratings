@@ -493,11 +493,11 @@ function place_ratings($content){
 ### Function: Snippet Text
 if(!function_exists('snippet_text')) {
 	function snippet_text($text, $length = 0) {
-		$text = html_entity_decode($text, ENT_QUOTES);
-		 if (strlen($text) > $length){       
-			return substr($text,0,$length).'...';             
+		$text = html_entity_decode($text, ENT_QUOTES, get_option('blog_charset'));
+		 if (strlen($text) > $length) {
+			return htmlentities(substr($text,0,$length), ENT_COMPAT, get_option('blog_charset')).'...';
 		 } else {
-			return $text;
+			return htmlentities($text, ENT_COMPAT, get_option('blog_charset'));
 		 }
 	}
 }
@@ -671,7 +671,6 @@ function ratings_highest_orderby($content) {
 
 
 ### Process The Sorting
-/*
 if($_GET['sortby'] == 'most_rated') {
 	add_filter('posts_fields', 'ratings_most_fields');
 	add_filter('posts_join', 'ratings_most_join');
@@ -683,7 +682,6 @@ if($_GET['sortby'] == 'most_rated') {
 	add_filter('posts_where', 'ratings_highest_where');
 	add_filter('posts_orderby', 'ratings_highest_orderby');
 }
-*/
 
 
 ### Function: Plug Into WP-Stats
