@@ -10,7 +10,7 @@ Author URI: http://lesterchan.net
 
 
 /* 
-	Copyright 2007  Lester Chan  (email : gamerz84@hotmail.com)
+	Copyright 2008  Lester Chan  (email : lesterchan@gmail.com)
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -42,7 +42,8 @@ function postratings_textdomain() {
 
 
 ### Rating Logs Table Name
-$wpdb->ratings = $table_prefix . 'ratings';
+global $wpdb;
+$wpdb->ratings = $wpdb->prefix.'ratings';
 
 
 ### Function: Ratings Administration Menu
