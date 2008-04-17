@@ -284,6 +284,7 @@
 					<strong>Version 1.30 (01-06-2008)</strong>
 					<ul>
 						<li>NEW: Works For WordPress 2.5 Only</li>
+						<li>NEW: WP-PostRatings Will Load 'postratings-css.css' Inside Your Theme Directory If It Exists. If Not, It Will Just Load The Default 'postratings-css.css' By WP-PostRatings</li>
 						<li>NEW: Use number_format_i18n() Instead Of number_format()</li>
 						<li>NEW: Added Get Most/Highest Rated Post Within A Given Time Range Function</li>
 						<li>NEW: Added Get Most/Highest Rated Post By Category ID Within A Given Time Range Function</li>
@@ -487,6 +488,13 @@
 			</ol>
 			<div class="SubSubTitle">Note</div>
 			<ul>
+				<li>
+					WP-PostRatings will load '<strong>postratings-css.css</strong>' from your theme's directory if it exists.
+					<ul>
+						<li>If it doesn't exists, it will just load the default 'postratings-css.css' that comes with WP-PostRatings.</li>
+						<li>This will allow you to upgrade WP-PostRatings without worrying about overwriting your ratings styles that you have created.</li>
+					</ul>
+				</li>
 				<li>
 					Note: In IE, some of the post ratings' text may appear jagged (this is normal in IE). To solve this issue,
 					<ol>

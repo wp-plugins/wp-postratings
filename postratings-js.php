@@ -83,7 +83,7 @@ function rade_fadein_text() {
 			rate_fadein_opacity = 100;
 		} else	 if(is_ie) {
 			if(ratings_show_fading) {
-				document.getElementById('post-ratings-' + post_id).filters.alpha.opacity = rate_fadein_opacity;
+				document.getElementById('post-ratings-' + post_id).style.filter = 'alpha(opacity=' + rate_fadein_opacity + ')';
 			} else {
 				rate_fadein_opacity = 100;
 			}
@@ -203,7 +203,7 @@ function rate_process() {
 			rate_fadein_opacity = 0;
 		} else if(is_ie) {
 			if(ratings_show_fading) {
-				document.getElementById('post-ratings-' + post_id).filters.alpha.opacity = rate_fadeout_opacity;
+				document.getElementById('post-ratings-' + post_id).style.filter = 'alpha(opacity=' + rate_fadeout_opacity + ')';
 			} else {
 				rate_fadein_opacity = 0;
 			}

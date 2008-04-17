@@ -1,12 +1,13 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: WP-PostRatings 1.30\n"
-"POT-Creation-Date: \n"
-"PO-Revision-Date: 2008-03-30 11:16+0800\n"
-"Last-Translator: Lester 'GaMerZ' Chan <gamerz84@hotmail.com>\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2008-04-17 17:27+0800\n"
+"PO-Revision-Date: 2008-04-17 17:27+0800\n"
+"Last-Translator: Lester Chan <lesterchan@gmail.com>\n"
 "Language-Team: Lester Chan <gamerz84@hotmail.com>\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=utf-8\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Poedit-Language: English\n"
 "X-Poedit-Country: SINGAPORE\n"
@@ -274,7 +275,7 @@ msgid "Post ID:"
 msgstr ""
 
 #: postratings-manager.php:439
-#: wp-postratings.php:579
+#: wp-postratings.php:583
 msgid "Guest"
 msgstr ""
 
@@ -480,7 +481,7 @@ msgstr ""
 #: postratings-stats.php:629
 #: postratings-stats.php:741
 #: postratings-stats.php:859
-#: wp-postratings.php:171
+#: wp-postratings.php:175
 msgid "rating"
 msgstr ""
 
@@ -503,31 +504,31 @@ msgstr ""
 #: postratings-stats.php:631
 #: postratings-stats.php:743
 #: postratings-stats.php:861
-#: wp-postratings.php:171
-#: wp-postratings.php:173
-#: wp-postratings.php:787
-#: wp-postratings.php:788
-#: wp-postratings.php:803
-#: wp-postratings.php:805
+#: wp-postratings.php:175
+#: wp-postratings.php:177
+#: wp-postratings.php:791
+#: wp-postratings.php:792
+#: wp-postratings.php:807
+#: wp-postratings.php:809
 msgid "votes"
 msgstr ""
 
 #: postratings-options.php:117
 #: postratings-options.php:120
 #: postratings-options.php:145
-#: wp-postratings.php:788
+#: wp-postratings.php:792
 msgid "rated"
 msgstr ""
 
 #: postratings-options.php:120
 #: postratings-options.php:148
-#: wp-postratings.php:803
+#: wp-postratings.php:807
 msgid "You need to be a registered member to rate this post."
 msgstr ""
 
 #: postratings-options.php:123
 #: postratings-options.php:151
-#: wp-postratings.php:789
+#: wp-postratings.php:793
 msgid "No Ratings Yet"
 msgstr ""
 
@@ -540,10 +541,10 @@ msgstr ""
 #: postratings-stats.php:631
 #: postratings-stats.php:743
 #: postratings-stats.php:861
-#: wp-postratings.php:173
-#: wp-postratings.php:787
-#: wp-postratings.php:788
-#: wp-postratings.php:803
+#: wp-postratings.php:177
+#: wp-postratings.php:791
+#: wp-postratings.php:792
+#: wp-postratings.php:807
 msgid "average"
 msgstr ""
 
@@ -557,11 +558,11 @@ msgstr ""
 #: postratings-stats.php:631
 #: postratings-stats.php:743
 #: postratings-stats.php:861
-#: wp-postratings.php:173
-#: wp-postratings.php:787
-#: wp-postratings.php:788
-#: wp-postratings.php:797
-#: wp-postratings.php:803
+#: wp-postratings.php:177
+#: wp-postratings.php:791
+#: wp-postratings.php:792
+#: wp-postratings.php:801
+#: wp-postratings.php:807
 msgid "out of"
 msgstr ""
 
@@ -1116,70 +1117,70 @@ msgstr ""
 msgid "Loading"
 msgstr ""
 
-#: wp-postratings.php:486
-#: wp-postratings.php:487
+#: wp-postratings.php:490
+#: wp-postratings.php:491
 msgid "Note: There is a rating embedded within this post, please visit this post to rate it."
 msgstr ""
 
-#: wp-postratings.php:488
+#: wp-postratings.php:492
 msgid "Note: There is a rating result embedded within this post, please visit this post to view it."
-msgstr ""
-
-#: wp-postratings.php:607
-#, php-format
-msgid "Invalid Post ID. Post ID #%s."
 msgstr ""
 
 #: wp-postratings.php:611
 #, php-format
+msgid "Invalid Post ID. Post ID #%s."
+msgstr ""
+
+#: wp-postratings.php:615
+#, php-format
 msgid "You Had Already Rated This Post. Post ID #%s."
 msgstr ""
 
-#: wp-postratings.php:701
-#: wp-postratings.php:703
-#: wp-postratings.php:731
+#: wp-postratings.php:705
+#: wp-postratings.php:707
+#: wp-postratings.php:735
 msgid "WP-PostRatings"
 msgstr ""
 
-#: wp-postratings.php:714
-#: wp-postratings.php:716
+#: wp-postratings.php:718
+#: wp-postratings.php:720
 msgid "Highest Rated Posts"
 msgstr ""
 
-#: wp-postratings.php:719
-#: wp-postratings.php:721
+#: wp-postratings.php:723
+#: wp-postratings.php:725
 msgid "Most Rated Posts"
 msgstr ""
 
-#: wp-postratings.php:733
+#: wp-postratings.php:737
 msgid "users casted their vote."
 msgstr ""
 
-#: wp-postratings.php:745
+#: wp-postratings.php:749
 msgid "Highest Rated Post"
 msgstr ""
 
-#: wp-postratings.php:751
+#: wp-postratings.php:755
 msgid "Most Rated Post"
 msgstr ""
 
-#: wp-postratings.php:796
+#: wp-postratings.php:800
 msgid "1 Star"
 msgstr ""
 
-#: wp-postratings.php:796
+#: wp-postratings.php:800
 msgid "2 Stars"
 msgstr ""
 
-#: wp-postratings.php:796
+#: wp-postratings.php:800
 msgid "3 Stars"
 msgstr ""
 
-#: wp-postratings.php:796
+#: wp-postratings.php:800
 msgid "4 Stars"
 msgstr ""
 
-#: wp-postratings.php:796
+#: wp-postratings.php:800
 msgid "5 Stars"
 msgstr ""
 
