@@ -66,7 +66,7 @@ function widget_ratings_init() {
 	function widget_ratings_highest_rated_options() {
 		$options = get_option('widget_ratings_highest_rated');
 		if (!is_array($options)) {
-			$options = array('title' => __('Highest Rated', 'wp-postratings'), 'mode' => 'post', 'limit' => 10, 'chars' => 200);
+			$options = array('title' => __('Highest Rated', 'wp-postratings'), 'mode' => 'post', 'limit' => 10, 'chars' => 0);
 		}
 		if ($_POST['highest_rated-submit']) {
 			$options['title'] = strip_tags(addslashes($_POST['highest_rated-title']));
@@ -119,7 +119,7 @@ function widget_ratings_init() {
 	function widget_ratings_most_rated_options() {
 		$options = get_option('widget_ratings_most_rated');
 		if (!is_array($options)) {
-			$options = array('title' => __('Most Rated', 'wp-postratings'), 'mode' => 'post', 'limit' => 10, 'chars' => 200);
+			$options = array('title' => __('Most Rated', 'wp-postratings'), 'mode' => 'post', 'limit' => 10, 'chars' => 0);
 		}
 		if ($_POST['most_rated-submit']) {
 			$options['title'] = strip_tags(addslashes($_POST['most_rated-title']));

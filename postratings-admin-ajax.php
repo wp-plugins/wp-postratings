@@ -57,49 +57,53 @@ if($postratings_customrating && $postratings_max == 2) {
 	}
 }
 ?>
-<table width="80%"  border="0" cellspacing="3" cellpadding="3">			
-	<tr>
-		<td><strong>Rating Image</strong></td>
-		<td><strong>Rating Text</strong></td>
-		<td><strong>Rating Value</strong></td>
-	</tr>
-	<?php
-		for($i = 1; $i <= $postratings_max; $i++) {
-			$postratings_text = stripslashes($postratings_ratingstext[$i-1]);
-			$postratings_value = $postratings_ratingsvalue[$i-1];
-			if($postratings_value > 0) {
-				$postratings_value = '+'.$postratings_value;
-			}
-			echo '<tr>'."\n";
-			echo '<td>'."\n";
-			if(file_exists($postratings_path.'/'.$postratings_image.'/rating_start.gif')) {
-				echo '<img src="'.$postratings_url.'/'.$postratings_image.'/rating_start.gif" alt="rating_start.gif" class="post-ratings-image" />';
-			}
-			if($postratings_customrating) {
-				if($postratings_max == 2) {
-					echo '<img src="'.$postratings_url.'/'.$postratings_image.'/rating_'.$i.'_on.gif" alt="rating_'.$i.'_on.gif" class="post-ratings-image" />';
+<table class="form-table">
+	<thead>
+		<tr>
+			<th>Rating Image</th>
+			<th>Rating Text</th>
+			<th>Rating Value</th>
+		</tr>
+	</thead>
+	<tbody>
+		<?php
+			for($i = 1; $i <= $postratings_max; $i++) {
+				$postratings_text = stripslashes($postratings_ratingstext[$i-1]);
+				$postratings_value = $postratings_ratingsvalue[$i-1];
+				if($postratings_value > 0) {
+					$postratings_value = '+'.$postratings_value;
+				}
+				echo '<tr>'."\n";
+				echo '<td>'."\n";
+				if(file_exists($postratings_path.'/'.$postratings_image.'/rating_start.gif')) {
+					echo '<img src="'.$postratings_url.'/'.$postratings_image.'/rating_start.gif" alt="rating_start.gif" class="post-ratings-image" />';
+				}
+				if($postratings_customrating) {
+					if($postratings_max == 2) {
+						echo '<img src="'.$postratings_url.'/'.$postratings_image.'/rating_'.$i.'_on.gif" alt="rating_'.$i.'_on.gif" class="post-ratings-image" />';
+					} else {
+						for($j = 1; $j < ($i+1); $j++) {
+							echo '<img src="'.$postratings_url.'/'.$postratings_image.'/rating_'.$j.'_on.gif" alt="rating_on.gif" class="post-ratings-image" />';
+						}
+					}
 				} else {
 					for($j = 1; $j < ($i+1); $j++) {
-						echo '<img src="'.$postratings_url.'/'.$postratings_image.'/rating_'.$j.'_on.gif" alt="rating_on.gif" class="post-ratings-image" />';
+						echo '<img src="'.$postratings_url.'/'.$postratings_image.'/rating_on.gif" alt="rating_on.gif" class="post-ratings-image" />';
 					}
 				}
-			} else {
-				for($j = 1; $j < ($i+1); $j++) {
-					echo '<img src="'.$postratings_url.'/'.$postratings_image.'/rating_on.gif" alt="rating_on.gif" class="post-ratings-image" />';
+				if(file_exists($postratings_path.'/'.$postratings_image.'/rating_end.gif')) {
+					echo '<img src="'.$postratings_url.'/'.$postratings_image.'/rating_end.gif" alt="rating_end.gif" class="post-ratings-image" />';
 				}
-			}
-			if(file_exists($postratings_path.'/'.$postratings_image.'/rating_end.gif')) {
-				echo '<img src="'.$postratings_url.'/'.$postratings_image.'/rating_end.gif" alt="rating_end.gif" class="post-ratings-image" />';
-			}
-			echo '</td>'."\n";
-			echo '<td>'."\n";
-			echo '<input type="text" id="postratings_ratingstext_'.$i.'" name="postratings_ratingstext[]" value="'.$postratings_text.'" size="20" maxlength="50" />'."\n";
-			echo '</td>'."\n";
-			echo '<td>'."\n";
-			echo '<input type="text" id="postratings_ratingsvalue_'.$i.'" name="postratings_ratingsvalue[]" value="'.$postratings_value.'" size="2" maxlength="2" />'."\n";
-			echo '</td>'."\n";
-			echo '</tr>'."\n";
-		}								
-	?>
+				echo '</td>'."\n";
+				echo '<td>'."\n";
+				echo '<input type="text" id="postratings_ratingstext_'.$i.'" name="postratings_ratingstext[]" value="'.$postratings_text.'" size="20" maxlength="50" />'."\n";
+				echo '</td>'."\n";
+				echo '<td>'."\n";
+				echo '<input type="text" id="postratings_ratingsvalue_'.$i.'" name="postratings_ratingsvalue[]" value="'.$postratings_value.'" size="2" maxlength="2" />'."\n";
+				echo '</td>'."\n";
+				echo '</tr>'."\n";
+			}								
+		?>
+	</tbody>
 </table>
 <?php exit(); ?>

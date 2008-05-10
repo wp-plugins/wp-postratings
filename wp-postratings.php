@@ -55,7 +55,7 @@ function ratings_menu() {
 	if (function_exists('add_submenu_page')) {
 		add_submenu_page('wp-postratings/postratings-manager.php', __('Manage Ratings', 'wp-postratings'), __('Manage Ratings', 'wp-postratings'), 'manage_ratings', 'wp-postratings/postratings-manager.php');
 		add_submenu_page('wp-postratings/postratings-manager.php', __('Ratings Options', 'wp-postratings'), __('Ratings Options', 'wp-postratings'),  'manage_ratings', 'wp-postratings/postratings-options.php');
-		add_submenu_page('wp-postratings/postratings-manager.php', __('Ratings Usage', 'wp-postratings'), __('Ratings Usage', 'wp-postratings'), 'manage_ratings', 'wp-postratings/postratings-usage.php');
+		add_submenu_page('wp-postratings/postratings-manager.php', __('Ratings Templates', 'wp-postratings'), __('Ratings Templates', 'wp-postratings'),  'manage_ratings', 'wp-postratings/postratings-templates.php');
 		add_submenu_page('wp-postratings/postratings-manager.php', __('Uninstall WP-PostRatings', 'wp-postratings'), __('Uninstall WP-PostRatings', 'wp-postratings'), 'manage_ratings', 'wp-postratings/postratings-uninstall.php');
 	}
 }
@@ -415,6 +415,79 @@ function check_rated_username($post_id) {
 }
 
 
+### Function: Get Comment Authors Ratings
+add_action('loop_start', 'get_comment_authors_ratings');
+function get_comment_authors_ratings() {
+	global $wpdb, $id, $comment_authors_ratings;
+	$comment_authors_ratings = array();
+	$comment_authors_ratings_results = $wpdb->get_results("SELECT rating_username, rating_rating FROM $wpdb->ratings WHERE rating_postid = $id");
+	if($comment_authors_ratings_results) {
+		foreach($comment_authors_ratings_results as $comment_authors_ratings_result) {
+			$comment_author = stripslashes($comment_authors_ratings_result->rating_username);
+			$comment_authors_ratings[$comment_author] = $comment_authors_ratings_result->rating_rating;
+		}
+	}
+}
+
+
+### Function: Comment Author Ratings
+function comment_author_ratings($comment_author_specific = '') {
+	global $comment_authors_ratings;
+	$ratings_image = get_option('postratings_image');
+	$ratings_max = intval(get_option('postratings_max'));
+	$postratings_custom = intval(get_option('postratings_customrating'));
+	if(empty($comment_author_specific)) {
+		$comment_author = get_comment_author();
+	} else {
+		$comment_author = $comment_author_specific;
+	}
+	$comment_author_rating = intval($comment_authors_ratings[$comment_author]);
+	
+	if($comment_author_rating != 0) {
+		// Display Start Of Rating Image
+		if(file_exists(ABSPATH.'/wp-content/plugins/wp-postratings/images/'.$ratings_image.'/rating_start.gif')) {
+			$post_ratings_images .= '<img src="'.get_option('siteurl').'/wp-content/plugins/wp-postratings/images/'.$ratings_image.'/rating_start.gif" alt="" class="post-ratings-image" />';
+		}
+		// Display Rated Images
+		if($postratings_custom && $ratings_max == 2) {
+			if($comment_author_rating > 0) {
+				$comment_author_rating = '+'.$comment_author_rating;
+			}		
+		}
+		$image_alt = sprintf(__('%s gives a rating of %s', 'wp-postratings'), $comment_author, $comment_author_rating);
+		// Display 
+		if($postratings_custom && $ratings_max == 2) {
+			if($comment_author_rating > 0) {
+				$post_ratings_images .= '<img src="'.get_option('siteurl').'/wp-content/plugins/wp-postratings/images/'.$ratings_image.'/rating_2_on.gif" alt="'.$image_alt.'" title="'.$image_alt.'" class="post-ratings-image" />';
+			} else {
+				$post_ratings_images .= '<img src="'.get_option('siteurl').'/wp-content/plugins/wp-postratings/images/'.$ratings_image.'/rating_1_on.gif" alt="'.$image_alt.'" title="'.$image_alt.'" class="post-ratings-image" />';
+			}
+		} elseif($postratings_custom) {
+			for($i=1; $i <= $ratings_max; $i++) {
+				if($i <= $comment_author_rating) {
+					$post_ratings_images .= '<img src="'.get_option('siteurl').'/wp-content/plugins/wp-postratings/images/'.$ratings_image.'/rating_'.$i.'_on.gif" alt="'.$image_alt.'" title="'.$image_alt.'" class="post-ratings-image" />';
+				} else {
+					$post_ratings_images .= '<img src="'.get_option('siteurl').'/wp-content/plugins/wp-postratings/images/'.$ratings_image.'/rating_'.$i.'_off.gif" alt="'.$image_alt.'" title="'.$image_alt.'" class="post-ratings-image" />';
+				}
+			}
+		} else {
+			for($i=1; $i <= $ratings_max; $i++) {
+				if($i <= $comment_author_rating) {
+					$post_ratings_images .= '<img src="'.get_option('siteurl').'/wp-content/plugins/wp-postratings/images/'.$ratings_image.'/rating_on.gif" alt="'.$image_alt.'" title="'.$image_alt.'" class="post-ratings-image" />';		
+				} else {
+					$post_ratings_images .= '<img src="'.get_option('siteurl').'/wp-content/plugins/wp-postratings/images/'.$ratings_image.'/rating_off.gif" alt="'.$image_alt.'" title="'.$image_alt.'" class="post-ratings-image" />';
+				}
+			}
+		}
+		// Display End Of Rating Image
+		if(file_exists(ABSPATH.'/wp-content/plugins/wp-postratings/images/'.$ratings_image.'/rating_end.gif')) {
+			$post_ratings_images .= '<img src="'.get_option('siteurl').'/wp-content/plugins/wp-postratings/images/'.$ratings_image.'/rating_end.gif" alt="" class="post-ratings-image" />';
+		}
+	}
+	echo $post_ratings_images;
+}
+
+
 ### Function: Get IP Address
 if(!function_exists('get_ipaddress')) {
 	function get_ipaddress() {
@@ -589,7 +662,7 @@ function process_ratings() {
 					$rate_cookie = setcookie("rated_".$post_id, $ratings_value[$rate-1], time() + 30000000, COOKIEPATH);
 				}
 				// Log Ratings No Matter What
-				$rate_log = $wpdb->query("INSERT INTO $wpdb->ratings VALUES (0, $post_id, '$post_title', ".$ratings_value[$rate-1].",'".current_time('timestamp')."', '".get_ipaddress()."', '".gethostbyaddr(get_ipaddress())."' ,'$rate_user', $rate_userid)");
+				$rate_log = $wpdb->query("INSERT INTO $wpdb->ratings VALUES (0, $post_id, '$post_title', ".$ratings_value[$rate-1].",'".current_time('timestamp')."', '".get_ipaddress()."', '".@gethostbyaddr(get_ipaddress())."' ,'$rate_user', $rate_userid)");
 				// Output AJAX Result
 				if(defined(WP_CACHE)) {
 					$page_hash = $_GET['page_hash'];

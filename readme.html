@@ -262,6 +262,10 @@
 				<strong>&raquo;</strong> <a href="http://forums.lesterchan.net/index.php?board=17.0" title="http://forums.lesterchan.net/index.php?board=17.0">http://forums.lesterchan.net/index.php?board=17.0</a>
 			</p>
 			<p>
+				<strong>Credits:</strong><br />
+				<strong>&raquo;</strong> Icons courtesy of <a href="http://www.famfamfam.com/">FamFamFam</a> and <a href="http://www.everaldo.com/">Everaldo</a>.
+			</p>
+			<p>
 				<strong>Note:</strong><br />
 				<strong>&raquo;</strong> The <strong>Changelog</strong>, <strong>Installation</strong>, <strong>Upgrade</strong>, <strong>Usage</strong> Tab at the top of the page.
 			</p>
@@ -284,6 +288,9 @@
 					<strong>Version 1.30 (01-06-2008)</strong>
 					<ul>
 						<li>NEW: Works For WordPress 2.5 Only</li>
+						<li>NEW: Removed 'postratings-usage.php'</li>
+						<li>NEW: Splitted Templates From PostRating Options Into Its Own File, 'postratings-templates.php'</li>
+						<li>NEW: Able To Display The Ratings Given By Comment Author When Displaying Comments</li>
 						<li>NEW: WP-PostRatings Will Load 'postratings-css.css' Inside Your Theme Directory If It Exists. If Not, It Will Just Load The Default 'postratings-css.css' By WP-PostRatings</li>
 						<li>NEW: Use number_format_i18n() Instead Of number_format()</li>
 						<li>NEW: Added Get Most/Highest Rated Post Within A Given Time Range Function</li>
@@ -299,6 +306,7 @@
 						<li>FIXED: Thumbs Up/Down Post Should Get Sorted By Score Instead Of Average</li>
 						<li>FIXED: Increased The Length Of The Input Box For Individual Rating Value</li>
 						<li>FIXED: Manage Ratings Does Not Display "Numbers" Style Rating</li>
+						<li>FIXED: %POST_EXCERPT% Variable Is Sometimes Empty</li>
 					</ul>
 				</li>
 				<li>
@@ -486,6 +494,18 @@
 					<p>If you want to embed other <strong>post ratings results</strong>, use <strong>[ratings_results=1]</strong>, where <strong>1</strong> is the ID of the post/page ratings resilts that you want to display.</p>
 				</li>
 			</ol>
+			<div class="SubSubTitle">Displaying Comment Author Ratings</div>
+			<ol>
+				<li>
+					Open <strong>wp-content/themes/&lt;YOUR THEME NAME&gt;/comment.php</strong>
+				</li>
+				<li>
+					Use:
+					<blockquote>
+						&lt;?php comment_author_ratings(); ?&gt;
+					</blockquote>
+				</li>
+			</ol>
 			<div class="SubSubTitle">Note</div>
 			<ul>
 				<li>
@@ -628,6 +648,25 @@
 					<p>The value <strong>10</strong> will display only the top 10 highest rated posts/pages.</p>
 				</li>
 				<li>
+					To Display <strong>Highest Rated Post Within A Given Period</strong>
+				</li>
+				<li>
+					Use:
+					<blockquote>
+						&lt;?php if (function_exists('get_highest_rated_range')): ?&gt;<br />
+						&nbsp;&nbsp;&nbsp;&lt;ul&gt;<br />
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;?php get_highest_rated_range('1 day'); ?&gt;<br />
+						&nbsp;&nbsp;&nbsp;&lt;/ul&gt;<br />
+						&lt;?php endif; ?&gt;
+					</blockquote>
+					<p>Default: get_highest_rated_range('1 day', 'both', 10)</p>
+					<p>The value <strong>'1 day'</strong> will be the range that you want. You can use <strong>'2 days'</strong>, <strong>'1 month'</strong>, etc.</p>
+					<p>The value <strong>'both'</strong> will display both the most rated posts and pages.</p>
+					<p>If you want to display the most rated posts only, replace 'both' with <strong>'post'</strong>.</p>
+					<p>If you want to display the most rated pages only, replace 'both' with <strong>'page'</strong>.</p>
+					<p>The value <strong>10</strong> will display only the top 10 most rated posts/pages.</p>
+				</li>
+				<li>
 					To Display <strong>Most Rated Post</strong>
 				</li>
 				<li>
@@ -664,6 +703,25 @@
 					<p>If you want to display the most rated posts only, replace 'both' with <strong>'post'</strong>.</p>
 					<p>If you want to display the most rated pages only, replace 'both' with <strong>'page'</strong>.</p>
 					<p>The value <strong>0</strong> refers to the minimum votes required before the post get shown.</p>
+					<p>The value <strong>10</strong> will display only the top 10 most rated posts/pages.</p>
+				</li>
+				<li>
+					To Display <strong>Most Rated Post Within A Given Period</strong>
+				</li>
+				<li>
+					Use:
+					<blockquote>
+						&lt;?php if (function_exists('get_most_rated_range')): ?&gt;<br />
+						&nbsp;&nbsp;&nbsp;&lt;ul&gt;<br />
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;?php get_most_rated_range('1 day'); ?&gt;<br />
+						&nbsp;&nbsp;&nbsp;&lt;/ul&gt;<br />
+						&lt;?php endif; ?&gt;
+					</blockquote>
+					<p>Default: get_most_rated_range('1 day', 'both', 10)</p>
+					<p>The value <strong>'1 day'</strong> will be the range that you want. You can use <strong>'2 days'</strong>, <strong>'1 month'</strong>, etc.</p>
+					<p>The value <strong>'both'</strong> will display both the most rated posts and pages.</p>
+					<p>If you want to display the most rated posts only, replace 'both' with <strong>'post'</strong>.</p>
+					<p>If you want to display the most rated pages only, replace 'both' with <strong>'page'</strong>.</p>
 					<p>The value <strong>10</strong> will display only the top 10 most rated posts/pages.</p>
 				</li>
 			</ul>

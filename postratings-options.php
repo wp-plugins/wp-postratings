@@ -31,6 +31,12 @@ $base_page = 'admin.php?page='.$base_name;
 ### If Form Is Submitted
 if($_POST['Submit']) {
 	$postratings_customrating = intval($_POST['postratings_customrating']);
+	$postratings_template_vote = trim($_POST['postratings_template_vote']);
+	$postratings_template_text = trim($_POST['postratings_template_text']);
+	$postratings_template_permission = trim($_POST['postratings_template_permission']);
+	$postratings_template_none = trim($_POST['postratings_template_none']);
+	$postratings_template_highestrated = trim($_POST['postratings_template_highestrated']);
+	$postratings_template_mostrated = trim($_POST['postratings_template_mostrated']);
 	$postratings_image = strip_tags(trim($_POST['postratings_image']));
 	$postratings_max = intval($_POST['postratings_max']);
 	$postratings_ratingstext_array = $_POST['postratings_ratingstext'];
@@ -44,42 +50,36 @@ if($_POST['Submit']) {
 		$postratings_ratingsvalue[] =intval($ratingsvalue);
 	}
 	$postratings_ajax_style = array('loading' => intval($_POST['postratings_ajax_style_loading']), 'fading' => intval($_POST['postratings_ajax_style_fading']));
-	$postratings_template_vote = trim($_POST['postratings_template_vote']);
-	$postratings_template_text = trim($_POST['postratings_template_text']);
-	$postratings_template_permission = trim($_POST['postratings_template_permission']);
-	$postratings_template_none = trim($_POST['postratings_template_none']);
-	$postratings_template_highestrated = trim($_POST['postratings_template_highestrated']);
-	$postratings_template_mostrated = trim($_POST['postratings_template_mostrated']);
 	$postratings_logging_method = intval($_POST['postratings_logging_method']);
 	$postratings_allowtorate = intval($_POST['postratings_allowtorate']);
 	$update_ratings_queries = array();
 	$update_ratings_text = array();
 	$update_ratings_queries[] = update_option('postratings_customrating', $postratings_customrating);
-	$update_ratings_queries[] = update_option('postratings_image', $postratings_image);
-	$update_ratings_queries[] = update_option('postratings_max', $postratings_max);
-	$update_ratings_queries[] = update_option('postratings_ratingstext', $postratings_ratingstext);
-	$update_ratings_queries[] = update_option('postratings_ratingsvalue', $postratings_ratingsvalue);
-	$update_ratings_queries[] = update_option('postratings_ajax_style', $postratings_ajax_style);
 	$update_ratings_queries[] = update_option('postratings_template_vote', $postratings_template_vote);
 	$update_ratings_queries[] = update_option('postratings_template_text', $postratings_template_text);
 	$update_ratings_queries[] = update_option('postratings_template_permission', $postratings_template_permission);
 	$update_ratings_queries[] = update_option('postratings_template_none', $postratings_template_none);
 	$update_ratings_queries[] = update_option('postratings_template_highestrated', $postratings_template_highestrated);
 	$update_ratings_queries[] = update_option('postratings_template_mostrated', $postratings_template_mostrated);
+	$update_ratings_queries[] = update_option('postratings_image', $postratings_image);
+	$update_ratings_queries[] = update_option('postratings_max', $postratings_max);
+	$update_ratings_queries[] = update_option('postratings_ratingstext', $postratings_ratingstext);
+	$update_ratings_queries[] = update_option('postratings_ratingsvalue', $postratings_ratingsvalue);
+	$update_ratings_queries[] = update_option('postratings_ajax_style', $postratings_ajax_style);
 	$update_ratings_queries[] = update_option('postratings_logging_method', $postratings_logging_method);
 	$update_ratings_queries[] = update_option('postratings_allowtorate', $postratings_allowtorate);
 	$update_ratings_text[] = __('Custom Rating', 'wp-postratings');
-	$update_ratings_text[] = __('Ratings Image', 'wp-postratings');
-	$update_ratings_text[] = __('Max Ratings', 'wp-postratings');
-	$update_ratings_text[] = __('Individual Rating Text', 'wp-postratings');
-	$update_ratings_text[] = __('Individual Rating Value', 'wp-postratings');
-	$update_ratings_text[] = __('Ratings AJAX Style', 'wp-postratings');
 	$update_ratings_text[] = __('Ratings Template Vote', 'wp-postratings');
 	$update_ratings_text[] = __('Ratings Template Voted', 'wp-postratings');
 	$update_ratings_text[] = __('Ratings Template No Permission', 'wp-postratings');
 	$update_ratings_text[] = __('Ratings Template For No Ratings', 'wp-postratings');
 	$update_ratings_text[] = __('Ratings Template For Highest Rated', 'wp-postratings');
 	$update_ratings_text[] = __('Ratings Template For Most Rated', 'wp-postratings');
+	$update_ratings_text[] = __('Ratings Image', 'wp-postratings');
+	$update_ratings_text[] = __('Max Ratings', 'wp-postratings');
+	$update_ratings_text[] = __('Individual Rating Text', 'wp-postratings');
+	$update_ratings_text[] = __('Individual Rating Value', 'wp-postratings');
+	$update_ratings_text[] = __('Ratings AJAX Style', 'wp-postratings');
 	$update_ratings_text[] = __('Logging Method', 'wp-postratings');
 	$update_ratings_text[] = __('Allow To Vote Option', 'wp-postratings');
 	$i = 0;
@@ -105,7 +105,7 @@ $postratings_ratingstext = get_option('postratings_ratingstext');
 $postratings_ratingsvalue = get_option('postratings_ratingsvalue');
 $postratings_image = get_option('postratings_image');
 ?>
-<script language="JavaScript" type="text/javascript">
+<script type="text/javascript">
 /* <![CDATA[*/
 	function ratings_updown_templates(template, print) {
 		var default_template;
@@ -200,86 +200,89 @@ $postratings_image = get_option('postratings_image');
 	<h2><?php _e('Post Rating Options', 'wp-postratings'); ?></h2> 
 	<form method="post" action="<?php echo $_SERVER['REQUEST_URI']; ?>"> 
 		<input type="hidden" id="postratings_customrating" name="postratings_customrating" value="<?php echo $postratings_customrating; ?>" />
-		<p class="submit">
-			<input type="submit" name="Submit" class="button" value="<?php _e('Update Options &raquo;', 'wp-postratings'); ?>" />
-		</p>
-		<fieldset class="options">
-			<legend><?php _e('Ratings Settings', 'wp-postratings'); ?></legend>
-			<table width="100%"  border="0" cellspacing="3" cellpadding="3">
-				 <tr valign="top">
-					<th align="left" width="20%"><?php _e('Ratings Image:', 'wp-postratings'); ?></th>
-					<td align="left">
-						<?php
-							$postratings_images_array = array();
-							if($handle = @opendir($postratings_path)) {     
-								while (false !== ($filename = readdir($handle))) {  
-									if ($filename != '.' && $filename != '..') {
-										if(is_dir($postratings_path.'/'.$filename)) {
-											$postratings_images_array[$filename] = ratings_images_folder($filename);
-										}
-									} 
+		<input type="hidden" id="postratings_template_vote" name="postratings_template_vote" value="<?php echo htmlspecialchars(stripslashes(get_option('postratings_template_vote'))); ?>>" />
+		<input type="hidden" id="postratings_template_text" name="postratings_template_text" value="<?php echo htmlspecialchars(stripslashes(get_option('postratings_template_text'))); ?>" />
+		<input type="hidden" id="postratings_template_permission" name="postratings_template_permission" value="<?php echo htmlspecialchars(stripslashes(get_option('postratings_template_permission'))); ?>" />
+		<input type="hidden" id="postratings_template_none" name="postratings_template_none" value="<?php echo htmlspecialchars(stripslashes(get_option('postratings_template_none'))); ?>" />
+		<input type="hidden" id="postratings_template_highestrated" name="postratings_template_highestrated" value="<?php echo htmlspecialchars(stripslashes(get_option('postratings_template_highestrated'))); ?>" />
+		<input type="hidden" id="postratings_template_mostrated" name="postratings_template_mostrated" value="<?php echo htmlspecialchars(stripslashes(get_option('postratings_template_mostrated'))); ?>" />
+		<h3><?php _e('Ratings Settings', 'wp-postratings'); ?></h3>
+		<table class="form-table">
+			 <tr>
+				<th scope="row" valign="top"><?php _e('Ratings Image:', 'wp-postratings'); ?></th>
+				<td>
+					<?php
+						$postratings_images_array = array();
+						if($handle = @opendir($postratings_path)) {     
+							while (false !== ($filename = readdir($handle))) {  
+								if ($filename != '.' && $filename != '..') {
+									if(is_dir($postratings_path.'/'.$filename)) {
+										$postratings_images_array[$filename] = ratings_images_folder($filename);
+									}
 								} 
-								closedir($handle);
-							}
-							foreach($postratings_images_array as $key => $value) {
-								if($value['custom'] == 0) {
-									if($postratings_image == $key) {
-										echo '<input type="radio" name="postratings_image" onclick="set_custom('.$value['custom'].', '.$value['max'].');" value="'.$key.'" checked="checked" />';
-									} else {
-										echo '<input type="radio" name="postratings_image" onclick="set_custom('.$value['custom'].', '.$value['max'].');" value="'.$key.'" />';
-									}
-									echo '&nbsp;&nbsp;&nbsp;';
-									if(file_exists($postratings_path.'/'.$key.'/rating_start.gif')) {
-										echo '<img src="'.$postratings_url.'/'.$key.'/rating_start.gif" alt="rating_start.gif" class="post-ratings-image" />';
-									}
-									echo '<img src="'.$postratings_url.'/'.$key.'/rating_over.gif" alt="rating_over.gif" class="post-ratings-image" />';
-									echo '<img src="'.$postratings_url.'/'.$key.'/rating_on.gif" alt="rating_on.gif" class="post-ratings-image" />';
-									echo '<img src="'.$postratings_url.'/'.$key.'/rating_on.gif" alt="rating_on.gif" class="post-ratings-image" />';
-									echo '<img src="'.$postratings_url.'/'.$key.'/rating_half.gif" alt="rating_half.gif" class="post-ratings-image" />';
-									echo '<img src="'.$postratings_url.'/'.$key.'/rating_off.gif" alt="rating_off.gif" class="post-ratings-image" />';
+							} 
+							closedir($handle);
+						}
+						foreach($postratings_images_array as $key => $value) {
+							if($value['custom'] == 0) {
+								if($postratings_image == $key) {
+									echo '<input type="radio" name="postratings_image" onclick="set_custom('.$value['custom'].', '.$value['max'].');" value="'.$key.'" checked="checked" />';
 								} else {
-									if($postratings_image == $key) {
-										echo '<input type="radio" name="postratings_image" onclick="set_custom('.$value['custom'].', '.$value['max'].');" value="'.$key.'" checked="checked" />';
-									} else {
-										echo '<input type="radio" name="postratings_image" onclick="set_custom('.$value['custom'].', '.$value['max'].');" value="'.$key.'" />';
-									}
-									echo '&nbsp;&nbsp;&nbsp;';
-									if(file_exists($postratings_path.'/'.$key.'/rating_start.gif')) {
-										echo '<img src="'.$postratings_url.'/'.$key.'/rating_start.gif" alt="rating_start.gif" class="post-ratings-image" />';
-									}
-									for($i = 1; $i <= $value['max']; $i++) {
-											if(file_exists($postratings_path.'/'.$key.'/rating_'.$i.'_off.gif')) {
-												echo '<img src="'.$postratings_url.'/'.$key.'/rating_'.$i.'_off.gif" alt="rating_'.$i.'_off.gif" class="post-ratings-image" />';
-											}
-									}
+									echo '<input type="radio" name="postratings_image" onclick="set_custom('.$value['custom'].', '.$value['max'].');" value="'.$key.'" />';
 								}
-								if(file_exists($postratings_path.'/'.$key.'/rating_end.gif')) {
-									echo '<img src="'.$postratings_url.'/'.$key.'/rating_end.gif" alt="rating_end.gif" class="post-ratings-image" />';
+								echo '&nbsp;&nbsp;&nbsp;';
+								if(file_exists($postratings_path.'/'.$key.'/rating_start.gif')) {
+									echo '<img src="'.$postratings_url.'/'.$key.'/rating_start.gif" alt="rating_start.gif" class="post-ratings-image" />';
 								}
-								echo '&nbsp;&nbsp;&nbsp;('.$key.')';
-								echo '<br /><br />'."\n";
+								echo '<img src="'.$postratings_url.'/'.$key.'/rating_over.gif" alt="rating_over.gif" class="post-ratings-image" />';
+								echo '<img src="'.$postratings_url.'/'.$key.'/rating_on.gif" alt="rating_on.gif" class="post-ratings-image" />';
+								echo '<img src="'.$postratings_url.'/'.$key.'/rating_on.gif" alt="rating_on.gif" class="post-ratings-image" />';
+								echo '<img src="'.$postratings_url.'/'.$key.'/rating_half.gif" alt="rating_half.gif" class="post-ratings-image" />';
+								echo '<img src="'.$postratings_url.'/'.$key.'/rating_off.gif" alt="rating_off.gif" class="post-ratings-image" />';
+							} else {
+								if($postratings_image == $key) {
+									echo '<input type="radio" name="postratings_image" onclick="set_custom('.$value['custom'].', '.$value['max'].');" value="'.$key.'" checked="checked" />';
+								} else {
+									echo '<input type="radio" name="postratings_image" onclick="set_custom('.$value['custom'].', '.$value['max'].');" value="'.$key.'" />';
+								}
+								echo '&nbsp;&nbsp;&nbsp;';
+								if(file_exists($postratings_path.'/'.$key.'/rating_start.gif')) {
+									echo '<img src="'.$postratings_url.'/'.$key.'/rating_start.gif" alt="rating_start.gif" class="post-ratings-image" />';
+								}
+								for($i = 1; $i <= $value['max']; $i++) {
+										if(file_exists($postratings_path.'/'.$key.'/rating_'.$i.'_off.gif')) {
+											echo '<img src="'.$postratings_url.'/'.$key.'/rating_'.$i.'_off.gif" alt="rating_'.$i.'_off.gif" class="post-ratings-image" />';
+										}
+								}
 							}
-						?>
-					</td>
-				</tr>
-				<tr valign="top">
-					<th align="left" width="20%"><?php _e('Max Ratings:', 'wp-postratings'); ?></th>
-					<td align="left"><input type="text" id="postratings_max" name="postratings_max" value="<?php echo $postratings_max; ?>" size="3" <?php if($postratings_customrating) { echo 'readonly="readonly"'; } ?> /></td>
-				</tr>
-				<tr valign="top">
-					<td colspan="2" align="center"><input type="button" name="update" value="<?php _e('Update \'Individual Rating Text/Value\' Display', 'wp-postratings'); ?>" onclick="update_rating_text_value();" class="button" /><br /><img id="postratings_loading" src="<?php echo $postratings_url; ?>/loading.gif" alt="" style="display: none;" /></td>
-				</tr>
-			</table>
-		</fieldset>
-		<fieldset class="options">
-			<legend><?php _e('Individual Rating Text/Value', 'wp-postratings'); ?></legend>
-			<div id="rating_text_value">
-				<table width="80%"  border="0" cellspacing="3" cellpadding="3">
+							if(file_exists($postratings_path.'/'.$key.'/rating_end.gif')) {
+								echo '<img src="'.$postratings_url.'/'.$key.'/rating_end.gif" alt="rating_end.gif" class="post-ratings-image" />';
+							}
+							echo '&nbsp;&nbsp;&nbsp;('.$key.')';
+							echo '<br /><br />'."\n";
+						}
+					?>
+				</td>
+			</tr>
+			<tr>
+				<th scope="row" valign="top"><?php _e('Max Ratings:', 'wp-postratings'); ?></th>
+				<td><input type="text" id="postratings_max" name="postratings_max" value="<?php echo $postratings_max; ?>" size="3" <?php if($postratings_customrating) { echo 'readonly="readonly"'; } ?> /></td>
+			</tr>
+			<tr>
+				<td colspan="2" align="center"><input type="button" name="update" value="<?php _e('Update \'Individual Rating Text/Value\' Display', 'wp-postratings'); ?>" onclick="update_rating_text_value();" class="button" /><br /><img id="postratings_loading" src="<?php echo $postratings_url; ?>/loading.gif" alt="" style="display: none;" /></td>
+			</tr>
+		</table>
+		<h3><?php _e('Individual Rating Text/Value', 'wp-postratings'); ?></h3>
+		<div id="rating_text_value">
+			<table class="form-table">
+				<thead>
 					<tr>
-						<td><strong>Rating Image</strong></td>
-						<td><strong>Rating Text</strong></td>
-						<td><strong>Rating Value</strong></td>
+						<th><?php _e('Rating Image', 'wp-postratings'); ?></th>
+						<th><?php _e('Rating Text', 'wp-postratings'); ?></th>
+						<th><?php _e('Rating Value', 'wp-postratings'); ?></th>
 					</tr>
+				</thead>
+				<tbody>
 					<?php
 						for($i = 1; $i <= $postratings_max; $i++) {
 							echo '<tr>'."\n";
@@ -317,39 +320,36 @@ $postratings_image = get_option('postratings_image');
 							echo '</tr>'."\n";
 						}								
 					?>
-				</table>
-			</div>
-		</fieldset>
-		<?php $postratings_ajax_style = get_option('postratings_ajax_style'); ?>
-		<fieldset class="options">
-			<legend><?php _e('Ratings AJAX Style', 'wp-postratings'); ?></legend>
-			<table width="100%"  border="0" cellspacing="3" cellpadding="3">
-				 <tr valign="top">
-					<th align="left" width="30%"><?php _e('Show Loading Image With Text', 'wp-postratings'); ?></th>
-					<td align="left">
-						<select name="postratings_ajax_style_loading" size="1">
-							<option value="0"<?php selected('0', $postratings_ajax_style['loading']); ?>><?php _e('No', 'wp-postratings'); ?></option>
-							<option value="1"<?php selected('1', $postratings_ajax_style['loading']); ?>><?php _e('Yes', 'wp-postratings'); ?></option>
-						</select>
-					</td>
-				</tr>
-				<tr valign="top"> 
-					<th align="left" width="30%"><?php _e('Show Fading In And Fading Out Of Ratings', 'wp-postratings'); ?></th>
-					<td align="left">
-						<select name="postratings_ajax_style_fading" size="1">
-							<option value="0"<?php selected('0', $postratings_ajax_style['fading']); ?>><?php _e('No', 'wp-postratings'); ?></option>
-							<option value="1"<?php selected('1', $postratings_ajax_style['fading']); ?>><?php _e('Yes', 'wp-postratings'); ?></option>
-						</select>
-					</td> 
-				</tr>
+				</tbody>
 			</table>
-		</fieldset>
-		<fieldset class="options">
-		<legend><?php _e('Allow To Rate', 'wp-postratings'); ?></legend>
-		<table width="100%"  border="0" cellspacing="3" cellpadding="3">
-			 <tr valign="top">
-				<th align="left" width="30%"><?php _e('Who Is Allowed To Rate?', 'wp-postratings'); ?></th>
-				<td align="left">
+		</div>
+		<?php $postratings_ajax_style = get_option('postratings_ajax_style'); ?>
+		<h3><?php _e('Ratings AJAX Style', 'wp-postratings'); ?></h3>
+		<table class="form-table">
+			 <tr>
+				<th scope="row" valign="top"><?php _e('Show Loading Image With Text', 'wp-postratings'); ?></th>
+				<td>
+					<select name="postratings_ajax_style_loading" size="1">
+						<option value="0"<?php selected('0', $postratings_ajax_style['loading']); ?>><?php _e('No', 'wp-postratings'); ?></option>
+						<option value="1"<?php selected('1', $postratings_ajax_style['loading']); ?>><?php _e('Yes', 'wp-postratings'); ?></option>
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<th scope="row" valign="top"><?php _e('Show Fading In And Fading Out Of Ratings', 'wp-postratings'); ?></th>
+				<td>
+					<select name="postratings_ajax_style_fading" size="1">
+						<option value="0"<?php selected('0', $postratings_ajax_style['fading']); ?>><?php _e('No', 'wp-postratings'); ?></option>
+						<option value="1"<?php selected('1', $postratings_ajax_style['fading']); ?>><?php _e('Yes', 'wp-postratings'); ?></option>
+					</select>
+				</td> 
+			</tr>
+		</table>
+		<h3><?php _e('Allow To Rate', 'wp-postratings'); ?></h3>
+		<table class="form-table">
+			 <tr>
+				<th scope="row" valign="top"><?php _e('Who Is Allowed To Rate?', 'wp-postratings'); ?></th>
+				<td>
 					<select name="postratings_allowtorate" size="1">
 						<option value="0"<?php selected('0', get_option('postratings_allowtorate')); ?>><?php _e('Guests Only', 'wp-postratings'); ?></option>
 						<option value="1"<?php selected('1', get_option('postratings_allowtorate')); ?>><?php _e('Registered Users Only', 'wp-postratings'); ?></option>
@@ -358,13 +358,11 @@ $postratings_image = get_option('postratings_image');
 				</td>
 			</tr>
 		</table>
-	</fieldset>
-	<fieldset class="options">
-		<legend><?php _e('Logging Method', 'wp-postratings'); ?></legend>
-		<table width="100%"  border="0" cellspacing="3" cellpadding="3">
-			 <tr valign="top">
-				<th align="left" width="30%"><?php _e('Ratings Logging Method:', 'wp-postratings'); ?></th>
-				<td align="left">
+		<h3><?php _e('Logging Method', 'wp-postratings'); ?></h3>
+		<table class="form-table">
+			 <tr>
+				<th scope="row" valign="top"><?php _e('Ratings Logging Method:', 'wp-postratings'); ?></th>
+				<td>
 					<select name="postratings_logging_method" size="1">
 						<option value="0"<?php selected('0', get_option('postratings_logging_method')); ?>><?php _e('Do Not Log', 'wp-postratings'); ?></option>
 						<option value="1"<?php selected('1', get_option('postratings_logging_method')); ?>><?php _e('Logged By Cookie', 'wp-postratings'); ?></option>
@@ -375,130 +373,8 @@ $postratings_image = get_option('postratings_image');
 				</td>
 			</tr>
 		</table>
-	</fieldset>
-	<fieldset class="options">
-		<legend><?php _e('Template Variables', 'wp-postratings'); ?></legend>
-		<table width="100%"  border="0" cellspacing="3" cellpadding="3">
-			<tr>
-				<td><strong>%RATINGS_IMAGES%</strong> - <?php _e('Display the ratings images', 'wp-postratings'); ?></td>
-				<td><strong>%RATINGS_IMAGES_VOTE%</strong> - <?php _e('Display the ratings voting image', 'wp-postratings'); ?></td>
-			</tr>
-			<tr>
-				<td><strong>%RATINGS_AVERAGE%</strong> - <?php _e('Display the average ratings', 'wp-postratings'); ?></td>
-				<td><strong>%RATINGS_USERS%</strong> - <?php _e('Display the total number of users rated for the post', 'wp-postratings'); ?></td>						
-			</tr>
-			<tr>
-				<td><strong>%RATINGS_MAX%</strong> - <?php _e('Display the max number of ratings', 'wp-postratings'); ?></td>
-				<td><strong>%RATINGS_PERCENTAGE%</strong> - <?php _e('Display the ratings percentage', 'wp-postratings'); ?></td>
-			</tr>
-			<tr>
-				<td><strong>%RATINGS_SCORE%</strong> - <?php _e('Display the total score of the ratings', 'wp-postratings'); ?></td>
-				<td><strong>%RATINGS_TEXT%</strong> - <?php _e('Display the individual rating text. Eg: 1 Star, 2 Stars, etc', 'wp-postratings'); ?></td>
-			</tr>
-		</table>
-	</fieldset>
-	<fieldset class="options">
-		<legend><?php _e('Ratings Templates', 'wp-postratings'); ?></legend>
-		<table width="100%"  border="0" cellspacing="3" cellpadding="3">
-			 <tr valign="top">
-				<td align="left" width="30%">
-					<strong><?php _e('Ratings Vote Text:', 'wp-postratings'); ?></strong><br /><br />
-					<?php _e('Allowed Variables:', 'wp-postratings'); ?><br />
-					- %RATINGS_IMAGES_VOTE%<br />
-					- %RATINGS_MAX%<br />
-					- %RATINGS_SCORE%<br />
-					- %RATINGS_TEXT%<br />
-					- %RATINGS_USERS%<br />							
-					- %RATINGS_AVERAGE%<br />
-					- %RATINGS_PERCENTAGE%<br /><br />
-					<input type="button" name="RestoreDefault" value="<?php _e('Restore Default Template (Normal Rating)', 'wp-postratings'); ?>" onclick="ratings_default_templates('vote', true);" class="button" />
-					<br />
-					<input type="button" name="RestoreDefault" value="<?php _e('Restore Default Template (Up/Down Rating)', 'wp-postratings'); ?>" onclick="ratings_updown_templates('vote', true);" class="button" />
-				</td>
-				<td align="left"><textarea cols="80" rows="15" id="postratings_template_vote" name="postratings_template_vote"><?php echo htmlspecialchars(stripslashes(get_option('postratings_template_vote'))); ?></textarea></td>
-			</tr>
-			<tr valign="top">
-				<td align="left" width="30%">
-					<strong><?php _e('Ratings Voted Text:', 'wp-postratings'); ?></strong><br /><br />
-					<?php _e('Allowed Variables:', 'wp-postratings'); ?><br />
-					- %RATINGS_IMAGES%<br />
-					- %RATINGS_MAX%<br />
-					- %RATINGS_SCORE%<br />
-					- %RATINGS_USERS%<br />							
-					- %RATINGS_AVERAGE%<br />
-					- %RATINGS_PERCENTAGE%<br /><br />
-					<input type="button" name="RestoreDefault" value="<?php _e('Restore Default Template (Normal Rating)', 'wp-postratings'); ?>" onclick="ratings_default_templates('text', true);" class="button" /><br />
-					<input type="button" name="RestoreDefault" value="<?php _e('Restore Default Template (Up/Down Rating)', 'wp-postratings'); ?>" onclick="ratings_updown_templates('text', true);" class="button" />
-				</td>
-				<td align="left"><textarea cols="80" rows="15" id="postratings_template_text" name="postratings_template_text"><?php echo htmlspecialchars(stripslashes(get_option('postratings_template_text'))); ?></textarea></td>
-			</tr>
-			<tr valign="top">
-				<td align="left" width="30%">
-					<strong><?php _e('Ratings No Permission Text:', 'wp-postratings'); ?></strong><br /><br />
-					<?php _e('Allowed Variables:', 'wp-postratings'); ?><br />
-					- %RATINGS_IMAGES%<br />
-					- %RATINGS_MAX%<br />
-					- %RATINGS_SCORE%<br />
-					- %RATINGS_USERS%<br />							
-					- %RATINGS_AVERAGE%<br />
-					- %RATINGS_PERCENTAGE%<br /><br />
-					<input type="button" name="RestoreDefault" value="<?php _e('Restore Default Template (Normal Rating)', 'wp-postratings'); ?>" onclick="ratings_default_templates('permission', true);" class="button" /><br />
-					<input type="button" name="RestoreDefault" value="<?php _e('Restore Default Template (Up/Down Rating)', 'wp-postratings'); ?>" onclick="ratings_updown_templates('permission', true);" class="button" />
-				</td>
-				<td align="left"><textarea cols="80" rows="15" id="postratings_template_permission" name="postratings_template_permission"><?php echo htmlspecialchars(stripslashes(get_option('postratings_template_permission'))); ?></textarea></td>
-			</tr>
-			<tr valign="top">
-				<td align="left" width="30%">
-					<strong><?php _e('Ratings None:', 'wp-postratings'); ?></strong><br /><br />
-					<?php _e('Allowed Variables:', 'wp-postratings'); ?><br />
-					- %RATINGS_IMAGES_VOTE%<br />
-					- %RATINGS_MAX%<br />
-					- %RATINGS_SCORE%<br />
-					- %RATINGS_TEXT%<br />
-					- %RATINGS_USERS%<br />							
-					- %RATINGS_AVERAGE%<br />
-					- %RATINGS_PERCENTAGE%<br /><br />
-					<input type="button" name="RestoreDefault" value="<?php _e('Restore Default Template (Normal Rating)', 'wp-postratings'); ?>" onclick="ratings_default_templates('none', true);" class="button" /><br />
-					<input type="button" name="RestoreDefault" value="<?php _e('Restore Default Template (Up/Down Rating)', 'wp-postratings'); ?>" onclick="ratings_updown_templates('none', true);" class="button" />
-				</td>
-				<td align="left"><textarea cols="80" rows="15" id="postratings_template_none" name="postratings_template_none"><?php echo htmlspecialchars(stripslashes(get_option('postratings_template_none'))); ?></textarea></td>
-			</tr>
-			<tr valign="top">
-				<td align="left" width="30%">
-					<strong><?php _e('Highest Rated:', 'wp-postratings'); ?></strong><br /><br />
-					<?php _e('Allowed Variables:', 'wp-postratings'); ?><br />
-					- %RATINGS_IMAGES<br />
-					- %RATINGS_MAX%<br />
-					- %RATINGS_SCORE%<br />
-					- %RATINGS_USERS%<br />							
-					- %RATINGS_AVERAGE%<br />
-					- %POST_TITLE%<br />
-					- %POST_EXCERPT%<br />
-					- %POST_CONTENT%<br />
-					- %POST_URL%<br /><br />
-					<input type="button" name="RestoreDefault" value="<?php _e('Restore Default Template (Normal Rating)', 'wp-postratings'); ?>" onclick="ratings_default_templates('highestrated', true);" class="button" /><br />
-					<input type="button" name="RestoreDefault" value="<?php _e('Restore Default Template (Up/Down Rating)', 'wp-postratings'); ?>" onclick="ratings_updown_templates('highestrated', true);" class="button" />
-				</td>
-				<td align="left"><textarea cols="80" rows="15" id="postratings_template_highestrated" name="postratings_template_highestrated"><?php echo htmlspecialchars(stripslashes(get_option('postratings_template_highestrated'))); ?></textarea></td>
-			</tr>
-			<tr valign="top">
-				<td align="left" width="30%">
-					<strong><?php _e('Most Rated:', 'wp-postratings'); ?></strong><br /><br />
-					<?php _e('Allowed Variables:', 'wp-postratings'); ?><br />
-					- %RATINGS_USERS%<br />							
-					- %POST_TITLE%<br />
-					- %POST_EXCERPT%<br />
-					- %POST_CONTENT%<br />
-					- %POST_URL%<br /><br />
-					<input type="button" name="RestoreDefault" value="<?php _e('Restore Default Template (Normal Rating)', 'wp-postratings'); ?>" onclick="ratings_default_templates('mostrated', true);" class="button" /><br />
-					<input type="button" name="RestoreDefault" value="<?php _e('Restore Default Template (Up/Down Rating)', 'wp-postratings'); ?>" onclick="ratings_updown_templates('mostrated', true);" class="button" />
-				</td>
-				<td align="left"><textarea cols="80" rows="15" id="postratings_template_mostrated" name="postratings_template_mostrated"><?php echo htmlspecialchars(stripslashes(get_option('postratings_template_mostrated'))); ?></textarea></td>
-			</tr>
-		</table>
-	</fieldset>
-	<p class="submit">
-		<input type="submit" name="Submit" class="button" value="<?php _e('Update Options &raquo;', 'wp-postratings'); ?>" />
-	</p>
+		<p class="submit">
+			<input type="submit" name="Submit" class="button" value="<?php _e('Save Changes', 'wp-postratings'); ?>" />
+		</p>
 	</form>
 </div>

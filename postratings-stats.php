@@ -41,7 +41,7 @@ if(!function_exists('get_most_rated')) {
 			foreach ($most_rated as $post) {
 				$post_ratings_users = number_format_i18n($post->ratings_users);
 				$post_title = get_the_title();
-				$post_excerpt = get_the_excerpt();
+				$post_excerpt = apply_filters('the_excerpt', get_the_excerpt());
 				$post_content = get_the_content();
 				if($chars > 0) {
 					$temp = "<li><a href=\"".get_permalink()."\">".snippet_text($post_title, $chars)."</a> - $post_ratings_users ".__('votes', 'wp-postratings')."</li>\n";
@@ -96,7 +96,7 @@ if(!function_exists('get_most_rated_category')) {
 			foreach ($most_rated as $post) {
 				$post_ratings_users = number_format_i18n($post->ratings_users);
 				$post_title = get_the_title();
-				$post_excerpt = get_the_excerpt();
+				$post_excerpt = apply_filters('the_excerpt', get_the_excerpt());
 				$post_content = get_the_content();
 				if($chars > 0) {
 					$temp = "<li><a href=\"".get_permalink()."\">".snippet_text($post_title, $chars)."</a> - $post_ratings_users ".__('votes', 'wp-postratings')."</li>\n";
@@ -147,7 +147,7 @@ if(!function_exists('get_most_rated_range')) {
 			foreach ($most_rated as $post) {
 				$post_ratings_users = number_format_i18n($post->ratings_users);
 				$post_title = get_the_title();
-				$post_excerpt = get_the_excerpt();
+				$post_excerpt = apply_filters('the_excerpt', get_the_excerpt());
 				$post_content = get_the_content();
 				if($chars > 0) {
 					$temp = "<li><a href=\"".get_permalink()."\">".snippet_text($post_title, $chars)."</a> - $post_ratings_users ".__('votes', 'wp-postratings')."</li>\n";
@@ -204,7 +204,7 @@ if(!function_exists('get_most_rated_range_category')) {
 			foreach ($most_rated as $post) {
 				$post_ratings_users = number_format_i18n($post->ratings_users);
 				$post_title = get_the_title();
-				$post_excerpt = get_the_excerpt();
+				$post_excerpt = apply_filters('the_excerpt', get_the_excerpt());
 				$post_content = get_the_content();
 				if($chars > 0) {
 					$temp = "<li><a href=\"".get_permalink()."\">".snippet_text($post_title, $chars)."</a> - $post_ratings_users ".__('votes', 'wp-postratings')."</li>\n";
@@ -262,7 +262,7 @@ if(!function_exists('get_highest_rated')) {
 				$post_ratings_score = $post->ratings_score;
 				$post_ratings_whole = intval($post_ratings_average);
 				$post_ratings = floor($post_ratings_average);
-				$post_excerpt = get_the_excerpt();
+				$post_excerpt = apply_filters('the_excerpt', get_the_excerpt());
 				$post_content = get_the_content();
 				// Check For Half Star
 				$insert_half = 0;
@@ -380,7 +380,7 @@ if(!function_exists('get_highest_rated_category')) {
 				$post_ratings_score = $post->ratings_score;
 				$post_ratings_whole = intval($post_ratings_average);
 				$post_ratings = floor($post_ratings_average);
-				$post_excerpt = get_the_excerpt();
+				$post_excerpt = apply_filters('the_excerpt', get_the_excerpt());
 				$post_content = get_the_content();
 				// Check For Half Star
 				$insert_half = 0;
@@ -493,7 +493,7 @@ if(!function_exists('get_highest_rated_range')) {
 				$post_ratings_score = $post->ratings_score;
 				$post_ratings_whole = intval($post_ratings_average);
 				$post_ratings = floor($post_ratings_average);
-				$post_excerpt = get_the_excerpt();
+				$post_excerpt = apply_filters('the_excerpt', get_the_excerpt());
 				$post_content = get_the_content();
 				// Check For Half Star
 				$insert_half = 0;
@@ -612,7 +612,7 @@ if(!function_exists('get_highest_rated_range_category')) {
 				$post_ratings_score = $post->ratings_score;
 				$post_ratings_whole = intval($post_ratings_average);
 				$post_ratings = floor($post_ratings_average);
-				$post_excerpt = get_the_excerpt();
+				$post_excerpt = apply_filters('the_excerpt', get_the_excerpt());
 				$post_content = get_the_content();
 				// Check For Half Star
 				$insert_half = 0;
@@ -724,7 +724,7 @@ if(!function_exists('get_lowest_rated')) {
 				$post_ratings_score = $post->ratings_score;
 				$post_ratings_whole = intval($post_ratings_average);
 				$post_ratings = floor($post_ratings_average);
-				$post_excerpt = get_the_excerpt();
+				$post_excerpt = apply_filters('the_excerpt', get_the_excerpt());
 				$post_content = get_the_content();
 				// Check For Half Star
 				$insert_half = 0;
@@ -842,7 +842,7 @@ if(!function_exists('get_lowest_rated_category')) {
 				$post_ratings_score = $post->ratings_score;
 				$post_ratings_whole = intval($post_ratings_average);
 				$post_ratings = floor($post_ratings_average);
-				$post_excerpt = get_the_excerpt();
+				$post_excerpt = apply_filters('the_excerpt', get_the_excerpt());
 				$post_content = get_the_content();
 				// Check For Half Star
 				$insert_half = 0;

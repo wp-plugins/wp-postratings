@@ -114,41 +114,45 @@ switch($mode) {
 	<p style="text-align: left; color: red">
 		<strong><?php _e('The following WordPress Options/Tables/PostMetas will be DELETED:', 'wp-postratings'); ?></strong><br />
 	</p>
-	<table width="70%"  border="0" cellspacing="3" cellpadding="3">
-		<tr class="thead">
-			<td align="center"><strong><?php _e('WordPress Options', 'wp-postratings'); ?></strong></td>
-			<td align="center"><strong><?php _e('WordPress Tables', 'wp-postratings'); ?></strong></td>
-			<td align="center"><strong><?php _e('WordPress PostMetas', 'wp-postratings'); ?></strong></td>
-		</tr>
-		<tr>
-			<td valign="top" style="background-color: #eee;">
-				<ol>
-				<?php
-					foreach($ratings_settings as $settings) {
-						echo '<li>'.$settings.'</li>'."\n";
-					}
-				?>
-				</ol>
-			</td>
-			<td valign="top" style="background-color: #eee;">
-				<ol>
-				<?php
-					foreach($ratings_tables as $tables) {
-						echo '<li>'.$tables.'</li>'."\n";
-					}
-				?>
-				</ol>
-			</td>
-			<td valign="top" style="background-color: #eee;">
-				<ol>
-				<?php
-					foreach($ratings_postmetas as $postmeta) {
-						echo '<li>'.$postmeta.'</li>'."\n";
-					}
-				?>
-				</ol>
-			</td>
-		</tr>
+	<table class="widefat">
+		<thead>
+			<tr>
+				<td align="center"><strong><?php _e('WordPress Options', 'wp-postratings'); ?></strong></td>
+				<td align="center"><strong><?php _e('WordPress Tables', 'wp-postratings'); ?></strong></td>
+				<td align="center"><strong><?php _e('WordPress PostMetas', 'wp-postratings'); ?></strong></td>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td valign="top">
+					<ol>
+					<?php
+						foreach($ratings_settings as $settings) {
+							echo '<li>'.$settings.'</li>'."\n";
+						}
+					?>
+					</ol>
+				</td>
+				<td valign="top" class="alternate">
+					<ol>
+					<?php
+						foreach($ratings_tables as $tables) {
+							echo '<li>'.$tables.'</li>'."\n";
+						}
+					?>
+					</ol>
+				</td>
+				<td valign="top">
+					<ol>
+					<?php
+						foreach($ratings_postmetas as $postmeta) {
+							echo '<li>'.$postmeta.'</li>'."\n";
+						}
+					?>
+					</ol>
+				</td>
+			</tr>
+		</tbody>
 	</table>
 	<p>&nbsp;</p>
 	<p style="text-align: center;">

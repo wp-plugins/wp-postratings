@@ -45,40 +45,6 @@ $ratings_max = intval(get_option('postratings_max'));
 if(!empty($_POST['do'])) {
 	// Decide What To Do
 	switch($_POST['do']) {
-		//  Uninstall WP-PostRatings
-		case __('UNINSTALL Ratings', 'wp-postratings'):
-			if(trim($_POST['uninstall_ratings_yes']) == 'yes') {
-				echo '<div id="message" class="updated fade"><p>';
-				$ratings_tables = array($wpdb->ratings);
-				foreach($ratings_tables as $table) {
-					$wpdb->query("DROP TABLE {$table}");
-					echo '<font color="green">';
-					printf(__('Table "%s" Has Been Dropped.', 'wp-postratings'), "<strong><em>{$table}</em></strong>");
-					echo '</font><br />';
-				}
-				$ratings_settings = array('postratings_image', 'postratings_max', 'postratings_template_vote', 'postratings_template_text', 'postratings_template_none', 'postratings_logging_method', 'postratings_allowtorate', 'postratings_ratingstext', 'postratings_template_highestrated');
-				foreach($ratings_settings as $setting) {
-					$delete_setting = delete_option($setting);
-					if($delete_setting) {
-						echo '<font color="green">';
-						printf(__('Setting Key \'%s\' Has been Errased.', 'wp-postratings'), "<strong><em>{$setting}</em></strong>");
-					} else {
-						echo '<font color="red">';
-						printf(__('Error Deleting Setting Key \'%s\'.', 'wp-postratings'), "<strong><em>{$setting}</em></strong>");
-					}
-					echo '</font><br />';
-				}
-				$ratings_postmeta = array('ratings_users', 'ratings_score', 'ratings_average');
-				foreach($ratings_postmeta as $postmeta) {
-					$wpdb->query("DELETE FROM $wpdb->postmeta WHERE meta_key = '$postmeta'");
-					echo '<font color="green">';
-					printf(__('Post Meta "%s" Has Been Deleted.', 'wp-postratings'), "<strong><em>$postmeta</em></strong>");
-					echo '</font><br />';
-				}				
-				echo '</p></div>'; 
-				$mode = 'end-UNINSTALL';
-			}
-			break;
 		case __('Delete Data/Logs', 'wp-postratings'):
 			$post_ids = trim($_POST['delete_postid']);
 			$delete_datalog = intval($_POST['delete_datalog']);
@@ -291,24 +257,27 @@ switch($mode) {
 	<h2><?php _e('Post Ratings Logs', 'wp-postratings'); ?></h2>
 	<p><?php _e('Displaying', 'wp-postratings'); ?> <strong><?php echo number_format_i18n($display_on_page);?></strong> <?php _e('To', 'wp-postratings'); ?> <strong><?php echo number_format_i18n($max_on_page); ?></strong> <?php _e('Of', 'wp-postratings'); ?> <strong><?php echo number_format_i18n($total_ratings); ?></strong> <?php _e('Post Ratings Logs', 'wp-postratings'); ?></p>
 	<p><?php _e('Sorted By', 'wp-postratings'); ?> <strong><?php echo $postratings_sortby_text;?></strong> <?php _e('In', 'wp-postratings'); ?> <strong><?php echo $postratings_sortorder_text;?></strong> <?php _e('Order', 'wp-postratings'); ?></p>
-	<table width="100%"  border="0" cellspacing="3" cellpadding="3">
-	<tr class="thead">
-		<th width="2%"><?php _e('ID', 'wp-postratings'); ?></th>
-		<th width="10%"><?php _e('Username', 'wp-postratings'); ?></th>
-		<th width="10%"><?php _e('Rating', 'wp-postratings'); ?></th>
-		<th width="8%"><?php _e('Post ID', 'wp-postratings'); ?></th>
-		<th width="25%"><?php _e('Post Title', 'wp-postratings'); ?></th>	
-		<th width="20%"><?php _e('Date / Time', 'wp-postratings'); ?></th>
-		<th width="25%"><?php _e('IP / Host', 'wp-postratings'); ?></th>			
-	</tr>
+	<table class="widefat">
+		<thead>
+			<tr>
+				<th width="2%"><?php _e('ID', 'wp-postratings'); ?></th>
+				<th width="10%"><?php _e('Username', 'wp-postratings'); ?></th>
+				<th width="10%"><?php _e('Rating', 'wp-postratings'); ?></th>
+				<th width="8%"><?php _e('Post ID', 'wp-postratings'); ?></th>
+				<th width="25%"><?php _e('Post Title', 'wp-postratings'); ?></th>	
+				<th width="20%"><?php _e('Date / Time', 'wp-postratings'); ?></th>
+				<th width="25%"><?php _e('IP / Host', 'wp-postratings'); ?></th>			
+			</tr>
+		</thead>
+		<tbody>
 	<?php
 		if($postratings_logs) {
 			$i = 0;
 			foreach($postratings_logs as $postratings_log) {
 				if($i%2 == 0) {
-					$style = 'style=\'background-color: #eee\'';
+					$style = 'class="alternate"';
 				}  else {
-					$style = 'style=\'background-color: none\'';
+					$style = '';
 				}
 				$postratings_id = intval($postratings_log->rating_id);
 				$postratings_username = stripslashes($postratings_log->rating_username);
@@ -364,6 +333,7 @@ switch($mode) {
 			echo '<tr><td colspan="7" align="center"><strong>'.__('No Post Ratings Logs Found', 'wp-postratings').'</strong></td></tr>';
 		}
 	?>
+		</tbody>
 	</table>
 		<!-- <Paging> -->
 		<?php
@@ -427,9 +397,9 @@ switch($mode) {
 	<br />
 	<form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="get">
 		<input type="hidden" name="page" value="<?php echo $base_name; ?>" />
-		<table border="0" cellspacing="3" cellpadding="3">
+		<table class="widefat">
 			<tr>
-				<td><?php _e('Filter Options:', 'wp-postratings'); ?></td>
+				<th><?php _e('Filter Options:', 'wp-postratings'); ?></th>
 				<td>
 					<?php _e('Post ID:', 'wp-postratings'); ?>&nbsp;<input type="text" name="id" value="<?php echo $postratings_filterid; ?>" size="5" maxlength="5" />
 					&nbsp;&nbsp;&nbsp;
@@ -475,8 +445,8 @@ switch($mode) {
 					</select>
 				</td>
 			</tr>
-			<tr>
-				<td><?php _e('Sort Options:', 'wp-postratings'); ?></td>
+			<tr class="alternate">
+				<th><?php _e('Sort Options:', 'wp-postratings'); ?></th>
 				<td>
 					<select name="by" size="1">
 						<option value="id"<?php if($postratings_sortby == 'rating_id') { echo ' selected="selected"'; }?>><?php _e('ID', 'wp-postratings'); ?></option>
@@ -513,36 +483,39 @@ switch($mode) {
 		</table>
 	</form>
 </div>
+<p>&nbsp;</p>
 
 <!-- Post Ratings Stats -->
 <div class="wrap">
 	<h2><?php _e('Post Ratings Logs Stats', 'wp-postratings'); ?></h2>
-	<table border="0" cellspacing="3" cellpadding="3">
+	<br style="clear" />
+	<table class="widefat">
 		<tr>
-			<th align="left"><?php _e('Total Users Voted:', 'wp-postratings'); ?></th>
-			<td align="left"><?php echo number_format_i18n($total_users); ?></td>
+			<th><?php _e('Total Users Voted:', 'wp-postratings'); ?></th>
+			<td><?php echo number_format_i18n($total_users); ?></td>
+		</tr>
+		<tr class="alternate">
+			<th><?php _e('Total Score:', 'wp-postratings'); ?></th>
+			<td><?php echo number_format_i18n($total_score); ?></td>
 		</tr>
 		<tr>
-			<th align="left"><?php _e('Total Score:', 'wp-postratings'); ?></th>
-			<td align="left"><?php echo number_format_i18n($total_score); ?></td>
-		</tr>
-		<tr>
-			<th align="left"><?php _e('Total Average:', 'wp-postratings'); ?></th>
-			<td align="left"><?php echo number_format_i18n($total_average, 2); ?></td>
+			<th><?php _e('Total Average:', 'wp-postratings'); ?></th>
+			<td><?php echo number_format_i18n($total_average, 2); ?></td>
 		</tr>
 	</table>
 </div>
+<p>&nbsp;</p>
 
 <!-- Delete Post Ratings Logs -->
 <div class="wrap">
-	<h2><?php _e('Post Ratings Data/Logs', 'wp-postratings'); ?></h2>
+	<h2><?php _e('Delete Post Ratings Data/Logs', 'wp-postratings'); ?></h2>
+	<br style="clear" />
 	<div align="center">
-		<strong><?php _e('Delete Post Ratings Data/Logs', 'wp-postratings'); ?></strong><br /><br />
 		<form action="<?php echo htmlspecialchars($_SERVER['REQUEST_URI']); ?>" method="post">
-		<table width="100%" border="0" cellspacing="3" cellpadding="3">
+		<table class="widefat">
 			<tr>
-				<td valign="top" align="left"><b><?php _e('Delete Type: ', 'wp-postratings'); ?></b></td>
-				<td valign="top" align="left">
+				<td valign="top"><b><?php _e('Delete Type: ', 'wp-postratings'); ?></b></td>
+				<td valign="top">
 					<select size="1" name="delete_datalog">
 						<option value="1">Logs Only</option>
 						<option value="2">Data Only</option>
@@ -551,8 +524,8 @@ switch($mode) {
 				</td>
 			</tr>
 			<tr>
-				<td valign="top" align="left"><b><?php _e('Post ID(s):', 'wp-postratings'); ?></b></td>
-				<td valign="top" align="left">
+				<td valign="top"><b><?php _e('Post ID(s):', 'wp-postratings'); ?></b></td>
+				<td valign="top">
 					<input type="text" name="delete_postid" size="20" />
 					<p><?php _e('Seperate each Post ID with a comma.', 'wp-postratings'); ?></p>
 					<p><?php _e('To delete ratings data/logs from Post ID 2, 3 and 4. Just type in: <b>2,3,4</b>', 'wp-postratings'); ?></p>
@@ -574,24 +547,6 @@ switch($mode) {
 		<li><?php _e('\'Logs And Data\' means both the logs generated and the rating data for the post.', 'wp-postratings'); ?></li>
 		<li><?php _e('If your logging method is by IP and Cookie or by Cookie, users may still be unable to rate if they have voted before as the cookie is still stored in their computer.', 'wp-postratings'); ?></li>
 	</ul>
-</div>
-
-<!-- Uninstall WP-PostRatings -->
-<div class="wrap">
-	<h2><?php _e('Uninstall Ratings', 'wp-postratings'); ?></h2>
-	<div align="center">
-		<form action="<?php echo htmlspecialchars($_SERVER['REQUEST_URI']); ?>" method="post">
-			<p style="text-align: left;">
-				<?php _e('Deactivating WP-PostRatings plugin does not remove any data that may have been created, such as the rating data and the rating\'s logs. To completely remove this plugin, you can uninstall it here.', 'wp-postratings'); ?>
-			</p>
-			<p style="text-align: left; color: red">
-				<?php 
-					vprintf(__('<strong>WARNING:</strong><br />Once uninstalled, this cannot be undone. You should use a Database Backup plugin of WordPress to back up all the data first.  Your data is stored in the %1$s, %2$s and %3$s tables.', 'wp-postratings'), array("<strong><em>{$wpdb->ratings}</em></strong>", "<strong><em>{$wpdb->postmeta}</em></strong>", "<strong><em>{$wpdb->options}</em></strong>")); ?>
-			</p>
-			<input type="checkbox" name="uninstall_ratings_yes" value="yes" />&nbsp;<?php _e('Yes', 'wp-postratings'); ?><br /><br />
-			<input type="submit" name="do" value="<?php _e('UNINSTALL Ratings', 'wp-postratings'); ?>" class="button" onclick="return confirm('<?php _e('You Are About To Uninstall WP-PostRatings From WordPress.\nThis Action Is Not Reversible.\n\n Choose [Cancel] To Stop, [OK] To Uninstall.', 'wp-postratings'); ?>')" />
-		</form>
-	</div>
 </div>
 <?php
 	}
