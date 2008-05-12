@@ -551,20 +551,19 @@ function add_ratings_to_content($content) {
 }
 
 
-### Function: Place Rating In Content
-add_filter('the_content', 'place_ratings', 7);
-add_filter('the_excerpt', 'place_ratings', 7);
-function place_ratings($content){
+### Function: Short Code For Inserting Ratings Into Posts
+add_shortcode('ratings', 'ratings_shortcode');
+function ratings_shortcode($atts) {
+	extract(shortcode_atts(array('id' => '0', 'results' => false), $atts));
 	if(!is_feed()) {
-		$content = preg_replace("/\[ratings\]/ise", "the_ratings('span', 0, false)", $content);
-		$content = preg_replace("/\[ratings=(\d+)\]/ise", "the_ratings('span', '\\1', false)", $content);
-		$content = preg_replace("/\[ratings_results=(\d+)\]/ise", "the_ratings_results('\\1')", $content);
+		if($results) {
+			return the_ratings_results($id);
+		} else {
+			return the_ratings('span', $id, false);
+		}
 	} else {
-		$content = str_replace("[ratings]", __('Note: There is a rating embedded within this post, please visit this post to rate it.', 'wp-postratings'), $content);
-		$content = preg_replace("/\[ratings=(\d+)\]/i", __('Note: There is a rating embedded within this post, please visit this post to rate it.', 'wp-postratings'), $content);
-		$content = preg_replace("/\[ratings_results=(\d+)\]/i", __('Note: There is a rating result embedded within this post, please visit this post to view it.', 'wp-postratings'), $content);
-	}   
-	return $content;
+		return __('Note: There is a rating embedded within this post, please visit this post to rate it.', 'wp-postratings');
+	}
 }
 
 
