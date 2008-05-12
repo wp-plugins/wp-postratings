@@ -580,6 +580,21 @@ if(!function_exists('snippet_text')) {
 }
 
 
+### Function: Process Post Excerpt, For Some Reasons, The Default get_post_excerpt() Does Not Work As Expected
+function ratings_post_excerpt($post_excerpt, $post_content, $post_password) {
+	if(!empty($post_password)) {
+		if(!isset($_COOKIE['wp-postpass_'.COOKIEHASH]) || $_COOKIE['wp-postpass_'.COOKIEHASH] != $post_password) {
+			return __('There is no excerpt because this is a protected post.', 'wp-postratings');
+		}
+	}
+	if(empty($post_excerpt)) {
+		return snippet_text($post_content, 200);
+	} else {
+		return $post_excerpt;
+	}
+}
+
+
 ### Function: Add Rating Custom Fields
 add_action('publish_post', 'add_ratings_fields');
 function add_ratings_fields($post_ID) {
