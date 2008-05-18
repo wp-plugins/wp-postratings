@@ -200,7 +200,7 @@ $postratings_image = get_option('postratings_image');
 	<h2><?php _e('Post Rating Options', 'wp-postratings'); ?></h2> 
 	<form method="post" action="<?php echo $_SERVER['REQUEST_URI']; ?>"> 
 		<input type="hidden" id="postratings_customrating" name="postratings_customrating" value="<?php echo $postratings_customrating; ?>" />
-		<input type="hidden" id="postratings_template_vote" name="postratings_template_vote" value="<?php echo htmlspecialchars(stripslashes(get_option('postratings_template_vote'))); ?>>" />
+		<input type="hidden" id="postratings_template_vote" name="postratings_template_vote" value="<?php echo htmlspecialchars(stripslashes(get_option('postratings_template_vote'))); ?>" />
 		<input type="hidden" id="postratings_template_text" name="postratings_template_text" value="<?php echo htmlspecialchars(stripslashes(get_option('postratings_template_text'))); ?>" />
 		<input type="hidden" id="postratings_template_permission" name="postratings_template_permission" value="<?php echo htmlspecialchars(stripslashes(get_option('postratings_template_permission'))); ?>" />
 		<input type="hidden" id="postratings_template_none" name="postratings_template_none" value="<?php echo htmlspecialchars(stripslashes(get_option('postratings_template_none'))); ?>" />

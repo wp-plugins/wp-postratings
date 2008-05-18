@@ -340,7 +340,7 @@ switch($mode) {
 			if($total_pages > 1) {
 		?>
 		<br />
-		<table width="100%" cellspacing="0" cellpadding="0" border="0">
+		<table class="widefat">
 			<tr>
 				<td align="left" width="50%">
 					<?php
@@ -361,7 +361,7 @@ switch($mode) {
 					?>
 				</td>
 			</tr>
-			<tr>
+			<tr class="alternate">
 				<td colspan="2" align="center">
 					<?php printf(__('Pages (%s): ', 'wp-postratings'), $total_pages); ?>
 					<?php
