@@ -38,7 +38,7 @@ function widget_ratings_init() {
 	function widget_ratings_highest_rated($args) {
 		extract($args);
 		$options = get_option('widget_ratings_highest_rated');
-		$title = htmlspecialchars($options['title']);		
+		$title = htmlspecialchars(stripslashes($options['title']));		
 		if (function_exists('get_highest_rated')) {
 			echo $before_widget.$before_title.$title.$after_title;
 			echo '<ul>'."\n";
@@ -52,7 +52,7 @@ function widget_ratings_init() {
 	function widget_ratings_most_rated($args) {
 		extract($args);
 		$options = get_option('widget_ratings_most_rated');
-		$title = htmlspecialchars($options['title']);		
+		$title = htmlspecialchars(stripslashes($options['title']));		
 		if (function_exists('get_most_rated')) {
 			echo $before_widget.$before_title.$title.$after_title;
 			echo '<ul>'."\n";
@@ -69,8 +69,8 @@ function widget_ratings_init() {
 			$options = array('title' => __('Highest Rated', 'wp-postratings'), 'mode' => 'post', 'limit' => 10, 'chars' => 0);
 		}
 		if ($_POST['highest_rated-submit']) {
-			$options['title'] = strip_tags(addslashes($_POST['highest_rated-title']));
-			$options['mode'] = strip_tags(addslashes($_POST['highest_rated-mode']));
+			$options['title'] = strip_tags($_POST['highest_rated-title']);
+			$options['mode'] = strip_tags($_POST['highest_rated-mode']);
 			$options['min_votes'] = intval($_POST['highest_rated-min_votes']);
 			$options['limit'] = intval($_POST['highest_rated-limit']);
 			$options['chars'] = intval($_POST['highest_rated-chars']);
@@ -122,8 +122,8 @@ function widget_ratings_init() {
 			$options = array('title' => __('Most Rated', 'wp-postratings'), 'mode' => 'post', 'limit' => 10, 'chars' => 0);
 		}
 		if ($_POST['most_rated-submit']) {
-			$options['title'] = strip_tags(addslashes($_POST['most_rated-title']));
-			$options['mode'] = strip_tags(addslashes($_POST['most_rated-mode']));
+			$options['title'] = strip_tags($_POST['most_rated-title']);
+			$options['mode'] = strip_tags($_POST['most_rated-mode']);
 			$options['min_votes'] = intval($_POST['most_rated-min_votes']);
 			$options['limit'] = intval($_POST['most_rated-limit']);
 			$options['chars'] = intval($_POST['most_rated-chars']);
