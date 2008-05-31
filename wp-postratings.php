@@ -209,7 +209,7 @@ function the_ratings_results($post_id, $new_user = 0, $new_score = 0, $new_avera
 	}
 	$template_postratings_text = str_replace("%RATINGS_IMAGES%", $post_ratings_images, $template_postratings_text);
 	$template_postratings_text = str_replace("%RATINGS_MAX%", $ratings_max, $template_postratings_text);
-	$template_postratings_text = str_replace("%RATINGS_SCORE%", number_format_i18n($post_ratings_score), $template_postratings_text);
+	$template_postratings_text = str_replace("%RATINGS_SCORE%", $post_ratings_score, $template_postratings_text);
 	$template_postratings_text = str_replace("%RATINGS_AVERAGE%", $post_ratings_average, $template_postratings_text);
 	$template_postratings_text = str_replace("%RATINGS_PERCENTAGE%", $post_ratings_percentage, $template_postratings_text);
 	$template_postratings_text = str_replace("%RATINGS_USERS%", number_format_i18n($post_ratings_users), $template_postratings_text);
@@ -298,7 +298,7 @@ function the_ratings_vote($post_id, $new_user = 0, $new_score = 0, $new_average 
 		$template_postratings_none = stripslashes(get_option('postratings_template_none'));
 		$template_postratings_none = str_replace("%RATINGS_IMAGES_VOTE%", $post_ratings_images, $template_postratings_none);
 		$template_postratings_none = str_replace("%RATINGS_MAX%", $ratings_max, $template_postratings_none);
-		$template_postratings_none = str_replace("%RATINGS_SCORE%", number_format_i18n($post_ratings_score), $template_postratings_none);
+		$template_postratings_none = str_replace("%RATINGS_SCORE%", $post_ratings_score, $template_postratings_none);
 		$template_postratings_none = str_replace("%RATINGS_TEXT%", $post_ratings_text, $template_postratings_none);
 		$template_postratings_none = str_replace("%RATINGS_AVERAGE%", $post_ratings_average, $template_postratings_none);
 		$template_postratings_none = str_replace("%RATINGS_PERCENTAGE%", $post_ratings_percentage, $template_postratings_none);
@@ -310,7 +310,7 @@ function the_ratings_vote($post_id, $new_user = 0, $new_score = 0, $new_average 
 		$template_postratings_vote = stripslashes(get_option('postratings_template_vote'));
 		$template_postratings_vote = str_replace("%RATINGS_IMAGES_VOTE%", $post_ratings_images, $template_postratings_vote);
 		$template_postratings_vote = str_replace("%RATINGS_MAX%", $ratings_max, $template_postratings_vote);
-		$template_postratings_vote = str_replace("%RATINGS_SCORE%", number_format_i18n($post_ratings_score), $template_postratings_vote);
+		$template_postratings_vote = str_replace("%RATINGS_SCORE%", $post_ratings_score, $template_postratings_vote);
 		$template_postratings_vote = str_replace("%RATINGS_TEXT%", $post_ratings_text, $template_postratings_vote);
 		$template_postratings_vote = str_replace("%RATINGS_AVERAGE%", $post_ratings_average, $template_postratings_vote);
 		$template_postratings_vote = str_replace("%RATINGS_PERCENTAGE%", $post_ratings_percentage, $template_postratings_vote);
