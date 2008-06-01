@@ -321,7 +321,7 @@ if(!function_exists('get_highest_rated')) {
 					$temp = str_replace("%RATINGS_IMAGES%", $post_ratings_images, $temp);
 					$temp = str_replace("%RATINGS_MAX%", $ratings_max, $temp);
 					$temp = str_replace("%RATINGS_AVERAGE%", $post_ratings_average, $temp);
-					$temp = str_replace("%RATINGS_SCORE%", number_format_i18n($post_ratings_score), $temp);
+					$temp = str_replace("%RATINGS_SCORE%", $post_ratings_score, $temp);
 					$temp = str_replace("%RATINGS_USERS%", number_format_i18n($post_ratings_users), $temp);
 					$temp = str_replace("%POST_TITLE%", $post_title, $temp);
 					$temp = str_replace("%POST_EXCERPT%", $post_excerpt, $temp);
@@ -439,7 +439,7 @@ if(!function_exists('get_highest_rated_category')) {
 					$temp = str_replace("%RATINGS_IMAGES%", $post_ratings_images, $temp);
 					$temp = str_replace("%RATINGS_MAX%", $ratings_max, $temp);
 					$temp = str_replace("%RATINGS_AVERAGE%", $post_ratings_average, $temp);
-					$temp = str_replace("%RATINGS_SCORE%", number_format_i18n($post_ratings_score), $temp);
+					$temp = str_replace("%RATINGS_SCORE%", $post_ratings_score, $temp);
 					$temp = str_replace("%RATINGS_USERS%", number_format_i18n($post_ratings_users), $temp);
 					$temp = str_replace("%POST_TITLE%", $post_title, $temp);
 					$temp = str_replace("%POST_EXCERPT%", $post_excerpt, $temp);
@@ -552,7 +552,7 @@ if(!function_exists('get_highest_rated_range')) {
 					$temp = str_replace("%RATINGS_IMAGES%", $post_ratings_images, $temp);
 					$temp = str_replace("%RATINGS_MAX%", $ratings_max, $temp);
 					$temp = str_replace("%RATINGS_AVERAGE%", $post_ratings_average, $temp);
-					$temp = str_replace("%RATINGS_SCORE%", number_format_i18n($post_ratings_score), $temp);
+					$temp = str_replace("%RATINGS_SCORE%", $post_ratings_score, $temp);
 					$temp = str_replace("%RATINGS_USERS%", number_format_i18n($post_ratings_users), $temp);
 					$temp = str_replace("%POST_TITLE%", $post_title, $temp);
 					$temp = str_replace("%POST_EXCERPT%", $post_excerpt, $temp);
@@ -671,7 +671,7 @@ if(!function_exists('get_highest_rated_range_category')) {
 					$temp = str_replace("%RATINGS_IMAGES%", $post_ratings_images, $temp);
 					$temp = str_replace("%RATINGS_MAX%", $ratings_max, $temp);
 					$temp = str_replace("%RATINGS_AVERAGE%", $post_ratings_average, $temp);
-					$temp = str_replace("%RATINGS_SCORE%", number_format_i18n($post_ratings_score), $temp);
+					$temp = str_replace("%RATINGS_SCORE%", $post_ratings_score, $temp);
 					$temp = str_replace("%RATINGS_USERS%", number_format_i18n($post_ratings_users), $temp);
 					$temp = str_replace("%POST_TITLE%", $post_title, $temp);
 					$temp = str_replace("%POST_EXCERPT%", $post_excerpt, $temp);
@@ -783,7 +783,7 @@ if(!function_exists('get_lowest_rated')) {
 					$temp = str_replace("%RATINGS_IMAGES%", $post_ratings_images, $temp);
 					$temp = str_replace("%RATINGS_MAX%", $ratings_max, $temp);
 					$temp = str_replace("%RATINGS_AVERAGE%", $post_ratings_average, $temp);
-					$temp = str_replace("%RATINGS_SCORE%", number_format_i18n($post_ratings_score), $temp);
+					$temp = str_replace("%RATINGS_SCORE%", $post_ratings_score, $temp);
 					$temp = str_replace("%RATINGS_USERS%", number_format_i18n($post_ratings_users), $temp);
 					$temp = str_replace("%POST_TITLE%", $post_title, $temp);
 					$temp = str_replace("%POST_EXCERPT%", $post_excerpt, $temp);
@@ -901,7 +901,7 @@ if(!function_exists('get_lowest_rated_category')) {
 					$temp = str_replace("%RATINGS_IMAGES%", $post_ratings_images, $temp);
 					$temp = str_replace("%RATINGS_MAX%", $ratings_max, $temp);
 					$temp = str_replace("%RATINGS_AVERAGE%", $post_ratings_average, $temp);
-					$temp = str_replace("%RATINGS_SCORE%", number_format_i18n($post_ratings_score), $temp);
+					$temp = str_replace("%RATINGS_SCORE%", $post_ratings_score, $temp);
 					$temp = str_replace("%RATINGS_USERS%", number_format_i18n($post_ratings_users), $temp);
 					$temp = str_replace("%POST_TITLE%", $post_title, $temp);
 					$temp = str_replace("%POST_EXCERPT%", $post_excerpt, $temp);
