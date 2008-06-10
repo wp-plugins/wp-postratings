@@ -3,7 +3,7 @@
 Plugin Name: WP-PostRatings
 Plugin URI: http://lesterchan.net/portfolio/programming/php/
 Description: Adds an AJAX rating system for your WordPress blog's post/page.
-Version: 1.30
+Version: 1.31
 Author: Lester 'GaMerZ' Chan
 Author URI: http://lesterchan.net
 */
@@ -859,6 +859,15 @@ function create_ratinglogs_table() {
 	} else {
 		die('We have problem finding your \'/wp-admin/upgrade-functions.php\' and \'/wp-admin/includes/upgrade.php\'');
 	}
+	$charset_collate = '';
+	if($wpdb->supports_collation()) {
+		if(!empty($wpdb->charset)) {
+			$charset_collate = "DEFAULT CHARACTER SET $wpdb->charset";
+		}
+		if(!empty($wpdb->collate)) {
+			$charset_collate .= " COLLATE $wpdb->collate";
+		}
+	}
 	// Create Post Ratings Table
 	$create_ratinglogs_sql = "CREATE TABLE $wpdb->ratings (".
 			"rating_id INT(11) NOT NULL auto_increment,".
@@ -870,7 +879,7 @@ function create_ratinglogs_table() {
 			"rating_host VARCHAR(200) NOT NULL,".
 			"rating_username VARCHAR(50) NOT NULL,".
 			"rating_userid int(10) NOT NULL default '0',".
-			"PRIMARY KEY (rating_id))";
+			"PRIMARY KEY (rating_id)) $charset_collate;";
 	maybe_create_table($wpdb->ratings, $create_ratinglogs_sql);
 	// Add In Options (4 Records)
 	add_option('postratings_image', 'stars', 'Your Ratings Image');
