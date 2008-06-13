@@ -1,4 +1,3 @@
-<?php
 /*
 +----------------------------------------------------------------+
 |																							|
@@ -17,27 +16,13 @@
 */
 
 
-### Include wp-config.php
-@require('../../../wp-config.php');
-cache_javascript_headers();
-
-
-### Determine postratings-admin-ajax.php Path
-$postratings_admin_ajax_url = dirname($_SERVER['PHP_SELF']);
-if(substr($postratings_admin_ajax_url, -1) == '/') {
-	$postratings_admin_ajax_url  = substr($postratings_admin_ajax_url, 0, -1);
-}
-?>
 // Variables
-var postratings_admin_ajax_url = "<?php echo $postratings_admin_ajax_url; ?>/postratings-admin-ajax.php";
 var postratings_admin = new sack(postratings_admin_ajax_url);
-
 
 // Function: Hide PostRatings Loading
 function postratings_admin_hide_loading() {
 	document.getElementById('postratings_loading').style.display = 'none';
 }
-
 
 // Function: Update Rating Text, Rating Value
 function update_rating_text_value() {
