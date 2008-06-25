@@ -86,7 +86,7 @@ function widget_ratings_init() {
 		echo '<option value="both"';
 		selected('both', $options['mode']);
 		echo '>';
-		_e('Posts &amp Pages', 'wp-postratings');
+		_e('Posts &amp; Pages', 'wp-postratings');
 		echo '</option>'."\n";
 		echo '<option value="post"';
 		selected('post', $options['mode']);
@@ -139,7 +139,7 @@ function widget_ratings_init() {
 		echo '<option value="both"';
 		selected('both', $options['mode']);
 		echo '>';
-		_e('Posts &amp Pages', 'wp-postratings');
+		_e('Posts &amp; Pages', 'wp-postratings');
 		echo '</option>'."\n";
 		echo '<option value="post"';
 		selected('post', $options['mode']);

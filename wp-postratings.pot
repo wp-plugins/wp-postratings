@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WP-PostRatings 1.31\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-06-25 14:16+0800\n"
-"PO-Revision-Date: 2008-06-25 14:16+0800\n"
+"POT-Creation-Date: 2008-06-25 14:21+0800\n"
+"PO-Revision-Date: 2008-06-25 14:21+0800\n"
 "Last-Translator: Lester Chan <lesterchan@gmail.com>\n"
 "Language-Team: Lester Chan <lesterchan@gmail.com>\n"
 "MIME-Version: 1.0\n"
@@ -844,7 +844,7 @@ msgstr ""
 
 #: wp-postratings-widget.php:89
 #: wp-postratings-widget.php:142
-msgid "Posts &amp Pages"
+msgid "Posts &amp; Pages"
 msgstr ""
 
 #: wp-postratings-widget.php:94
