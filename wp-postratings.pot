@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WP-PostRatings 1.31\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-06-26 15:06+0800\n"
-"PO-Revision-Date: 2008-06-26 15:06+0800\n"
+"POT-Creation-Date: 2008-06-26 15:07+0800\n"
+"PO-Revision-Date: 2008-06-26 15:07+0800\n"
 "Last-Translator: Lester Chan <lesterchan@gmail.com>\n"
 "Language-Team: Lester Chan <lesterchan@gmail.com>\n"
 "MIME-Version: 1.0\n"
@@ -639,7 +639,7 @@ msgid "Logged By Username"
 msgstr ""
 
 #: postratings-options.php:377
-#: postratings-templates.php:248
+#: postratings-templates.php:249
 msgid "Save Changes"
 msgstr ""
 
@@ -723,7 +723,7 @@ msgstr ""
 #: postratings-templates.php:193
 #: postratings-templates.php:209
 #: postratings-templates.php:227
-#: postratings-templates.php:241
+#: postratings-templates.php:242
 msgid "Restore Default Template (Normal Rating)"
 msgstr ""
 
@@ -732,7 +732,7 @@ msgstr ""
 #: postratings-templates.php:194
 #: postratings-templates.php:210
 #: postratings-templates.php:228
-#: postratings-templates.php:242
+#: postratings-templates.php:243
 msgid "Restore Default Template (Up/Down Rating)"
 msgstr ""
 

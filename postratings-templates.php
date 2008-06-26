@@ -233,7 +233,8 @@ if($_POST['Submit']) {
 				<td width="30%">
 					<strong><?php _e('Most Rated:', 'wp-postratings'); ?></strong><br /><br />
 					<?php _e('Allowed Variables:', 'wp-postratings'); ?><br />
-					- %RATINGS_USERS%<br />							
+					- %RATINGS_USERS%<br />
+					- %RATINGS_AVERAGE%<br />
 					- %POST_TITLE%<br />
 					- %POST_EXCERPT%<br />
 					- %POST_CONTENT%<br />
