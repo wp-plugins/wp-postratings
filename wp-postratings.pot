@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WP-PostRatings 1.31\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-06-25 14:21+0800\n"
-"PO-Revision-Date: 2008-06-25 14:21+0800\n"
+"POT-Creation-Date: 2008-06-26 15:06+0800\n"
+"PO-Revision-Date: 2008-06-26 15:06+0800\n"
 "Last-Translator: Lester Chan <lesterchan@gmail.com>\n"
 "Language-Team: Lester Chan <lesterchan@gmail.com>\n"
 "MIME-Version: 1.0\n"
@@ -421,12 +421,12 @@ msgstr ""
 #: postratings-options.php:117
 #: postratings-options.php:120
 #: postratings-options.php:126
-#: postratings-stats.php:279
-#: postratings-stats.php:397
-#: postratings-stats.php:510
-#: postratings-stats.php:629
-#: postratings-stats.php:741
-#: postratings-stats.php:859
+#: postratings-stats.php:291
+#: postratings-stats.php:409
+#: postratings-stats.php:522
+#: postratings-stats.php:641
+#: postratings-stats.php:753
+#: postratings-stats.php:871
 #: postratings-templates.php:72
 #: postratings-templates.php:75
 #: postratings-templates.php:78
@@ -444,16 +444,16 @@ msgstr ""
 #: postratings-options.php:145
 #: postratings-options.php:148
 #: postratings-options.php:157
-#: postratings-stats.php:47
-#: postratings-stats.php:102
-#: postratings-stats.php:153
-#: postratings-stats.php:210
-#: postratings-stats.php:281
-#: postratings-stats.php:399
-#: postratings-stats.php:512
-#: postratings-stats.php:631
-#: postratings-stats.php:743
-#: postratings-stats.php:861
+#: postratings-stats.php:48
+#: postratings-stats.php:105
+#: postratings-stats.php:159
+#: postratings-stats.php:220
+#: postratings-stats.php:293
+#: postratings-stats.php:411
+#: postratings-stats.php:524
+#: postratings-stats.php:643
+#: postratings-stats.php:755
+#: postratings-stats.php:873
 #: postratings-templates.php:72
 #: postratings-templates.php:75
 #: postratings-templates.php:78
@@ -501,12 +501,12 @@ msgstr ""
 #: postratings-options.php:142
 #: postratings-options.php:145
 #: postratings-options.php:148
-#: postratings-stats.php:281
-#: postratings-stats.php:399
-#: postratings-stats.php:512
-#: postratings-stats.php:631
-#: postratings-stats.php:743
-#: postratings-stats.php:861
+#: postratings-stats.php:293
+#: postratings-stats.php:411
+#: postratings-stats.php:524
+#: postratings-stats.php:643
+#: postratings-stats.php:755
+#: postratings-stats.php:873
 #: postratings-templates.php:100
 #: postratings-templates.php:103
 #: postratings-templates.php:106
@@ -521,12 +521,12 @@ msgstr ""
 #: postratings-options.php:145
 #: postratings-options.php:148
 #: postratings-options.php:154
-#: postratings-stats.php:281
-#: postratings-stats.php:399
-#: postratings-stats.php:512
-#: postratings-stats.php:631
-#: postratings-stats.php:743
-#: postratings-stats.php:861
+#: postratings-stats.php:293
+#: postratings-stats.php:411
+#: postratings-stats.php:524
+#: postratings-stats.php:643
+#: postratings-stats.php:755
+#: postratings-stats.php:873
 #: postratings-templates.php:100
 #: postratings-templates.php:103
 #: postratings-templates.php:106
@@ -643,16 +643,16 @@ msgstr ""
 msgid "Save Changes"
 msgstr ""
 
-#: postratings-stats.php:59
-#: postratings-stats.php:114
-#: postratings-stats.php:165
-#: postratings-stats.php:222
-#: postratings-stats.php:334
-#: postratings-stats.php:452
-#: postratings-stats.php:565
-#: postratings-stats.php:684
-#: postratings-stats.php:796
-#: postratings-stats.php:914
+#: postratings-stats.php:61
+#: postratings-stats.php:118
+#: postratings-stats.php:173
+#: postratings-stats.php:234
+#: postratings-stats.php:346
+#: postratings-stats.php:464
+#: postratings-stats.php:577
+#: postratings-stats.php:696
+#: postratings-stats.php:808
+#: postratings-stats.php:926
 msgid "N/A"
 msgstr ""
 

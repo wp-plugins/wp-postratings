@@ -40,6 +40,7 @@ if(!function_exists('get_most_rated')) {
 		if($most_rated) {
 			foreach ($most_rated as $post) {
 				$post_ratings_users = number_format_i18n($post->ratings_users);
+				$post_ratings_average = $post->ratings_average;
 				$post_title = get_the_title();
 				$post_excerpt = ratings_post_excerpt($post->post_excerpt, $post->post_content, $post->post_password);
 				$post_content = get_the_content();
@@ -48,6 +49,7 @@ if(!function_exists('get_most_rated')) {
 				} else {
 					$temp = stripslashes(get_option('postratings_template_mostrated'));
 					$temp = str_replace("%RATINGS_USERS%", $post_ratings_users, $temp);
+					$temp = str_replace("%RATINGS_AVERAGE%", $post_ratings_average, $temp);
 					$temp = str_replace("%POST_TITLE%", $post_title, $temp);
 					$temp = str_replace("%POST_EXCERPT%", $post_excerpt, $temp);
 					$temp = str_replace("%POST_CONTENT%", $post_content, $temp);
@@ -95,6 +97,7 @@ if(!function_exists('get_most_rated_category')) {
 		if($most_rated) {
 			foreach ($most_rated as $post) {
 				$post_ratings_users = number_format_i18n($post->ratings_users);
+				$post_ratings_average = $post->ratings_average;
 				$post_title = get_the_title();
 				$post_excerpt = ratings_post_excerpt($post->post_excerpt, $post->post_content, $post->post_password);
 				$post_content = get_the_content();
@@ -103,6 +106,7 @@ if(!function_exists('get_most_rated_category')) {
 				} else {
 					$temp = stripslashes(get_option('postratings_template_mostrated'));
 					$temp = str_replace("%RATINGS_USERS%", $post_ratings_users, $temp);
+					$temp = str_replace("%RATINGS_AVERAGE%", $post_ratings_average, $temp);
 					$temp = str_replace("%POST_TITLE%", $post_title, $temp);
 					$temp = str_replace("%POST_EXCERPT%", $post_excerpt, $temp);
 					$temp = str_replace("%POST_CONTENT%", $post_content, $temp);
@@ -146,6 +150,8 @@ if(!function_exists('get_most_rated_range')) {
 		if($most_rated) {
 			foreach ($most_rated as $post) {
 				$post_ratings_users = number_format_i18n($post->ratings_users);
+				$post_ratings_average = $post->ratings_average;
+				$post_ratings_score = $post->ratings_score;
 				$post_title = get_the_title();
 				$post_excerpt = ratings_post_excerpt($post->post_excerpt, $post->post_content, $post->post_password);
 				$post_content = get_the_content();
@@ -154,6 +160,8 @@ if(!function_exists('get_most_rated_range')) {
 				} else {
 					$temp = stripslashes(get_option('postratings_template_mostrated'));
 					$temp = str_replace("%RATINGS_USERS%", $post_ratings_users, $temp);
+					$temp = str_replace("%RATINGS_AVERAGE%", $post_ratings_average, $temp);
+					$temp = str_replace("%RATINGS_SCORE%", $post_ratings_score, $temp);
 					$temp = str_replace("%POST_TITLE%", $post_title, $temp);
 					$temp = str_replace("%POST_EXCERPT%", $post_excerpt, $temp);
 					$temp = str_replace("%POST_CONTENT%", $post_content, $temp);
@@ -203,6 +211,8 @@ if(!function_exists('get_most_rated_range_category')) {
 		if($most_rated) {
 			foreach ($most_rated as $post) {
 				$post_ratings_users = number_format_i18n($post->ratings_users);
+				$post_ratings_average = $post->ratings_average;
+				$post_ratings_score = $post->ratings_score;
 				$post_title = get_the_title();
 				$post_excerpt = ratings_post_excerpt($post->post_excerpt, $post->post_content, $post->post_password);
 				$post_content = get_the_content();
@@ -211,6 +221,8 @@ if(!function_exists('get_most_rated_range_category')) {
 				} else {
 					$temp = stripslashes(get_option('postratings_template_mostrated'));
 					$temp = str_replace("%RATINGS_USERS%", $post_ratings_users, $temp);
+					$temp = str_replace("%RATINGS_AVERAGE%", $post_ratings_average, $temp);
+					$temp = str_replace("%RATINGS_SCORE%", $post_ratings_score, $temp);
 					$temp = str_replace("%POST_TITLE%", $post_title, $temp);
 					$temp = str_replace("%POST_EXCERPT%", $post_excerpt, $temp);
 					$temp = str_replace("%POST_CONTENT%", $post_content, $temp);
