@@ -293,33 +293,33 @@ if(!function_exists('get_highest_rated')) {
 					$image_alt = $post_ratings_users.' '.__('votes', 'wp-postratings').', '.__('average', 'wp-postratings').': '.$post_ratings_average.' '.__('out of', 'wp-postratings').' '.$ratings_max;
 				}
 				// Display Start Of Rating Images
-				if(file_exists(ABSPATH.'/wp-content/plugins/wp-postratings/images/'.$ratings_image.'/rating_start.gif')) {
-					$post_ratings_images .= '<img src="'.get_option('siteurl').'/wp-content/plugins/wp-postratings/images/'.$ratings_image.'/rating_start.gif" alt="" class="post-ratings-image" />';
+				if(file_exists(WP_PLUGIN_DIR.'/wp-postratings/images/'.$ratings_image.'/rating_start.gif')) {
+					$post_ratings_images .= '<img src="'.WP_PLUGIN_URL.'/wp-postratings/images/'.$ratings_image.'/rating_start.gif" alt="" class="post-ratings-image" />';
 				}
 				if(!$ratings_custom) { 
 					for($i=1; $i <= $ratings_max; $i++) {
 						if($i <= $post_ratings) {
-							$post_ratings_images .= '<img src="'.get_option('siteurl').'/wp-content/plugins/wp-postratings/images/'.$ratings_image.'/rating_on.gif" alt="'.$image_alt.'" title="'.$image_alt.'" class="post-ratings-image" />';		
+							$post_ratings_images .= '<img src="'.WP_PLUGIN_URL.'/wp-postratings/images/'.$ratings_image.'/rating_on.gif" alt="'.$image_alt.'" title="'.$image_alt.'" class="post-ratings-image" />';		
 						} elseif($i == $insert_half) {						
-							$post_ratings_images .= '<img src="'.get_option('siteurl').'/wp-content/plugins/wp-postratings/images/'.$ratings_image.'/rating_half.gif" alt="'.$image_alt.'" title="'.$image_alt.'" class="post-ratings-image" />';
+							$post_ratings_images .= '<img src="'.WP_PLUGIN_URL.'/wp-postratings/images/'.$ratings_image.'/rating_half.gif" alt="'.$image_alt.'" title="'.$image_alt.'" class="post-ratings-image" />';
 						} else {
-							$post_ratings_images .= '<img src="'.get_option('siteurl').'/wp-content/plugins/wp-postratings/images/'.$ratings_image.'/rating_off.gif" alt="'.$image_alt.'" title="'.$image_alt.'" class="post-ratings-image" />';
+							$post_ratings_images .= '<img src="'.WP_PLUGIN_URL.'/wp-postratings/images/'.$ratings_image.'/rating_off.gif" alt="'.$image_alt.'" title="'.$image_alt.'" class="post-ratings-image" />';
 						}
 					}
 				} else {
 					for($i=1; $i <= $ratings_max; $i++) {
 						if($i <= $post_ratings) {
-							$post_ratings_images .= '<img src="'.get_option('siteurl').'/wp-content/plugins/wp-postratings/images/'.$ratings_image.'/rating_'.$i.'_on.gif" alt="'.$image_alt.'" title="'.$image_alt.'" class="post-ratings-image" />';		
+							$post_ratings_images .= '<img src="'.WP_PLUGIN_URL.'/wp-postratings/images/'.$ratings_image.'/rating_'.$i.'_on.gif" alt="'.$image_alt.'" title="'.$image_alt.'" class="post-ratings-image" />';		
 						} elseif($i == $insert_half) {						
-							$post_ratings_images .= '<img src="'.get_option('siteurl').'/wp-content/plugins/wp-postratings/images/'.$ratings_image.'/rating_'.$i.'_half.gif" alt="'.$image_alt.'" title="'.$image_alt.'" class="post-ratings-image" />';
+							$post_ratings_images .= '<img src="'.WP_PLUGIN_URL.'/wp-postratings/images/'.$ratings_image.'/rating_'.$i.'_half.gif" alt="'.$image_alt.'" title="'.$image_alt.'" class="post-ratings-image" />';
 						} else {
-							$post_ratings_images .= '<img src="'.get_option('siteurl').'/wp-content/plugins/wp-postratings/images/'.$ratings_image.'/rating_'.$i.'_off.gif" alt="'.$image_alt.'" title="'.$image_alt.'" class="post-ratings-image" />';
+							$post_ratings_images .= '<img src="'.WP_PLUGIN_URL.'/wp-postratings/images/'.$ratings_image.'/rating_'.$i.'_off.gif" alt="'.$image_alt.'" title="'.$image_alt.'" class="post-ratings-image" />';
 						}
 					}
 				}
 				// Display End Of Rating Image
-				if(file_exists(ABSPATH.'/wp-content/plugins/wp-postratings/images/'.$ratings_image.'/rating_end.gif')) {
-					$post_ratings_images .= '<img src="'.get_option('siteurl').'/wp-content/plugins/wp-postratings/images/'.$ratings_image.'/rating_end.gif" alt="" class="post-ratings-image" />';
+				if(file_exists(WP_PLUGIN_DIR.'/wp-postratings/images/'.$ratings_image.'/rating_end.gif')) {
+					$post_ratings_images .= '<img src="'.WP_PLUGIN_URL.'/wp-postratings/images/'.$ratings_image.'/rating_end.gif" alt="" class="post-ratings-image" />';
 				}
 				if($chars > 0) {
 					if($ratings_custom && $ratings_max == 2) {
@@ -411,33 +411,33 @@ if(!function_exists('get_highest_rated_category')) {
 					$image_alt = $post_ratings_users.' '.__('votes', 'wp-postratings').', '.__('average', 'wp-postratings').': '.$post_ratings_average.' '.__('out of', 'wp-postratings').' '.$ratings_max;
 				}
 				// Display Start Of Rating Image
-				if(file_exists(ABSPATH.'/wp-content/plugins/wp-postratings/images/'.$ratings_image.'/rating_start.gif')) {
-					$post_ratings_images .= '<img src="'.get_option('siteurl').'/wp-content/plugins/wp-postratings/images/'.$ratings_image.'/rating_start.gif" alt="" class="post-ratings-image" />';
+				if(file_exists(WP_PLUGIN_DIR.'/wp-postratings/images/'.$ratings_image.'/rating_start.gif')) {
+					$post_ratings_images .= '<img src="'.WP_PLUGIN_URL.'/wp-postratings/images/'.$ratings_image.'/rating_start.gif" alt="" class="post-ratings-image" />';
 				}
 				if(!$ratings_custom) { 
 					for($i=1; $i <= $ratings_max; $i++) {
 						if($i <= $post_ratings) {
-							$post_ratings_images .= '<img src="'.get_option('siteurl').'/wp-content/plugins/wp-postratings/images/'.$ratings_image.'/rating_on.gif" alt="'.$image_alt.'" title="'.$image_alt.'" class="post-ratings-image" />';		
+							$post_ratings_images .= '<img src="'.WP_PLUGIN_URL.'/wp-postratings/images/'.$ratings_image.'/rating_on.gif" alt="'.$image_alt.'" title="'.$image_alt.'" class="post-ratings-image" />';		
 						} elseif($i == $insert_half) {						
-							$post_ratings_images .= '<img src="'.get_option('siteurl').'/wp-content/plugins/wp-postratings/images/'.$ratings_image.'/rating_half.gif" alt="'.$image_alt.'" title="'.$image_alt.'" class="post-ratings-image" />';
+							$post_ratings_images .= '<img src="'.WP_PLUGIN_URL.'/wp-postratings/images/'.$ratings_image.'/rating_half.gif" alt="'.$image_alt.'" title="'.$image_alt.'" class="post-ratings-image" />';
 						} else {
-							$post_ratings_images .= '<img src="'.get_option('siteurl').'/wp-content/plugins/wp-postratings/images/'.$ratings_image.'/rating_off.gif" alt="'.$image_alt.'" title="'.$image_alt.'" class="post-ratings-image" />';
+							$post_ratings_images .= '<img src="'.WP_PLUGIN_URL.'/wp-postratings/images/'.$ratings_image.'/rating_off.gif" alt="'.$image_alt.'" title="'.$image_alt.'" class="post-ratings-image" />';
 						}
 					}
 				} else {
 					for($i=1; $i <= $ratings_max; $i++) {
 						if($i <= $post_ratings) {
-							$post_ratings_images .= '<img src="'.get_option('siteurl').'/wp-content/plugins/wp-postratings/images/'.$ratings_image.'/rating_'.$i.'_on.gif" alt="'.$image_alt.'" title="'.$image_alt.'" class="post-ratings-image" />';		
+							$post_ratings_images .= '<img src="'.WP_PLUGIN_URL.'/wp-postratings/images/'.$ratings_image.'/rating_'.$i.'_on.gif" alt="'.$image_alt.'" title="'.$image_alt.'" class="post-ratings-image" />';		
 						} elseif($i == $insert_half) {						
-							$post_ratings_images .= '<img src="'.get_option('siteurl').'/wp-content/plugins/wp-postratings/images/'.$ratings_image.'/rating_'.$i.'_half.gif" alt="'.$image_alt.'" title="'.$image_alt.'" class="post-ratings-image" />';
+							$post_ratings_images .= '<img src="'.WP_PLUGIN_URL.'/wp-postratings/images/'.$ratings_image.'/rating_'.$i.'_half.gif" alt="'.$image_alt.'" title="'.$image_alt.'" class="post-ratings-image" />';
 						} else {
-							$post_ratings_images .= '<img src="'.get_option('siteurl').'/wp-content/plugins/wp-postratings/images/'.$ratings_image.'/rating_'.$i.'_off.gif" alt="'.$image_alt.'" title="'.$image_alt.'" class="post-ratings-image" />';
+							$post_ratings_images .= '<img src="'.WP_PLUGIN_URL.'/wp-postratings/images/'.$ratings_image.'/rating_'.$i.'_off.gif" alt="'.$image_alt.'" title="'.$image_alt.'" class="post-ratings-image" />';
 						}
 					}
 				}
 				// Display End Of Rating Image
-				if(file_exists(ABSPATH.'/wp-content/plugins/wp-postratings/images/'.$ratings_image.'/rating_end.gif')) {
-					$post_ratings_images .= '<img src="'.get_option('siteurl').'/wp-content/plugins/wp-postratings/images/'.$ratings_image.'/rating_end.gif" alt="" class="post-ratings-image" />';
+				if(file_exists(WP_PLUGIN_DIR.'/wp-postratings/images/'.$ratings_image.'/rating_end.gif')) {
+					$post_ratings_images .= '<img src="'.WP_PLUGIN_URL.'/wp-postratings/images/'.$ratings_image.'/rating_end.gif" alt="" class="post-ratings-image" />';
 				}
 				if($chars > 0) {
 					if($ratings_custom && $ratings_max == 2) {
@@ -524,33 +524,33 @@ if(!function_exists('get_highest_rated_range')) {
 					$image_alt = $post_ratings_users.' '.__('votes', 'wp-postratings').', '.__('average', 'wp-postratings').': '.$post_ratings_average.' '.__('out of', 'wp-postratings').' '.$ratings_max;
 				}
 				// Display Start Of Rating Images
-				if(file_exists(ABSPATH.'/wp-content/plugins/wp-postratings/images/'.$ratings_image.'/rating_start.gif')) {
-					$post_ratings_images .= '<img src="'.get_option('siteurl').'/wp-content/plugins/wp-postratings/images/'.$ratings_image.'/rating_start.gif" alt="" class="post-ratings-image" />';
+				if(file_exists(WP_PLUGIN_DIR.'/wp-postratings/images/'.$ratings_image.'/rating_start.gif')) {
+					$post_ratings_images .= '<img src="'.WP_PLUGIN_URL.'/wp-postratings/images/'.$ratings_image.'/rating_start.gif" alt="" class="post-ratings-image" />';
 				}
 				if(!$ratings_custom) { 
 					for($i=1; $i <= $ratings_max; $i++) {
 						if($i <= $post_ratings) {
-							$post_ratings_images .= '<img src="'.get_option('siteurl').'/wp-content/plugins/wp-postratings/images/'.$ratings_image.'/rating_on.gif" alt="'.$image_alt.'" title="'.$image_alt.'" class="post-ratings-image" />';		
+							$post_ratings_images .= '<img src="'.WP_PLUGIN_URL.'/wp-postratings/images/'.$ratings_image.'/rating_on.gif" alt="'.$image_alt.'" title="'.$image_alt.'" class="post-ratings-image" />';		
 						} elseif($i == $insert_half) {						
-							$post_ratings_images .= '<img src="'.get_option('siteurl').'/wp-content/plugins/wp-postratings/images/'.$ratings_image.'/rating_half.gif" alt="'.$image_alt.'" title="'.$image_alt.'" class="post-ratings-image" />';
+							$post_ratings_images .= '<img src="'.WP_PLUGIN_URL.'/wp-postratings/images/'.$ratings_image.'/rating_half.gif" alt="'.$image_alt.'" title="'.$image_alt.'" class="post-ratings-image" />';
 						} else {
-							$post_ratings_images .= '<img src="'.get_option('siteurl').'/wp-content/plugins/wp-postratings/images/'.$ratings_image.'/rating_off.gif" alt="'.$image_alt.'" title="'.$image_alt.'" class="post-ratings-image" />';
+							$post_ratings_images .= '<img src="'.WP_PLUGIN_URL.'/wp-postratings/images/'.$ratings_image.'/rating_off.gif" alt="'.$image_alt.'" title="'.$image_alt.'" class="post-ratings-image" />';
 						}
 					}
 				} else {
 					for($i=1; $i <= $ratings_max; $i++) {
 						if($i <= $post_ratings) {
-							$post_ratings_images .= '<img src="'.get_option('siteurl').'/wp-content/plugins/wp-postratings/images/'.$ratings_image.'/rating_'.$i.'_on.gif" alt="'.$image_alt.'" title="'.$image_alt.'" class="post-ratings-image" />';		
+							$post_ratings_images .= '<img src="'.WP_PLUGIN_URL.'/wp-postratings/images/'.$ratings_image.'/rating_'.$i.'_on.gif" alt="'.$image_alt.'" title="'.$image_alt.'" class="post-ratings-image" />';		
 						} elseif($i == $insert_half) {						
-							$post_ratings_images .= '<img src="'.get_option('siteurl').'/wp-content/plugins/wp-postratings/images/'.$ratings_image.'/rating_'.$i.'_half.gif" alt="'.$image_alt.'" title="'.$image_alt.'" class="post-ratings-image" />';
+							$post_ratings_images .= '<img src="'.WP_PLUGIN_URL.'/wp-postratings/images/'.$ratings_image.'/rating_'.$i.'_half.gif" alt="'.$image_alt.'" title="'.$image_alt.'" class="post-ratings-image" />';
 						} else {
-							$post_ratings_images .= '<img src="'.get_option('siteurl').'/wp-content/plugins/wp-postratings/images/'.$ratings_image.'/rating_'.$i.'_off.gif" alt="'.$image_alt.'" title="'.$image_alt.'" class="post-ratings-image" />';
+							$post_ratings_images .= '<img src="'.WP_PLUGIN_URL.'/wp-postratings/images/'.$ratings_image.'/rating_'.$i.'_off.gif" alt="'.$image_alt.'" title="'.$image_alt.'" class="post-ratings-image" />';
 						}
 					}
 				}
 				// Display End Of Rating Image
-				if(file_exists(ABSPATH.'/wp-content/plugins/wp-postratings/images/'.$ratings_image.'/rating_end.gif')) {
-					$post_ratings_images .= '<img src="'.get_option('siteurl').'/wp-content/plugins/wp-postratings/images/'.$ratings_image.'/rating_end.gif" alt="" class="post-ratings-image" />';
+				if(file_exists(WP_PLUGIN_DIR.'/wp-postratings/images/'.$ratings_image.'/rating_end.gif')) {
+					$post_ratings_images .= '<img src="'.WP_PLUGIN_URL.'/wp-postratings/images/'.$ratings_image.'/rating_end.gif" alt="" class="post-ratings-image" />';
 				}
 				if($chars > 0) {
 					if($ratings_custom && $ratings_max == 2) {
@@ -643,33 +643,33 @@ if(!function_exists('get_highest_rated_range_category')) {
 					$image_alt = $post_ratings_users.' '.__('votes', 'wp-postratings').', '.__('average', 'wp-postratings').': '.$post_ratings_average.' '.__('out of', 'wp-postratings').' '.$ratings_max;
 				}
 				// Display Start Of Rating Image
-				if(file_exists(ABSPATH.'/wp-content/plugins/wp-postratings/images/'.$ratings_image.'/rating_start.gif')) {
-					$post_ratings_images .= '<img src="'.get_option('siteurl').'/wp-content/plugins/wp-postratings/images/'.$ratings_image.'/rating_start.gif" alt="" class="post-ratings-image" />';
+				if(file_exists(WP_PLUGIN_DIR.'/wp-postratings/images/'.$ratings_image.'/rating_start.gif')) {
+					$post_ratings_images .= '<img src="'.WP_PLUGIN_URL.'/wp-postratings/images/'.$ratings_image.'/rating_start.gif" alt="" class="post-ratings-image" />';
 				}
 				if(!$ratings_custom) { 
 					for($i=1; $i <= $ratings_max; $i++) {
 						if($i <= $post_ratings) {
-							$post_ratings_images .= '<img src="'.get_option('siteurl').'/wp-content/plugins/wp-postratings/images/'.$ratings_image.'/rating_on.gif" alt="'.$image_alt.'" title="'.$image_alt.'" class="post-ratings-image" />';		
+							$post_ratings_images .= '<img src="'.WP_PLUGIN_URL.'/wp-postratings/images/'.$ratings_image.'/rating_on.gif" alt="'.$image_alt.'" title="'.$image_alt.'" class="post-ratings-image" />';		
 						} elseif($i == $insert_half) {						
-							$post_ratings_images .= '<img src="'.get_option('siteurl').'/wp-content/plugins/wp-postratings/images/'.$ratings_image.'/rating_half.gif" alt="'.$image_alt.'" title="'.$image_alt.'" class="post-ratings-image" />';
+							$post_ratings_images .= '<img src="'.WP_PLUGIN_URL.'/wp-postratings/images/'.$ratings_image.'/rating_half.gif" alt="'.$image_alt.'" title="'.$image_alt.'" class="post-ratings-image" />';
 						} else {
-							$post_ratings_images .= '<img src="'.get_option('siteurl').'/wp-content/plugins/wp-postratings/images/'.$ratings_image.'/rating_off.gif" alt="'.$image_alt.'" title="'.$image_alt.'" class="post-ratings-image" />';
+							$post_ratings_images .= '<img src="'.WP_PLUGIN_URL.'/wp-postratings/images/'.$ratings_image.'/rating_off.gif" alt="'.$image_alt.'" title="'.$image_alt.'" class="post-ratings-image" />';
 						}
 					}
 				} else {
 					for($i=1; $i <= $ratings_max; $i++) {
 						if($i <= $post_ratings) {
-							$post_ratings_images .= '<img src="'.get_option('siteurl').'/wp-content/plugins/wp-postratings/images/'.$ratings_image.'/rating_'.$i.'_on.gif" alt="'.$image_alt.'" title="'.$image_alt.'" class="post-ratings-image" />';		
+							$post_ratings_images .= '<img src="'.WP_PLUGIN_URL.'/wp-postratings/images/'.$ratings_image.'/rating_'.$i.'_on.gif" alt="'.$image_alt.'" title="'.$image_alt.'" class="post-ratings-image" />';		
 						} elseif($i == $insert_half) {						
-							$post_ratings_images .= '<img src="'.get_option('siteurl').'/wp-content/plugins/wp-postratings/images/'.$ratings_image.'/rating_'.$i.'_half.gif" alt="'.$image_alt.'" title="'.$image_alt.'" class="post-ratings-image" />';
+							$post_ratings_images .= '<img src="'.WP_PLUGIN_URL.'/wp-postratings/images/'.$ratings_image.'/rating_'.$i.'_half.gif" alt="'.$image_alt.'" title="'.$image_alt.'" class="post-ratings-image" />';
 						} else {
-							$post_ratings_images .= '<img src="'.get_option('siteurl').'/wp-content/plugins/wp-postratings/images/'.$ratings_image.'/rating_'.$i.'_off.gif" alt="'.$image_alt.'" title="'.$image_alt.'" class="post-ratings-image" />';
+							$post_ratings_images .= '<img src="'.WP_PLUGIN_URL.'/wp-postratings/images/'.$ratings_image.'/rating_'.$i.'_off.gif" alt="'.$image_alt.'" title="'.$image_alt.'" class="post-ratings-image" />';
 						}
 					}
 				}
 				// Display End Of Rating Image
-				if(file_exists(ABSPATH.'/wp-content/plugins/wp-postratings/images/'.$ratings_image.'/rating_end.gif')) {
-					$post_ratings_images .= '<img src="'.get_option('siteurl').'/wp-content/plugins/wp-postratings/images/'.$ratings_image.'/rating_end.gif" alt="" class="post-ratings-image" />';
+				if(file_exists(WP_PLUGIN_DIR.'/wp-postratings/images/'.$ratings_image.'/rating_end.gif')) {
+					$post_ratings_images .= '<img src="'.WP_PLUGIN_URL.'/wp-postratings/images/'.$ratings_image.'/rating_end.gif" alt="" class="post-ratings-image" />';
 				}
 				if($chars > 0) {
 					if($ratings_custom && $ratings_max == 2) {
@@ -755,33 +755,33 @@ if(!function_exists('get_lowest_rated')) {
 					$image_alt = $post_ratings_users.' '.__('votes', 'wp-postratings').', '.__('average', 'wp-postratings').': '.$post_ratings_average.' '.__('out of', 'wp-postratings').' '.$ratings_max;
 				}
 				// Display Start Of Rating Images
-				if(file_exists(ABSPATH.'/wp-content/plugins/wp-postratings/images/'.$ratings_image.'/rating_start.gif')) {
-					$post_ratings_images .= '<img src="'.get_option('siteurl').'/wp-content/plugins/wp-postratings/images/'.$ratings_image.'/rating_start.gif" alt="" class="post-ratings-image" />';
+				if(file_exists(WP_PLUGIN_DIR.'/wp-postratings/images/'.$ratings_image.'/rating_start.gif')) {
+					$post_ratings_images .= '<img src="'.WP_PLUGIN_URL.'/wp-postratings/images/'.$ratings_image.'/rating_start.gif" alt="" class="post-ratings-image" />';
 				}
 				if(!$ratings_custom) { 
 					for($i=1; $i <= $ratings_max; $i++) {
 						if($i <= $post_ratings) {
-							$post_ratings_images .= '<img src="'.get_option('siteurl').'/wp-content/plugins/wp-postratings/images/'.$ratings_image.'/rating_on.gif" alt="'.$image_alt.'" title="'.$image_alt.'" class="post-ratings-image" />';		
+							$post_ratings_images .= '<img src="'.WP_PLUGIN_URL.'/wp-postratings/images/'.$ratings_image.'/rating_on.gif" alt="'.$image_alt.'" title="'.$image_alt.'" class="post-ratings-image" />';		
 						} elseif($i == $insert_half) {						
-							$post_ratings_images .= '<img src="'.get_option('siteurl').'/wp-content/plugins/wp-postratings/images/'.$ratings_image.'/rating_half.gif" alt="'.$image_alt.'" title="'.$image_alt.'" class="post-ratings-image" />';
+							$post_ratings_images .= '<img src="'.WP_PLUGIN_URL.'/wp-postratings/images/'.$ratings_image.'/rating_half.gif" alt="'.$image_alt.'" title="'.$image_alt.'" class="post-ratings-image" />';
 						} else {
-							$post_ratings_images .= '<img src="'.get_option('siteurl').'/wp-content/plugins/wp-postratings/images/'.$ratings_image.'/rating_off.gif" alt="'.$image_alt.'" title="'.$image_alt.'" class="post-ratings-image" />';
+							$post_ratings_images .= '<img src="'.WP_PLUGIN_URL.'/wp-postratings/images/'.$ratings_image.'/rating_off.gif" alt="'.$image_alt.'" title="'.$image_alt.'" class="post-ratings-image" />';
 						}
 					}
 				} else {
 					for($i=1; $i <= $ratings_max; $i++) {
 						if($i <= $post_ratings) {
-							$post_ratings_images .= '<img src="'.get_option('siteurl').'/wp-content/plugins/wp-postratings/images/'.$ratings_image.'/rating_'.$i.'_on.gif" alt="'.$image_alt.'" title="'.$image_alt.'" class="post-ratings-image" />';		
+							$post_ratings_images .= '<img src="'.WP_PLUGIN_URL.'/wp-postratings/images/'.$ratings_image.'/rating_'.$i.'_on.gif" alt="'.$image_alt.'" title="'.$image_alt.'" class="post-ratings-image" />';		
 						} elseif($i == $insert_half) {						
-							$post_ratings_images .= '<img src="'.get_option('siteurl').'/wp-content/plugins/wp-postratings/images/'.$ratings_image.'/rating_'.$i.'_half.gif" alt="'.$image_alt.'" title="'.$image_alt.'" class="post-ratings-image" />';
+							$post_ratings_images .= '<img src="'.WP_PLUGIN_URL.'/wp-postratings/images/'.$ratings_image.'/rating_'.$i.'_half.gif" alt="'.$image_alt.'" title="'.$image_alt.'" class="post-ratings-image" />';
 						} else {
-							$post_ratings_images .= '<img src="'.get_option('siteurl').'/wp-content/plugins/wp-postratings/images/'.$ratings_image.'/rating_'.$i.'_off.gif" alt="'.$image_alt.'" title="'.$image_alt.'" class="post-ratings-image" />';
+							$post_ratings_images .= '<img src="'.WP_PLUGIN_URL.'/wp-postratings/images/'.$ratings_image.'/rating_'.$i.'_off.gif" alt="'.$image_alt.'" title="'.$image_alt.'" class="post-ratings-image" />';
 						}
 					}
 				}
 				// Display End Of Rating Image
-				if(file_exists(ABSPATH.'/wp-content/plugins/wp-postratings/images/'.$ratings_image.'/rating_end.gif')) {
-					$post_ratings_images .= '<img src="'.get_option('siteurl').'/wp-content/plugins/wp-postratings/images/'.$ratings_image.'/rating_end.gif" alt="" class="post-ratings-image" />';
+				if(file_exists(WP_PLUGIN_DIR.'/wp-postratings/images/'.$ratings_image.'/rating_end.gif')) {
+					$post_ratings_images .= '<img src="'.WP_PLUGIN_URL.'/wp-postratings/images/'.$ratings_image.'/rating_end.gif" alt="" class="post-ratings-image" />';
 				}
 				if($chars > 0) {
 					if($ratings_custom && $ratings_max == 2) {
@@ -873,33 +873,33 @@ if(!function_exists('get_lowest_rated_category')) {
 					$image_alt = $post_ratings_users.' '.__('votes', 'wp-postratings').', '.__('average', 'wp-postratings').': '.$post_ratings_average.' '.__('out of', 'wp-postratings').' '.$ratings_max;
 				}
 				// Display Start Of Rating Image
-				if(file_exists(ABSPATH.'/wp-content/plugins/wp-postratings/images/'.$ratings_image.'/rating_start.gif')) {
-					$post_ratings_images .= '<img src="'.get_option('siteurl').'/wp-content/plugins/wp-postratings/images/'.$ratings_image.'/rating_start.gif" alt="" class="post-ratings-image" />';
+				if(file_exists(WP_PLUGIN_DIR.'/wp-postratings/images/'.$ratings_image.'/rating_start.gif')) {
+					$post_ratings_images .= '<img src="'.WP_PLUGIN_URL.'/wp-postratings/images/'.$ratings_image.'/rating_start.gif" alt="" class="post-ratings-image" />';
 				}
 				if(!$ratings_custom) { 
 					for($i=1; $i <= $ratings_max; $i++) {
 						if($i <= $post_ratings) {
-							$post_ratings_images .= '<img src="'.get_option('siteurl').'/wp-content/plugins/wp-postratings/images/'.$ratings_image.'/rating_on.gif" alt="'.$image_alt.'" title="'.$image_alt.'" class="post-ratings-image" />';		
+							$post_ratings_images .= '<img src="'.WP_PLUGIN_URL.'/wp-postratings/images/'.$ratings_image.'/rating_on.gif" alt="'.$image_alt.'" title="'.$image_alt.'" class="post-ratings-image" />';		
 						} elseif($i == $insert_half) {						
-							$post_ratings_images .= '<img src="'.get_option('siteurl').'/wp-content/plugins/wp-postratings/images/'.$ratings_image.'/rating_half.gif" alt="'.$image_alt.'" title="'.$image_alt.'" class="post-ratings-image" />';
+							$post_ratings_images .= '<img src="'.WP_PLUGIN_URL.'/wp-postratings/images/'.$ratings_image.'/rating_half.gif" alt="'.$image_alt.'" title="'.$image_alt.'" class="post-ratings-image" />';
 						} else {
-							$post_ratings_images .= '<img src="'.get_option('siteurl').'/wp-content/plugins/wp-postratings/images/'.$ratings_image.'/rating_off.gif" alt="'.$image_alt.'" title="'.$image_alt.'" class="post-ratings-image" />';
+							$post_ratings_images .= '<img src="'.WP_PLUGIN_URL.'/wp-postratings/images/'.$ratings_image.'/rating_off.gif" alt="'.$image_alt.'" title="'.$image_alt.'" class="post-ratings-image" />';
 						}
 					}
 				} else {
 					for($i=1; $i <= $ratings_max; $i++) {
 						if($i <= $post_ratings) {
-							$post_ratings_images .= '<img src="'.get_option('siteurl').'/wp-content/plugins/wp-postratings/images/'.$ratings_image.'/rating_'.$i.'_on.gif" alt="'.$image_alt.'" title="'.$image_alt.'" class="post-ratings-image" />';		
+							$post_ratings_images .= '<img src="'.WP_PLUGIN_URL.'/wp-postratings/images/'.$ratings_image.'/rating_'.$i.'_on.gif" alt="'.$image_alt.'" title="'.$image_alt.'" class="post-ratings-image" />';		
 						} elseif($i == $insert_half) {						
-							$post_ratings_images .= '<img src="'.get_option('siteurl').'/wp-content/plugins/wp-postratings/images/'.$ratings_image.'/rating_'.$i.'_half.gif" alt="'.$image_alt.'" title="'.$image_alt.'" class="post-ratings-image" />';
+							$post_ratings_images .= '<img src="'.WP_PLUGIN_URL.'/wp-postratings/images/'.$ratings_image.'/rating_'.$i.'_half.gif" alt="'.$image_alt.'" title="'.$image_alt.'" class="post-ratings-image" />';
 						} else {
-							$post_ratings_images .= '<img src="'.get_option('siteurl').'/wp-content/plugins/wp-postratings/images/'.$ratings_image.'/rating_'.$i.'_off.gif" alt="'.$image_alt.'" title="'.$image_alt.'" class="post-ratings-image" />';
+							$post_ratings_images .= '<img src="'.WP_PLUGIN_URL.'/wp-postratings/images/'.$ratings_image.'/rating_'.$i.'_off.gif" alt="'.$image_alt.'" title="'.$image_alt.'" class="post-ratings-image" />';
 						}
 					}
 				}
 				// Display End Of Rating Image
-				if(file_exists(ABSPATH.'/wp-content/plugins/wp-postratings/images/'.$ratings_image.'/rating_end.gif')) {
-					$post_ratings_images .= '<img src="'.get_option('siteurl').'/wp-content/plugins/wp-postratings/images/'.$ratings_image.'/rating_end.gif" alt="" class="post-ratings-image" />';
+				if(file_exists(WP_PLUGIN_DIR.'/wp-postratings/images/'.$ratings_image.'/rating_end.gif')) {
+					$post_ratings_images .= '<img src="'.WP_PLUGIN_URL.'/wp-postratings/images/'.$ratings_image.'/rating_end.gif" alt="" class="post-ratings-image" />';
 				}
 				if($chars > 0) {
 					if($ratings_custom && $ratings_max == 2) {

@@ -18,7 +18,12 @@
 
 
 ### Include wp-config.php
-@require('../../../wp-config.php');
+$wp_root = dirname(dirname(dirname(dirname(__FILE__))));
+if (file_exists($wp_root.'/wp-load.php')) {
+	require_once($wp_root.'/wp-load.php');
+} else {
+	require_once($wp_root.'/wp-config.php');
+}
 
 
 ### Check Whether User Can Manage Ratings
@@ -28,8 +33,8 @@ if(!current_user_can('manage_ratings')) {
 
 
 ### Variables
-$postratings_url = get_option('siteurl').'/wp-content/plugins/wp-postratings/images';
-$postratings_path = ABSPATH.'/wp-content/plugins/wp-postratings/images';
+$postratings_url = WP_PLUGIN_URL.'/wp-postratings/images';
+$postratings_path = WP_PLUGIN_DIR.'/wp-postratings/images';
 $postratings_ratingstext = get_option('postratings_ratingstext');
 $postratings_ratingsvalue = get_option('postratings_ratingsvalue');
 

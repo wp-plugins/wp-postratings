@@ -99,8 +99,8 @@ if($_POST['Submit']) {
 ### Needed Variables
 $postratings_max = intval(get_option('postratings_max'));
 $postratings_customrating = intval(get_option('postratings_customrating'));
-$postratings_url = get_option('siteurl').'/wp-content/plugins/wp-postratings/images';
-$postratings_path = ABSPATH.'/wp-content/plugins/wp-postratings/images';
+$postratings_url = WP_PLUGIN_URL.'/wp-postratings/images';
+$postratings_path = WP_PLUGIN_DIR.'/wp-postratings/images';
 $postratings_ratingstext = get_option('postratings_ratingstext');
 $postratings_ratingsvalue = get_option('postratings_ratingsvalue');
 $postratings_image = get_option('postratings_image');

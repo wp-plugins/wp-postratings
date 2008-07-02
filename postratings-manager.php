@@ -297,28 +297,28 @@ switch($mode) {
 					}
 					echo $postratings_rating;
 				} else {
-					if(file_exists(ABSPATH.'/wp-content/plugins/wp-postratings/images/'.$ratings_image.'/rating_start.gif')) {
-						echo '<img src="'.get_option('siteurl').'/wp-content/plugins/wp-postratings/images/'.$ratings_image.'/rating_start.gif" alt="" class="post-ratings-image" />';
+					if(file_exists(WP_PLUGIN_DIR.'/wp-postratings/images/'.$ratings_image.'/rating_start.gif')) {
+						echo '<img src="'.WP_PLUGIN_URL.'/wp-postratings/images/'.$ratings_image.'/rating_start.gif" alt="" class="post-ratings-image" />';
 					}
 					if($ratings_custom) {
 						for($j=1; $j <= $ratings_max; $j++) {
 							if($j <= $postratings_rating) {
-								echo '<img src="'.get_option('siteurl').'/wp-content/plugins/wp-postratings/images/'.$ratings_image.'/rating_'.$j.'_on.gif" alt="'.__('User Rate This Post ').$postratings_rating.__(' Stars Out Of ').$ratings_max.'" title="'.__('User Rate This Post ').$postratings_rating.__(' Stars Out Of ').$ratings_max.'" class="post-ratings-image" />';
+								echo '<img src="'.WP_PLUGIN_URL.'/wp-postratings/images/'.$ratings_image.'/rating_'.$j.'_on.gif" alt="'.sprintf(__('User Rate This Post %s Stars Out Of %s', 'wp-postratings'), $postratings_rating, $ratings_max).'" title="'.sprintf(__('User Rate This Post %s Stars Out Of %s', 'wp-postratings'), $postratings_rating, $ratings_max).'" class="post-ratings-image" />';
 							} else {
-								echo '<img src="'.get_option('siteurl').'/wp-content/plugins/wp-postratings/images/'.$ratings_image.'/rating_'.$j.'_off.gif" alt="'.__('User Rate This Post ').$postratings_rating.__(' Stars Out Of ').$ratings_max.'" title="'.__('User Rate This Post ').$postratings_rating.__(' Stars Out Of ').$ratings_max.'" class="post-ratings-image" />';
+								echo '<img src="'.WP_PLUGIN_URL.'/wp-postratings/images/'.$ratings_image.'/rating_'.$j.'_off.gif" alt="'.sprintf(__('User Rate This Post %s Stars Out Of %s', 'wp-postratings'), $postratings_rating, $ratings_max).'" title="'.sprintf(__('User Rate This Post %s Stars Out Of %s', 'wp-postratings'), $postratings_rating, $ratings_max).'" class="post-ratings-image" />';
 							}
 						}
 					} else {
 						for($j=1; $j <= $ratings_max; $j++) {
 							if($j <= $postratings_rating) {
-								echo '<img src="'.get_option('siteurl').'/wp-content/plugins/wp-postratings/images/'.$ratings_image.'/rating_on.gif" alt="'.__('User Rate This Post ').$postratings_rating.__(' Stars Out Of ').$ratings_max.'" title="'.__('User Rate This Post ').$postratings_rating.__(' Stars Out Of ').$ratings_max.'" class="post-ratings-image" />';
+								echo '<img src="'.WP_PLUGIN_URL.'/wp-postratings/images/'.$ratings_image.'/rating_on.gif" alt="'.sprintf(__('User Rate This Post %s Stars Out Of %s', 'wp-postratings'), $postratings_rating, $ratings_max).'" title="'.sprintf(__('User Rate This Post %s Stars Out Of %s', 'wp-postratings'), $postratings_rating, $ratings_max).'" class="post-ratings-image" />';
 							} else {
-								echo '<img src="'.get_option('siteurl').'/wp-content/plugins/wp-postratings/images/'.$ratings_image.'/rating_off.gif" alt="'.__('User Rate This Post ').$postratings_rating.__(' Stars Out Of ').$ratings_max.'" title="'.__('User Rate This Post ').$postratings_rating.__(' Stars Out Of ').$ratings_max.'" class="post-ratings-image" />';
+								echo '<img src="'.WP_PLUGIN_URL.'/wp-postratings/images/'.$ratings_image.'/rating_off.gif" alt="'.sprintf(__('User Rate This Post %s Stars Out Of %s', 'wp-postratings'), $postratings_rating, $ratings_max).'" title="'.sprintf(__('User Rate This Post %s Stars Out Of %s', 'wp-postratings'), $postratings_rating, $ratings_max).'" class="post-ratings-image" />';
 							}
 						}
 					}
-					if(file_exists(ABSPATH.'/wp-content/plugins/wp-postratings/images/'.$ratings_image.'/rating_end.gif')) {
-						echo '<img src="'.get_option('siteurl').'/wp-content/plugins/wp-postratings/images/'.$ratings_image.'/rating_end.gif" alt="" class="post-ratings-image" />';
+					if(file_exists(WP_PLUGIN_DIR.'/wp-postratings/images/'.$ratings_image.'/rating_end.gif')) {
+						echo '<img src="'.WP_PLUGIN_URL.'/wp-postratings/images/'.$ratings_image.'/rating_end.gif" alt="" class="post-ratings-image" />';
 					}
 				}
 				echo '</td>'."\n";

@@ -86,21 +86,21 @@ function ratings_off(rating_score, insert_half) {
 		for(i = 1; i <= ratings_max; i++) {
 			if(i <= rating_score) {
 				if(ratings_custom) {
-					document.images['rating_' + post_id + '_' + i].src = site_url + '/wp-content/plugins/wp-postratings/images/' + ratings_image + '/rating_' + i + '_on.gif';
+					document.images['rating_' + post_id + '_' + i].src = ratings_plugin_url + '/images/' + ratings_image + '/rating_' + i + '_on.gif';
 				} else {
-					document.images['rating_' + post_id + '_' + i].src = site_url + '/wp-content/plugins/wp-postratings/images/' + ratings_image + '/rating_on.gif';
+					document.images['rating_' + post_id + '_' + i].src = ratings_plugin_url + '/images/' + ratings_image + '/rating_on.gif';
 				}
 			} else if(i == insert_half) {
 				if(ratings_custom) {
-					document.images['rating_' + post_id + '_' + i].src = site_url + '/wp-content/plugins/wp-postratings/images/' + ratings_image + '/rating_' + i + '_half.gif';
+					document.images['rating_' + post_id + '_' + i].src = ratings_plugin_url + '/images/' + ratings_image + '/rating_' + i + '_half.gif';
 				} else {
-					document.images['rating_' + post_id + '_' + i].src = site_url + '/wp-content/plugins/wp-postratings/images/' + ratings_image + '/rating_half.gif';
+					document.images['rating_' + post_id + '_' + i].src = ratings_plugin_url + '/images/' + ratings_image + '/rating_half.gif';
 				}
 			} else {
 				if(ratings_custom) {
-					document.images['rating_' + post_id + '_' + i].src = site_url + '/wp-content/plugins/wp-postratings/images/' + ratings_image + '/rating_' + i + '_off.gif';
+					document.images['rating_' + post_id + '_' + i].src = ratings_plugin_url + '/images/' + ratings_image + '/rating_' + i + '_off.gif';
 				} else {
-					document.images['rating_' + post_id + '_' + i].src = site_url + '/wp-content/plugins/wp-postratings/images/' + ratings_image + '/rating_off.gif';
+					document.images['rating_' + post_id + '_' + i].src = ratings_plugin_url + '/images/' + ratings_image + '/rating_off.gif';
 				}
 			}
 		}
@@ -165,9 +165,6 @@ function rate_process() {
 		ratings.reset();
 		ratings.setVar("pid", post_id);
 		ratings.setVar("rate", post_rating);
-		if(using_wp_cache) {
-			ratings.setVar("page_hash", ratings_page_hash);
-		}
 		ratings.method = 'GET';
 		ratings.element = 'post-ratings-' + post_id;
 		ratings.onCompletion = rade_fadein_text;
