@@ -30,7 +30,7 @@ Author URI: http://lesterchan.net
 
 ### Load WP-Config File If This File Is Called Directly
 if (!function_exists('add_action')) {
-	$wp_root = dirname(dirname(dirname(dirname(__FILE__))));
+	$wp_root = '../../..';
 	if (file_exists($wp_root.'/wp-load.php')) {
 		require_once($wp_root.'/wp-load.php');
 	} else {
@@ -772,7 +772,7 @@ function ratings_most_where($content) {
 	return $content;
 }
 function ratings_most_orderby($content) {
-	$orderby = trim(addslashes($_GET['orderby']));
+	$orderby = trim(addslashes(get_query_var('r_orderby')));
 	if(empty($orderby) && ($orderby != 'asc' || $orderby != 'desc')) {
 		$orderby = 'desc';
 	}
@@ -802,7 +802,7 @@ function ratings_highest_where($content) {
 	return $content;
 }
 function ratings_highest_orderby($content) {
-	$orderby = trim(addslashes($_GET['orderby']));
+	$orderby = trim(addslashes(get_query_var('r_orderby')));
 	if(empty($orderby) || ($orderby != 'asc' && $orderby != 'desc')) {
 		$orderby = 'desc';
 	}
@@ -811,17 +811,29 @@ function ratings_highest_orderby($content) {
 }
 
 
-### Process The Sorting
-if($_GET['sortby'] == 'most_rated') {
-	add_filter('posts_fields', 'ratings_most_fields');
-	add_filter('posts_join', 'ratings_most_join');
-	add_filter('posts_where', 'ratings_most_where');
-	add_filter('posts_orderby', 'ratings_most_orderby');
-} elseif($_GET['sortby'] == 'highest_rated') {
-	add_filter('posts_fields', 'ratings_highest_fields');
-	add_filter('posts_join', 'ratings_highest_join');
-	add_filter('posts_where', 'ratings_highest_where');
-	add_filter('posts_orderby', 'ratings_highest_orderby');
+### Function: Ratings Public Variables
+add_filter('query_vars', 'ratings_variables');
+function ratings_variables($public_query_vars) {
+	$public_query_vars[] = 'r_sortby';
+	$public_query_vars[] = 'r_orderby';
+	return $public_query_vars;
+}
+
+
+### Function: Sort Ratings Posts
+add_action('pre_get_posts', 'ratings_sorting');
+function ratings_sorting() {
+	if(get_query_var('r_sortby') == 'most_rated') {
+		add_filter('posts_fields', 'ratings_most_fields');
+		add_filter('posts_join', 'ratings_most_join');
+		add_filter('posts_where', 'ratings_most_where');
+		add_filter('posts_orderby', 'ratings_most_orderby');
+	} elseif(get_query_var('r_sortby') == 'highest_rated') {
+		add_filter('posts_fields', 'ratings_highest_fields');
+		add_filter('posts_join', 'ratings_highest_join');
+		add_filter('posts_where', 'ratings_highest_where');
+		add_filter('posts_orderby', 'ratings_highest_orderby');
+	}
 }
 
 

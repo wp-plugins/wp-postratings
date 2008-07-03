@@ -288,11 +288,14 @@
 					<strong>Version 2.31 (01-08-2008)</strong>
 					<ul>
 						<li>NEW: Works For WordPress 2.6</li>
+						<li>NEW: Renamed GET Variables sortby To r_sortby And orderby To r_orderby</li>
 						<li>NEW: Renamed postratings-admin-js.php To postratings-admin-js.js and Move The Dynamic Javascript Variables To The PHP Pages</li>
 						<li>NEW: Renamed postratings-js.php To postratings-js.js and Move The Dynamic Javascript Variables To The PHP Pages</li>
 						<li>NEW: Uses postratings-js-packed.js And postratings-admin-js-packed.js</li>
 						<li>NEW: When Displaying The Ratings Given By Comment Author, It Check Against Cookie As Well As IP</li>
 						<li>FIXED: MYSQL Charset Issue Should Be Solved</li>
+						<li>FIXED: Removed WP-Cache Compatibility As It Is Not Tested</li>
+						<li>FIXED: Able To Use r_sortby And r_orderby in query_posts()</li>
 					</ul>
 				</li>
 				<li>
@@ -735,6 +738,34 @@
 					<p>If you want to display the most rated posts only, replace 'both' with <strong>'post'</strong>.</p>
 					<p>If you want to display the most rated pages only, replace 'both' with <strong>'page'</strong>.</p>
 					<p>The value <strong>10</strong> will display only the top 10 most rated posts/pages.</p>
+				</li>
+				<li>
+					To Sort <strong>Highest/Lowest Rated Posts</strong>
+				</li>
+				<li>
+					You can use:
+					<blockquote>
+						&lt;?php query_posts('r_sortby=highest_rated&amp;r_orderby=desc') ?&gt;
+					</blockquote>
+					<p>Or pass in the variables to the URL:</p>
+					<blockquote>
+						http://yoursite.com/?r_sortby=highest_rated&amp;r_orderby=desc
+					</blockquote>
+					<p>You can replace <strong>desc</strong> with <strong>asc</strong> if you want the lowest rated posts.</p>
+				</li>
+				<li>
+					To Sort <strong>Most/Least Rated Posts</strong>
+				</li>
+				<li>
+					You can use:
+					<blockquote>
+						&lt;?php query_posts('r_sortby=most_rated&amp;r_orderby=desc') ?&gt;
+					</blockquote>
+					<p>Or pass in the variables to the URL:</p>
+					<blockquote>
+						http://yoursite.com/?r_sortby=most_rated&amp;r_orderby=desc
+					</blockquote>
+					<p>You can replace <strong>desc</strong> with <strong>asc</strong> if you want the least rated posts.</p>
 				</li>
 			</ul>
 		</div>
