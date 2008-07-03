@@ -880,7 +880,7 @@ function postratings_page_admin_most_stats($content) {
 function postratings_page_general_stats($content) {
 	$stats_display = get_option('stats_display');
 	if($stats_display['ratings'] == 1) {
-		$content .= '<p><strong>'.__('WP-PostRatings', 'wp-stats').'</strong></p>'."\n";
+		$content .= '<p><strong>'.__('WP-PostRatings', 'wp-postratings').'</strong></p>'."\n";
 		$content .= '<ul>'."\n";
 		$content .= '<li><strong>'.get_ratings_users(false).'</strong> '.__('users casted their vote.', 'wp-postratings').'</li>'."\n";
 		$content .= '</ul>'."\n";
@@ -894,13 +894,13 @@ function postratings_page_most_stats($content) {
 	$stats_display = get_option('stats_display');
 	$stats_mostlimit = intval(get_option('stats_mostlimit'));
 	if($stats_display['rated_highest'] == 1) {
-		$content .= '<p><strong>'.$stats_mostlimit.' '.__('Highest Rated Post', 'wp-postratings').'</strong></p>'."\n";
+		$content .= '<p><strong>'.$stats_mostlimit.' '.__('Highest Rated Posts', 'wp-postratings').'</strong></p>'."\n";
 		$content .= '<ul>'."\n";
 		$content .= get_highest_rated('post', 0, $stats_mostlimit, 0, false);
 		$content .= '</ul>'."\n";
 	}
 	if($stats_display['rated_most'] == 1) {
-		$content .= '<p><strong>'.$stats_mostlimit.' '.__('Most Rated Post', 'wp-postratings').'</strong></p>'."\n";
+		$content .= '<p><strong>'.$stats_mostlimit.' '.__('Most Rated Posts', 'wp-postratings').'</strong></p>'."\n";
 		$content .= '<ul>'."\n";
 		$content .= get_most_rated('post', 0, $stats_mostlimit, 0, false);
 		$content .= '</ul>'."\n";
