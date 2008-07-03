@@ -18,7 +18,7 @@
 
 
 ### Include wp-config.php
-$wp_root = '../../..';;
+$wp_root = '../../..';
 if (file_exists($wp_root.'/wp-load.php')) {
 	require_once($wp_root.'/wp-load.php');
 } else {
