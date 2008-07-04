@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WP-PostRatings 1.31\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-07-03 16:10+0800\n"
-"PO-Revision-Date: 2008-07-03 16:10+0800\n"
+"POT-Creation-Date: 2008-07-04 17:44+0800\n"
+"PO-Revision-Date: 2008-07-04 17:44+0800\n"
 "Last-Translator: Lester Chan <lesterchan@gmail.com>\n"
 "Language-Team: Lester Chan <lesterchan@gmail.com>\n"
 "MIME-Version: 1.0\n"
@@ -137,7 +137,6 @@ msgid "<a href=\"%s\">Click Here</a> To Finish The Uninstallation And WP-PostRat
 msgstr ""
 
 #: postratings-manager.php:257
-#: postratings-manager.php:258
 msgid "Post Ratings Logs"
 msgstr ""
 
@@ -151,6 +150,10 @@ msgstr ""
 
 #: postratings-manager.php:258
 msgid "Of"
+msgstr ""
+
+#: postratings-manager.php:258
+msgid "Post Ratings Log Entries"
 msgstr ""
 
 #: postratings-manager.php:259
@@ -931,24 +934,18 @@ msgstr ""
 
 #: wp-postratings.php:866
 #: wp-postratings.php:868
+#: wp-postratings.php:897
 msgid "Highest Rated Posts"
 msgstr ""
 
 #: wp-postratings.php:871
 #: wp-postratings.php:873
+#: wp-postratings.php:903
 msgid "Most Rated Posts"
 msgstr ""
 
 #: wp-postratings.php:885
 msgid "users casted their vote."
-msgstr ""
-
-#: wp-postratings.php:897
-msgid "Highest Rated Post"
-msgstr ""
-
-#: wp-postratings.php:903
-msgid "Most Rated Post"
 msgstr ""
 
 #: wp-postratings.php:957
