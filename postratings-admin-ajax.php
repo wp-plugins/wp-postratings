@@ -65,9 +65,9 @@ if($postratings_customrating && $postratings_max == 2) {
 <table class="form-table">
 	<thead>
 		<tr>
-			<th>Rating Image</th>
-			<th>Rating Text</th>
-			<th>Rating Value</th>
+			<th><?php _e('Rating Image', 'wp-postratings'); ?></th>
+			<th><?php _e('Rating Text', 'wp-postratings'); ?></th>
+			<th><?php _e('Rating Value', 'wp-postratings'); ?></th>
 		</tr>
 	</thead>
 	<tbody>

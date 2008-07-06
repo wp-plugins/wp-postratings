@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WP-PostRatings 1.31\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-07-04 17:44+0800\n"
-"PO-Revision-Date: 2008-07-04 17:44+0800\n"
+"POT-Creation-Date: 2008-07-07 00:40+0800\n"
+"PO-Revision-Date: 2008-07-07 00:40+0800\n"
 "Last-Translator: Lester Chan <lesterchan@gmail.com>\n"
 "Language-Team: Lester Chan <lesterchan@gmail.com>\n"
 "MIME-Version: 1.0\n"
@@ -31,6 +31,21 @@ msgstr ""
 #: postratings-admin-ajax.php:59
 #, php-format
 msgid "%s Star"
+msgstr ""
+
+#: postratings-admin-ajax.php:68
+#: postratings-options.php:280
+msgid "Rating Image"
+msgstr ""
+
+#: postratings-admin-ajax.php:69
+#: postratings-options.php:281
+msgid "Rating Text"
+msgstr ""
+
+#: postratings-admin-ajax.php:70
+#: postratings-options.php:282
+msgid "Rating Value"
 msgstr ""
 
 #: postratings-manager.php:48
@@ -297,6 +312,18 @@ msgstr ""
 msgid "Delete Type: "
 msgstr ""
 
+#: postratings-manager.php:520
+msgid "Logs Only"
+msgstr ""
+
+#: postratings-manager.php:521
+msgid "Data Only"
+msgstr ""
+
+#: postratings-manager.php:522
+msgid "Logs And Data"
+msgstr ""
+
 #: postratings-manager.php:527
 msgid "Post ID(s):"
 msgstr ""
@@ -558,18 +585,6 @@ msgstr ""
 
 #: postratings-options.php:275
 msgid "Individual Rating Text/Value"
-msgstr ""
-
-#: postratings-options.php:280
-msgid "Rating Image"
-msgstr ""
-
-#: postratings-options.php:281
-msgid "Rating Text"
-msgstr ""
-
-#: postratings-options.php:282
-msgid "Rating Value"
 msgstr ""
 
 #: postratings-options.php:330

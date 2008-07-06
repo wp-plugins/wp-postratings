@@ -517,9 +517,9 @@ switch($mode) {
 				<td valign="top"><b><?php _e('Delete Type: ', 'wp-postratings'); ?></b></td>
 				<td valign="top">
 					<select size="1" name="delete_datalog">
-						<option value="1">Logs Only</option>
-						<option value="2">Data Only</option>
-						<option value="3">Logs And Data</option>
+						<option value="1"><?php _e('Logs Only', 'wp-postratings'); ?></option>
+						<option value="2"><?php _e('Data Only', 'wp-postratings'); ?></option>
+						<option value="3"><?php _e('Logs And Data', 'wp-postratings'); ?></option>
 					</select>				
 				</td>
 			</tr>
