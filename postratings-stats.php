@@ -45,7 +45,7 @@ if(!function_exists('get_most_rated')) {
 				$post_excerpt = ratings_post_excerpt($post->post_excerpt, $post->post_content, $post->post_password);
 				$post_content = get_the_content();
 				if($chars > 0) {
-					$temp = "<li><a href=\"".get_permalink()."\">".snippet_text($post_title, $chars)."</a> - $post_ratings_users ".__('votes', 'wp-postratings')."</li>\n";
+					$temp = "<li><a href=\"".get_permalink()."\">".snippet_text($post_title, $chars)."</a> - $post_ratings_users ".__sprintf(__ngettext('%s vote', '%s votes', $post_ratings_users, 'wp-postratings'), $post_ratings_users)."</li>\n";
 				} else {
 					$temp = stripslashes(get_option('postratings_template_mostrated'));
 					$temp = str_replace("%RATINGS_USERS%", $post_ratings_users, $temp);
@@ -102,7 +102,7 @@ if(!function_exists('get_most_rated_category')) {
 				$post_excerpt = ratings_post_excerpt($post->post_excerpt, $post->post_content, $post->post_password);
 				$post_content = get_the_content();
 				if($chars > 0) {
-					$temp = "<li><a href=\"".get_permalink()."\">".snippet_text($post_title, $chars)."</a> - $post_ratings_users ".__('votes', 'wp-postratings')."</li>\n";
+					$temp = "<li><a href=\"".get_permalink()."\">".snippet_text($post_title, $chars)."</a> -  ".__sprintf(__ngettext('%s vote', '%s votes', $post_ratings_users, 'wp-postratings'), $post_ratings_users)."</li>\n";
 				} else {
 					$temp = stripslashes(get_option('postratings_template_mostrated'));
 					$temp = str_replace("%RATINGS_USERS%", $post_ratings_users, $temp);
@@ -156,7 +156,7 @@ if(!function_exists('get_most_rated_range')) {
 				$post_excerpt = ratings_post_excerpt($post->post_excerpt, $post->post_content, $post->post_password);
 				$post_content = get_the_content();
 				if($chars > 0) {
-					$temp = "<li><a href=\"".get_permalink()."\">".snippet_text($post_title, $chars)."</a> - $post_ratings_users ".__('votes', 'wp-postratings')."</li>\n";
+					$temp = "<li><a href=\"".get_permalink()."\">".snippet_text($post_title, $chars)."</a> -  ".__sprintf(__ngettext('%s vote', '%s votes', $post_ratings_users, 'wp-postratings'), $post_ratings_users)."</li>\n";
 				} else {
 					$temp = stripslashes(get_option('postratings_template_mostrated'));
 					$temp = str_replace("%RATINGS_USERS%", $post_ratings_users, $temp);
@@ -217,7 +217,7 @@ if(!function_exists('get_most_rated_range_category')) {
 				$post_excerpt = ratings_post_excerpt($post->post_excerpt, $post->post_content, $post->post_password);
 				$post_content = get_the_content();
 				if($chars > 0) {
-					$temp = "<li><a href=\"".get_permalink()."\">".snippet_text($post_title, $chars)."</a> - $post_ratings_users ".__('votes', 'wp-postratings')."</li>\n";
+					$temp = "<li><a href=\"".get_permalink()."\">".snippet_text($post_title, $chars)."</a> -  ".__sprintf(__ngettext('%s vote', '%s votes', $post_ratings_users, 'wp-postratings'), $post_ratings_users)."</li>\n";
 				} else {
 					$temp = stripslashes(get_option('postratings_template_mostrated'));
 					$temp = str_replace("%RATINGS_USERS%", $post_ratings_users, $temp);
@@ -288,9 +288,9 @@ if(!function_exists('get_highest_rated')) {
 					if($post_ratings_score > 0) {
 						$post_ratings_score = '+'.$post_ratings_score;
 					}
-					$image_alt = $post_ratings_score.' '.__('rating', 'wp-postratings');
+					$image_alt = sprintf(__ngettext('%s rating', '%s rating', $post_ratings_score, 'wp-postratings'), $post_ratings_score);
 				} else {
-					$image_alt = $post_ratings_users.' '.__('votes', 'wp-postratings').', '.__('average', 'wp-postratings').': '.$post_ratings_average.' '.__('out of', 'wp-postratings').' '.$ratings_max;
+					$image_alt = sprintf(__ngettext('%s vote', '%s votes', $post_ratings_users, 'wp-postratings'), $post_ratings_users).', '.__('average', 'wp-postratings').': '.$post_ratings_average.' '.__('out of', 'wp-postratings').' '.$ratings_max;
 				}
 				// Display Start Of Rating Images
 				if(file_exists(WP_PLUGIN_DIR.'/wp-postratings/images/'.$ratings_image.'/rating_start.gif')) {
@@ -406,9 +406,9 @@ if(!function_exists('get_highest_rated_category')) {
 					if($post_ratings_score > 0) {
 						$post_ratings_score = '+'.$post_ratings_score;
 					}
-					$image_alt = $post_ratings_score.' '.__('rating', 'wp-postratings');
+					$image_alt = sprintf(__ngettext('%s rating', '%s rating', $post_ratings_score, 'wp-postratings'), $post_ratings_score);
 				} else {
-					$image_alt = $post_ratings_users.' '.__('votes', 'wp-postratings').', '.__('average', 'wp-postratings').': '.$post_ratings_average.' '.__('out of', 'wp-postratings').' '.$ratings_max;
+					$image_alt = sprintf(__ngettext('%s vote', '%s votes', $post_ratings_users, 'wp-postratings'), $post_ratings_users).', '.__('average', 'wp-postratings').': '.$post_ratings_average.' '.__('out of', 'wp-postratings').' '.$ratings_max;
 				}
 				// Display Start Of Rating Image
 				if(file_exists(WP_PLUGIN_DIR.'/wp-postratings/images/'.$ratings_image.'/rating_start.gif')) {
@@ -519,9 +519,9 @@ if(!function_exists('get_highest_rated_range')) {
 					if($post_ratings_score > 0) {
 						$post_ratings_score = '+'.$post_ratings_score;
 					}
-					$image_alt = $post_ratings_score.' '.__('rating', 'wp-postratings');
+					$image_alt = sprintf(__ngettext('%s rating', '%s rating', $post_ratings_score, 'wp-postratings'), $post_ratings_score);
 				} else {
-					$image_alt = $post_ratings_users.' '.__('votes', 'wp-postratings').', '.__('average', 'wp-postratings').': '.$post_ratings_average.' '.__('out of', 'wp-postratings').' '.$ratings_max;
+					$image_alt = sprintf(__ngettext('%s vote', '%s votes', $post_ratings_users, 'wp-postratings'), $post_ratings_users).', '.__('average', 'wp-postratings').': '.$post_ratings_average.' '.__('out of', 'wp-postratings').' '.$ratings_max;
 				}
 				// Display Start Of Rating Images
 				if(file_exists(WP_PLUGIN_DIR.'/wp-postratings/images/'.$ratings_image.'/rating_start.gif')) {
@@ -638,9 +638,9 @@ if(!function_exists('get_highest_rated_range_category')) {
 					if($post_ratings_score > 0) {
 						$post_ratings_score = '+'.$post_ratings_score;
 					}
-					$image_alt = $post_ratings_score.' '.__('rating', 'wp-postratings');
+					$image_alt = sprintf(__ngettext('%s rating', '%s rating', $post_ratings_score, 'wp-postratings'), $post_ratings_score);
 				} else {
-					$image_alt = $post_ratings_users.' '.__('votes', 'wp-postratings').', '.__('average', 'wp-postratings').': '.$post_ratings_average.' '.__('out of', 'wp-postratings').' '.$ratings_max;
+					$image_alt = sprintf(__ngettext('%s vote', '%s votes', $post_ratings_users, 'wp-postratings'), $post_ratings_users).', '.__('average', 'wp-postratings').': '.$post_ratings_average.' '.__('out of', 'wp-postratings').' '.$ratings_max;
 				}
 				// Display Start Of Rating Image
 				if(file_exists(WP_PLUGIN_DIR.'/wp-postratings/images/'.$ratings_image.'/rating_start.gif')) {
@@ -750,9 +750,9 @@ if(!function_exists('get_lowest_rated')) {
 					if($post_ratings_score > 0) {
 						$post_ratings_score = '+'.$post_ratings_score;
 					}
-					$image_alt = $post_ratings_score.' '.__('rating', 'wp-postratings');
+					$image_alt = sprintf(__ngettext('%s rating', '%s rating', $post_ratings_score, 'wp-postratings'), $post_ratings_score);
 				} else {
-					$image_alt = $post_ratings_users.' '.__('votes', 'wp-postratings').', '.__('average', 'wp-postratings').': '.$post_ratings_average.' '.__('out of', 'wp-postratings').' '.$ratings_max;
+					$image_alt = sprintf(__ngettext('%s vote', '%s votes', $post_ratings_users, 'wp-postratings'), $post_ratings_users).', '.__('average', 'wp-postratings').': '.$post_ratings_average.' '.__('out of', 'wp-postratings').' '.$ratings_max;
 				}
 				// Display Start Of Rating Images
 				if(file_exists(WP_PLUGIN_DIR.'/wp-postratings/images/'.$ratings_image.'/rating_start.gif')) {
@@ -868,9 +868,9 @@ if(!function_exists('get_lowest_rated_category')) {
 					if($post_ratings_score > 0) {
 						$post_ratings_score = '+'.$post_ratings_score;
 					}
-					$image_alt = $post_ratings_score.' '.__('rating', 'wp-postratings');
+					$image_alt = sprintf(__ngettext('%s rating', '%s rating', $post_ratings_score, 'wp-postratings'), $post_ratings_score);
 				} else {
-					$image_alt = $post_ratings_users.' '.__('votes', 'wp-postratings').', '.__('average', 'wp-postratings').': '.$post_ratings_average.' '.__('out of', 'wp-postratings').' '.$ratings_max;
+					$image_alt = sprintf(__ngettext('%s vote', '%s votes', $post_ratings_users, 'wp-postratings'), $post_ratings_users).', '.__('average', 'wp-postratings').': '.$post_ratings_average.' '.__('out of', 'wp-postratings').' '.$ratings_max;
 				}
 				// Display Start Of Rating Image
 				if(file_exists(WP_PLUGIN_DIR.'/wp-postratings/images/'.$ratings_image.'/rating_start.gif')) {

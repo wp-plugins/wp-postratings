@@ -227,9 +227,9 @@ function the_ratings_results($post_id, $new_user = 0, $new_score = 0, $new_avera
 		if($post_ratings_score > 0) {
 			$post_ratings_score = '+'.$post_ratings_score;
 		}
-		$image_alt = $post_ratings_score.' '.__('rating', 'wp-postratings').', '.number_format_i18n($post_ratings_users).' '.__('votes', 'wp-postratings');
+		$image_alt = sprintf(__ngettext('%s rating', '%s rating', $post_ratings_score, 'wp-postratings'), $post_ratings_score).', '.sprintf(__ngettext('%s vote', '%s votes', number_format_i18n($post_ratings_users), 'wp-postratings'), number_format_i18n($post_ratings_users));
 	} else {
-		$image_alt = number_format_i18n($post_ratings_users).' '.__('votes', 'wp-postratings').', '.__('average', 'wp-postratings').': '.$post_ratings_average.' '.__('out of', 'wp-postratings').' '.$ratings_max;
+		$image_alt = sprintf(__ngettext('%s vote', '%s votes', number_format_i18n($post_ratings_users), 'wp-postratings'), number_format_i18n($post_ratings_users)).', '.__('average', 'wp-postratings').': '.$post_ratings_average.' '.__('out of', 'wp-postratings').' '.$ratings_max;
 	}
 	if($postratings_custom) {
 		for($i=1; $i <= $ratings_max; $i++) {
@@ -863,14 +863,14 @@ function postratings_page_admin_most_stats($content) {
 	$stats_display = get_option('stats_display');
 	$stats_mostlimit = intval(get_option('stats_mostlimit'));
 	if($stats_display['rated_highest'] == 1) {
-		$content .= '<input type="checkbox" name="stats_display[]" id="wpstats_rated_highest" value="rated_highest" checked="checked" />&nbsp;&nbsp;<label for="wpstats_rated_highest">'.$stats_mostlimit.' '.__('Highest Rated Posts', 'wp-postratings').'</label><br />'."\n";
+		$content .= '<input type="checkbox" name="stats_display[]" id="wpstats_rated_highest" value="rated_highest" checked="checked" />&nbsp;&nbsp;<label for="wpstats_rated_highest">'.sprintf(__ngettext('%s Highest Rated Post', '%s Highest Rated Posts', $stats_mostlimit, 'wp-postratings'), $stats_mostlimit).'</label><br />'."\n";
 	} else {
-		$content .= '<input type="checkbox" name="stats_display[]" id="wpstats_rated_highest" value="rated_highest" />&nbsp;&nbsp;<label for="wpstats_rated_highest">'.$stats_mostlimit.' '.__('Highest Rated Posts', 'wp-postratings').'</label><br />'."\n";
+		$content .= '<input type="checkbox" name="stats_display[]" id="wpstats_rated_highest" value="rated_highest" />&nbsp;&nbsp;<label for="wpstats_rated_highest">'.sprintf(__ngettext('%s Highest Rated Post', '%s Highest Rated Posts', $stats_mostlimit, 'wp-postratings'), $stats_mostlimit).'</label><br />'."\n";
 	}
 	if($stats_display['rated_most'] == 1) {
-		$content .= '<input type="checkbox" name="stats_display[]" id="wpstats_rated_most" value="rated_most" checked="checked" />&nbsp;&nbsp;<label for="wpstats_rated_most">'.$stats_mostlimit.' '.__('Most Rated Posts', 'wp-postratings').'</label><br />'."\n";
+		$content .= '<input type="checkbox" name="stats_display[]" id="wpstats_rated_most" value="rated_most" checked="checked" />&nbsp;&nbsp;<label for="wpstats_rated_most">'.sprintf(__ngettext('%s Most Rated Post', '%s Most Rated Posts', $stats_mostlimit, 'wp-postratings'), $stats_mostlimit).'</label><br />'."\n";
 	} else {
-		$content .= '<input type="checkbox" name="stats_display[]" id="wpstats_rated_most" value="rated_most" />&nbsp;&nbsp;<label for="wpstats_rated_most">'.$stats_mostlimit.' '.__('Most Rated Posts', 'wp-postratings').'</label><br />'."\n";
+		$content .= '<input type="checkbox" name="stats_display[]" id="wpstats_rated_most" value="rated_most" />&nbsp;&nbsp;<label for="wpstats_rated_most">'.sprintf(__ngettext('%s Most Rated Post', '%s Most Rated Posts', $stats_mostlimit, 'wp-postratings'), $stats_mostlimit).'</label><br />'."\n";
 	}
 	return $content;
 }
@@ -882,7 +882,7 @@ function postratings_page_general_stats($content) {
 	if($stats_display['ratings'] == 1) {
 		$content .= '<p><strong>'.__('WP-PostRatings', 'wp-postratings').'</strong></p>'."\n";
 		$content .= '<ul>'."\n";
-		$content .= '<li><strong>'.get_ratings_users(false).'</strong> '.__('users casted their vote.', 'wp-postratings').'</li>'."\n";
+		$content .= '<li>'.sprintf(__ngettext('<strong>%s</strong> user casted his vote.', '<strong>%s</strong> users casted their vote.', get_ratings_users(false), 'wp-postratings'), get_ratings_users(false)).'</li>'."\n";
 		$content .= '</ul>'."\n";
 	}
 	return $content;
@@ -894,13 +894,13 @@ function postratings_page_most_stats($content) {
 	$stats_display = get_option('stats_display');
 	$stats_mostlimit = intval(get_option('stats_mostlimit'));
 	if($stats_display['rated_highest'] == 1) {
-		$content .= '<p><strong>'.$stats_mostlimit.' '.__('Highest Rated Posts', 'wp-postratings').'</strong></p>'."\n";
+		$content .= '<p><strong>'.sprintf(__ngettext('%s Highest Rated Post', '%s Highest Rated Posts', $stats_mostlimit, 'wp-postratings'), $stats_mostlimit).'</strong></p>'."\n";
 		$content .= '<ul>'."\n";
 		$content .= get_highest_rated('post', 0, $stats_mostlimit, 0, false);
 		$content .= '</ul>'."\n";
 	}
 	if($stats_display['rated_most'] == 1) {
-		$content .= '<p><strong>'.$stats_mostlimit.' '.__('Most Rated Posts', 'wp-postratings').'</strong></p>'."\n";
+		$content .= '<p><strong>'.sprintf(__ngettext('%s Most Rated Post', '%s Most Rated Posts', $stats_mostlimit, 'wp-postratings'), $stats_mostlimit).'</strong></p>'."\n";
 		$content .= '<ul>'."\n";
 		$content .= get_most_rated('post', 0, $stats_mostlimit, 0, false);
 		$content .= '</ul>'."\n";

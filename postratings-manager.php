@@ -303,17 +303,17 @@ switch($mode) {
 					if($ratings_custom) {
 						for($j=1; $j <= $ratings_max; $j++) {
 							if($j <= $postratings_rating) {
-								echo '<img src="'.WP_PLUGIN_URL.'/wp-postratings/images/'.$ratings_image.'/rating_'.$j.'_on.gif" alt="'.sprintf(__('User Rate This Post %s Stars Out Of %s', 'wp-postratings'), $postratings_rating, $ratings_max).'" title="'.sprintf(__('User Rate This Post %s Stars Out Of %s', 'wp-postratings'), $postratings_rating, $ratings_max).'" class="post-ratings-image" />';
+								echo '<img src="'.WP_PLUGIN_URL.'/wp-postratings/images/'.$ratings_image.'/rating_'.$j.'_on.gif" alt="'.sprintf(__ngettext('User Rate This Post %s Star', 'User Rate This Post %s Stars', $postratings_rating, 'wp-postratings'), $postratings_rating).__(' Out Of ', 'wp-postratings').$ratings_max.'" title="'.sprintf(__ngettext('User Rate This Post %s Star', 'User Rate This Post %s Stars', $postratings_rating, 'wp-postratings'), $postratings_rating).__(' Out Of ', 'wp-postratings').$ratings_max.'" class="post-ratings-image" />';
 							} else {
-								echo '<img src="'.WP_PLUGIN_URL.'/wp-postratings/images/'.$ratings_image.'/rating_'.$j.'_off.gif" alt="'.sprintf(__('User Rate This Post %s Stars Out Of %s', 'wp-postratings'), $postratings_rating, $ratings_max).'" title="'.sprintf(__('User Rate This Post %s Stars Out Of %s', 'wp-postratings'), $postratings_rating, $ratings_max).'" class="post-ratings-image" />';
+								echo '<img src="'.WP_PLUGIN_URL.'/wp-postratings/images/'.$ratings_image.'/rating_'.$j.'_off.gif" alt="'.sprintf(__ngettext('User Rate This Post %s Star', 'User Rate This Post %s Stars', $postratings_rating, 'wp-postratings'), $postratings_rating).__(' Out Of ', 'wp-postratings').$ratings_max.'" title="'.sprintf(__ngettext('User Rate This Post %s Star', 'User Rate This Post %s Stars', $postratings_rating, 'wp-postratings'), $postratings_rating).__(' Out Of ', 'wp-postratings').$ratings_max.'" class="post-ratings-image" />';
 							}
 						}
 					} else {
 						for($j=1; $j <= $ratings_max; $j++) {
 							if($j <= $postratings_rating) {
-								echo '<img src="'.WP_PLUGIN_URL.'/wp-postratings/images/'.$ratings_image.'/rating_on.gif" alt="'.sprintf(__('User Rate This Post %s Stars Out Of %s', 'wp-postratings'), $postratings_rating, $ratings_max).'" title="'.sprintf(__('User Rate This Post %s Stars Out Of %s', 'wp-postratings'), $postratings_rating, $ratings_max).'" class="post-ratings-image" />';
+								echo '<img src="'.WP_PLUGIN_URL.'/wp-postratings/images/'.$ratings_image.'/rating_on.gif" alt="'.sprintf(__ngettext('User Rate This Post %s Star', 'User Rate This Post %s Stars', $postratings_rating, 'wp-postratings'), $postratings_rating).__(' Out Of ', 'wp-postratings').$ratings_max.'" title="'.sprintf(__ngettext('User Rate This Post %s Star', 'User Rate This Post %s Stars', $postratings_rating, 'wp-postratings'), $postratings_rating).__(' Out Of ', 'wp-postratings').$ratings_max.'" class="post-ratings-image" />';
 							} else {
-								echo '<img src="'.WP_PLUGIN_URL.'/wp-postratings/images/'.$ratings_image.'/rating_off.gif" alt="'.sprintf(__('User Rate This Post %s Stars Out Of %s', 'wp-postratings'), $postratings_rating, $ratings_max).'" title="'.sprintf(__('User Rate This Post %s Stars Out Of %s', 'wp-postratings'), $postratings_rating, $ratings_max).'" class="post-ratings-image" />';
+								echo '<img src="'.WP_PLUGIN_URL.'/wp-postratings/images/'.$ratings_image.'/rating_off.gif" alt="'.sprintf(__ngettext('User Rate This Post %s Star', 'User Rate This Post %s Stars', $postratings_rating, 'wp-postratings'), $postratings_rating).__(' Out Of ', 'wp-postratings').$ratings_max.'" title="'.sprintf(__ngettext('User Rate This Post %s Star', 'User Rate This Post %s Stars', $postratings_rating, 'wp-postratings'), $postratings_rating).__(' Out Of ', 'wp-postratings').$ratings_max.'" class="post-ratings-image" />';
 							}
 						}
 					}

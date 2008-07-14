@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WP-PostRatings 1.31\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-07-07 00:40+0800\n"
-"PO-Revision-Date: 2008-07-07 00:40+0800\n"
+"POT-Creation-Date: 2008-07-15 01:54+0800\n"
+"PO-Revision-Date: 2008-07-15 01:55+0800\n"
 "Last-Translator: Lester Chan <lesterchan@gmail.com>\n"
 "Language-Team: Lester Chan <lesterchan@gmail.com>\n"
 "MIME-Version: 1.0\n"
@@ -11,7 +11,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Poedit-Language: English\n"
 "X-Poedit-Country: SINGAPORE\n"
-"X-Poedit-KeywordsList: __;_e\n"
+"X-Poedit-KeywordsList: __;_e;__ngettext:1,2\n"
 "X-Poedit-Basepath: .\n"
 "X-Poedit-SearchPath-0: .\n"
 
@@ -201,7 +201,16 @@ msgstr ""
 #: postratings-manager.php:314
 #: postratings-manager.php:316
 #, php-format
-msgid "User Rate This Post %s Stars Out Of %s"
+msgid "User Rate This Post %s Star"
+msgid_plural "User Rate This Post %s Stars"
+msgstr[0] ""
+msgstr[1] ""
+
+#: postratings-manager.php:306
+#: postratings-manager.php:308
+#: postratings-manager.php:314
+#: postratings-manager.php:316
+msgid " Out Of "
 msgstr ""
 
 #: postratings-manager.php:333
@@ -445,17 +454,10 @@ msgstr ""
 #: postratings-options.php:117
 #: postratings-options.php:120
 #: postratings-options.php:126
-#: postratings-stats.php:291
-#: postratings-stats.php:409
-#: postratings-stats.php:522
-#: postratings-stats.php:641
-#: postratings-stats.php:753
-#: postratings-stats.php:871
 #: postratings-templates.php:72
 #: postratings-templates.php:75
 #: postratings-templates.php:78
 #: postratings-templates.php:84
-#: wp-postratings.php:230
 msgid "rating"
 msgstr ""
 
@@ -468,16 +470,6 @@ msgstr ""
 #: postratings-options.php:145
 #: postratings-options.php:148
 #: postratings-options.php:157
-#: postratings-stats.php:48
-#: postratings-stats.php:105
-#: postratings-stats.php:159
-#: postratings-stats.php:220
-#: postratings-stats.php:293
-#: postratings-stats.php:411
-#: postratings-stats.php:524
-#: postratings-stats.php:643
-#: postratings-stats.php:755
-#: postratings-stats.php:873
 #: postratings-templates.php:72
 #: postratings-templates.php:75
 #: postratings-templates.php:78
@@ -487,8 +479,6 @@ msgstr ""
 #: postratings-templates.php:103
 #: postratings-templates.php:106
 #: postratings-templates.php:115
-#: wp-postratings.php:230
-#: wp-postratings.php:232
 #: wp-postratings.php:948
 #: wp-postratings.php:949
 #: wp-postratings.php:964
@@ -655,6 +645,24 @@ msgstr ""
 msgid "Save Changes"
 msgstr ""
 
+#: postratings-stats.php:48
+#: postratings-stats.php:105
+#: postratings-stats.php:159
+#: postratings-stats.php:220
+#: postratings-stats.php:293
+#: postratings-stats.php:411
+#: postratings-stats.php:524
+#: postratings-stats.php:643
+#: postratings-stats.php:755
+#: postratings-stats.php:873
+#: wp-postratings.php:230
+#: wp-postratings.php:232
+#, php-format
+msgid "%s vote"
+msgid_plural "%s votes"
+msgstr[0] ""
+msgstr[1] ""
+
 #: postratings-stats.php:61
 #: postratings-stats.php:118
 #: postratings-stats.php:173
@@ -667,6 +675,19 @@ msgstr ""
 #: postratings-stats.php:926
 msgid "N/A"
 msgstr ""
+
+#: postratings-stats.php:291
+#: postratings-stats.php:409
+#: postratings-stats.php:522
+#: postratings-stats.php:641
+#: postratings-stats.php:753
+#: postratings-stats.php:871
+#: wp-postratings.php:230
+#, php-format
+msgid "%s rating"
+msgid_plural "%s rating"
+msgstr[0] ""
+msgstr[1] ""
 
 #: postratings-templates.php:62
 msgid "No Ratings Templates Updated"
@@ -950,18 +971,27 @@ msgstr ""
 #: wp-postratings.php:866
 #: wp-postratings.php:868
 #: wp-postratings.php:897
-msgid "Highest Rated Posts"
-msgstr ""
+#, php-format
+msgid "%s Highest Rated Post"
+msgid_plural "%s Highest Rated Posts"
+msgstr[0] ""
+msgstr[1] ""
 
 #: wp-postratings.php:871
 #: wp-postratings.php:873
 #: wp-postratings.php:903
-msgid "Most Rated Posts"
-msgstr ""
+#, php-format
+msgid "%s Most Rated Post"
+msgid_plural "%s Most Rated Posts"
+msgstr[0] ""
+msgstr[1] ""
 
 #: wp-postratings.php:885
-msgid "users casted their vote."
-msgstr ""
+#, php-format
+msgid "<strong>%s</strong> user casted his vote."
+msgid_plural "<strong>%s</strong> users casted their vote."
+msgstr[0] ""
+msgstr[1] ""
 
 #: wp-postratings.php:957
 msgid "1 Star"
