@@ -45,7 +45,7 @@ if(!function_exists('get_most_rated')) {
 				$post_excerpt = ratings_post_excerpt($post->post_excerpt, $post->post_content, $post->post_password);
 				$post_content = get_the_content();
 				if($chars > 0) {
-					$temp = "<li><a href=\"".get_permalink()."\">".snippet_text($post_title, $chars)."</a> - $post_ratings_users ".__sprintf(__ngettext('%s vote', '%s votes', $post_ratings_users, 'wp-postratings'), $post_ratings_users)."</li>\n";
+					$temp = "<li><a href=\"".get_permalink()."\">".snippet_text($post_title, $chars)."</a> - $post_ratings_users ".sprintf(__ngettext('%s vote', '%s votes', $post_ratings_users, 'wp-postratings'), $post_ratings_users)."</li>\n";
 				} else {
 					$temp = stripslashes(get_option('postratings_template_mostrated'));
 					$temp = str_replace("%RATINGS_USERS%", $post_ratings_users, $temp);
@@ -102,7 +102,7 @@ if(!function_exists('get_most_rated_category')) {
 				$post_excerpt = ratings_post_excerpt($post->post_excerpt, $post->post_content, $post->post_password);
 				$post_content = get_the_content();
 				if($chars > 0) {
-					$temp = "<li><a href=\"".get_permalink()."\">".snippet_text($post_title, $chars)."</a> -  ".__sprintf(__ngettext('%s vote', '%s votes', $post_ratings_users, 'wp-postratings'), $post_ratings_users)."</li>\n";
+					$temp = "<li><a href=\"".get_permalink()."\">".snippet_text($post_title, $chars)."</a> -  ".sprintf(__ngettext('%s vote', '%s votes', $post_ratings_users, 'wp-postratings'), $post_ratings_users)."</li>\n";
 				} else {
 					$temp = stripslashes(get_option('postratings_template_mostrated'));
 					$temp = str_replace("%RATINGS_USERS%", $post_ratings_users, $temp);
@@ -156,7 +156,7 @@ if(!function_exists('get_most_rated_range')) {
 				$post_excerpt = ratings_post_excerpt($post->post_excerpt, $post->post_content, $post->post_password);
 				$post_content = get_the_content();
 				if($chars > 0) {
-					$temp = "<li><a href=\"".get_permalink()."\">".snippet_text($post_title, $chars)."</a> -  ".__sprintf(__ngettext('%s vote', '%s votes', $post_ratings_users, 'wp-postratings'), $post_ratings_users)."</li>\n";
+					$temp = "<li><a href=\"".get_permalink()."\">".snippet_text($post_title, $chars)."</a> -  ".sprintf(__ngettext('%s vote', '%s votes', $post_ratings_users, 'wp-postratings'), $post_ratings_users)."</li>\n";
 				} else {
 					$temp = stripslashes(get_option('postratings_template_mostrated'));
 					$temp = str_replace("%RATINGS_USERS%", $post_ratings_users, $temp);
@@ -217,7 +217,7 @@ if(!function_exists('get_most_rated_range_category')) {
 				$post_excerpt = ratings_post_excerpt($post->post_excerpt, $post->post_content, $post->post_password);
 				$post_content = get_the_content();
 				if($chars > 0) {
-					$temp = "<li><a href=\"".get_permalink()."\">".snippet_text($post_title, $chars)."</a> -  ".__sprintf(__ngettext('%s vote', '%s votes', $post_ratings_users, 'wp-postratings'), $post_ratings_users)."</li>\n";
+					$temp = "<li><a href=\"".get_permalink()."\">".snippet_text($post_title, $chars)."</a> -  ".sprintf(__ngettext('%s vote', '%s votes', $post_ratings_users, 'wp-postratings'), $post_ratings_users)."</li>\n";
 				} else {
 					$temp = stripslashes(get_option('postratings_template_mostrated'));
 					$temp = str_replace("%RATINGS_USERS%", $post_ratings_users, $temp);
