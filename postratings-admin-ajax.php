@@ -2,7 +2,7 @@
 /*
 +----------------------------------------------------------------+
 |																							|
-|	WordPress 2.5 Plugin: WP-PostRatings 1.31								|
+|	WordPress 2.6 Plugin: WP-PostRatings 1.40								|
 |	Copyright (c) 2008 Lester "GaMerZ" Chan									|
 |																							|
 |	File Written By:																	|
@@ -33,7 +33,7 @@ if(!current_user_can('manage_ratings')) {
 
 
 ### Variables
-$postratings_url = WP_PLUGIN_URL.'/wp-postratings/images';
+$postratings_url = plugins_url('wp-postratings/images');
 $postratings_path = WP_PLUGIN_DIR.'/wp-postratings/images';
 $postratings_ratingstext = get_option('postratings_ratingstext');
 $postratings_ratingsvalue = get_option('postratings_ratingsvalue');

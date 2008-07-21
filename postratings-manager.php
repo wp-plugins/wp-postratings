@@ -2,7 +2,7 @@
 /*
 +----------------------------------------------------------------+
 |																							|
-|	WordPress 2.5 Plugin: WP-PostRatings 1.31								|
+|	WordPress 2.6 Plugin: WP-PostRatings 1.40								|
 |	Copyright (c) 2008 Lester "GaMerZ" Chan									|
 |																							|
 |	File Written By:																	|
@@ -297,28 +297,28 @@ switch($mode) {
 					}
 					echo $postratings_rating;
 				} else {
-					if(file_exists(WP_PLUGIN_DIR.'/wp-postratings/images/'.$ratings_image.'/rating_start.gif')) {
-						echo '<img src="'.WP_PLUGIN_URL.'/wp-postratings/images/'.$ratings_image.'/rating_start.gif" alt="" class="post-ratings-image" />';
+					if(file_exists(plugins_url('wp-postratings/images/'.$ratings_image.'/rating_start.gif'))) {
+						echo '<img src="'.plugins_url('wp-postratings/images/'.$ratings_image.'/rating_start.gif').'" alt="" class="post-ratings-image" />';
 					}
 					if($ratings_custom) {
 						for($j=1; $j <= $ratings_max; $j++) {
 							if($j <= $postratings_rating) {
-								echo '<img src="'.WP_PLUGIN_URL.'/wp-postratings/images/'.$ratings_image.'/rating_'.$j.'_on.gif" alt="'.sprintf(__ngettext('User Rate This Post %s Star', 'User Rate This Post %s Stars', $postratings_rating, 'wp-postratings'), $postratings_rating).__(' Out Of ', 'wp-postratings').$ratings_max.'" title="'.sprintf(__ngettext('User Rate This Post %s Star', 'User Rate This Post %s Stars', $postratings_rating, 'wp-postratings'), $postratings_rating).__(' Out Of ', 'wp-postratings').$ratings_max.'" class="post-ratings-image" />';
+								echo '<img src="'.plugins_url('wp-postratings/images/'.$ratings_image.'/rating_'.$j.'_on.gif').'" alt="'.sprintf(__ngettext('User Rate This Post %s Star', 'User Rate This Post %s Stars', $postratings_rating, 'wp-postratings'), $postratings_rating).__(' Out Of ', 'wp-postratings').$ratings_max.'" title="'.sprintf(__ngettext('User Rate This Post %s Star', 'User Rate This Post %s Stars', $postratings_rating, 'wp-postratings'), $postratings_rating).__(' Out Of ', 'wp-postratings').$ratings_max.'" class="post-ratings-image" />';
 							} else {
-								echo '<img src="'.WP_PLUGIN_URL.'/wp-postratings/images/'.$ratings_image.'/rating_'.$j.'_off.gif" alt="'.sprintf(__ngettext('User Rate This Post %s Star', 'User Rate This Post %s Stars', $postratings_rating, 'wp-postratings'), $postratings_rating).__(' Out Of ', 'wp-postratings').$ratings_max.'" title="'.sprintf(__ngettext('User Rate This Post %s Star', 'User Rate This Post %s Stars', $postratings_rating, 'wp-postratings'), $postratings_rating).__(' Out Of ', 'wp-postratings').$ratings_max.'" class="post-ratings-image" />';
+								echo '<img src="'.plugins_url('wp-postratings/images/'.$ratings_image.'/rating_'.$j.'_off.gif').'" alt="'.sprintf(__ngettext('User Rate This Post %s Star', 'User Rate This Post %s Stars', $postratings_rating, 'wp-postratings'), $postratings_rating).__(' Out Of ', 'wp-postratings').$ratings_max.'" title="'.sprintf(__ngettext('User Rate This Post %s Star', 'User Rate This Post %s Stars', $postratings_rating, 'wp-postratings'), $postratings_rating).__(' Out Of ', 'wp-postratings').$ratings_max.'" class="post-ratings-image" />';
 							}
 						}
 					} else {
 						for($j=1; $j <= $ratings_max; $j++) {
 							if($j <= $postratings_rating) {
-								echo '<img src="'.WP_PLUGIN_URL.'/wp-postratings/images/'.$ratings_image.'/rating_on.gif" alt="'.sprintf(__ngettext('User Rate This Post %s Star', 'User Rate This Post %s Stars', $postratings_rating, 'wp-postratings'), $postratings_rating).__(' Out Of ', 'wp-postratings').$ratings_max.'" title="'.sprintf(__ngettext('User Rate This Post %s Star', 'User Rate This Post %s Stars', $postratings_rating, 'wp-postratings'), $postratings_rating).__(' Out Of ', 'wp-postratings').$ratings_max.'" class="post-ratings-image" />';
+								echo '<img src="'.plugins_url('wp-postratings/images/'.$ratings_image.'/rating_on.gif').'" alt="'.sprintf(__ngettext('User Rate This Post %s Star', 'User Rate This Post %s Stars', $postratings_rating, 'wp-postratings'), $postratings_rating).__(' Out Of ', 'wp-postratings').$ratings_max.'" title="'.sprintf(__ngettext('User Rate This Post %s Star', 'User Rate This Post %s Stars', $postratings_rating, 'wp-postratings'), $postratings_rating).__(' Out Of ', 'wp-postratings').$ratings_max.'" class="post-ratings-image" />';
 							} else {
-								echo '<img src="'.WP_PLUGIN_URL.'/wp-postratings/images/'.$ratings_image.'/rating_off.gif" alt="'.sprintf(__ngettext('User Rate This Post %s Star', 'User Rate This Post %s Stars', $postratings_rating, 'wp-postratings'), $postratings_rating).__(' Out Of ', 'wp-postratings').$ratings_max.'" title="'.sprintf(__ngettext('User Rate This Post %s Star', 'User Rate This Post %s Stars', $postratings_rating, 'wp-postratings'), $postratings_rating).__(' Out Of ', 'wp-postratings').$ratings_max.'" class="post-ratings-image" />';
+								echo '<img src="'.plugins_url('wp-postratings/images/'.$ratings_image.'/rating_off.gif').'" alt="'.sprintf(__ngettext('User Rate This Post %s Star', 'User Rate This Post %s Stars', $postratings_rating, 'wp-postratings'), $postratings_rating).__(' Out Of ', 'wp-postratings').$ratings_max.'" title="'.sprintf(__ngettext('User Rate This Post %s Star', 'User Rate This Post %s Stars', $postratings_rating, 'wp-postratings'), $postratings_rating).__(' Out Of ', 'wp-postratings').$ratings_max.'" class="post-ratings-image" />';
 							}
 						}
 					}
 					if(file_exists(WP_PLUGIN_DIR.'/wp-postratings/images/'.$ratings_image.'/rating_end.gif')) {
-						echo '<img src="'.WP_PLUGIN_URL.'/wp-postratings/images/'.$ratings_image.'/rating_end.gif" alt="" class="post-ratings-image" />';
+						echo '<img src="'.plugins_url('wp-postratings/images/'.$ratings_image.'/rating_end.gif').'" alt="" class="post-ratings-image" />';
 					}
 				}
 				echo '</td>'."\n";
