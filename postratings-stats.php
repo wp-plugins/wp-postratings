@@ -39,16 +39,16 @@ if(!function_exists('get_most_rated')) {
 		$most_rated = $wpdb->get_results("SELECT DISTINCT $wpdb->posts.*, (t1.meta_value+0.00) AS ratings_average, (t2.meta_value+0.00) AS ratings_users FROM $wpdb->posts LEFT JOIN $wpdb->postmeta AS t1 ON t1.post_id = $wpdb->posts.ID LEFT JOIN $wpdb->postmeta As t2 ON t1.post_id = t2.post_id WHERE t1.meta_key = 'ratings_average' AND t2.meta_key = 'ratings_users' AND $wpdb->posts.post_password = '' AND $wpdb->posts.post_date < '".current_time('mysql')."' AND $wpdb->posts.post_status = 'publish' AND t2.meta_value >= $min_votes AND $where ORDER BY ratings_users DESC, $order_by DESC LIMIT $limit");
 		if($most_rated) {
 			foreach ($most_rated as $post) {
-				$post_ratings_users = number_format_i18n($post->ratings_users);
+				$post_ratings_users = intval($post->ratings_users);
 				$post_ratings_average = $post->ratings_average;
 				$post_title = get_the_title();
 				$post_excerpt = ratings_post_excerpt($post->post_excerpt, $post->post_content, $post->post_password);
 				$post_content = get_the_content();
 				if($chars > 0) {
-					$temp = "<li><a href=\"".get_permalink()."\">".snippet_text($post_title, $chars)."</a> - ".sprintf(__ngettext('%s vote', '%s votes', $post_ratings_users, 'wp-postratings'), $post_ratings_users)."</li>\n";
+					$temp = "<li><a href=\"".get_permalink()."\">".snippet_text($post_title, $chars)."</a> - ".sprintf(__ngettext('%s vote', '%s votes', $post_ratings_users, 'wp-postratings'), number_format_i18n($post_ratings_users))."</li>\n";
 				} else {
 					$temp = stripslashes(get_option('postratings_template_mostrated'));
-					$temp = str_replace("%RATINGS_USERS%", $post_ratings_users, $temp);
+					$temp = str_replace("%RATINGS_USERS%", number_format_i18n($post_ratings_users), $temp);
 					$temp = str_replace("%RATINGS_AVERAGE%", $post_ratings_average, $temp);
 					$temp = str_replace("%POST_TITLE%", $post_title, $temp);
 					$temp = str_replace("%POST_EXCERPT%", $post_excerpt, $temp);
@@ -96,16 +96,16 @@ if(!function_exists('get_most_rated_category')) {
 		$most_rated = $wpdb->get_results("SELECT DISTINCT $wpdb->posts.*, (t1.meta_value+0.00) AS ratings_average, (t2.meta_value+0.00) AS ratings_users FROM $wpdb->posts LEFT JOIN $wpdb->postmeta AS t1 ON t1.post_id = $wpdb->posts.ID LEFT JOIN $wpdb->postmeta As t2 ON t1.post_id = t2.post_id INNER JOIN $wpdb->term_relationships ON ($wpdb->posts.ID = $wpdb->term_relationships.object_id) INNER JOIN $wpdb->term_taxonomy ON ($wpdb->term_relationships.term_taxonomy_id = $wpdb->term_taxonomy.term_taxonomy_id) WHERE t1.meta_key = 'ratings_average' AND t2.meta_key = 'ratings_users' AND $wpdb->posts.post_password = '' AND $wpdb->posts.post_date < '".current_time('mysql')."' AND $wpdb->posts.post_status = 'publish' AND $wpdb->term_taxonomy.taxonomy = 'category' AND $category_sql AND t2.meta_value >= $min_votes AND $where ORDER BY ratings_users DESC, $order_by DESC LIMIT $limit");
 		if($most_rated) {
 			foreach ($most_rated as $post) {
-				$post_ratings_users = number_format_i18n($post->ratings_users);
+				$post_ratings_users = intval($post->ratings_users);
 				$post_ratings_average = $post->ratings_average;
 				$post_title = get_the_title();
 				$post_excerpt = ratings_post_excerpt($post->post_excerpt, $post->post_content, $post->post_password);
 				$post_content = get_the_content();
 				if($chars > 0) {
-					$temp = "<li><a href=\"".get_permalink()."\">".snippet_text($post_title, $chars)."</a> -  ".sprintf(__ngettext('%s vote', '%s votes', $post_ratings_users, 'wp-postratings'), $post_ratings_users)."</li>\n";
+					$temp = "<li><a href=\"".get_permalink()."\">".snippet_text($post_title, $chars)."</a> -  ".sprintf(__ngettext('%s vote', '%s votes', $post_ratings_users, 'wp-postratings'), number_format_i18n($post_ratings_users))."</li>\n";
 				} else {
 					$temp = stripslashes(get_option('postratings_template_mostrated'));
-					$temp = str_replace("%RATINGS_USERS%", $post_ratings_users, $temp);
+					$temp = str_replace("%RATINGS_USERS%", number_format_i18n($post_ratings_users), $temp);
 					$temp = str_replace("%RATINGS_AVERAGE%", $post_ratings_average, $temp);
 					$temp = str_replace("%POST_TITLE%", $post_title, $temp);
 					$temp = str_replace("%POST_EXCERPT%", $post_excerpt, $temp);
@@ -149,17 +149,17 @@ if(!function_exists('get_most_rated_range')) {
 		$most_rated = $wpdb->get_results("SELECT COUNT($wpdb->ratings.rating_postid) AS ratings_users, SUM($wpdb->ratings.rating_rating) AS ratings_score, ROUND(((SUM($wpdb->ratings.rating_rating)/COUNT($wpdb->ratings.rating_postid))), 2) AS ratings_average, $wpdb->posts.* FROM $wpdb->posts LEFT JOIN $wpdb->ratings ON $wpdb->ratings.rating_postid = $wpdb->posts.ID WHERE rating_timestamp >= $min_time AND $wpdb->posts.post_password = '' AND $wpdb->posts.post_date < '".current_time('mysql')."'  AND $wpdb->posts.post_status = 'publish' AND $where GROUP BY $wpdb->ratings.rating_postid ORDER BY ratings_users DESC, $order_by DESC LIMIT $limit");
 		if($most_rated) {
 			foreach ($most_rated as $post) {
-				$post_ratings_users = number_format_i18n($post->ratings_users);
+				$post_ratings_users = intval($post->ratings_users);
 				$post_ratings_average = $post->ratings_average;
 				$post_ratings_score = $post->ratings_score;
 				$post_title = get_the_title();
 				$post_excerpt = ratings_post_excerpt($post->post_excerpt, $post->post_content, $post->post_password);
 				$post_content = get_the_content();
 				if($chars > 0) {
-					$temp = "<li><a href=\"".get_permalink()."\">".snippet_text($post_title, $chars)."</a> -  ".sprintf(__ngettext('%s vote', '%s votes', $post_ratings_users, 'wp-postratings'), $post_ratings_users)."</li>\n";
+					$temp = "<li><a href=\"".get_permalink()."\">".snippet_text($post_title, $chars)."</a> -  ".sprintf(__ngettext('%s vote', '%s votes', $post_ratings_users, 'wp-postratings'), number_format_i18n($post_ratings_users))."</li>\n";
 				} else {
 					$temp = stripslashes(get_option('postratings_template_mostrated'));
-					$temp = str_replace("%RATINGS_USERS%", $post_ratings_users, $temp);
+					$temp = str_replace("%RATINGS_USERS%", number_format_i18n($post_ratings_users), $temp);
 					$temp = str_replace("%RATINGS_AVERAGE%", $post_ratings_average, $temp);
 					$temp = str_replace("%RATINGS_SCORE%", $post_ratings_score, $temp);
 					$temp = str_replace("%POST_TITLE%", $post_title, $temp);
@@ -210,17 +210,17 @@ if(!function_exists('get_most_rated_range_category')) {
 		$most_rated = $wpdb->get_results("SELECT COUNT($wpdb->ratings.rating_postid) AS ratings_users, SUM($wpdb->ratings.rating_rating) AS ratings_score, ROUND(((SUM($wpdb->ratings.rating_rating)/COUNT($wpdb->ratings.rating_postid))), 2) AS ratings_average, $wpdb->posts.* FROM $wpdb->posts LEFT JOIN $wpdb->ratings ON $wpdb->ratings.rating_postid = $wpdb->posts.ID INNER JOIN $wpdb->term_relationships ON ($wpdb->posts.ID = $wpdb->term_relationships.object_id) INNER JOIN $wpdb->term_taxonomy ON ($wpdb->term_relationships.term_taxonomy_id = $wpdb->term_taxonomy.term_taxonomy_id) WHERE rating_timestamp >= $min_time AND $wpdb->posts.post_password = '' AND $wpdb->posts.post_date < '".current_time('mysql')."'  AND $wpdb->posts.post_status = 'publish' AND $wpdb->term_taxonomy.taxonomy = 'category' AND $category_sql AND $where GROUP BY $wpdb->ratings.rating_postid ORDER BY ratings_users DESC, $order_by DESC LIMIT $limit");
 		if($most_rated) {
 			foreach ($most_rated as $post) {
-				$post_ratings_users = number_format_i18n($post->ratings_users);
+				$post_ratings_users = intval($post->ratings_users);
 				$post_ratings_average = $post->ratings_average;
 				$post_ratings_score = $post->ratings_score;
 				$post_title = get_the_title();
 				$post_excerpt = ratings_post_excerpt($post->post_excerpt, $post->post_content, $post->post_password);
 				$post_content = get_the_content();
 				if($chars > 0) {
-					$temp = "<li><a href=\"".get_permalink()."\">".snippet_text($post_title, $chars)."</a> -  ".sprintf(__ngettext('%s vote', '%s votes', $post_ratings_users, 'wp-postratings'), $post_ratings_users)."</li>\n";
+					$temp = "<li><a href=\"".get_permalink()."\">".snippet_text($post_title, $chars)."</a> -  ".sprintf(__ngettext('%s vote', '%s votes', $post_ratings_users, 'wp-postratings'), number_format_i18n($post_ratings_users))."</li>\n";
 				} else {
 					$temp = stripslashes(get_option('postratings_template_mostrated'));
-					$temp = str_replace("%RATINGS_USERS%", $post_ratings_users, $temp);
+					$temp = str_replace("%RATINGS_USERS%", number_format_i18n($post_ratings_users), $temp);
 					$temp = str_replace("%RATINGS_AVERAGE%", $post_ratings_average, $temp);
 					$temp = str_replace("%RATINGS_SCORE%", $post_ratings_score, $temp);
 					$temp = str_replace("%POST_TITLE%", $post_title, $temp);
@@ -267,7 +267,7 @@ if(!function_exists('get_highest_rated')) {
 		if($highest_rated) {
 			foreach($highest_rated as $post) {
 				// Variables
-				$post_ratings_users = $post->ratings_users;
+				$post_ratings_users = intval($post->ratings_users);
 				$post_ratings_images = '';
 				$post_title = get_the_title();
 				$post_ratings_average = $post->ratings_average;
@@ -290,7 +290,7 @@ if(!function_exists('get_highest_rated')) {
 					}
 					$image_alt = sprintf(__ngettext('%s rating', '%s rating', $post_ratings_score, 'wp-postratings'), $post_ratings_score);
 				} else {
-					$image_alt = sprintf(__ngettext('%s vote', '%s votes', $post_ratings_users, 'wp-postratings'), $post_ratings_users).', '.__('average', 'wp-postratings').': '.$post_ratings_average.' '.__('out of', 'wp-postratings').' '.$ratings_max;
+					$image_alt = sprintf(__ngettext('%s vote', '%s votes', $post_ratings_users, 'wp-postratings'), number_format_i18n($post_ratings_users)).', '.__('average', 'wp-postratings').': '.$post_ratings_average.' '.__('out of', 'wp-postratings').' '.$ratings_max;
 				}
 				// Display Start Of Rating Images
 				if(file_exists(WP_PLUGIN_DIR.'/wp-postratings/images/'.$ratings_image.'/rating_start.gif')) {
@@ -385,7 +385,7 @@ if(!function_exists('get_highest_rated_category')) {
 		if($highest_rated) {
 			foreach($highest_rated as $post) {
 				// Variables
-				$post_ratings_users = $post->ratings_users;
+				$post_ratings_users = intval($post->ratings_users);
 				$post_ratings_images = '';
 				$post_title = get_the_title();
 				$post_ratings_average = $post->ratings_average;
@@ -408,7 +408,7 @@ if(!function_exists('get_highest_rated_category')) {
 					}
 					$image_alt = sprintf(__ngettext('%s rating', '%s rating', $post_ratings_score, 'wp-postratings'), $post_ratings_score);
 				} else {
-					$image_alt = sprintf(__ngettext('%s vote', '%s votes', $post_ratings_users, 'wp-postratings'), $post_ratings_users).', '.__('average', 'wp-postratings').': '.$post_ratings_average.' '.__('out of', 'wp-postratings').' '.$ratings_max;
+					$image_alt = sprintf(__ngettext('%s vote', '%s votes', $post_ratings_users, 'wp-postratings'), number_format_i18n($post_ratings_users)).', '.__('average', 'wp-postratings').': '.$post_ratings_average.' '.__('out of', 'wp-postratings').' '.$ratings_max;
 				}
 				// Display Start Of Rating Image
 				if(file_exists(WP_PLUGIN_DIR.'/wp-postratings/images/'.$ratings_image.'/rating_start.gif')) {
@@ -498,7 +498,7 @@ if(!function_exists('get_highest_rated_range')) {
 		if($highest_rated) {
 			foreach($highest_rated as $post) {
 				// Variables
-				$post_ratings_users = $post->ratings_users;
+				$post_ratings_users = intval($post->ratings_users);
 				$post_ratings_images = '';
 				$post_title = get_the_title();
 				$post_ratings_average = $post->ratings_average;
@@ -521,7 +521,7 @@ if(!function_exists('get_highest_rated_range')) {
 					}
 					$image_alt = sprintf(__ngettext('%s rating', '%s rating', $post_ratings_score, 'wp-postratings'), $post_ratings_score);
 				} else {
-					$image_alt = sprintf(__ngettext('%s vote', '%s votes', $post_ratings_users, 'wp-postratings'), $post_ratings_users).', '.__('average', 'wp-postratings').': '.$post_ratings_average.' '.__('out of', 'wp-postratings').' '.$ratings_max;
+					$image_alt = sprintf(__ngettext('%s vote', '%s votes', $post_ratings_users, 'wp-postratings'), number_format_i18n($post_ratings_users)).', '.__('average', 'wp-postratings').': '.$post_ratings_average.' '.__('out of', 'wp-postratings').' '.$ratings_max;
 				}
 				// Display Start Of Rating Images
 				if(file_exists(WP_PLUGIN_DIR.'/wp-postratings/images/'.$ratings_image.'/rating_start.gif')) {
@@ -617,7 +617,7 @@ if(!function_exists('get_highest_rated_range_category')) {
 		if($highest_rated) {
 			foreach($highest_rated as $post) {
 				// Variables
-				$post_ratings_users = $post->ratings_users;
+				$post_ratings_users = intval($post->ratings_users);
 				$post_ratings_images = '';
 				$post_title = get_the_title();
 				$post_ratings_average = $post->ratings_average;
@@ -640,7 +640,7 @@ if(!function_exists('get_highest_rated_range_category')) {
 					}
 					$image_alt = sprintf(__ngettext('%s rating', '%s rating', $post_ratings_score, 'wp-postratings'), $post_ratings_score);
 				} else {
-					$image_alt = sprintf(__ngettext('%s vote', '%s votes', $post_ratings_users, 'wp-postratings'), $post_ratings_users).', '.__('average', 'wp-postratings').': '.$post_ratings_average.' '.__('out of', 'wp-postratings').' '.$ratings_max;
+					$image_alt = sprintf(__ngettext('%s vote', '%s votes', $post_ratings_users, 'wp-postratings'), number_format_i18n($post_ratings_users)).', '.__('average', 'wp-postratings').': '.$post_ratings_average.' '.__('out of', 'wp-postratings').' '.$ratings_max;
 				}
 				// Display Start Of Rating Image
 				if(file_exists(WP_PLUGIN_DIR.'/wp-postratings/images/'.$ratings_image.'/rating_start.gif')) {
@@ -729,7 +729,7 @@ if(!function_exists('get_lowest_rated')) {
 		if($highest_rated) {
 			foreach($highest_rated as $post) {
 				// Variables
-				$post_ratings_users = $post->ratings_users;
+				$post_ratings_users = intval($post->ratings_users);
 				$post_ratings_images = '';
 				$post_title = get_the_title();
 				$post_ratings_average = $post->ratings_average;
@@ -752,7 +752,7 @@ if(!function_exists('get_lowest_rated')) {
 					}
 					$image_alt = sprintf(__ngettext('%s rating', '%s rating', $post_ratings_score, 'wp-postratings'), $post_ratings_score);
 				} else {
-					$image_alt = sprintf(__ngettext('%s vote', '%s votes', $post_ratings_users, 'wp-postratings'), $post_ratings_users).', '.__('average', 'wp-postratings').': '.$post_ratings_average.' '.__('out of', 'wp-postratings').' '.$ratings_max;
+					$image_alt = sprintf(__ngettext('%s vote', '%s votes', $post_ratings_users, 'wp-postratings'), number_format_i18n($post_ratings_users)).', '.__('average', 'wp-postratings').': '.$post_ratings_average.' '.__('out of', 'wp-postratings').' '.$ratings_max;
 				}
 				// Display Start Of Rating Images
 				if(file_exists(WP_PLUGIN_DIR.'/wp-postratings/images/'.$ratings_image.'/rating_start.gif')) {
@@ -847,7 +847,7 @@ if(!function_exists('get_lowest_rated_category')) {
 		if($highest_rated) {
 			foreach($highest_rated as $post) {
 				// Variables
-				$post_ratings_users = $post->ratings_users;
+				$post_ratings_users = intval($post->ratings_users);
 				$post_ratings_images = '';
 				$post_title = get_the_title();
 				$post_ratings_average = $post->ratings_average;
@@ -870,7 +870,7 @@ if(!function_exists('get_lowest_rated_category')) {
 					}
 					$image_alt = sprintf(__ngettext('%s rating', '%s rating', $post_ratings_score, 'wp-postratings'), $post_ratings_score);
 				} else {
-					$image_alt = sprintf(__ngettext('%s vote', '%s votes', $post_ratings_users, 'wp-postratings'), $post_ratings_users).', '.__('average', 'wp-postratings').': '.$post_ratings_average.' '.__('out of', 'wp-postratings').' '.$ratings_max;
+					$image_alt = sprintf(__ngettext('%s vote', '%s votes', $post_ratings_users, 'wp-postratings'), number_format_i18n($post_ratings_users)).', '.__('average', 'wp-postratings').': '.$post_ratings_average.' '.__('out of', 'wp-postratings').' '.$ratings_max;
 				}
 				// Display Start Of Rating Image
 				if(file_exists(WP_PLUGIN_DIR.'/wp-postratings/images/'.$ratings_image.'/rating_start.gif')) {
@@ -940,9 +940,9 @@ if(!function_exists('get_ratings_users')) {
 		global $wpdb;
 		$ratings_users = $wpdb->get_var("SELECT SUM((meta_value+0.00)) FROM $wpdb->postmeta WHERE meta_key = 'ratings_users'");
 		if($display) {
-			echo number_format_i18n($ratings_users);
+			echo $ratings_users;
 		} else {
-			return number_format_i18n($ratings_users);
+			return $ratings_users;
 		}
 	}
 }

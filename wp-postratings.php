@@ -215,9 +215,9 @@ function the_ratings_results($post_id, $new_user = 0, $new_score = 0, $new_avera
 		if($post_ratings_score > 0) {
 			$post_ratings_score = '+'.$post_ratings_score;
 		}
-		$image_alt = sprintf(__ngettext('%s rating', '%s rating', $post_ratings_score, 'wp-postratings'), $post_ratings_score).', '.sprintf(__ngettext('%s vote', '%s votes', number_format_i18n($post_ratings_users), 'wp-postratings'), number_format_i18n($post_ratings_users));
+		$image_alt = sprintf(__ngettext('%s rating', '%s rating', $post_ratings_score, 'wp-postratings'), $post_ratings_score).', '.sprintf(__ngettext('%s vote', '%s votes', $post_ratings_users, 'wp-postratings'), number_format_i18n($post_ratings_users));
 	} else {
-		$image_alt = sprintf(__ngettext('%s vote', '%s votes', number_format_i18n($post_ratings_users), 'wp-postratings'), number_format_i18n($post_ratings_users)).', '.__('average', 'wp-postratings').': '.$post_ratings_average.' '.__('out of', 'wp-postratings').' '.$ratings_max;
+		$image_alt = sprintf(__ngettext('%s vote', '%s votes', $post_ratings_users, 'wp-postratings'), number_format_i18n($post_ratings_users)).', '.__('average', 'wp-postratings').': '.$post_ratings_average.' '.__('out of', 'wp-postratings').' '.$ratings_max;
 	}
 	if($postratings_custom) {
 		for($i=1; $i <= $ratings_max; $i++) {
@@ -870,7 +870,7 @@ function postratings_page_general_stats($content) {
 	if($stats_display['ratings'] == 1) {
 		$content .= '<p><strong>'.__('WP-PostRatings', 'wp-postratings').'</strong></p>'."\n";
 		$content .= '<ul>'."\n";
-		$content .= '<li>'.sprintf(__ngettext('<strong>%s</strong> user casted his vote.', '<strong>%s</strong> users casted their vote.', get_ratings_users(false), 'wp-postratings'), get_ratings_users(false)).'</li>'."\n";
+		$content .= '<li>'.sprintf(__ngettext('<strong>%s</strong> user casted his vote.', '<strong>%s</strong> users casted their vote.', get_ratings_users(false), 'wp-postratings'), number_format_i18n(get_ratings_users(false))).'</li>'."\n";
 		$content .= '</ul>'."\n";
 	}
 	return $content;
