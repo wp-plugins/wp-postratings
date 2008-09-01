@@ -538,7 +538,13 @@
 				<li>
 					Use:
 					<blockquote>
-						&lt;?php comment_author_ratings(); ?&gt;
+						&lt;?php<br />
+						&nbsp;&nbsp;&nbsp;if(comment_author_ratings('', false) != '') {<br />
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;echo get_comment_author().' ratings for this post: '.comment_author_ratings('', false);<br />
+						&nbsp;&nbsp;&nbsp;} else {<br />
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;echo get_comment_author().' did not rate this post.';<br />
+						&nbsp;&nbsp;&nbsp;}<br />
+						?&gt;
 					</blockquote>
 				</li>
 			</ol>
