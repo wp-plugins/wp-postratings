@@ -1,7 +1,7 @@
 /*
 +----------------------------------------------------------------+
 |																							|
-|	WordPress 2.6 Plugin: WP-PostRatings 1.40								|
+|	WordPress 2.5 Plugin: WP-PostRatings 1.31								|
 |	Copyright (c) 2008 Lester "GaMerZ" Chan									|
 |																							|
 |	File Written By:																	|
@@ -81,7 +81,7 @@ function current_rating(id, rating, rating_text) {
 
 
 // When User Mouse Out Ratings
-function ratings_off(rating_score, insert_half) {
+function ratings_off(rating_score, insert_half, half_rtl) {
 	if(!is_being_rated) {
 		for(i = 1; i <= ratings_max; i++) {
 			if(i <= rating_score) {
@@ -92,9 +92,9 @@ function ratings_off(rating_score, insert_half) {
 				}
 			} else if(i == insert_half) {
 				if(ratings_custom) {
-					document.images['rating_' + post_id + '_' + i].src = ratings_plugin_url + '/images/' + ratings_image + '/rating_' + i + '_half.gif';
+					document.images['rating_' + post_id + '_' + i].src = ratings_plugin_url + '/images/' + ratings_image + '/rating_' + i + '_half' + (half_rtl ? '-rtl' : '') + '.gif';
 				} else {
-					document.images['rating_' + post_id + '_' + i].src = ratings_plugin_url + '/images/' + ratings_image + '/rating_half.gif';
+					document.images['rating_' + post_id + '_' + i].src = ratings_plugin_url + '/images/' + ratings_image + '/rating_half' + (half_rtl ? '-rtl' : '') + '.gif';
 				}
 			} else {
 				if(ratings_custom) {

@@ -297,7 +297,9 @@ switch($mode) {
 					}
 					echo $postratings_rating;
 				} else {
-					if(file_exists(plugins_url('wp-postratings/images/'.$ratings_image.'/rating_start.gif'))) {
+          if('rtl' == $text_direction && file_exists(WP_PLUGIN_DIR.'/wp-postratings/images/'.$ratings_image.'/rating_start-rtl.gif')) {
+            echo '<img src="'.plugins_url('wp-postratings/images/'.$ratings_image.'/rating_start-rtl.gif').'" alt="" class="post-ratings-image" />';
+					} elseif(file_exists(WP_PLUGIN_DIR.'/wp-postratings/images/'.$ratings_image.'/rating_start.gif')) {
 						echo '<img src="'.plugins_url('wp-postratings/images/'.$ratings_image.'/rating_start.gif').'" alt="" class="post-ratings-image" />';
 					}
 					if($ratings_custom) {
@@ -317,8 +319,10 @@ switch($mode) {
 							}
 						}
 					}
-					if(file_exists(WP_PLUGIN_DIR.'/wp-postratings/images/'.$ratings_image.'/rating_end.gif')) {
-						echo '<img src="'.plugins_url('wp-postratings/images/'.$ratings_image.'/rating_end.gif').'" alt="" class="post-ratings-image" />';
+          if('rtl' == $text_direction && file_exists(WP_PLUGIN_DIR.'/wp-postratings/images/'.$ratings_image.'/rating_end-rtl.gif')) {
+            echo '<img src="'.plugins_url('wp-postratings/images/'.$ratings_image.'/rating_end-rtl.gif').'" alt="" class="post-ratings-image" />';
+          } elseif(file_exists(WP_PLUGIN_DIR.'/wp-postratings/images/'.$ratings_image.'/rating_end.gif')) {
+            echo '<img src="'.plugins_url('wp-postratings/images/'.$ratings_image.'/rating_end.gif').'" alt="" class="post-ratings-image" />';
 					}
 				}
 				echo '</td>'."\n";
@@ -526,7 +530,7 @@ switch($mode) {
 			<tr>
 				<td valign="top"><b><?php _e('Post ID(s):', 'wp-postratings'); ?></b></td>
 				<td valign="top">
-					<input type="text" name="delete_postid" size="20" />
+					<input type="text" name="delete_postid" size="20" dir="ltr" />
 					<p><?php _e('Seperate each Post ID with a comma.', 'wp-postratings'); ?></p>
 					<p><?php _e('To delete ratings data/logs from Post ID 2, 3 and 4. Just type in: <b>2,3,4</b>', 'wp-postratings'); ?></p>
 					<p><?php _e('To delete ratings data/logs for all posts. Just type in: <b>all</b>', 'wp-postratings'); ?></p>

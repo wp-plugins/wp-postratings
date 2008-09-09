@@ -76,10 +76,10 @@ function widget_ratings_init() {
 			$options['chars'] = intval($_POST['highest_rated-chars']);
 			update_option('widget_ratings_highest_rated', $options);
 		}
-		echo '<p style="text-align: left;"><label for="highest_rated-title">';
+		echo '<p><label for="highest_rated-title">';
 		_e('Title', 'wp-postratings');
 		echo ': </label><input type="text" id="highest_rated-title" name="highest_rated-title" value="'.htmlspecialchars(stripslashes($options['title'])).'" /></p>'."\n";
-		echo '<p style="text-align: left;"><label for="highest_rated-mode">';
+		echo '<p><label for="highest_rated-mode">';
 		_e('Show Ratings For: ', 'wp-postratings');
 		echo ' </label>'."\n";
 		echo '<select id="highest_rated-mode" name="highest_rated-mode" size="1">'."\n";
@@ -101,13 +101,13 @@ function widget_ratings_init() {
 		echo '</select>&nbsp;&nbsp;';
 		_e('Only', 'wp-postratings');
 		echo '</p>'."\n";
-		echo '<p style="text-align: left;"><label for="highest_rated-min_votes">';
+		echo '<p><label for="highest_rated-min_votes">';
 		_e('Minimum Votes', 'wp-postratings');
 		echo ': </label><input type="text" id="highest_rated-min_votes" name="highest_rated-min_votes" value="'.intval($options['min_votes']).'" size="3" /></p>'."\n";
-		echo '<p style="text-align: left;"><label for="highest_rated-limit">';
+		echo '<p><label for="highest_rated-limit">';
 		_e('Limit', 'wp-postratings');
 		echo ': </label><input type="text" id="highest_rated-limit" name="highest_rated-limit" value="'.intval($options['limit']).'" size="3" /></p>'."\n";
-		echo '<p style="text-align: left;"><label for="highest_rated-chars">';
+		echo '<p><label for="highest_rated-chars">';
 		_e('Post Title Length (Characters)', 'wp-postratings');
 		echo ': </label><input type="text" id="highest_rated-chars" name="highest_rated-chars" value="'.intval($options['chars']).'" size="5" />&nbsp;&nbsp;'."\n";
 		_e('(<strong>0</strong> to disable)', 'wp-postratings');
@@ -129,10 +129,10 @@ function widget_ratings_init() {
 			$options['chars'] = intval($_POST['most_rated-chars']);
 			update_option('widget_ratings_most_rated', $options);
 		}
-		echo '<p style="text-align: left;"><label for="most_rated-title">';
+		echo '<p><label for="most_rated-title">';
 		_e('Title', 'wp-postratings');
 		echo ': </label><input type="text" id="most_rated-title" name="most_rated-title" value="'.htmlspecialchars(stripslashes($options['title'])).'" /></p>'."\n";
-		echo '<p style="text-align: left;"><label for="most_rated-mode">';
+		echo '<p><label for="most_rated-mode">';
 		_e('Show Ratings For: ', 'wp-postratings');
 		echo ' </label>'."\n";
 		echo '<select id="most_rated-mode" name="most_rated-mode" size="1">'."\n";
@@ -154,13 +154,13 @@ function widget_ratings_init() {
 		echo '</select>&nbsp;&nbsp;';
 		_e('Only', 'wp-postratings');
 		echo '</p>'."\n";
-		echo '<p style="text-align: left;"><label for="most_rated-min_votes">';
+		echo '<p><label for="most_rated-min_votes">';
 		_e('Minimum Votes', 'wp-postratings');
 		echo ': </label><input type="text" id="most_rated-min_votes" name="most_rated-min_votes" value="'.intval($options['min_votes']).'" size="3" /></p>'."\n";
-		echo '<p style="text-align: left;"><label for="most_rated-limit">';
+		echo '<p><label for="most_rated-limit">';
 		_e('Limit', 'wp-postratings');
 		echo ': </label><input type="text" id="most_rated-limit" name="most_rated-limit" value="'.intval($options['limit']).'" size="3" /></p>'."\n";
-		echo '<p style="text-align: left;"><label for="most_rated-chars">';
+		echo '<p><label for="most_rated-chars">';
 		_e('Post Title Length (Characters)', 'wp-postratings');
 		echo ': </label><input type="text" id="most_rated-chars" name="most_rated-chars" value="'.intval($options['chars']).'" size="5" />&nbsp;&nbsp;'."\n";
 		_e('(<strong>0</strong> to disable)', 'wp-postratings');
