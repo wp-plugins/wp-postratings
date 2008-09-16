@@ -679,14 +679,14 @@ function postratings_page_admin_most_stats($content) {
 	$stats_display = get_option('stats_display');
 	$stats_mostlimit = intval(get_option('stats_mostlimit'));
 	if($stats_display['rated_highest'] == 1) {
-		$content .= '<input type="checkbox" name="stats_display[]" id="wpstats_rated_highest" value="rated_highest" checked="checked" />&nbsp;&nbsp;<label for="wpstats_rated_highest">'.sprintf(__ngettext('%s Highest Rated Post', '%s Highest Rated Posts', $stats_mostlimit, 'wp-postratings'), $stats_mostlimit).'</label><br />'."\n";
+		$content .= '<input type="checkbox" name="stats_display[]" id="wpstats_rated_highest" value="rated_highest" checked="checked" />&nbsp;&nbsp;<label for="wpstats_rated_highest">'.sprintf(__ngettext('%s Highest Rated Post', '%s Highest Rated Posts', $stats_mostlimit, 'wp-postratings'), number_format_i18n($stats_mostlimit)).'</label><br />'."\n";
 	} else {
-		$content .= '<input type="checkbox" name="stats_display[]" id="wpstats_rated_highest" value="rated_highest" />&nbsp;&nbsp;<label for="wpstats_rated_highest">'.sprintf(__ngettext('%s Highest Rated Post', '%s Highest Rated Posts', $stats_mostlimit, 'wp-postratings'), $stats_mostlimit).'</label><br />'."\n";
+		$content .= '<input type="checkbox" name="stats_display[]" id="wpstats_rated_highest" value="rated_highest" />&nbsp;&nbsp;<label for="wpstats_rated_highest">'.sprintf(__ngettext('%s Highest Rated Post', '%s Highest Rated Posts', $stats_mostlimit, 'wp-postratings'), number_format_i18n($stats_mostlimit)).'</label><br />'."\n";
 	}
 	if($stats_display['rated_most'] == 1) {
-		$content .= '<input type="checkbox" name="stats_display[]" id="wpstats_rated_most" value="rated_most" checked="checked" />&nbsp;&nbsp;<label for="wpstats_rated_most">'.sprintf(__ngettext('%s Most Rated Post', '%s Most Rated Posts', $stats_mostlimit, 'wp-postratings'), $stats_mostlimit).'</label><br />'."\n";
+		$content .= '<input type="checkbox" name="stats_display[]" id="wpstats_rated_most" value="rated_most" checked="checked" />&nbsp;&nbsp;<label for="wpstats_rated_most">'.sprintf(__ngettext('%s Most Rated Post', '%s Most Rated Posts', $stats_mostlimit, 'wp-postratings'), number_format_i18n($stats_mostlimit)).'</label><br />'."\n";
 	} else {
-		$content .= '<input type="checkbox" name="stats_display[]" id="wpstats_rated_most" value="rated_most" />&nbsp;&nbsp;<label for="wpstats_rated_most">'.sprintf(__ngettext('%s Most Rated Post', '%s Most Rated Posts', $stats_mostlimit, 'wp-postratings'), $stats_mostlimit).'</label><br />'."\n";
+		$content .= '<input type="checkbox" name="stats_display[]" id="wpstats_rated_most" value="rated_most" />&nbsp;&nbsp;<label for="wpstats_rated_most">'.sprintf(__ngettext('%s Most Rated Post', '%s Most Rated Posts', $stats_mostlimit, 'wp-postratings'), number_format_i18n($stats_mostlimit)).'</label><br />'."\n";
 	}
 	return $content;
 }
@@ -710,13 +710,13 @@ function postratings_page_most_stats($content) {
 	$stats_display = get_option('stats_display');
 	$stats_mostlimit = intval(get_option('stats_mostlimit'));
 	if($stats_display['rated_highest'] == 1) {
-		$content .= '<p><strong>'.sprintf(__ngettext('%s Highest Rated Post', '%s Highest Rated Posts', $stats_mostlimit, 'wp-postratings'), $stats_mostlimit).'</strong></p>'."\n";
+		$content .= '<p><strong>'.sprintf(__ngettext('%s Highest Rated Post', '%s Highest Rated Posts', $stats_mostlimit, 'wp-postratings'), number_format_i18n($stats_mostlimit)).'</strong></p>'."\n";
 		$content .= '<ul>'."\n";
 		$content .= get_highest_rated('post', 0, $stats_mostlimit, 0, false);
 		$content .= '</ul>'."\n";
 	}
 	if($stats_display['rated_most'] == 1) {
-		$content .= '<p><strong>'.sprintf(__ngettext('%s Most Rated Post', '%s Most Rated Posts', $stats_mostlimit, 'wp-postratings'), $stats_mostlimit).'</strong></p>'."\n";
+		$content .= '<p><strong>'.sprintf(__ngettext('%s Most Rated Post', '%s Most Rated Posts', $stats_mostlimit, 'wp-postratings'), number_format_i18n($stats_mostlimit)).'</strong></p>'."\n";
 		$content .= '<ul>'."\n";
 		$content .= get_most_rated('post', 0, $stats_mostlimit, 0, false);
 		$content .= '</ul>'."\n";
@@ -906,9 +906,9 @@ function expand_ratings_template($template, $post_id, $post_ratings_data = null,
     if($post_ratings_score > 0) {
       $post_ratings_score = '+'.$post_ratings_score;
     }
-    $post_ratings_alt_text = sprintf(__ngettext('%s rating', '%s rating', $post_ratings_score, 'wp-postratings'), $post_ratings_score).__(',', 'wp-postratings').' '.sprintf(__ngettext('%s vote', '%s votes', $post_ratings_users, 'wp-postratings'), number_format_i18n($post_ratings_users));
+    $post_ratings_alt_text = sprintf(__ngettext('%s rating', '%s rating', $post_ratings_score, 'wp-postratings'), number_format_i18n($post_ratings_score)).__(',', 'wp-postratings').' '.sprintf(__ngettext('%s vote', '%s votes', $post_ratings_users, 'wp-postratings'), number_format_i18n($post_ratings_users));
   } else {
-    $post_ratings_alt_text = sprintf(__ngettext('%s vote', '%s votes', $post_ratings_users, 'wp-postratings'), number_format_i18n($post_ratings_users)).__(',', 'wp-postratings').' '.__('average', 'wp-postratings').': '.$post_ratings_average.' '.__('out of', 'wp-postratings').' '.$ratings_max;
+    $post_ratings_alt_text = sprintf(__ngettext('%s vote', '%s votes', $post_ratings_users, 'wp-postratings'), number_format_i18n($post_ratings_users)).__(',', 'wp-postratings').' '.__('average', 'wp-postratings').': '.number_format_i18n($post_ratings_average, 2).' '.__('out of', 'wp-postratings').' '.number_format_i18n($ratings_max);
   }
   // Check for half star
   $insert_half = 0;
@@ -933,8 +933,8 @@ function expand_ratings_template($template, $post_id, $post_ratings_data = null,
   $value = str_replace("%RATINGS_TEXT%", $post_ratings_text, $value);
   $value = str_replace("%RATINGS_MAX%", number_format_i18n($ratings_max), $value);
   $value = str_replace("%RATINGS_SCORE%", number_format_i18n($post_ratings_score), $value);
-  $value = str_replace("%RATINGS_AVERAGE%", $post_ratings_average, $value);
-  $value = str_replace("%RATINGS_PERCENTAGE%", $post_ratings_percentage, $value);
+  $value = str_replace("%RATINGS_AVERAGE%", number_format_i18n($post_ratings_average, 2), $value);
+  $value = str_replace("%RATINGS_PERCENTAGE%", number_format_i18n($post_ratings_percentage, 2), $value);
   $value = str_replace("%RATINGS_USERS%", number_format_i18n($post_ratings_users), $value);
   if (strpos($template, '%POST_URL%') !== false) {
     $post_link = get_permalink($post_id);

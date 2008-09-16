@@ -288,9 +288,9 @@ switch($mode) {
 				$postratings_ip = $postratings_log->rating_ip;
 				$postratings_host = $postratings_log->rating_host;				
 				echo "<tr $style>\n";
-				echo "<td>$postratings_id</td>\n";
+				echo '<td>'.number_format_i18n($postratings_id).'</td>'."\n";
 				echo "<td>$postratings_username</td>\n";
-				echo '<td>';
+				echo '<td nowrap="nowrap">';
 				if($ratings_custom && $ratings_max == 2) {
 					if($postratings_rating > 0) {
 						$postratings_rating = '+'.$postratings_rating;
@@ -326,7 +326,7 @@ switch($mode) {
 					}
 				}
 				echo '</td>'."\n";
-				echo "<td>$postratings_postid</td>\n";
+				echo '<td>'.number_format_i18n($postratings_postid).'</td>'."\n";
 				echo "<td>$postratings_posttitle</td>\n";
 				echo "<td>$postratings_date</td>\n";
 				echo "<td>$postratings_ip / $postratings_host</td>\n";
@@ -439,9 +439,9 @@ switch($mode) {
 									$rating_rating = $filter_rating->rating_rating;
 									$prefix = __('Rating: ', 'wp-postratings');
 									if($rating_rating == $postratings_filterrating) {
-										echo '<option value="'.$rating_rating.'" selected="selected">'.$prefix.' '.$rating_rating.'</option>'."\n";
+										echo '<option value="'.$rating_rating.'" selected="selected">'.$prefix.' '.number_format_i18n($rating_rating).'</option>'."\n";
 									} else {
-										echo '<option value="'.$rating_rating.'">'.$prefix.' '.$rating_rating.'</option>'."\n";
+										echo '<option value="'.$rating_rating.'">'.$prefix.' '.number_format_i18n($rating_rating).'</option>'."\n";
 									}
 								}
 							}
@@ -472,9 +472,9 @@ switch($mode) {
 					<?php
 						for($i=10; $i <= 100; $i+=10) {
 							if($postratings_log_perpage == $i) {
-								echo "<option value=\"$i\" selected=\"selected\">".__('Per Page', 'wp-postratings').": $i</option>\n";
+								echo "<option value=\"$i\" selected=\"selected\">".__('Per Page', 'wp-postratings').": ".number_format_i18n($i)."</option>\n";
 							} else {
-								echo "<option value=\"$i\">".__('Per Page', 'wp-postratings').": $i</option>\n";
+								echo "<option value=\"$i\">".__('Per Page', 'wp-postratings').": ".number_format_i18n($i)."</option>\n";
 							}
 						}
 					?>

@@ -54,9 +54,9 @@ if($postratings_customrating && $postratings_max == 2) {
 } else {
 	for($i = 0; $i < $postratings_max; $i++) {
 		if($i > 0) {
-			$postratings_ratingstext[$i] = sprintf(__('%s Stars', 'wp-postratings'), $i+1);
+			$postratings_ratingstext[$i] = sprintf(__('%s Stars', 'wp-postratings'), number_format_i18n($i+1));
 		} else {
-			$postratings_ratingstext[$i] = sprintf(__('%s Star', 'wp-postratings'), $i+1);
+			$postratings_ratingstext[$i] = sprintf(__('%s Star', 'wp-postratings'), number_format_i18n($i+1));
 		}
 		$postratings_ratingsvalue[$i] = $i+1;
 	}
