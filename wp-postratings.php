@@ -123,7 +123,7 @@ function ratings_register_scriptstyle() {
 	}	
   if('rtl' == $text_direction && @file_exists(TEMPLATEPATH.'/postratings-css-rtl.css')) {
     wp_register_style('wp-postratings-rtl', get_stylesheet_directory_uri().'/postratings-css-rtl.css', false, '1.40', 'all');
-  } elseif(@file_exists(WP_PLUGIN_DIR.'/postratings-css-rtl.css')) {
+  } else {
     wp_register_style('wp-postratings-rtl', plugins_url('wp-postratings/postratings-css-rtl.css'), false, '1.40', 'all');
   }  
 }
@@ -856,7 +856,7 @@ function get_ratings_images_comment_author($ratings_custom, $ratings_max, $comme
       }
     }
   } else {
-    for($i=1; $i <= $ratings_max; $i++) {
+	for($i=1; $i <= $ratings_max; $i++) {
       if($i <= $comment_author_rating) {
         $ratings_images .= '<img src="'.plugins_url('wp-postratings/images/'.$ratings_image.'/rating_on.gif').'" alt="'.$image_alt.'" title="'.$image_alt.'" class="post-ratings-image" />';    
       } else {
@@ -874,95 +874,94 @@ function get_ratings_images_comment_author($ratings_custom, $ratings_max, $comme
 
 ### Function: Replaces the template's variables with appropriate values
 function expand_ratings_template($template, $post_id, $post_ratings_data = null, $max_post_title_chars = 0) {
-  global $post;
-  $temp_post = $post;
-  // Get global variables
-  $ratings_image = get_option('postratings_image');
-  $ratings_max = intval(get_option('postratings_max'));
-  $ratings_custom = intval(get_option('postratings_customrating'));
-  // Get post related variables
-  if(is_null($post_ratings_data)) {
-    $post_ratings_data = get_post_custom($post_id);
-    $post_ratings_users = intval($post_ratings_data['ratings_users'][0]);
-    $post_ratings_score = intval($post_ratings_data['ratings_score'][0]);
-    $post_ratings_average = floatval($post_ratings_data['ratings_average'][0]);
-  }
-  else {
-    $post_ratings_users = intval($post_ratings_data->ratings_users);
-    $post_ratings_score = intval($post_ratings_data->ratings_score);
-    $post_ratings_average = floatval($post_ratings_data->ratings_average);
-  }
-  if($post_ratings_score == 0 || $post_ratings_users == 0) {
-    $post_ratings = 0;
-    $post_ratings_average = 0;
-    $post_ratings_percentage = 0;
-  } else {
-    $post_ratings = round($post_ratings_average, 1);
-    $post_ratings_percentage = round((($post_ratings_score/$post_ratings_users)/$ratings_max) * 100, 2);    
-  }
-  $post_ratings_text = '<span class="post-ratings-text" id="ratings_'.$post_id.'_text"></span>';
-  // Get the image's alt text
-  if($ratings_custom && $ratings_max == 2) {
-    if($post_ratings_score > 0) {
-      $post_ratings_score = '+'.$post_ratings_score;
-    }
-    $post_ratings_alt_text = sprintf(__ngettext('%s rating', '%s rating', $post_ratings_score, 'wp-postratings'), number_format_i18n($post_ratings_score)).__(',', 'wp-postratings').' '.sprintf(__ngettext('%s vote', '%s votes', $post_ratings_users, 'wp-postratings'), number_format_i18n($post_ratings_users));
-  } else {
-    $post_ratings_alt_text = sprintf(__ngettext('%s vote', '%s votes', $post_ratings_users, 'wp-postratings'), number_format_i18n($post_ratings_users)).__(',', 'wp-postratings').' '.__('average', 'wp-postratings').': '.number_format_i18n($post_ratings_average, 2).' '.__('out of', 'wp-postratings').' '.number_format_i18n($ratings_max);
-  }
-  // Check for half star
-  $insert_half = 0;
-  $average_diff = abs(floor($post_ratings_average)-$post_ratings);
-  if($average_diff >= 0.25 && $average_diff <= 0.75) {
-    $insert_half = ceil($post_ratings_average);
-  } elseif($average_diff > 0.75) {
-    $insert_half = ceil($post_ratings);
-  }  
-  // Replace the variables
-  $value = $template;
-  if (strpos($template, '%RATINGS_IMAGES%') !== false) {
-    $post_ratings_images = get_ratings_images($ratings_custom, $ratings_max, $post_ratings, $ratings_image, $post_ratings_alt_text, $insert_half);
-    $value = str_replace("%RATINGS_IMAGES%", $post_ratings_images, $value);
-  }
-  if (strpos($template, '%RATINGS_IMAGES_VOTE%') !== false) {
-    $ratings_texts = get_option('postratings_ratingstext');
-    $post_ratings_images = get_ratings_images_vote($post_id, $ratings_custom, $ratings_max, $post_ratings, $ratings_image, $post_ratings_alt_text, $insert_half, $ratings_texts);
-    $value = str_replace("%RATINGS_IMAGES_VOTE%", $post_ratings_images, $value);
-  }
-  $value = str_replace("%RATINGS_ALT_TEXT%", $post_ratings_alt_text, $value);
-  $value = str_replace("%RATINGS_TEXT%", $post_ratings_text, $value);
-  $value = str_replace("%RATINGS_MAX%", number_format_i18n($ratings_max), $value);
-  $value = str_replace("%RATINGS_SCORE%", number_format_i18n($post_ratings_score), $value);
-  $value = str_replace("%RATINGS_AVERAGE%", number_format_i18n($post_ratings_average, 2), $value);
-  $value = str_replace("%RATINGS_PERCENTAGE%", number_format_i18n($post_ratings_percentage, 2), $value);
-  $value = str_replace("%RATINGS_USERS%", number_format_i18n($post_ratings_users), $value);
-  if (strpos($template, '%POST_URL%') !== false) {
-    $post_link = get_permalink($post_id);
-    $value = str_replace("%POST_URL%", $post_link, $value);
-  }
-  if (strpos($template, '%POST_TITLE%') !== false) {
-    $post_title = get_the_title($post_id);
-    if ($max_post_title_chars > 0) {
-      $post_title = snippet_text($post_title, $max_post_title_chars);
-    }
-    $value = str_replace("%POST_TITLE%", $post_title, $value);
-  }
-  if (strpos($template, '%POST_EXCERPT%') !== false) {
-    if ($post->ID != $post_id) {
-      $post = &get_post($post_id);
-    }
-    $post_excerpt = ratings_post_excerpt($post->post_excerpt, $post->post_content, $post->post_password);
-    $value = str_replace("%POST_EXCERPT%", $post_excerpt, $value);
-  }
-  if (strpos($template, '%POST_CONTENT%') !== false) {
-    if ($post->ID != $post_id) {
-      $post = &get_post($post_id);
-    }
-    $value = str_replace("%POST_CONTENT%", get_the_content(), $value);
-  }
-  // Return value
-  $post = $temp_post;
-  return apply_filters('expand_ratings_template', $value);
+	global $post;
+	$temp_post = $post;
+	// Get global variables
+	$ratings_image = get_option('postratings_image');
+	$ratings_max = intval(get_option('postratings_max'));
+	$ratings_custom = intval(get_option('postratings_customrating'));
+	// Get post related variables
+	if(is_null($post_ratings_data)) {
+		$post_ratings_data = get_post_custom($post_id);
+		$post_ratings_users = intval($post_ratings_data['ratings_users'][0]);
+		$post_ratings_score = intval($post_ratings_data['ratings_score'][0]);
+		$post_ratings_average = floatval($post_ratings_data['ratings_average'][0]);
+	} else {
+		$post_ratings_users = intval($post_ratings_data->ratings_users);
+		$post_ratings_score = intval($post_ratings_data->ratings_score);
+		$post_ratings_average = floatval($post_ratings_data->ratings_average);
+	}
+	if($post_ratings_score == 0 || $post_ratings_users == 0) {
+		$post_ratings = 0;
+		$post_ratings_average = 0;
+		$post_ratings_percentage = 0;
+	} else {
+		$post_ratings = round($post_ratings_average, 1);
+		$post_ratings_percentage = round((($post_ratings_score/$post_ratings_users)/$ratings_max) * 100, 2);    
+	}
+	$post_ratings_text = '<span class="post-ratings-text" id="ratings_'.$post_id.'_text"></span>';
+	// Get the image's alt text
+	if($ratings_custom && $ratings_max == 2) {
+		if($post_ratings_score > 0) {
+			$post_ratings_score = '+'.$post_ratings_score;
+		}
+		$post_ratings_alt_text = sprintf(__ngettext('%s rating', '%s rating', $post_ratings_score, 'wp-postratings'), number_format_i18n($post_ratings_score)).__(',', 'wp-postratings').' '.sprintf(__ngettext('%s vote', '%s votes', $post_ratings_users, 'wp-postratings'), number_format_i18n($post_ratings_users));
+	} else {
+		$post_ratings_alt_text = sprintf(__ngettext('%s vote', '%s votes', $post_ratings_users, 'wp-postratings'), number_format_i18n($post_ratings_users)).__(',', 'wp-postratings').' '.__('average', 'wp-postratings').': '.number_format_i18n($post_ratings_average, 2).' '.__('out of', 'wp-postratings').' '.number_format_i18n($ratings_max);
+	}
+	// Check for half star
+	$insert_half = 0;
+	$average_diff = abs(floor($post_ratings_average)-$post_ratings);
+	if($average_diff >= 0.25 && $average_diff <= 0.75) {
+		$insert_half = ceil($post_ratings_average);
+	} elseif($average_diff > 0.75) {
+		$insert_half = ceil($post_ratings);
+	}  
+	// Replace the variables
+	$value = $template;
+	if (strpos($template, '%RATINGS_IMAGES%') !== false) {
+		$post_ratings_images = get_ratings_images($ratings_custom, $ratings_max, $post_ratings, $ratings_image, $post_ratings_alt_text, $insert_half);
+		$value = str_replace("%RATINGS_IMAGES%", $post_ratings_images, $value);
+	}
+	if (strpos($template, '%RATINGS_IMAGES_VOTE%') !== false) {
+		$ratings_texts = get_option('postratings_ratingstext');
+		$post_ratings_images = get_ratings_images_vote($post_id, $ratings_custom, $ratings_max, $post_ratings, $ratings_image, $post_ratings_alt_text, $insert_half, $ratings_texts);
+		$value = str_replace("%RATINGS_IMAGES_VOTE%", $post_ratings_images, $value);
+	}
+	$value = str_replace("%RATINGS_ALT_TEXT%", $post_ratings_alt_text, $value);
+	$value = str_replace("%RATINGS_TEXT%", $post_ratings_text, $value);
+	$value = str_replace("%RATINGS_MAX%", number_format_i18n($ratings_max), $value);
+	$value = str_replace("%RATINGS_SCORE%", number_format_i18n($post_ratings_score), $value);
+	$value = str_replace("%RATINGS_AVERAGE%", number_format_i18n($post_ratings_average, 2), $value);
+	$value = str_replace("%RATINGS_PERCENTAGE%", number_format_i18n($post_ratings_percentage, 2), $value);
+	$value = str_replace("%RATINGS_USERS%", number_format_i18n($post_ratings_users), $value);
+	if (strpos($template, '%POST_URL%') !== false) {
+		$post_link = get_permalink($post_id);
+		$value = str_replace("%POST_URL%", $post_link, $value);
+	}
+	if (strpos($template, '%POST_TITLE%') !== false) {
+		$post_title = get_the_title($post_id);
+		if ($max_post_title_chars > 0) {
+			$post_title = snippet_text($post_title, $max_post_title_chars);
+		}
+		$value = str_replace("%POST_TITLE%", $post_title, $value);
+	}
+	if (strpos($template, '%POST_EXCERPT%') !== false) {
+		if ($post->ID != $post_id) {
+			$post = &get_post($post_id);
+		}
+		$post_excerpt = ratings_post_excerpt($post->post_excerpt, $post->post_content, $post->post_password);
+		$value = str_replace("%POST_EXCERPT%", $post_excerpt, $value);
+	}
+	if (strpos($template, '%POST_CONTENT%') !== false) {
+		if ($post->ID != $post_id) {
+			$post = &get_post($post_id);
+		}
+		$value = str_replace("%POST_CONTENT%", get_the_content(), $value);
+	}
+	// Return value
+	$post = $temp_post;
+	return apply_filters('expand_ratings_template', $value);
 }
 
 ### Function: Create Rating Logs Table
