@@ -121,11 +121,13 @@ function ratings_register_scriptstyle() {
 	} else {
 		wp_register_style('wp-postratings', plugins_url('wp-postratings/postratings-css.css'), false, '1.40', 'all');
 	}	
-  if('rtl' == $text_direction && @file_exists(TEMPLATEPATH.'/postratings-css-rtl.css')) {
-    wp_register_style('wp-postratings-rtl', get_stylesheet_directory_uri().'/postratings-css-rtl.css', false, '1.40', 'all');
-  } else {
-    wp_register_style('wp-postratings-rtl', plugins_url('wp-postratings/postratings-css-rtl.css'), false, '1.40', 'all');
-  }  
+	if('rtl' == $text_direction) {
+		if(@file_exists(TEMPLATEPATH.'/postratings-css-rtl.css')) {
+			wp_register_style('wp-postratings-rtl', get_stylesheet_directory_uri().'/postratings-css-rtl.css', false, '1.40', 'all');
+		} else {
+			wp_register_style('wp-postratings-rtl', plugins_url('wp-postratings/postratings-css-rtl.css'), false, '1.40', 'all');
+		} 
+	}
 }
 
 
