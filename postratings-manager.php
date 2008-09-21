@@ -346,7 +346,7 @@ switch($mode) {
 		<br />
 		<table class="widefat">
 			<tr>
-				<td align="left" width="50%">
+				<td align="<?php echo ('rtl' == $text_direction) ? 'right' : 'left'; ?>" width="50%">
 					<?php
 						if($postratings_page > 1 && ((($postratings_page*$postratings_log_perpage)-($postratings_log_perpage-1)) <= $total_ratings)) {
 							echo '<strong>&laquo;</strong> <a href="'.$base_page.'&amp;ratingpage='.($postratings_page-1).$postratings_sort_url.'" title="&laquo; '.__('Previous Page', 'wp-postratings').'">'.__('Previous Page', 'wp-postratings').'</a>';
@@ -355,7 +355,7 @@ switch($mode) {
 						}
 					?>
 				</td>
-				<td align="right" width="50%">
+				<td align="<?php echo ('rtl' == $text_direction) ? 'left' : 'right'; ?>" width="50%">
 					<?php
 						if($postratings_page >= 1 && ((($postratings_page*$postratings_log_perpage)+1) <=  $total_ratings)) {
 							echo '<a href="'.$base_page.'&amp;ratingpage='.($postratings_page+1).$postratings_sort_url.'" title="'.__('Next Page', 'wp-postratings').' &raquo;">'.__('Next Page', 'wp-postratings').'</a> <strong>&raquo;</strong>';
@@ -367,25 +367,25 @@ switch($mode) {
 			</tr>
 			<tr class="alternate">
 				<td colspan="2" align="center">
-					<?php printf(__('Pages (%s): ', 'wp-postratings'), $total_pages); ?>
+					<?php printf(__('Pages (%s): ', 'wp-postratings'), number_format_i18n($total_pages)); ?>
 					<?php
 						if ($postratings_page >= 4) {
 							echo '<strong><a href="'.$base_page.'&amp;ratingpage=1'.$postratings_sort_url.$postratings_sort_url.'" title="'.__('Go to First Page', 'wp-postratings').'">&laquo; '.__('First', 'wp-postratings').'</a></strong> ... ';
 						}
 						if($postratings_page > 1) {
-							echo ' <strong><a href="'.$base_page.'&amp;ratingpage='.($postratings_page-1).$postratings_sort_url.'" title="&laquo; '.__('Go to Page', 'wp-postratings').' '.($postratings_page-1).'">&laquo;</a></strong> ';
+							echo ' <strong><a href="'.$base_page.'&amp;ratingpage='.($postratings_page-1).$postratings_sort_url.'" title="&laquo; '.__('Go to Page', 'wp-postratings').' '.number_format_i18n($postratings_page-1).'">&laquo;</a></strong> ';
 						}
 						for($i = $postratings_page - 2 ; $i  <= $postratings_page +2; $i++) {
 							if ($i >= 1 && $i <= $total_pages) {
 								if($i == $postratings_page) {
-									echo "<strong>[$i]</strong> ";
+									echo '<strong>['.number_format_i18n($i).']</strong> ';
 								} else {
-									echo '<a href="'.$base_page.'&amp;ratingpage='.($i).$postratings_sort_url.'" title="'.__('Page', 'wp-postratings').' '.$i.'">'.$i.'</a> ';
+									echo '<a href="'.$base_page.'&amp;ratingpage='.($i).$postratings_sort_url.'" title="'.__('Page', 'wp-postratings').' '.number_format_i18n($i).'">'.number_format_i18n($i).'</a> ';
 								}
 							}
 						}
 						if($postratings_page < $total_pages) {
-							echo ' <strong><a href="'.$base_page.'&amp;ratingpage='.($postratings_page+1).$postratings_sort_url.'" title="'.__('Go to Page', 'wp-postratings').' '.($postratings_page+1).' &raquo;">&raquo;</a></strong> ';
+							echo ' <strong><a href="'.$base_page.'&amp;ratingpage='.($postratings_page+1).$postratings_sort_url.'" title="'.__('Go to Page', 'wp-postratings').' '.number_format_i18n($postratings_page+1).' &raquo;">&raquo;</a></strong> ';
 						}
 						if (($postratings_page+2) < $total_pages) {
 							echo ' ... <strong><a href="'.$base_page.'&amp;ratingpage='.($total_pages).$postratings_sort_url.'" title="'.__('Go to Last Page', 'wp-postratings').'">'.__('Last', 'wp-postratings').' &raquo;</a></strong>';
