@@ -349,7 +349,7 @@ function comment_author_ratings($comment_author_specific = '', $display = true) 
 	$comment_author_rating = intval($comment_authors_ratings[$comment_author]);	
 	if($comment_author_rating == 0) {
 		$comment_author_rating = intval($comment_authors_ratings[get_comment_author_IP()]);
-	}	
+	}
 	if($comment_author_rating != 0) {
 		// Display Rated Images
 		if($postratings_custom && $ratings_max == 2) {
@@ -358,7 +358,7 @@ function comment_author_ratings($comment_author_specific = '', $display = true) 
 			}		
 		}
 		$image_alt = sprintf(__('%s gives a rating of %s', 'wp-postratings'), $comment_author, $comment_author_rating);
-		$post_ratings_images .= get_ratings_images_comment_author($postratings_custom, $ratings_image, $comment_author_rating, $ratings_image, $image_alt);
+		$post_ratings_images .= get_ratings_images_comment_author($postratings_custom, $ratings_max, $comment_author_rating, $ratings_image, $image_alt);
 	}
 	if($display) {
 		echo $post_ratings_images;
@@ -845,42 +845,42 @@ function get_ratings_images_vote($post_id, $ratings_custom, $ratings_max, $post_
 
 ### Function: Gets HTML of rating images for comment author
 function get_ratings_images_comment_author($ratings_custom, $ratings_max, $comment_author_rating, $ratings_image, $image_alt) {
-  global $text_direction;
-  $ratings_images = '';
-  if('rtl' == $text_direction && file_exists(WP_PLUGIN_DIR.'/wp-postratings/images/'.$ratings_image.'/rating_start-rtl.gif')) {
-     $ratings_images .= '<img src="'.plugins_url('/wp-postratings/images/'.$ratings_image.'/rating_start-rtl.gif').'" alt="" class="post-ratings-image" />';
-  } elseif(file_exists(WP_PLUGIN_DIR.'/wp-postratings/images/'.$ratings_image.'/rating_start.gif')) {
-     $ratings_images .= '<img src="'.plugins_url('/wp-postratings/images/'.$ratings_image.'/rating_start.gif').'" alt="" class="post-ratings-image" />';
-  }
-  if($postratings_custom && $ratings_max == 2) {
-    if($comment_author_rating > 0) {
-      $ratings_images .= '<img src="'.plugins_url('wp-postratings/images/'.$ratings_image.'/rating_2_on.gif').'" alt="'.$image_alt.'" title="'.$image_alt.'" class="post-ratings-image" />';
-    } else {
-      $ratings_images .= '<img src="'.plugins_url('wp-postratings/images/'.$ratings_image.'/rating_1_on.gif').'" alt="'.$image_alt.'" title="'.$image_alt.'" class="post-ratings-image" />';
-    }
-  } elseif($ratings_custom) {
-    for($i=1; $i <= $ratings_max; $i++) {
-      if($i <= $comment_author_rating) {
-        $ratings_images .= '<img src="'.plugins_url('wp-postratings/images/'.$ratings_image.'/rating_'.$i.'_on.gif').'" alt="'.$image_alt.'" title="'.$image_alt.'" class="post-ratings-image" />';
-      } else {
-        $ratings_images .= '<img src="'.plugins_url('wp-postratings/images/'.$ratings_image.'/rating_'.$i.'_off.gif').'" alt="'.$image_alt.'" title="'.$image_alt.'" class="post-ratings-image" />';
-      }
-    }
-  } else {
-	for($i=1; $i <= $ratings_max; $i++) {
-      if($i <= $comment_author_rating) {
-        $ratings_images .= '<img src="'.plugins_url('wp-postratings/images/'.$ratings_image.'/rating_on.gif').'" alt="'.$image_alt.'" title="'.$image_alt.'" class="post-ratings-image" />';    
-      } else {
-        $ratings_images .= '<img src="'.plugins_url('wp-postratings/images/'.$ratings_image.'/rating_off.gif').'" alt="'.$image_alt.'" title="'.$image_alt.'" class="post-ratings-image" />';
-      }
-    }
-  }
-  if('rtl' == $text_direction && file_exists(WP_PLUGIN_DIR.'/wp-postratings/images/'.$ratings_image.'/rating_end-rtl.gif')) {
-    $ratings_images .= '<img src="'.plugins_url('/wp-postratings/images/'.$ratings_image.'/rating_end-rtl.gif').'" alt="" class="post-ratings-image" />';
-  } elseif(file_exists(WP_PLUGIN_DIR.'/wp-postratings/images/'.$ratings_image.'/rating_end.gif')) {
-    $ratings_images .= '<img src="'.plugins_url('/wp-postratings/images/'.$ratings_image.'/rating_end.gif').'" alt="" class="post-ratings-image" />';
-  }
-  return $ratings_images;
+	global $text_direction;
+	$ratings_images = '';
+	if('rtl' == $text_direction && file_exists(WP_PLUGIN_DIR.'/wp-postratings/images/'.$ratings_image.'/rating_start-rtl.gif')) {
+		$ratings_images .= '<img src="'.plugins_url('/wp-postratings/images/'.$ratings_image.'/rating_start-rtl.gif').'" alt="" class="post-ratings-image" />';
+	} elseif(file_exists(WP_PLUGIN_DIR.'/wp-postratings/images/'.$ratings_image.'/rating_start.gif')) {
+		$ratings_images .= '<img src="'.plugins_url('/wp-postratings/images/'.$ratings_image.'/rating_start.gif').'" alt="" class="post-ratings-image" />';
+	}
+	if($postratings_custom && $ratings_max == 2) {
+		if($comment_author_rating > 0) {
+			$ratings_images .= '<img src="'.plugins_url('wp-postratings/images/'.$ratings_image.'/rating_2_on.gif').'" alt="'.$image_alt.'" title="'.$image_alt.'" class="post-ratings-image" />';
+		} else {
+			$ratings_images .= '<img src="'.plugins_url('wp-postratings/images/'.$ratings_image.'/rating_1_on.gif').'" alt="'.$image_alt.'" title="'.$image_alt.'" class="post-ratings-image" />';
+		}
+	} elseif($ratings_custom) {
+		for($i=1; $i <= $ratings_max; $i++) {
+			if($i <= $comment_author_rating) {
+				$ratings_images .= '<img src="'.plugins_url('wp-postratings/images/'.$ratings_image.'/rating_'.$i.'_on.gif').'" alt="'.$image_alt.'" title="'.$image_alt.'" class="post-ratings-image" />';
+			} else {
+				$ratings_images .= '<img src="'.plugins_url('wp-postratings/images/'.$ratings_image.'/rating_'.$i.'_off.gif').'" alt="'.$image_alt.'" title="'.$image_alt.'" class="post-ratings-image" />';
+			}
+		}
+	} else {
+		for($i=1; $i <= $ratings_max; $i++) {
+			if($i <= $comment_author_rating) {
+				$ratings_images .= '<img src="'.plugins_url('wp-postratings/images/'.$ratings_image.'/rating_on.gif').'" alt="'.$image_alt.'" title="'.$image_alt.'" class="post-ratings-image" />';    
+			} else {
+				$ratings_images .= '<img src="'.plugins_url('wp-postratings/images/'.$ratings_image.'/rating_off.gif').'" alt="'.$image_alt.'" title="'.$image_alt.'" class="post-ratings-image" />';
+			}
+		}
+	}
+	if('rtl' == $text_direction && file_exists(WP_PLUGIN_DIR.'/wp-postratings/images/'.$ratings_image.'/rating_end-rtl.gif')) {
+		$ratings_images .= '<img src="'.plugins_url('/wp-postratings/images/'.$ratings_image.'/rating_end-rtl.gif').'" alt="" class="post-ratings-image" />';
+	} elseif(file_exists(WP_PLUGIN_DIR.'/wp-postratings/images/'.$ratings_image.'/rating_end.gif')) {
+		$ratings_images .= '<img src="'.plugins_url('/wp-postratings/images/'.$ratings_image.'/rating_end.gif').'" alt="" class="post-ratings-image" />';
+	}
+	return $ratings_images;
 }
 
 ### Function: Replaces the template's variables with appropriate values
