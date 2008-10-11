@@ -264,7 +264,7 @@
 			</p>
 			<p>
 				<strong>Credits:</strong><br />
-				<strong>&raquo;</strong> Icons courtesy of <a href="http://www.famfamfam.com/">FamFamFam</a> and <a href="http://www.everaldo.com/">Everaldo</a>.<br />
+				<strong>&raquo;</strong> Icons courtesy of <a href="http://www.famfamfam.com/" title="http://www.famfamfam.com/">FamFamFam</a> and <a href="http://www.everaldo.com/" title="http://www.everaldo.com/">Everaldo</a>.<br />
 				<strong>&raquo;</strong> __ngetext() by <a href="http://hweia.ru/" title="http://hweia.ru/">Anna Ozeritskaya</a>.<br />
 				<strong>&raquo;</strong> Right To Left Language Support by <a href="http://persian-programming.com/" title="http://persian-programming.com/">Kambiz R. Khojasteh</a>.
 			</p>
@@ -291,6 +291,7 @@
 					<strong>Version 1.40 (01-12-2008)</strong>
 					<ul>
 						<li>NEW: Works For WordPress 2.6 Only</li>
+						<li>NEW: Allow The Usage Of PNG Icons Or GIF Icons. See Usage Tab.<li>
 						<li>NEW: Right To Left Language Support by <a href="http://persian-programming.com/" title="http://persian-programming.com/">Kambiz R. Khojasteh</a></li>
 						<li>NEW: Added "postratings-css-rtl.css" by <a href="http://persian-programming.com/" title="http://persian-programming.com/">Kambiz R. Khojasteh</a></li>
 						<li>NEW: Added 3 Functions For Creating HTML Code Of Rating Images by <a href="http://persian-programming.com/" title="http://persian-programming.com/">Kambiz R. Khojasteh</a></li>
@@ -557,6 +558,28 @@
 			</ol>
 			<div class="SubSubTitle">Note</div>
 			<ul>
+				<li>
+					To use PNG images instead of GIF images:
+					<ol>
+						<li>
+							Open <strong>wp-content/plugins/wp-postratings/wp-postratings.php</strong>
+						</li>
+						<li>
+							Find:
+							<blockquote>
+								define('RATINGS_IMG_EXT', 'gif');<br />
+								//define('RATINGS_IMG_EXT', 'png');
+							</blockquote>
+						</li>
+						<li>
+							Replace:
+							<blockquote>
+								//define('RATINGS_IMG_EXT', 'gif');<br />
+								define('RATINGS_IMG_EXT', 'png');
+							</blockquote>
+						</li>
+					</ol>
+				</li>
 				<li>
 					WP-PostRatings will load '<strong>postratings-css.css</strong>' from your theme's directory if it exists.
 					<ul>

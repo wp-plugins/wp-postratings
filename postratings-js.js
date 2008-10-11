@@ -86,21 +86,21 @@ function ratings_off(rating_score, insert_half, half_rtl) {
 		for(i = 1; i <= ratings_max; i++) {
 			if(i <= rating_score) {
 				if(ratings_custom) {
-					document.images['rating_' + post_id + '_' + i].src = ratings_plugin_url + '/images/' + ratings_image + '/rating_' + i + '_on.gif';
+					document.images['rating_' + post_id + '_' + i].src = ratings_plugin_url + '/images/' + ratings_image + '/rating_' + i + '_on.' + ratings_image_ext;
 				} else {
-					document.images['rating_' + post_id + '_' + i].src = ratings_plugin_url + '/images/' + ratings_image + '/rating_on.gif';
+					document.images['rating_' + post_id + '_' + i].src = ratings_plugin_url + '/images/' + ratings_image + '/rating_on.' + ratings_image_ext;
 				}
 			} else if(i == insert_half) {
 				if(ratings_custom) {
-					document.images['rating_' + post_id + '_' + i].src = ratings_plugin_url + '/images/' + ratings_image + '/rating_' + i + '_half' + (half_rtl ? '-rtl' : '') + '.gif';
+					document.images['rating_' + post_id + '_' + i].src = ratings_plugin_url + '/images/' + ratings_image + '/rating_' + i + '_half' + (half_rtl ? '-rtl' : '') + '.' + ratings_image_ext;
 				} else {
-					document.images['rating_' + post_id + '_' + i].src = ratings_plugin_url + '/images/' + ratings_image + '/rating_half' + (half_rtl ? '-rtl' : '') + '.gif';
+					document.images['rating_' + post_id + '_' + i].src = ratings_plugin_url + '/images/' + ratings_image + '/rating_half' + (half_rtl ? '-rtl' : '') + '.' + ratings_image_ext;
 				}
 			} else {
 				if(ratings_custom) {
-					document.images['rating_' + post_id + '_' + i].src = ratings_plugin_url + '/images/' + ratings_image + '/rating_' + i + '_off.gif';
+					document.images['rating_' + post_id + '_' + i].src = ratings_plugin_url + '/images/' + ratings_image + '/rating_' + i + '_off.' + ratings_image_ext;
 				} else {
-					document.images['rating_' + post_id + '_' + i].src = ratings_plugin_url + '/images/' + ratings_image + '/rating_off.gif';
+					document.images['rating_' + post_id + '_' + i].src = ratings_plugin_url + '/images/' + ratings_image + '/rating_off.' + ratings_image_ext;
 				}
 			}
 		}
