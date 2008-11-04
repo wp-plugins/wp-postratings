@@ -235,8 +235,8 @@
 			</p>
 			<p>
 				<strong>Download:</strong><br />
-				<strong>&raquo;</strong> <a href="http://downloads.wordpress.org/plugin/wp-postratings.1.40.zip" title="http://downloads.wordpress.org/plugin/wp-postratings.1.40.zip">WP-PostRatings 1.40 For WordPress 2.6.x And Above</a><br />
-				<strong>&raquo;</strong> <a href="http://downloads.wordpress.org/plugin/wp-postratings.1.31.zip" title="http://downloads.wordpress.org/plugin/wp-postratings.1.31.zip">WP-PostRatings 1.31 For WordPress 2.5.x</a><br />
+				<strong>&raquo;</strong> <a href="http://downloads.wordpress.org/plugin/wp-postratings.1.40.zip" title="http://downloads.wordpress.org/plugin/wp-postratings.1.40.zip">WP-PostRatings 1.40 For WordPress 2.7.x</a><br />
+				<strong>&raquo;</strong> <a href="http://downloads.wordpress.org/plugin/wp-postratings.1.31.zip" title="http://downloads.wordpress.org/plugin/wp-postratings.1.31.zip">WP-PostRatings 1.31 For WordPress 2.5.x And 2.6.x</a><br />
 				<strong>&raquo;</strong> <a href="http://downloads.wordpress.org/plugin/wp-postratings.1.20.zip" title="http://downloads.wordpress.org/plugin/wp-postratings.1.20.zip">WP-PostRatings 1.20 For WordPress 2.3.x</a><br />
 				<strong>&raquo;</strong> <a href="http://downloads.wordpress.org/plugin/wp-postratings.1.11.zip" title="http://downloads.wordpress.org/plugin/wp-postratings.1.11.zip">WP-PostRatings 1.11 For WordPress 2.1.x And 2.2.x</a><br />
 				<strong>&raquo;</strong> <a href="http://downloads.wordpress.org/plugin/wp-postratings.1.05.zip" title="http://downloads.wordpress.org/plugin/wp-postratings.1.05.zip">WP-PostRatings 1.05 For WordPress 2.0.x</a><br />
@@ -290,7 +290,7 @@
 				<li>
 					<strong>Version 1.40 (01-12-2008)</strong>
 					<ul>
-						<li>NEW: Works For WordPress 2.6 Only</li>
+						<li>NEW: Works For WordPress 2.7 Only</li>
 						<li>NEW: Allow The Usage Of PNG Icons Or GIF Icons. See Usage Tab.<li>
 						<li>NEW: Right To Left Language Support by <a href="http://persian-programming.com/" title="http://persian-programming.com/">Kambiz R. Khojasteh</a></li>
 						<li>NEW: Added "postratings-css-rtl.css" by <a href="http://persian-programming.com/" title="http://persian-programming.com/">Kambiz R. Khojasteh</a></li>
@@ -541,18 +541,18 @@
 			<div class="SubSubTitle">Displaying Comment Author Ratings</div>
 			<ol>
 				<li>
-					Open <strong>wp-content/themes/&lt;YOUR THEME NAME&gt;/comment.php</strong>
+					Open <strong>wp-content/plugins/wp-postratings/wp-postratings.php</strong>
 				</li>
 				<li>
-					Use:
+					Find:
 					<blockquote>
-						&lt;?php<br />
-						&nbsp;&nbsp;&nbsp;if(comment_author_ratings('', false) != '') {<br />
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;echo get_comment_author().' ratings for this post: '.comment_author_ratings('', false);<br />
-						&nbsp;&nbsp;&nbsp;} else {<br />
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;echo get_comment_author().' did not rate this post.';<br />
-						&nbsp;&nbsp;&nbsp;}<br />
-						?&gt;
+						//add_filter('comment_text', 'comment_author_ratings_filter');
+					</blockquote>
+				</li>
+				<li>
+					Replace:
+					<blockquote>
+						add_filter('comment_text', 'comment_author_ratings_filter');
 					</blockquote>
 				</li>
 			</ol>
