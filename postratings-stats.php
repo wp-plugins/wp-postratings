@@ -470,6 +470,52 @@ if(!function_exists('get_lowest_rated_category')) {
 }
 
 
+### Function: Display Lowest Rated Page/Post With Time Range
+if(!function_exists('get_lowest_rated_range')) {
+	function get_lowest_rated_range($time = '1 day', $mode = '', $limit = 10, $chars = 0, $display = true) {
+		global $wpdb, $post;
+		$temp_post = $post;
+		$ratings_max = intval(get_option('postratings_max'));
+		$ratings_custom = intval(get_option('postratings_customrating'));
+		$min_time = strtotime('-'.$time, current_time('timestamp')); 
+		$output = '';
+		if(!empty($mode) && $mode != 'both') {
+			$where = "$wpdb->posts.post_type = '$mode'";
+		} else {
+			$where = '1=1';
+		}
+		if($ratings_custom && $ratings_max == 2) {
+			$order_by = 'ratings_score';
+		} else {
+			$order_by = 'ratings_average';
+		}
+		if($chars > 0) {
+			if($ratings_custom && $ratings_max == 2) {
+				$temp = '<li><a href="%POST_URL%"\">%POST_TITLE%</a> %RATINGS_ALT_TEXT%</li>';
+			} else {
+				$temp = '<li><a href="%POST_URL%"\">%POST_TITLE%</a> %RATINGS_IMAGES%</li>';
+			}
+		} else {
+			$temp = stripslashes(get_option('postratings_template_highestrated'));
+		}
+		$highest_rated = $wpdb->get_results("SELECT COUNT($wpdb->ratings.rating_postid) AS ratings_users, SUM($wpdb->ratings.rating_rating) AS ratings_score, ROUND(((SUM($wpdb->ratings.rating_rating)/COUNT($wpdb->ratings.rating_postid))), 2) AS ratings_average, $wpdb->posts.* FROM $wpdb->posts LEFT JOIN $wpdb->ratings ON $wpdb->ratings.rating_postid = $wpdb->posts.ID WHERE rating_timestamp >= $min_time AND $wpdb->posts.post_password = '' AND $wpdb->posts.post_date < '".current_time('mysql')."'  AND $wpdb->posts.post_status = 'publish' AND $where GROUP BY $wpdb->ratings.rating_postid ORDER BY $order_by ASC, ratings_users DESC LIMIT $limit");
+		if($highest_rated) {
+			foreach($highest_rated as $post) {
+				$output .= expand_ratings_template($temp, $post->ID, $post, $chars)."\n";
+			}
+		} else {
+			$output = '<li>'.__('N/A', 'wp-postratings').'</li>'."\n";
+		}
+		$post = $temp_post;
+		if($display) {
+			echo $output;
+		} else {
+			return $output;
+		}
+	}
+}
+
+
 ### Function: Display Total Rating Users
 if(!function_exists('get_ratings_users')) {
 	function get_ratings_users($display = true) {
