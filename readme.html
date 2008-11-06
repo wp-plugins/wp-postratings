@@ -803,7 +803,7 @@
 				<li>
 					You can use:
 					<blockquote>
-						&lt;?php query_posts('r_sortby=highest_rated&amp;r_orderby=desc') ?&gt;
+						&lt;?php query_posts($query_string.'&r_sortby=highest_rated&amp;r_orderby=desc') ?&gt;
 					</blockquote>
 					<p>Or pass in the variables to the URL:</p>
 					<blockquote>
@@ -817,7 +817,7 @@
 				<li>
 					You can use:
 					<blockquote>
-						&lt;?php query_posts('r_sortby=most_rated&amp;r_orderby=desc') ?&gt;
+						&lt;?php query_posts($query_string.'&r_sortby=most_rated&amp;r_orderby=desc') ?&gt;
 					</blockquote>
 					<p>Or pass in the variables to the URL:</p>
 					<blockquote>

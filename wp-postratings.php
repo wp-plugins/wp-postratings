@@ -698,13 +698,13 @@ function ratings_variables($public_query_vars) {
 
 ### Function: Sort Ratings Posts
 add_action('pre_get_posts', 'ratings_sorting');
-function ratings_sorting() {
-	if(get_query_var('r_sortby') == 'most_rated') {
+function ratings_sorting($local_wp_query) {
+	if($local_wp_query->get('r_sortby') == 'most_rated') {
 		add_filter('posts_fields', 'ratings_most_fields');
 		add_filter('posts_join', 'ratings_most_join');
 		add_filter('posts_where', 'ratings_most_where');
 		add_filter('posts_orderby', 'ratings_most_orderby');
-	} elseif(get_query_var('r_sortby') == 'highest_rated') {
+	} elseif($local_wp_query->get('r_sortby') == 'highest_rated') {
 		add_filter('posts_fields', 'ratings_highest_fields');
 		add_filter('posts_join', 'ratings_highest_join');
 		add_filter('posts_where', 'ratings_highest_where');
