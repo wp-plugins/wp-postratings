@@ -381,37 +381,39 @@ function comment_author_ratings($comment_author_specific = '', $display = true) 
 function comment_author_ratings_filter($comment_text) {
 	global $comment, $comment_authors_ratings;
 	$output = '';
-	if(get_comment_type() == 'comment') {
-		$post_ratings_images = '';
-		$ratings_image = get_option('postratings_image');
-		$ratings_max = intval(get_option('postratings_max'));
-		$ratings_custom = intval(get_option('postratings_customrating'));
-		if(empty($comment_author_specific)) {
-			$comment_author = get_comment_author();
-		} else {
-			$comment_author = $comment_author_specific;
-		}
-		$comment_author_rating = intval($comment_authors_ratings[$comment_author]);	
-		if($comment_author_rating == 0) {
-			$comment_author_rating = intval($comment_authors_ratings[get_comment_author_IP()]);
-		}
-		if($comment_author_rating != 0) {
-			// Display Rated Images
-			if($ratings_custom && $ratings_max == 2) {
-				if($comment_author_rating > 0) {
-					$comment_author_rating = '+'.$comment_author_rating;
-				}		
+	if(!is_feed()) {
+		if(get_comment_type() == 'comment') {
+			$post_ratings_images = '';
+			$ratings_image = get_option('postratings_image');
+			$ratings_max = intval(get_option('postratings_max'));
+			$ratings_custom = intval(get_option('postratings_customrating'));
+			if(empty($comment_author_specific)) {
+				$comment_author = get_comment_author();
+			} else {
+				$comment_author = $comment_author_specific;
 			}
-			$image_alt = sprintf(__('%s gives a rating of %s', 'wp-postratings'), $comment_author, $comment_author_rating);
-			$post_ratings_images = get_ratings_images_comment_author($ratings_custom, $ratings_max, $comment_author_rating, $ratings_image, $image_alt);
+			$comment_author_rating = intval($comment_authors_ratings[$comment_author]);	
+			if($comment_author_rating == 0) {
+				$comment_author_rating = intval($comment_authors_ratings[get_comment_author_IP()]);
+			}
+			if($comment_author_rating != 0) {
+				// Display Rated Images
+				if($ratings_custom && $ratings_max == 2) {
+					if($comment_author_rating > 0) {
+						$comment_author_rating = '+'.$comment_author_rating;
+					}		
+				}
+				$image_alt = sprintf(__('%s gives a rating of %s', 'wp-postratings'), $comment_author, $comment_author_rating);
+				$post_ratings_images = get_ratings_images_comment_author($ratings_custom, $ratings_max, $comment_author_rating, $ratings_image, $image_alt);
+			}
+			$output .= '<div class="post-ratings-comment-author">';
+			if($post_ratings_images != '') {
+				$output .= get_comment_author().' ratings for this post: '.$post_ratings_images;
+			} else {
+				$output .= get_comment_author().' did not rate this post.';
+			}
+			$output .= '</div>';
 		}
-		$output .= '<div class="post-ratings-comment-author">';
-		if($post_ratings_images != '') {
-			$output .= get_comment_author().' ratings for this post: '.$post_ratings_images;
-		} else {
-			$output .= get_comment_author().' did not rate this post.';
-		}
-		$output .= '</div>';
 	}
 	return $comment_text.$output;
 }
@@ -473,7 +475,7 @@ function ratings_images_folder($folder_name) {
 ### Function: Add PostRatings To Post/Page Automatically
 //add_action('the_content', 'add_ratings_to_content');
 function add_ratings_to_content($content) {
-	if (!is_feed() && get_option('postratings_add')) {
+	if (!is_feed()) {
 		$content .= the_ratings('div', 0, false);
 	}
 	return $content;
