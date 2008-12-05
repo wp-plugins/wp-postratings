@@ -93,6 +93,7 @@ switch($mode) {
 				$deactivate_url = wp_nonce_url($deactivate_url, 'deactivate-plugin_wp-postratings/wp-postratings.php');
 			}
 			echo '<div class="wrap">';
+			echo '<div id="icon-wp-postratings" class="icon32"><br /></div>';
 			echo '<h2>'.__('Uninstall WP-PostRatings', 'wp-postratings').'</h2>';
 			echo '<p><strong>'.sprintf(__('<a href="%s">Click Here</a> To Finish The Uninstallation And WP-PostRatings Will Be Deactivated Automatically.', 'wp-postratings'), $deactivate_url).'</strong></p>';
 			echo '</div>';
@@ -103,6 +104,7 @@ switch($mode) {
 <!-- Uninstall WP-PostRatings -->
 <form action="<?php echo htmlspecialchars($_SERVER['REQUEST_URI']); ?>" method="post">
 <div class="wrap">
+	<div id="icon-wp-postratings" class="icon32"><br /></div>
 	<h2><?php _e('Uninstall WP-PostRatings', 'wp-postratings'); ?></h2>
 	<p>
 		<?php _e('Deactivating WP-PostRatings plugin does not remove any data that may have been created, such as the ratings data and the ratings\'s logs. To completely remove this plugin, you can uninstall it here.', 'wp-postratings'); ?>

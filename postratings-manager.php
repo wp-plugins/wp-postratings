@@ -187,74 +187,57 @@ switch($postratings_sortorder) {
 }
 
 
-### Determines Which Mode It Is
-switch($mode) {
-		//  Deactivating WP-PostRatings
-		case 'end-UNINSTALL':
-			echo '<div class="wrap">';
-			echo '<h2>';
-			_e('Uninstall Ratings', 'wp-postratings');			
-			echo'</h2>';
-			echo '<p><strong>';
-			$deactivate_url = "plugins.php?action=deactivate&amp;plugin=wp-postratings/wp-postratings.php";
-			if(function_exists('wp_nonce_url')) { 
-				$deactivate_url = wp_nonce_url($deactivate_url, 'deactivate-plugin_wp-postratings/wp-postratings.php');
-			}
-			printf(__('<a href="%s">Click Here</a> To Finish The Uninstallation And WP-PostRatings Will Be Deactivated Automatically.', 'wp-postratings'), $deactivate_url);
-			echo '</a>';
-			echo '</strong></p>';
-			echo '</div>';
-			break;
-	default:
-		// Where
-		$postratings_where = '';
-		if(!empty($postratings_filterid)) {
-			$postratings_where = "AND rating_postid =$postratings_filterid";
-		}
-		if(!empty($postratings_filteruser)) {
-			$postratings_where .= " AND rating_username = '$postratings_filteruser'";
-		}
-		if($_GET['rating'] != '') {
-			$postratings_where .= " AND rating_rating = '$postratings_filterrating'";
-		}
-		// Get Post Ratings Logs Data
-		$total_ratings = $wpdb->get_var("SELECT COUNT(rating_id) FROM $wpdb->ratings WHERE 1=1 $postratings_where");
-		$total_users = $wpdb->get_var("SELECT SUM(meta_value) FROM $wpdb->postmeta WHERE meta_key = 'ratings_users'");
-		$total_score = $wpdb->get_var("SELECT SUM((meta_value+0.00)) FROM $wpdb->postmeta WHERE meta_key = 'ratings_score'");
-		$ratings_custom = intval(get_option('postratings_customrating'));
-		if($total_users == 0) { 
-			$total_average = 0;
-		} else {
-			$total_average = $total_score/$total_users;
-		}
-		// Checking $postratings_page and $offset
-		if(empty($postratings_page) || $postratings_page == 0) { $postratings_page = 1; }
-		if(empty($offset)) { $offset = 0; }
-		if(empty($postratings_log_perpage) || $postratings_log_perpage == 0) { $postratings_log_perpage = 20; }
-		// Determin $offset
-		$offset = ($postratings_page-1) * $postratings_log_perpage;
-		// Determine Max Number Of Ratings To Display On Page
-		if(($offset + $postratings_log_perpage) > $total_ratings) { 
-			$max_on_page = $total_ratings; 
-		} else { 
-			$max_on_page = ($offset + $postratings_log_perpage); 
-		}
-		// Determine Number Of Ratings To Display On Page
-		if (($offset + 1) > ($total_ratings)) { 
-			$display_on_page = $total_ratings; 
-		} else { 
-			$display_on_page = ($offset + 1); 
-		}
-		// Determing Total Amount Of Pages
-		$total_pages = ceil($total_ratings / $postratings_log_perpage);
-		
-		// Get The Logs
-		$postratings_logs = $wpdb->get_results("SELECT * FROM $wpdb->ratings WHERE 1=1 $postratings_where ORDER BY $postratings_sortby $postratings_sortorder LIMIT $offset, $postratings_log_perpage");
+// Where
+$postratings_where = '';
+if(!empty($postratings_filterid)) {
+	$postratings_where = "AND rating_postid =$postratings_filterid";
+}
+if(!empty($postratings_filteruser)) {
+	$postratings_where .= " AND rating_username = '$postratings_filteruser'";
+}
+if($_GET['rating'] != '') {
+	$postratings_where .= " AND rating_rating = '$postratings_filterrating'";
+}
+// Get Post Ratings Logs Data
+$total_ratings = $wpdb->get_var("SELECT COUNT(rating_id) FROM $wpdb->ratings WHERE 1=1 $postratings_where");
+$total_users = $wpdb->get_var("SELECT SUM(meta_value) FROM $wpdb->postmeta WHERE meta_key = 'ratings_users'");
+$total_score = $wpdb->get_var("SELECT SUM((meta_value+0.00)) FROM $wpdb->postmeta WHERE meta_key = 'ratings_score'");
+$ratings_custom = intval(get_option('postratings_customrating'));
+if($total_users == 0) { 
+	$total_average = 0;
+} else {
+	$total_average = $total_score/$total_users;
+}
+// Checking $postratings_page and $offset
+if(empty($postratings_page) || $postratings_page == 0) { $postratings_page = 1; }
+if(empty($offset)) { $offset = 0; }
+if(empty($postratings_log_perpage) || $postratings_log_perpage == 0) { $postratings_log_perpage = 20; }
+// Determin $offset
+$offset = ($postratings_page-1) * $postratings_log_perpage;
+// Determine Max Number Of Ratings To Display On Page
+if(($offset + $postratings_log_perpage) > $total_ratings) { 
+	$max_on_page = $total_ratings; 
+} else { 
+	$max_on_page = ($offset + $postratings_log_perpage); 
+}
+// Determine Number Of Ratings To Display On Page
+if (($offset + 1) > ($total_ratings)) { 
+	$display_on_page = $total_ratings; 
+} else { 
+	$display_on_page = ($offset + 1); 
+}
+// Determing Total Amount Of Pages
+$total_pages = ceil($total_ratings / $postratings_log_perpage);
+
+// Get The Logs
+$postratings_logs = $wpdb->get_results("SELECT * FROM $wpdb->ratings WHERE 1=1 $postratings_where ORDER BY $postratings_sortby $postratings_sortorder LIMIT $offset, $postratings_log_perpage");
 ?>
 <?php if(!empty($text)) { echo '<!-- Last Action --><div id="message" class="updated fade"><p>'.$text.'</p></div>'; } ?>
 <!-- Manage Post Ratings -->
 <div class="wrap">
-	<h2><?php _e('Post Ratings Logs', 'wp-postratings'); ?></h2>
+	<div id="icon-wp-postratings" class="icon32"><br /></div>
+	<h2><?php _e('Manage Ratings', 'wp-postratings'); ?></h2>
+	<h3><?php _e('Post Ratings Logs', 'wp-postratings'); ?></h3>
 	<p><?php _e('Displaying', 'wp-postratings'); ?> <strong><?php echo number_format_i18n($display_on_page);?></strong> <?php _e('To', 'wp-postratings'); ?> <strong><?php echo number_format_i18n($max_on_page); ?></strong> <?php _e('Of', 'wp-postratings'); ?> <strong><?php echo number_format_i18n($total_ratings); ?></strong> <?php _e('Post Ratings Log Entries', 'wp-postratings'); ?></p>
 	<p><?php _e('Sorted By', 'wp-postratings'); ?> <strong><?php echo $postratings_sortby_text;?></strong> <?php _e('In', 'wp-postratings'); ?> <strong><?php echo $postratings_sortorder_text;?></strong> <?php _e('Order', 'wp-postratings'); ?></p>
 	<table class="widefat">
@@ -491,7 +474,7 @@ switch($mode) {
 
 <!-- Post Ratings Stats -->
 <div class="wrap">
-	<h2><?php _e('Post Ratings Logs Stats', 'wp-postratings'); ?></h2>
+	<h3><?php _e('Post Ratings Logs Stats', 'wp-postratings'); ?></h3>
 	<br style="clear" />
 	<table class="widefat">
 		<tr>
@@ -512,7 +495,7 @@ switch($mode) {
 
 <!-- Delete Post Ratings Logs -->
 <div class="wrap">
-	<h2><?php _e('Delete Post Ratings Data/Logs', 'wp-postratings'); ?></h2>
+	<h3><?php _e('Delete Post Ratings Data/Logs', 'wp-postratings'); ?></h3>
 	<br style="clear" />
 	<div align="center">
 		<form action="<?php echo htmlspecialchars($_SERVER['REQUEST_URI']); ?>" method="post">
@@ -544,7 +527,7 @@ switch($mode) {
 		</table>
 		</form>	
 	</div>
-	<p><b><?php _e('Note:', 'wp-postratings'); ?></b></p>
+	<h3><?php _e('Note:', 'wp-postratings'); ?></h3>
 	<ul>
 		<li><?php _e('\'Logs Only\' means the logs generated when a user rates a post.', 'wp-postratings'); ?></li>
 		<li><?php _e('\'Data Only\' means the rating data for the post.', 'wp-postratings'); ?></li>
@@ -552,6 +535,3 @@ switch($mode) {
 		<li><?php _e('If your logging method is by IP and Cookie or by Cookie, users may still be unable to rate if they have voted before as the cookie is still stored in their computer.', 'wp-postratings'); ?></li>
 	</ul>
 </div>
-<?php
-	}
-?>

@@ -124,7 +124,8 @@ if($_POST['Submit']) {
 /* ]]> */
 </script>
 <?php if(!empty($text)) { echo '<!-- Last Action --><div id="message" class="updated fade"><p>'.$text.'</p></div>'; } ?>
-<div class="wrap"> 
+<div class="wrap">
+	<div id="icon-wp-postratings" class="icon32"><br /></div>
 	<h2><?php _e('Post Rating Templates', 'wp-postratings'); ?></h2> 
 	<form method="post" action="<?php echo $_SERVER['REQUEST_URI']; ?>"> 
 		<h3><?php _e('Template Variables', 'wp-postratings'); ?></h3>
