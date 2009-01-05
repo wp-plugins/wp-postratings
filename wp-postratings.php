@@ -3,14 +3,14 @@
 Plugin Name: WP-PostRatings
 Plugin URI: http://lesterchan.net/portfolio/programming/php/
 Description: Adds an AJAX rating system for your WordPress blog's post/page.
-Version: 1.40
+Version: 1.41
 Author: Lester 'GaMerZ' Chan
 Author URI: http://lesterchan.net
 */
 
 
 /* 
-	Copyright 2008  Lester Chan  (email : lesterchan@gmail.com)
+	Copyright 2009  Lester Chan  (email : lesterchan@gmail.com)
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -536,9 +536,11 @@ function ratings_post_excerpt($post_excerpt, $post_content, $post_password) {
 add_action('publish_post', 'add_ratings_fields');
 function add_ratings_fields($post_ID) {
 	global $wpdb;
-	add_post_meta($post_ID, 'ratings_users', 0, true);
-	add_post_meta($post_ID, 'ratings_score', 0, true);
-	add_post_meta($post_ID, 'ratings_average', 0, true);	
+	if(!wp_is_post_revision($post_ID)) {
+		add_post_meta($post_ID, 'ratings_users', 0, true);
+		add_post_meta($post_ID, 'ratings_score', 0, true);
+		add_post_meta($post_ID, 'ratings_average', 0, true);
+	}
 }
 
 
@@ -546,9 +548,11 @@ function add_ratings_fields($post_ID) {
 add_action('delete_post', 'delete_ratings_fields');
 function delete_ratings_fields($post_ID) {
 	global $wpdb;
-	delete_post_meta($post_ID, 'ratings_users');
-	delete_post_meta($post_ID, 'ratings_score');
-	delete_post_meta($post_ID, 'ratings_average');	
+	if(!wp_is_post_revision($post_ID)) { 
+		delete_post_meta($post_ID, 'ratings_users');
+		delete_post_meta($post_ID, 'ratings_score');
+		delete_post_meta($post_ID, 'ratings_average');	
+	}
 }
 
 
@@ -575,7 +579,7 @@ function process_ratings() {
 			// Check Whether Is There A Valid Post
 			$post = get_post($post_id);
 			// If Valid Post Then We Rate It
-			if($post) {
+			if($post && !wp_is_post_revision($post)) {
 				$ratings_max = intval(get_option('postratings_max'));
 				$ratings_custom = intval(get_option('postratings_customrating'));
 				$ratings_value = get_option('postratings_ratingsvalue');
@@ -1026,7 +1030,7 @@ function expand_ratings_template($template, $post_id, $post_ratings_data = null,
 add_action('activate_wp-postratings/wp-postratings.php', 'create_ratinglogs_table');
 function create_ratinglogs_table() {
 	global $wpdb;
-  postratings_textdomain();
+	postratings_textdomain();
 	if(@is_file(ABSPATH.'/wp-admin/upgrade-functions.php')) {
 		include_once(ABSPATH.'/wp-admin/upgrade-functions.php');
 	} elseif(@is_file(ABSPATH.'/wp-admin/includes/upgrade.php')) {
