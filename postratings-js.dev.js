@@ -41,7 +41,7 @@ function current_rating(id, rating, rating_text) {
 				}
 			}
 		}
-		if(jQuery('#ratings_' + post_id + '_text')) {
+		if(jQuery('#ratings_' + post_id + '_text').length) {
 			jQuery('#ratings_' + post_id + '_text').show();
 			jQuery('#ratings_' + post_id + '_text').html(rating_text);
 		}
@@ -73,9 +73,9 @@ function ratings_off(rating_score, insert_half, half_rtl) {
 				}
 			}
 		}
-		if(jQuery('#ratings_' + post_id + '_text')) {
+		if(jQuery('#ratings_' + post_id + '_text').length) {
 			jQuery('#ratings_' + post_id + '_text').hide();
-			jQuery('#ratings_' + post_id + '_text').html('');
+			jQuery('#ratings_' + post_id + '_text').empty();
 		}
 	}
 }
