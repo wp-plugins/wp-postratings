@@ -1,7 +1,7 @@
 /*
 +----------------------------------------------------------------+
 |																							|
-|	WordPress 2.7 Plugin: WP-PostRatings 1.41								|
+|	WordPress 2.8 Plugin: WP-PostRatings 1.50								|
 |	Copyright (c) 2009 Lester "GaMerZ" Chan									|
 |																							|
 |	File Written By:																	|
