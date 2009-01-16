@@ -97,7 +97,6 @@ function rate_post_success(data) {
 		});
 	} else {
 		set_is_being_rated(false);	
-		jQuery('#post-ratings-' + post_id).show();
 	}
 }
 
@@ -113,7 +112,6 @@ function rate_post() {
 				jQuery.ajax({type: 'GET', url: ratingsL10n.ajax_url, data: 'pid=' + post_id + '&rate=' + post_rating, cache: false, success: rate_post_success});
 			});
 		} else {
-			jQuery('#post-ratings-' + post_id).hide();
 			if(ratingsL10n.show_loading) {
 				jQuery('#post-ratings-' + post_id + '-loading').show();
 			}
