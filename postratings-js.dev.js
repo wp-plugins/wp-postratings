@@ -87,6 +87,7 @@ function set_is_being_rated(rated_status) {
 
 // Process Post Ratings Success
 function rate_post_success(data) {
+	jQuery('#post-ratings-' + post_id).html(data);
 	if(ratingsL10n.show_loading) {
 		jQuery('#post-ratings-' + post_id + '-loading').hide();
 	}
@@ -95,9 +96,9 @@ function rate_post_success(data) {
 			set_is_being_rated(false);	
 		});
 	} else {
+		set_is_being_rated(false);	
 		jQuery('#post-ratings-' + post_id).show();
 	}
-	jQuery('#post-ratings-' + post_id).html(data);
 }
 
 // Process Post Ratings
