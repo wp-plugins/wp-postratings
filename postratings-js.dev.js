@@ -31,13 +31,13 @@ function current_rating(id, rating, rating_text) {
 		post_id = id;
 		post_rating = rating;
 		if(ratingsL10n.custom && ratingsL10n.max == 2) {
-			document.images['rating_' + post_id + '_' + rating].src = eval('ratings_' + rating + '_mouseover_image.src');
+			jQuery('#rating_' + post_id + '_' + rating).attr('src', eval('ratings_' + rating + '_mouseover_image.src'));
 		} else {
 			for(i = 1; i <= rating; i++) {
 				if(ratingsL10n.custom) {
-					document.images['rating_' + post_id + '_' + i].src = eval('ratings_' + i + '_mouseover_image.src');
+					jQuery('#rating_' + post_id + '_' + i).attr('src', eval('ratings_' + i + '_mouseover_image.src'));
 				} else {
-					document.images['rating_' + post_id + '_' + i].src = eval('ratings_mouseover_image.src');
+					jQuery('#rating_' + post_id + '_' + i).attr('src', ratings_mouseover_image.src);
 				}
 			}
 		}
@@ -55,21 +55,21 @@ function ratings_off(rating_score, insert_half, half_rtl) {
 		for(i = 1; i <= ratingsL10n.max; i++) {
 			if(i <= rating_score) {
 				if(ratingsL10n.custom) {
-					document.images['rating_' + post_id + '_' + i].src = ratingsL10n.plugin_url + '/images/' + ratingsL10n.image + '/rating_' + i + '_on.' + ratingsL10n.image_ext;
+					jQuery('#rating_' + post_id + '_' + i).attr('src', ratingsL10n.plugin_url + '/images/' + ratingsL10n.image + '/rating_' + i + '_on.' + ratingsL10n.image_ext);
 				} else {
-					document.images['rating_' + post_id + '_' + i].src = ratingsL10n.plugin_url + '/images/' + ratingsL10n.image + '/rating_on.' + ratingsL10n.image_ext;
+					jQuery('#rating_' + post_id + '_' + i).attr('src', ratingsL10n.plugin_url + '/images/' + ratingsL10n.image + '/rating_on.' + ratingsL10n.image_ext);
 				}
 			} else if(i == insert_half) {
 				if(ratingsL10n.custom) {
-					document.images['rating_' + post_id + '_' + i].src = ratingsL10n.plugin_url + '/images/' + ratingsL10n.image + '/rating_' + i + '_half' + (half_rtl ? '-rtl' : '') + '.' + ratingsL10n.image_ext;
+					jQuery('#rating_' + post_id + '_' + i).attr('src',  ratingsL10n.plugin_url + '/images/' + ratingsL10n.image + '/rating_' + i + '_half' + (half_rtl ? '-rtl' : '') + '.' + ratingsL10n.image_ext);
 				} else {
-					document.images['rating_' + post_id + '_' + i].src = ratingsL10n.plugin_url + '/images/' + ratingsL10n.image + '/rating_half' + (half_rtl ? '-rtl' : '') + '.' + ratingsL10n.image_ext;
+					jQuery('#rating_' + post_id + '_' + i).attr('src', ratingsL10n.plugin_url + '/images/' + ratingsL10n.image + '/rating_half' + (half_rtl ? '-rtl' : '') + '.' + ratingsL10n.image_ext);
 				}
 			} else {
 				if(ratingsL10n.custom) {
-					document.images['rating_' + post_id + '_' + i].src = ratingsL10n.plugin_url + '/images/' + ratingsL10n.image + '/rating_' + i + '_off.' + ratingsL10n.image_ext;
+					jQuery('#rating_' + post_id + '_' + i).attr('src', ratingsL10n.plugin_url + '/images/' + ratingsL10n.image + '/rating_' + i + '_off.' + ratingsL10n.image_ext);
 				} else {
-					document.images['rating_' + post_id + '_' + i].src = ratingsL10n.plugin_url + '/images/' + ratingsL10n.image + '/rating_off.' + ratingsL10n.image_ext;
+					jQuery('#rating_' + post_id + '_' + i).attr('src', ratingsL10n.plugin_url + '/images/' + ratingsL10n.image + '/rating_off.' + ratingsL10n.image_ext);
 				}
 			}
 		}
@@ -92,7 +92,7 @@ function rate_post_success(data) {
 		jQuery('#post-ratings-' + post_id + '-loading').hide();
 	}
 	if(ratingsL10n.show_fading) {
-		jQuery('#post-ratings-' + post_id).fadeIn('def', function () {
+		jQuery('#post-ratings-' + post_id).fadeTo('def', 1, function () {
 			set_is_being_rated(false);	
 		});
 	} else {
@@ -105,7 +105,7 @@ function rate_post() {
 	if(!is_being_rated) {
 		set_is_being_rated(true);
 		if(ratingsL10n.show_fading) {
-			jQuery('#post-ratings-' + post_id).fadeOut('def', function () {
+			jQuery('#post-ratings-' + post_id).fadeTo('def', 0, function () {
 				if(ratingsL10n.show_loading) {
 					jQuery('#post-ratings-' + post_id + '-loading').show();
 				}
