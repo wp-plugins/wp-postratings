@@ -174,26 +174,17 @@ function ratings_javascripts() {
 }
 
 
-### Function: Enqueue Ratings Stylesheets In WP-Admin
-add_action('admin_enqueue_scripts', 'ratings_stylesheets_admin');
-function ratings_stylesheets_admin($hook_suffix) {
+### Function: Enqueue Ratings Stylesheets/JavaScripts In WP-Admin
+add_action('admin_enqueue_scripts', 'ratings_scripts_admin');
+function ratings_scripts_admin($hook_suffix) {
 	$postratings_admin_pages = array('wp-postratings/postratings-manager.php', 'wp-postratings/postratings-options.php', 'wp-postratings/postratings-templates.php', 'wp-postratings/postratings-uninstall.php');
 	if(in_array($hook_suffix, $postratings_admin_pages)) {
 		wp_enqueue_style('wp-postratings-admin', plugins_url('wp-postratings/postratings-admin-css.css'), false, '1.50', 'all');
+		wp_enqueue_script('wp-postratings-admin', plugins_url('wp-postratings/postratings-admin-js.js'), array('jquery'), '1.50', true);
+		wp_localize_script('wp-postratings-admin', 'ratingsAdminL10n', array(
+			'admin_ajax_url' => plugins_url('wp-postratings/postratings-admin-ajax.php')
+		));
 	}
-}
-
-
-### Function: Enqueue Ratings JavaScripts In WP-Admin
-add_action('admin_print_scripts-wp-postratings/postratings-manager.php', 'ratings_javascripts_admin');
-add_action('admin_print_scripts-wp-postratings/postratings-options.php', 'ratings_javascripts_admin');
-add_action('admin_print_scripts-wp-postratings/postratings-templates.php', 'ratings_javascripts_admin');
-add_action('admin_print_scripts-wp-postratings/postratings-uninstall.php', 'ratings_javascripts_admin');
-function ratings_javascripts_admin() {
-	wp_enqueue_script('wp-postratings-admin', plugins_url('wp-postratings/postratings-admin-js.js'), array('jquery'), '1.50', true);
-	wp_localize_script('wp-postratings-admin', 'ratingsAdminL10n', array(
-		'admin_ajax_url' => plugins_url('wp-postratings/postratings-admin-ajax.php')
-	));
 }
 
 

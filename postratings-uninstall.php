@@ -119,9 +119,9 @@ switch($mode) {
 	<table class="widefat">
 		<thead>
 			<tr>
-				<td align="center"><strong><?php _e('WordPress Options', 'wp-postratings'); ?></strong></td>
-				<td align="center"><strong><?php _e('WordPress Tables', 'wp-postratings'); ?></strong></td>
-				<td align="center"><strong><?php _e('WordPress PostMetas', 'wp-postratings'); ?></strong></td>
+				<th><?php _e('WordPress Options', 'wp-postratings'); ?></th>
+				<th><?php _e('WordPress Tables', 'wp-postratings'); ?></th>
+				<th><?php _e('WordPress PostMetas', 'wp-postratings'); ?></th>
 			</tr>
 		</thead>
 		<tbody>
