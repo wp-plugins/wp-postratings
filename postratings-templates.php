@@ -88,7 +88,7 @@ if($_POST['Submit']) {
 				break;
 		}
 		if(print) {
-			document.getElementById("postratings_template_" + template).value = default_template;
+			jQuery("#postratings_template_" + template).val(default_template);
 		} else {
 			return default_template;
 		}
@@ -116,7 +116,7 @@ if($_POST['Submit']) {
 				break;
 		}
 		if(print) {
-			document.getElementById("postratings_template_" + template).value = default_template;
+			jQuery("#postratings_template_" + template).val(default_template);
 		} else {
 			return default_template;
 		}

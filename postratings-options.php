@@ -130,7 +130,7 @@ $postratings_image = get_option('postratings_image');
 				break;
 		}
 		if(print) {
-			document.getElementById("postratings_template_" + template).value = default_template;
+			jQuery("#postratings_template_" + template).val(default_template);
 		} else {
 			return default_template;
 		}
@@ -158,40 +158,40 @@ $postratings_image = get_option('postratings_image');
 				break;
 		}
 		if(print) {
-			document.getElementById("postratings_template_" + template).value = default_template;
+			jQuery("#postratings_template_" + template).val(default_template);
 		} else {
 			return default_template;
 		}
 	}
 	function set_custom(custom, max) {
 		if(custom == 1) {
-			document.getElementById('postratings_max').value = max;
-			document.getElementById('postratings_max').readOnly = true;
+			jQuery("#postratings_max").val(max);
+			jQuery("#postratings_max").attr("readonly", true);
 			if(max == 2) {
-				document.getElementById('postratings_template_vote').value = ratings_updown_templates('vote', false);
-				document.getElementById('postratings_template_text').value = ratings_updown_templates('text', false);
-				document.getElementById('postratings_template_permission').value = ratings_updown_templates('permission', false);
-				document.getElementById('postratings_template_none').value = ratings_updown_templates('none', false);
-				document.getElementById('postratings_template_highestrated').value = ratings_updown_templates('highestrated', false);
-				document.getElementById('postratings_template_mostrated').value = ratings_updown_templates('mostrated', false);
+				jQuery("#postratings_template_vote").val(ratings_updown_templates("vote", false));
+				jQuery("#postratings_template_text").val(ratings_updown_templates("text", false));
+				jQuery("#postratings_template_permission").val(ratings_updown_templates("permission", false));
+				jQuery("#postratings_template_none").val(ratings_updown_templates("none", false));
+				jQuery("#postratings_template_highestrated").val(ratings_updown_templates("highestrated", false));
+				jQuery("#postratings_template_mostrated").val(ratings_updown_templates("mostrated", false));
 			} else {
-				document.getElementById('postratings_template_vote').value = ratings_default_templates('vote', false);
-				document.getElementById('postratings_template_text').value = ratings_default_templates('text', false);
-				document.getElementById('postratings_template_none').value = ratings_default_templates('none', false);
-				document.getElementById('postratings_template_highestrated').value = ratings_default_templates('highestrated', false);
-				document.getElementById('postratings_template_mostrated').value = ratings_default_templates('mostrated', false);
+				jQuery("#postratings_template_vote").val(ratings_default_templates("vote", false));
+				jQuery("#postratings_template_text").val(ratings_default_templates("text", false));
+				jQuery("#postratings_template_none").val(ratings_default_templates("none", false));
+				jQuery("#postratings_template_highestrated").val(ratings_default_templates("highestrated", false));
+				jQuery("#postratings_template_mostrated").val(ratings_default_templates("mostrated", false));
 			}
 		} else {
-			document.getElementById('postratings_max').value = <?php echo $postratings_max; ?>;
-			document.getElementById('postratings_max').readOnly = false;
-			document.getElementById('postratings_template_vote').value = ratings_default_templates('vote', false);
-			document.getElementById('postratings_template_text').value = ratings_default_templates('text', false);
-			document.getElementById('postratings_template_permission').value = ratings_default_templates('permission', false);
-			document.getElementById('postratings_template_none').value = ratings_default_templates('none', false);
-			document.getElementById('postratings_template_highestrated').value = ratings_default_templates('highestrated', false);
-			document.getElementById('postratings_template_mostrated').value = ratings_default_templates('mostrated', false);
+			jQuery("#postratings_max").val(<?php echo $postratings_max; ?>);
+			jQuery("#postratings_max").attr("readonly", false);
+			jQuery("#postratings_template_vote").val(ratings_default_templates("vote", false));
+			jQuery("#postratings_template_text").val(ratings_default_templates("text", false));
+			jQuery("#postratings_template_permission").val(ratings_default_templates("permission", false));
+			jQuery("#postratings_template_none").val(ratings_default_templates("none", false));
+			jQuery("#postratings_template_highestrated").val(ratings_default_templates("highestrated", false));
+			jQuery("#postratings_template_mostrated").val(ratings_default_templates("mostrated", false));
 		}
-		document.getElementById('postratings_customrating').value = custom;
+		jQuery("#postratings_customrating").val(custom);
 	}
 /* ]]> */
 </script>
