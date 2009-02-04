@@ -962,6 +962,7 @@ function expand_ratings_template($template, $post_id, $post_ratings_data = null,
 		}
 		$post_ratings_alt_text = sprintf(__ngettext('%s rating', '%s rating', $post_ratings_score, 'wp-postratings'), number_format_i18n($post_ratings_score)).__(',', 'wp-postratings').' '.sprintf(__ngettext('%s vote', '%s votes', $post_ratings_users, 'wp-postratings'), number_format_i18n($post_ratings_users));
 	} else {
+		$post_ratings_score = number_format_i18n($post_ratings_score);
 		$post_ratings_alt_text = sprintf(__ngettext('%s vote', '%s votes', $post_ratings_users, 'wp-postratings'), number_format_i18n($post_ratings_users)).__(',', 'wp-postratings').' '.__('average', 'wp-postratings').': '.number_format_i18n($post_ratings_average, 2).' '.__('out of', 'wp-postratings').' '.number_format_i18n($ratings_max);
 	}
 	// Check for half star
@@ -986,7 +987,7 @@ function expand_ratings_template($template, $post_id, $post_ratings_data = null,
 	$value = str_replace("%RATINGS_ALT_TEXT%", $post_ratings_alt_text, $value);
 	$value = str_replace("%RATINGS_TEXT%", $post_ratings_text, $value);
 	$value = str_replace("%RATINGS_MAX%", number_format_i18n($ratings_max), $value);
-	$value = str_replace("%RATINGS_SCORE%", number_format_i18n($post_ratings_score), $value);
+	$value = str_replace("%RATINGS_SCORE%", $post_ratings_score, $value);
 	$value = str_replace("%RATINGS_AVERAGE%", number_format_i18n($post_ratings_average, 2), $value);
 	$value = str_replace("%RATINGS_PERCENTAGE%", number_format_i18n($post_ratings_percentage, 2), $value);
 	$value = str_replace("%RATINGS_USERS%", number_format_i18n($post_ratings_users), $value);
