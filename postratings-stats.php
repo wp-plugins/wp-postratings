@@ -35,7 +35,7 @@ if(!function_exists('get_most_rated')) {
 			$order_by = 'ratings_average';
 		}
 		if($chars > 0) {
-			$temp = '<li><a href="%POST_URL%"\">%POST_TITLE%</a> - %RATINGS_USERS%</li>';
+			$temp = '<li><a href="%POST_URL%">%POST_TITLE%</a> - %RATINGS_USERS%</li>';
 		} else {
 			$temp = stripslashes(get_option('postratings_template_mostrated'));
 		}
@@ -79,7 +79,7 @@ if(!function_exists('get_most_rated_category')) {
 			$order_by = 'ratings_average';
 		}
 		if($chars > 0) {
-		  $temp = '<li><a href="%POST_URL%"\">%POST_TITLE%</a> - %RATINGS_USERS%</li>';
+		  $temp = '<li><a href="%POST_URL%">%POST_TITLE%</a> - %RATINGS_USERS%</li>';
 		} else {
 		  $temp = stripslashes(get_option('postratings_template_mostrated'));
 		}
@@ -119,7 +119,7 @@ if(!function_exists('get_most_rated_range')) {
 			$order_by = 'ratings_average';
 		}
 		if($chars > 0) {
-			$temp = '<li><a href="%POST_URL%"\">%POST_TITLE%</a> - %RATINGS_USERS%</li>';
+			$temp = '<li><a href="%POST_URL%">%POST_TITLE%</a> - %RATINGS_USERS%</li>';
 		} else {
 			$temp = stripslashes(get_option('postratings_template_mostrated'));
 		}
@@ -165,7 +165,7 @@ if(!function_exists('get_most_rated_range_category')) {
 			$order_by = 'ratings_average';
 		}
 		if($chars > 0) {
-			$temp = '<li><a href="%POST_URL%"\">%POST_TITLE%</a> - %RATINGS_USERS%</li>';
+			$temp = '<li><a href="%POST_URL%">%POST_TITLE%</a> - %RATINGS_USERS%</li>';
 		} else {
 			$temp = stripslashes(get_option('postratings_template_mostrated'));
 		}
@@ -206,9 +206,9 @@ if(!function_exists('get_highest_rated')) {
 		}
 		if($chars > 0) {
 			if($ratings_custom && $ratings_max == 2) {
-				$temp = '<li><a href="%POST_URL%"\">%POST_TITLE%</a> %RATINGS_ALT_TEXT%</li>';
+				$temp = '<li><a href="%POST_URL%">%POST_TITLE%</a> %RATINGS_ALT_TEXT%</li>';
 			} else {
-				$temp = '<li><a href="%POST_URL%"\">%POST_TITLE%</a> %RATINGS_IMAGES%</li>';
+				$temp = '<li><a href="%POST_URL%">%POST_TITLE%</a> %RATINGS_IMAGES%</li>';
 			}
 		} else {
 			$temp = stripslashes(get_option('postratings_template_highestrated'));
@@ -256,9 +256,9 @@ if(!function_exists('get_highest_rated_category')) {
 		}
 		if($chars > 0) {
 			if($ratings_custom && $ratings_max == 2) {
-				$temp = '<li><a href="%POST_URL%"\">%POST_TITLE%</a> %RATINGS_ALT_TEXT%</li>';
+				$temp = '<li><a href="%POST_URL%">%POST_TITLE%</a> %RATINGS_ALT_TEXT%</li>';
 			} else {
-				$temp = '<li><a href="%POST_URL%"\">%POST_TITLE%</a> %RATINGS_IMAGES%</li>';
+				$temp = '<li><a href="%POST_URL%">%POST_TITLE%</a> %RATINGS_IMAGES%</li>';
 			}
 		} else {
 			$temp = stripslashes(get_option('postratings_template_highestrated'));
@@ -301,9 +301,9 @@ if(!function_exists('get_highest_rated_range')) {
 		}
 		if($chars > 0) {
 			if($ratings_custom && $ratings_max == 2) {
-				$temp = '<li><a href="%POST_URL%"\">%POST_TITLE%</a> %RATINGS_ALT_TEXT%</li>';
+				$temp = '<li><a href="%POST_URL%">%POST_TITLE%</a> %RATINGS_ALT_TEXT%</li>';
 			} else {
-				$temp = '<li><a href="%POST_URL%"\">%POST_TITLE%</a> %RATINGS_IMAGES%</li>';
+				$temp = '<li><a href="%POST_URL%">%POST_TITLE%</a> %RATINGS_IMAGES%</li>';
 			}
 		} else {
 			$temp = stripslashes(get_option('postratings_template_highestrated'));
@@ -352,9 +352,9 @@ if(!function_exists('get_highest_rated_range_category')) {
 		}
 		if($chars > 0) {
 			if($ratings_custom && $ratings_max == 2) {
-				$temp = '<li><a href="%POST_URL%"\">%POST_TITLE%</a> %RATINGS_ALT_TEXT%</li>';
+				$temp = '<li><a href="%POST_URL%">%POST_TITLE%</a> %RATINGS_ALT_TEXT%</li>';
 			} else {
-				$temp = '<li><a href="%POST_URL%"\">%POST_TITLE%</a> %RATINGS_IMAGES%</li>';
+				$temp = '<li><a href="%POST_URL%">%POST_TITLE%</a> %RATINGS_IMAGES%</li>';
 			}
 		} else {
 			$temp = stripslashes(get_option('postratings_template_highestrated'));
@@ -396,9 +396,9 @@ if(!function_exists('get_lowest_rated')) {
 		}
 		if($chars > 0) {
 			if($ratings_custom && $ratings_max == 2) {
-				$temp = '<li><a href="%POST_URL%"\">%POST_TITLE%</a> %RATINGS_ALT_TEXT%</li>';
+				$temp = '<li><a href="%POST_URL%">%POST_TITLE%</a> %RATINGS_ALT_TEXT%</li>';
 			} else {
-				$temp = '<li><a href="%POST_URL%"\">%POST_TITLE%</a> %RATINGS_IMAGES%</li>';
+				$temp = '<li><a href="%POST_URL%">%POST_TITLE%</a> %RATINGS_IMAGES%</li>';
 			}
 		} else {
 			$temp = stripslashes(get_option('postratings_template_highestrated'));
@@ -446,9 +446,9 @@ if(!function_exists('get_lowest_rated_category')) {
 		}
 		if($chars > 0) {
 			if($ratings_custom && $ratings_max == 2) {
-				$temp = '<li><a href="%POST_URL%"\">%POST_TITLE%</a> %RATINGS_ALT_TEXT%</li>';
+				$temp = '<li><a href="%POST_URL%">%POST_TITLE%</a> %RATINGS_ALT_TEXT%</li>';
 			} else {
-				$temp = '<li><a href="%POST_URL%"\">%POST_TITLE%</a> %RATINGS_IMAGES%</li>';
+				$temp = '<li><a href="%POST_URL%">%POST_TITLE%</a> %RATINGS_IMAGES%</li>';
 			}
 		} else {
 			$temp = stripslashes(get_option('postratings_template_highestrated'));
@@ -491,9 +491,9 @@ if(!function_exists('get_lowest_rated_range')) {
 		}
 		if($chars > 0) {
 			if($ratings_custom && $ratings_max == 2) {
-				$temp = '<li><a href="%POST_URL%"\">%POST_TITLE%</a> %RATINGS_ALT_TEXT%</li>';
+				$temp = '<li><a href="%POST_URL%">%POST_TITLE%</a> %RATINGS_ALT_TEXT%</li>';
 			} else {
-				$temp = '<li><a href="%POST_URL%"\">%POST_TITLE%</a> %RATINGS_IMAGES%</li>';
+				$temp = '<li><a href="%POST_URL%">%POST_TITLE%</a> %RATINGS_IMAGES%</li>';
 			}
 		} else {
 			$temp = stripslashes(get_option('postratings_template_highestrated'));
