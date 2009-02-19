@@ -238,8 +238,8 @@ $postratings_logs = $wpdb->get_results("SELECT * FROM $wpdb->ratings WHERE 1=1 $
 	<div id="icon-wp-postratings" class="icon32"><br /></div>
 	<h2><?php _e('Manage Ratings', 'wp-postratings'); ?></h2>
 	<h3><?php _e('Post Ratings Logs', 'wp-postratings'); ?></h3>
-	<p><?php _e('Displaying', 'wp-postratings'); ?> <strong><?php echo number_format_i18n($display_on_page);?></strong> <?php _e('To', 'wp-postratings'); ?> <strong><?php echo number_format_i18n($max_on_page); ?></strong> <?php _e('Of', 'wp-postratings'); ?> <strong><?php echo number_format_i18n($total_ratings); ?></strong> <?php _e('Post Ratings Log Entries', 'wp-postratings'); ?></p>
-	<p><?php _e('Sorted By', 'wp-postratings'); ?> <strong><?php echo $postratings_sortby_text;?></strong> <?php _e('In', 'wp-postratings'); ?> <strong><?php echo $postratings_sortorder_text;?></strong> <?php _e('Order', 'wp-postratings'); ?></p>
+	<p><?php printf(__('Displaying <strong>%s</strong> to <strong>%s</strong> of <strong>%s</strong> Post Ratings log entries.', 'wp-postratings'), number_format_i18n($display_on_page), number_format_i18n($max_on_page), number_format_i18n($total_ratings)); ?></p>
+	<p><?php printf(__('Sorted by <strong>%s</strong> in <strong>%s</strong> order.', 'wp-postratings'), $postratings_sortby_text, $postratings_sortorder_text); ?></p>
 	<table class="widefat">
 		<thead>
 			<tr>
@@ -271,7 +271,7 @@ $postratings_logs = $wpdb->get_results("SELECT * FROM $wpdb->ratings WHERE 1=1 $
 				$postratings_ip = $postratings_log->rating_ip;
 				$postratings_host = $postratings_log->rating_host;				
 				echo "<tr $style>\n";
-				echo '<td>'.number_format_i18n($postratings_id).'</td>'."\n";
+				echo '<td>'.$postratings_id.'</td>'."\n";
 				echo "<td>$postratings_username</td>\n";
 				echo '<td nowrap="nowrap">';
 				if($ratings_custom && $ratings_max == 2) {
