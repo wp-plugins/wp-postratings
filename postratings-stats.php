@@ -515,6 +515,146 @@ if(!function_exists('get_lowest_rated_range')) {
 	}
 }
 
+### Function: Display Highest Score Page/Post
+if(!function_exists('get_highest_score')) {
+	function get_highest_score($mode = '', $min_votes = 0, $limit = 10, $chars = 0, $display = true) {
+		global $wpdb, $post;
+		$output = '';
+		if(!empty($mode) && $mode != 'both') {
+			$where = "$wpdb->posts.post_type = '$mode'";
+		} else {
+			$where = '1=1';
+		}
+		if($chars > 0) {
+			$temp = '<li><a href="%POST_URL%">%POST_TITLE%</a> - %RATINGS_USERS%</li>';
+		} else {
+			$temp = stripslashes(get_option('postratings_template_mostrated'));
+		}
+		$highest_score = $wpdb->get_results("SELECT DISTINCT $wpdb->posts.*, (t1.meta_value+0.00) AS ratings_average, (t2.meta_value+0.00) AS ratings_users, (t3.meta_value+0.00) AS ratings_score FROM $wpdb->posts LEFT JOIN $wpdb->postmeta AS t1 ON t1.post_id = $wpdb->posts.ID LEFT JOIN $wpdb->postmeta As t2 ON t1.post_id = t2.post_id LEFT JOIN $wpdb->postmeta AS t3 ON t3.post_id = $wpdb->posts.ID WHERE t1.meta_key = 'ratings_average' AND t2.meta_key = 'ratings_users' AND t3.meta_key = 'ratings_score' AND $wpdb->posts.post_password = '' AND $wpdb->posts.post_date < '".current_time('mysql')."' AND $wpdb->posts.post_status = 'publish' AND t2.meta_value >= $min_votes AND $where ORDER BY ratings_score DESC, ratings_average DESC LIMIT $limit");
+		if($highest_score) {
+			foreach ($highest_score as $post) {
+				$output .= expand_ratings_template($temp, $post->ID, $post, $chars)."\n";
+			}
+		} else {
+			$output = '<li>'.__('N/A', 'wp-postratings').'</li>'."\n";
+		}
+		if($display) {
+			echo $output;
+		} else {
+			return $output;
+		}
+	}
+}
+
+
+### Function: Display Highest Score Page/Post By Category ID
+if(!function_exists('get_highest_score_category')) {
+	function get_highest_score_category($category_id = 0, $mode = '', $min_votes = 0, $limit = 10, $chars = 0, $display = true) {
+		global $wpdb, $post;
+		$output = '';
+		if(is_array($category_id)) {
+			$category_sql = "$wpdb->term_taxonomy.term_id IN (".join(',', $category_id).')';
+		} else {
+			$category_sql = "$wpdb->term_taxonomy.term_id = $category_id";
+		}
+		if(!empty($mode) && $mode != 'both') {
+			$where = "$wpdb->posts.post_type = '$mode'";
+		} else {
+			$where = '1=1';
+		}
+		if($chars > 0) {
+		  $temp = '<li><a href="%POST_URL%">%POST_TITLE%</a> - %RATINGS_USERS%</li>';
+		} else {
+		  $temp = stripslashes(get_option('postratings_template_mostrated'));
+		}
+		$highest_score = $wpdb->get_results("SELECT DISTINCT $wpdb->posts.*, (t1.meta_value+0.00) AS ratings_average, (t2.meta_value+0.00) AS ratings_users, (t3.meta_value+0.00) AS ratings_score FROM $wpdb->posts LEFT JOIN $wpdb->postmeta AS t1 ON t1.post_id = $wpdb->posts.ID LEFT JOIN $wpdb->postmeta As t2 ON t1.post_id = t2.post_id LEFT JOIN $wpdb->postmeta AS t3 ON t3.post_id = $wpdb->posts.ID INNER JOIN $wpdb->term_relationships ON ($wpdb->posts.ID = $wpdb->term_relationships.object_id) INNER JOIN $wpdb->term_taxonomy ON ($wpdb->term_relationships.term_taxonomy_id = $wpdb->term_taxonomy.term_taxonomy_id) WHERE t1.meta_key = 'ratings_average' AND t2.meta_key = 'ratings_users' AND t3.meta_key = 'ratings_score' AND $wpdb->posts.post_password = '' AND $wpdb->posts.post_date < '".current_time('mysql')."' AND $wpdb->posts.post_status = 'publish' AND $wpdb->term_taxonomy.taxonomy = 'category' AND $category_sql AND t2.meta_value >= $min_votes AND $where ORDER BY ratings_score DESC, ratings_average DESC LIMIT $limit");
+		if($highest_score) {
+			foreach ($highest_score as $post) {
+				$output .= expand_ratings_template($temp, $post->ID, $post, $chars)."\n";
+			}
+		} else {
+			$output = '<li>'.__('N/A', 'wp-postratings').'</li>'."\n";
+		}
+		if($display) {
+			echo $output;
+		} else {
+			return $output;
+		}
+	}
+}
+
+
+### Function: Display Highest Score Page/Post With Time Range
+if(!function_exists('get_highest_score_range')) {
+	function get_highest_score_range($time = '1 day', $mode = '', $limit = 10, $chars = 0, $display = true) {
+		global $wpdb, $post;
+		$min_time = strtotime('-'.$time, current_time('timestamp')); 
+		$output = '';
+		if(!empty($mode) && $mode != 'both') {
+			$where = "$wpdb->posts.post_type = '$mode'";
+		} else {
+			$where = '1=1';
+		}
+		if($chars > 0) {
+			$temp = '<li><a href="%POST_URL%">%POST_TITLE%</a> - %RATINGS_USERS%</li>';
+		} else {
+			$temp = stripslashes(get_option('postratings_template_mostrated'));
+		}
+		$highest_score = $wpdb->get_results("SELECT COUNT($wpdb->ratings.rating_postid) AS ratings_users, SUM($wpdb->ratings.rating_rating) AS ratings_score, ROUND(((SUM($wpdb->ratings.rating_rating)/COUNT($wpdb->ratings.rating_postid))), 2) AS ratings_average, $wpdb->posts.* FROM $wpdb->posts LEFT JOIN $wpdb->ratings ON $wpdb->ratings.rating_postid = $wpdb->posts.ID WHERE rating_timestamp >= $min_time AND $wpdb->posts.post_password = '' AND $wpdb->posts.post_date < '".current_time('mysql')."'  AND $wpdb->posts.post_status = 'publish' AND $where GROUP BY $wpdb->ratings.rating_postid ORDER BY ratings_score DESC, ratings_average DESC LIMIT $limit");
+		if($highest_score) {
+			foreach ($highest_score as $post) {
+				$output .= expand_ratings_template($temp, $post->ID, $post, $chars)."\n";
+			}
+		} else {
+			$output = '<li>'.__('N/A', 'wp-postratings').'</li>'."\n";
+		}
+		if($display) {
+			echo $output;
+		} else {
+			return $output;
+		}
+	}
+}
+
+
+### Function: Display Highest Score Page/Post With Time Range By Category ID
+if(!function_exists('get_highest_score_range_category')) {
+	function get_highest_score_range_category($time = '1 day', $category_id = 0, $mode = '', $limit = 10, $chars = 0, $display = true) {
+		global $wpdb, $post;
+		$min_time = strtotime('-'.$time, current_time('timestamp')); 
+		$output = '';
+		if(is_array($category_id)) {
+			// There is a bug with multiple categoies. The number of votes will be multiplied by the number of categories passed in.
+			$category_sql = "$wpdb->term_taxonomy.term_id IN (".join(',', $category_id).')';
+		} else {
+			$category_sql = "$wpdb->term_taxonomy.term_id = $category_id";
+		}
+		if(!empty($mode) && $mode != 'both') {
+			$where = "$wpdb->posts.post_type = '$mode'";
+		} else {
+			$where = '1=1';
+		}
+		if($chars > 0) {
+			$temp = '<li><a href="%POST_URL%">%POST_TITLE%</a> - %RATINGS_USERS%</li>';
+		} else {
+			$temp = stripslashes(get_option('postratings_template_mostrated'));
+		}
+		$highest_score = $wpdb->get_results("SELECT COUNT($wpdb->ratings.rating_postid) AS ratings_users, SUM($wpdb->ratings.rating_rating) AS ratings_score, ROUND(((SUM($wpdb->ratings.rating_rating)/COUNT($wpdb->ratings.rating_postid))), 2) AS ratings_average, $wpdb->posts.* FROM $wpdb->posts LEFT JOIN $wpdb->ratings ON $wpdb->ratings.rating_postid = $wpdb->posts.ID INNER JOIN $wpdb->term_relationships ON ($wpdb->posts.ID = $wpdb->term_relationships.object_id) INNER JOIN $wpdb->term_taxonomy ON ($wpdb->term_relationships.term_taxonomy_id = $wpdb->term_taxonomy.term_taxonomy_id) WHERE rating_timestamp >= $min_time AND $wpdb->posts.post_password = '' AND $wpdb->posts.post_date < '".current_time('mysql')."'  AND $wpdb->posts.post_status = 'publish' AND $wpdb->term_taxonomy.taxonomy = 'category' AND $category_sql AND $where GROUP BY $wpdb->ratings.rating_postid ORDER BY ratings_score DESC, ratings_average DESC LIMIT $limit");
+		if($highest_score) {
+			foreach ($highest_score as $post) {
+				$output .= expand_ratings_template($temp, $post->ID, $post, $chars)."\n";
+			}
+		} else {
+			$output = '<li>'.__('N/A', 'wp-postratings').'</li>'."\n";
+		}
+		if($display) {
+			echo $output;
+		} else {
+			return $output;
+		}
+	}
+}
+
 
 ### Function: Display Total Rating Users
 if(!function_exists('get_ratings_users')) {

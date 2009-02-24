@@ -300,6 +300,7 @@
 						<li>NEW: Renamed postratings-js-packed.js To postratings-js.js</li>
 						<li>NEW: Renamed postratings-js.js To postratings-js.dev.js</li>
 						<li>NEW: Translate Javascript Variables Using wp_localize_script()</li>
+						<li>NEW: Added get_highest_score(), get_highest_score_category(), get_highest_score_range(), get_highest_score_range_category()</li>
 						<li>FIXED: Ensure That Post Is Not A Revision</li>
 						<li>FIXED: Missing + Sign For Thumbs Up/Down Ratings If Score Is Positive</li>
 					</ul>
@@ -789,6 +790,64 @@
 						&lt;?php endif; ?&gt;
 					</blockquote>
 					<p>Default: get_most_rated_range('1 day', 'both', 10)</p>
+					<p>The value <strong>'1 day'</strong> will be the range that you want. You can use <strong>'2 days'</strong>, <strong>'1 month'</strong>, etc.</p>
+					<p>The value <strong>'both'</strong> will display both the most rated posts and pages.</p>
+					<p>If you want to display the most rated posts only, replace 'both' with <strong>'post'</strong>.</p>
+					<p>If you want to display the most rated pages only, replace 'both' with <strong>'page'</strong>.</p>
+					<p>The value <strong>10</strong> will display only the top 10 most rated posts/pages.</p>
+				</li>
+				<li>
+					To Display <strong>Highest Score Post</strong>
+				</li>
+				<li>
+					Use:
+					<blockquote>
+						&lt;?php if (function_exists('get_highest_score')): ?&gt;<br />
+						&nbsp;&nbsp;&nbsp;&lt;ul&gt;<br />
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;?php get_highest_score(); ?&gt;<br />
+						&nbsp;&nbsp;&nbsp;&lt;/ul&gt;<br />
+						&lt;?php endif; ?&gt;
+					</blockquote>
+					<p>Default: get_highest_score('both', 0, 10)</p>
+					<p>The value <strong>'both'</strong> will display both the most rated posts and pages.</p>
+					<p>If you want to display the most rated posts only, replace 'both' with <strong>'post'</strong>.</p>
+					<p>If you want to display the most rated pages only, replace 'both' with <strong>'page'</strong>.</p>
+					<p>The value <strong>0</strong> refers to the minimum votes required before the post get shown.</p>
+					<p>The value <strong>10</strong> will display only the top 10 most rated posts/pages.</p>
+				</li>
+				<li>
+					To Display <strong>Highest Score Post In A Category</strong>
+				</li>
+				<li>
+					Use:
+					<blockquote>
+						&lt;?php if (function_exists('get_highest_score_category')): ?&gt;<br />
+						&nbsp;&nbsp;&nbsp;&lt;ul&gt;<br />
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;?php get_highest_score_category(CATEGORY_ID); ?&gt;<br />
+						&nbsp;&nbsp;&nbsp;&lt;/ul&gt;<br />
+						&lt;?php endif; ?&gt;
+					</blockquote>
+					<p>Default: get_highest_score_category(CATEGORY_ID, 'both', 0, 10)</p>
+					<p>Replace <strong>CATEGORY_ID</strong> will your category ID. If you want it to span several categories, replace <strong>CATEGORY_ID</strong> with <strong>array(1, 2)</strong> where <strong>1</strong> and <strong>2</strong> are your categories ID.</p>
+					<p>The value <strong>'both'</strong> will display both the most rated posts and pages.</p>
+					<p>If you want to display the most rated posts only, replace 'both' with <strong>'post'</strong>.</p>
+					<p>If you want to display the most rated pages only, replace 'both' with <strong>'page'</strong>.</p>
+					<p>The value <strong>0</strong> refers to the minimum votes required before the post get shown.</p>
+					<p>The value <strong>10</strong> will display only the top 10 most rated posts/pages.</p>
+				</li>
+				<li>
+					To Display <strong>Highest Score Post Within A Given Period</strong>
+				</li>
+				<li>
+					Use:
+					<blockquote>
+						&lt;?php if (function_exists('get_highest_score_range')): ?&gt;<br />
+						&nbsp;&nbsp;&nbsp;&lt;ul&gt;<br />
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;?php get_highest_score_range('1 day'); ?&gt;<br />
+						&nbsp;&nbsp;&nbsp;&lt;/ul&gt;<br />
+						&lt;?php endif; ?&gt;
+					</blockquote>
+					<p>Default: get_highest_score_range('1 day', 'both', 10)</p>
 					<p>The value <strong>'1 day'</strong> will be the range that you want. You can use <strong>'2 days'</strong>, <strong>'1 month'</strong>, etc.</p>
 					<p>The value <strong>'both'</strong> will display both the most rated posts and pages.</p>
 					<p>If you want to display the most rated posts only, replace 'both' with <strong>'post'</strong>.</p>
