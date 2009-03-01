@@ -127,7 +127,7 @@ if($_POST['Submit']) {
 <div class="wrap">
 	<div id="icon-wp-postratings" class="icon32"><br /></div>
 	<h2><?php _e('Post Rating Templates', 'wp-postratings'); ?></h2> 
-	<form method="post" action="<?php echo $_SERVER['REQUEST_URI']; ?>"> 
+	<form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>?page=<?php echo plugin_basename(__FILE__); ?>">
 		<h3><?php _e('Template Variables', 'wp-postratings'); ?></h3>
 		<table class="form-table">
 			<tr>

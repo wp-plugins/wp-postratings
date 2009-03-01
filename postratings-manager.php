@@ -288,17 +288,17 @@ $postratings_logs = $wpdb->get_results("SELECT * FROM $wpdb->ratings WHERE 1=1 $
 					if($ratings_custom) {
 						for($j=1; $j <= $ratings_max; $j++) {
 							if($j <= $postratings_rating) {
-								echo '<img src="'.plugins_url('wp-postratings/images/'.$ratings_image.'/rating_'.$j.'_on.'.RATINGS_IMG_EXT).'" alt="'.sprintf(__ngettext('User Rate This Post %s Star', 'User Rate This Post %s Stars', $postratings_rating, 'wp-postratings'), $postratings_rating).__(' Out Of ', 'wp-postratings').$ratings_max.'" title="'.sprintf(__ngettext('User Rate This Post %s Star', 'User Rate This Post %s Stars', $postratings_rating, 'wp-postratings'), $postratings_rating).__(' Out Of ', 'wp-postratings').$ratings_max.'" class="post-ratings-image" />';
+								echo '<img src="'.plugins_url('wp-postratings/images/'.$ratings_image.'/rating_'.$j.'_on.'.RATINGS_IMG_EXT).'" alt="'.sprintf(_n('User Rate This Post %s Star', 'User Rate This Post %s Stars', $postratings_rating, 'wp-postratings'), $postratings_rating).__(' Out Of ', 'wp-postratings').$ratings_max.'" title="'.sprintf(_n('User Rate This Post %s Star', 'User Rate This Post %s Stars', $postratings_rating, 'wp-postratings'), $postratings_rating).__(' Out Of ', 'wp-postratings').$ratings_max.'" class="post-ratings-image" />';
 							} else {
-								echo '<img src="'.plugins_url('wp-postratings/images/'.$ratings_image.'/rating_'.$j.'_off.'.RATINGS_IMG_EXT).'" alt="'.sprintf(__ngettext('User Rate This Post %s Star', 'User Rate This Post %s Stars', $postratings_rating, 'wp-postratings'), $postratings_rating).__(' Out Of ', 'wp-postratings').$ratings_max.'" title="'.sprintf(__ngettext('User Rate This Post %s Star', 'User Rate This Post %s Stars', $postratings_rating, 'wp-postratings'), $postratings_rating).__(' Out Of ', 'wp-postratings').$ratings_max.'" class="post-ratings-image" />';
+								echo '<img src="'.plugins_url('wp-postratings/images/'.$ratings_image.'/rating_'.$j.'_off.'.RATINGS_IMG_EXT).'" alt="'.sprintf(_n('User Rate This Post %s Star', 'User Rate This Post %s Stars', $postratings_rating, 'wp-postratings'), $postratings_rating).__(' Out Of ', 'wp-postratings').$ratings_max.'" title="'.sprintf(_n('User Rate This Post %s Star', 'User Rate This Post %s Stars', $postratings_rating, 'wp-postratings'), $postratings_rating).__(' Out Of ', 'wp-postratings').$ratings_max.'" class="post-ratings-image" />';
 							}
 						}
 					} else {
 						for($j=1; $j <= $ratings_max; $j++) {
 							if($j <= $postratings_rating) {
-								echo '<img src="'.plugins_url('wp-postratings/images/'.$ratings_image.'/rating_on.'.RATINGS_IMG_EXT).'" alt="'.sprintf(__ngettext('User Rate This Post %s Star', 'User Rate This Post %s Stars', $postratings_rating, 'wp-postratings'), $postratings_rating).__(' Out Of ', 'wp-postratings').$ratings_max.'" title="'.sprintf(__ngettext('User Rate This Post %s Star', 'User Rate This Post %s Stars', $postratings_rating, 'wp-postratings'), $postratings_rating).__(' Out Of ', 'wp-postratings').$ratings_max.'" class="post-ratings-image" />';
+								echo '<img src="'.plugins_url('wp-postratings/images/'.$ratings_image.'/rating_on.'.RATINGS_IMG_EXT).'" alt="'.sprintf(_n('User Rate This Post %s Star', 'User Rate This Post %s Stars', $postratings_rating, 'wp-postratings'), $postratings_rating).__(' Out Of ', 'wp-postratings').$ratings_max.'" title="'.sprintf(_n('User Rate This Post %s Star', 'User Rate This Post %s Stars', $postratings_rating, 'wp-postratings'), $postratings_rating).__(' Out Of ', 'wp-postratings').$ratings_max.'" class="post-ratings-image" />';
 							} else {
-								echo '<img src="'.plugins_url('wp-postratings/images/'.$ratings_image.'/rating_off.'.RATINGS_IMG_EXT).'" alt="'.sprintf(__ngettext('User Rate This Post %s Star', 'User Rate This Post %s Stars', $postratings_rating, 'wp-postratings'), $postratings_rating).__(' Out Of ', 'wp-postratings').$ratings_max.'" title="'.sprintf(__ngettext('User Rate This Post %s Star', 'User Rate This Post %s Stars', $postratings_rating, 'wp-postratings'), $postratings_rating).__(' Out Of ', 'wp-postratings').$ratings_max.'" class="post-ratings-image" />';
+								echo '<img src="'.plugins_url('wp-postratings/images/'.$ratings_image.'/rating_off.'.RATINGS_IMG_EXT).'" alt="'.sprintf(_n('User Rate This Post %s Star', 'User Rate This Post %s Stars', $postratings_rating, 'wp-postratings'), $postratings_rating).__(' Out Of ', 'wp-postratings').$ratings_max.'" title="'.sprintf(_n('User Rate This Post %s Star', 'User Rate This Post %s Stars', $postratings_rating, 'wp-postratings'), $postratings_rating).__(' Out Of ', 'wp-postratings').$ratings_max.'" class="post-ratings-image" />';
 							}
 						}
 					}
@@ -498,7 +498,7 @@ $postratings_logs = $wpdb->get_results("SELECT * FROM $wpdb->ratings WHERE 1=1 $
 	<h3><?php _e('Delete Post Ratings Data/Logs', 'wp-postratings'); ?></h3>
 	<br style="clear" />
 	<div align="center">
-		<form action="<?php echo htmlspecialchars($_SERVER['REQUEST_URI']); ?>" method="post">
+		<form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>?page=<?php echo plugin_basename(__FILE__); ?>">
 		<table class="widefat">
 			<tr>
 				<td valign="top"><b><?php _e('Delete Type: ', 'wp-postratings'); ?></b></td>

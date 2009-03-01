@@ -199,7 +199,7 @@ $postratings_image = get_option('postratings_image');
 <div class="wrap">
 	<div id="icon-wp-postratings" class="icon32"><br /></div>
 	<h2><?php _e('Post Rating Options', 'wp-postratings'); ?></h2> 
-	<form method="post" action="<?php echo $_SERVER['REQUEST_URI']; ?>"> 
+	<form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>?page=<?php echo plugin_basename(__FILE__); ?>"> 
 		<input type="hidden" id="postratings_customrating" name="postratings_customrating" value="<?php echo $postratings_customrating; ?>" />
 		<input type="hidden" id="postratings_template_vote" name="postratings_template_vote" value="<?php echo htmlspecialchars(stripslashes(get_option('postratings_template_vote'))); ?>" />
 		<input type="hidden" id="postratings_template_text" name="postratings_template_text" value="<?php echo htmlspecialchars(stripslashes(get_option('postratings_template_text'))); ?>" />
