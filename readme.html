@@ -303,6 +303,8 @@
 						<li>NEW: Added In Most Rated & Highest Rated Pages To WP-Stats</li>
 						<li>NEW: Added get_highest_score(), get_highest_score_category(), get_highest_score_range(), get_highest_score_range_category()</li>
 						<li>NEW: Use _n() Instead Of __ngettext() And _n_noop() Instead Of __ngettext_noop()</li>
+						<li>NEW: Uses New Widget Class From WordPress</li>
+						<li>NEW: Merge Widget Code To wp-postratings.php And Remove wp-postratings-widget.php</li>
 						<li>FIXED: Uses $_SERVER['PHP_SELF'] With plugin_basename(__FILE__) Instead Of Just $_SERVER['REQUEST_URI']</li>
 						<li>FIXED: Ensure That Post Is Not A Revision</li>
 						<li>FIXED: Missing + Sign For Thumbs Up/Down Ratings If Score Is Positive</li>
@@ -504,6 +506,9 @@
 					<strong>Deactivate</strong> WP-PostRatings Plugin
 				</li>
 				<li>
+					<strong>Deactivate</strong> WP-PostRatings Widget Plugin
+				</li>
+				<li>
 					Open <strong>wp-content/plugins</strong> Folder
 				</li>
 				<li>
@@ -524,6 +529,7 @@
 					<blockquote>
 						File: postratings-admin-js.php<br />
 						File: postratings-js.php
+						File: wp-postratings-widget.php
 					</blockquote>
 				</li>
 				<li>
@@ -531,6 +537,9 @@
 				</li>
 				<li>
 					Go to '<strong>WP-Admin -> Ratings -> Ratings Templates</strong>' and restore all the template variables to <strong>Default</strong>
+				</li>
+				<li>
+					Go to '<strong>WP-Admin -> Appearance -> Widgets</strong>' and re-add the Ratings Widget
 				</li>
 				<li>
 					Refer To <strong>Usage</strong> For Further Instructions
@@ -616,31 +625,13 @@
 			<div class="SubSubTitle">Ratings Stats (With Widgets)</div>
 			<ol>
 				<li>
-					<strong>Activate</strong> WP-PostRatings Widget Plugin
-				</li>
-				<li>
 					Go to '<strong>WP-Admin -> Appearance -> Widgets</strong>'
 				</li>
 				<li>
-					To Display <strong>Highest Rated Post</strong>
+					You can <strong>add</strong> the Ratings Widget by clicking on the 'Add' link besides it.
 				</li>
 				<li>
-					You can <strong>add</strong> the Highest Rated Widget by clicking on the 'Add' link besides it.
-				</li>
-				<li>
-					After adding, you can <strong>configure</strong> the Highest Rated Widget by clicking on the 'Edit' link besides it.
-				</li>
-				<li>
-					To Display <strong>Most Rated Post</strong>
-				</li>
-				<li>
-					You can <strong>add</strong> the Most Rated Widget by clicking on the 'Add' link besides it.
-				</li>
-				<li>
-					After adding, you can <strong>configure</strong> the Most Rated Widget by clicking on the 'Edit' link besides it.
-				</li>
-				<li>
-					Click 'Save Changes'
+					After adding, you can <strong>configure</strong> the Ratings Widget by clicking on the 'Edit' link besides it.
 				</li>
 			</ol>
 			<div class="SubSubTitle">Ratings Stats (Outside WP Loop)</div>

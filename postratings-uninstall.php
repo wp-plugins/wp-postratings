@@ -28,7 +28,7 @@ $base_name = plugin_basename('wp-postratings/postratings-manager.php');
 $base_page = 'admin.php?page='.$base_name;
 $mode = trim($_GET['mode']);
 $ratings_tables = array($wpdb->ratings);
-$ratings_settings = array('postratings_image', 'postratings_max', 'postratings_template_vote', 'postratings_template_text', 'postratings_template_none', 'postratings_logging_method', 'postratings_allowtorate', 'postratings_ratingstext', 'postratings_template_highestrated', 'postratings_ajax_style', 'widget_ratings_highest_rated', 'widget_ratings_most_rated', 'postratings_customrating', 'postratings_ratingsvalue', 'postratings_template_permission', 'postratings_template_mostrated');
+$ratings_settings = array('postratings_image', 'postratings_max', 'postratings_template_vote', 'postratings_template_text', 'postratings_template_none', 'postratings_logging_method', 'postratings_allowtorate', 'postratings_ratingstext', 'postratings_template_highestrated', 'postratings_ajax_style', 'widget_ratings_highest_rated', 'widget_ratings_most_rated', 'postratings_customrating', 'postratings_ratingsvalue', 'postratings_template_permission', 'postratings_template_mostrated', 'widget_ratings');
 $ratings_postmetas = array('ratings_users', 'ratings_score', 'ratings_average');
 
 
@@ -57,7 +57,7 @@ if(!empty($_POST['do'])) {
 						echo '</font><br />';
 					} else {
 						echo '<font color="red">';
-						printf(__('Error deleting Setting Key \'%s\'.', 'wp-postratings'), "<strong><em>{$setting}</em></strong>");
+						printf(__('Error deleting Setting Key \'%s\' or Setting Key \'%s\' does not exist.', 'wp-postratings'), "<strong><em>{$setting}</em></strong>");
 						echo '</font><br />';
 					}
 				}
@@ -71,7 +71,7 @@ if(!empty($_POST['do'])) {
 						echo '</font><br />';
 					} else {
 						echo '<font color="red">';
-						printf(__('Error deleting Post Meta Key \'%s\'.', 'wp-postratings'), "<strong><em>{$postmeta}</em></strong>");
+						printf(__('Error deleting Post Meta Key \'%s\' or Post Meta Key \'%s\' does not exist.', 'wp-postratings'), "<strong><em>{$postmeta}</em></strong>");
 						echo '</font><br />';
 					}
 				}
