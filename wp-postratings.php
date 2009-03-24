@@ -703,11 +703,19 @@ function ratings_sorting($local_wp_query) {
 		add_filter('posts_join', 'ratings_most_join');
 		add_filter('posts_where', 'ratings_most_where');
 		add_filter('posts_orderby', 'ratings_most_orderby');
+		remove_filter('posts_fields', 'ratings_highest_fields');
+		remove_filter('posts_join', 'ratings_highest_join');
+		remove_filter('posts_where', 'ratings_highest_where');
+		remove_filter('posts_orderby', 'ratings_highest_orderby');
 	} elseif($local_wp_query->get('r_sortby') == 'highest_rated') {
 		add_filter('posts_fields', 'ratings_highest_fields');
 		add_filter('posts_join', 'ratings_highest_join');
 		add_filter('posts_where', 'ratings_highest_where');
 		add_filter('posts_orderby', 'ratings_highest_orderby');
+		remove_filter('posts_fields', 'ratings_most_fields');
+		remove_filter('posts_join', 'ratings_most_join');
+		remove_filter('posts_where', 'ratings_most_where');
+		remove_filter('posts_orderby', 'ratings_most_orderby');
 	} else {
 		remove_filter('posts_fields', 'ratings_highest_fields');
 		remove_filter('posts_join', 'ratings_highest_join');
