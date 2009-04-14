@@ -376,7 +376,7 @@ function comment_author_ratings($comment_author_specific = '', $display = true) 
 function comment_author_ratings_filter($comment_text) {
 	global $comment, $comment_authors_ratings;
 	$output = '';
-	if(!is_feed()) {
+	if(!is_feed() && !is_admin()) {
 		if(get_comment_type() == 'comment') {
 			$post_ratings_images = '';
 			$ratings_image = get_option('postratings_image');
@@ -1080,7 +1080,7 @@ function expand_ratings_template($template, $post_id, $post_ratings_data = null,
 		$limit = intval($instance['limit']);
 		$min_votes = intval($instance['min_votes']);
 		$chars = intval($instance['chars']);
-		$cat_ids = attribute_escape($instance['cat_ids']);
+		$cat_ids = explode(',', attribute_escape($instance['cat_ids']));
 		$time_range = attribute_escape($instance['time_range']);
 		echo $before_widget.$before_title.$title.$after_title;
 		echo '<ul>'."\n";
@@ -1231,9 +1231,9 @@ function expand_ratings_template($template, $post_id, $post_ratings_data = null,
 
 
 ### Function: Init WP-PostRatings Widget
-add_action('widgets_init', 'widget_ratings_init', 5);
+add_action('widgets_init', 'widget_ratings_init');
 function widget_ratings_init() {
-	new WP_Widget_PostRatings();
+	register_widget('WP_Widget_PostRatings');
 }
 
 
