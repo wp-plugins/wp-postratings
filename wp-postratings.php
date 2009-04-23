@@ -183,7 +183,7 @@ function ratings_scripts_admin($hook_suffix) {
 function the_ratings_results($post_id, $new_user = 0, $new_score = 0, $new_average = 0, $type = 0) {
 	if($new_user == 0 && $new_score == 0 && $new_average == 0) {
 		$post_ratings_data = null;
-  } else {
+	} else {
 		$post_ratings_data->ratings_users = $new_user;
 		$post_ratings_data->ratings_score = $new_score;
 		$post_ratings_data->ratings_average = $new_average;
@@ -308,7 +308,7 @@ function check_rated_ip($post_id) {
 ### Function: Check Rated By Username
 function check_rated_username($post_id) {
 	global $wpdb, $user_ID;
-	if($user_ID == 0) {
+	if(!is_user_logged_in()) {
 		return 1;
 	}
 	$rating_userid = intval($user_ID);
