@@ -1074,14 +1074,14 @@ function expand_ratings_template($template, $post_id, $post_ratings_data = null,
 	// Display Widget
 	function widget($args, $instance) {
 		extract($args);
-		$title = attribute_escape($instance['title']);
-		$type = attribute_escape($instance['type']);
-		$mode = attribute_escape($instance['mode']);
+		$title = attr($instance['title']);
+		$type = attr($instance['type']);
+		$mode = attr($instance['mode']);
 		$limit = intval($instance['limit']);
 		$min_votes = intval($instance['min_votes']);
 		$chars = intval($instance['chars']);
-		$cat_ids = explode(',', attribute_escape($instance['cat_ids']));
-		$time_range = attribute_escape($instance['time_range']);
+		$cat_ids = explode(',', attr($instance['cat_ids']));
+		$time_range = attr($instance['time_range']);
 		echo $before_widget.$before_title.$title.$after_title;
 		echo '<ul>'."\n";
 		switch($type) {
@@ -1156,14 +1156,14 @@ function expand_ratings_template($template, $post_id, $post_ratings_data = null,
 	function form($instance) {
 		global $wpdb;
 		$instance = wp_parse_args((array) $instance, array('title' => __('Ratings', 'wp-postratings'), 'type' => 'highest_rated', 'mode' => 'both', 'limit' => 10, 'min_votes' => 0, 'chars' => 200, 'cat_ids' => '0', 'time_range' => '1 day'));
-		$title = attribute_escape($instance['title']);
-		$type = attribute_escape($instance['type']);
-		$mode = attribute_escape($instance['mode']);
+		$title = attr($instance['title']);
+		$type = attr($instance['type']);
+		$mode = attr($instance['mode']);
 		$limit = intval($instance['limit']);
 		$min_votes = intval($instance['min_votes']);
 		$chars = intval($instance['chars']);
-		$cat_ids = attribute_escape($instance['cat_ids']);
-		$time_range = attribute_escape($instance['time_range']);
+		$cat_ids = attr($instance['cat_ids']);
+		$time_range = attr($instance['time_range']);
 ?>
 		<p>
 			<label for="<?php echo $this->get_field_id('title'); ?>"><?php _e('Title:', 'wp-postratings'); ?> <input class="widefat" id="<?php echo $this->get_field_id('title'); ?>" name="<?php echo $this->get_field_name('title'); ?>" type="text" value="<?php echo $title; ?>" /></label>
