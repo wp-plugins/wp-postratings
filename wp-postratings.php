@@ -372,7 +372,7 @@ function comment_author_ratings($comment_author_specific = '', $display = true) 
 
 
 ### Function:  Display Comment Author Ratings
-//add_filter('comment_text', 'comment_author_ratings_filter');
+add_filter('comment_text', 'comment_author_ratings_filter');
 function comment_author_ratings_filter($comment_text) {
 	global $comment, $comment_authors_ratings;
 	$output = '';
@@ -382,11 +382,7 @@ function comment_author_ratings_filter($comment_text) {
 			$ratings_image = get_option('postratings_image');
 			$ratings_max = intval(get_option('postratings_max'));
 			$ratings_custom = intval(get_option('postratings_customrating'));
-			if(empty($comment_author_specific)) {
-				$comment_author = get_comment_author();
-			} else {
-				$comment_author = $comment_author_specific;
-			}
+			$comment_author = get_comment_author();
 			$comment_author_rating = intval($comment_authors_ratings[$comment_author]);	
 			if($comment_author_rating == 0) {
 				$comment_author_rating = intval($comment_authors_ratings[get_comment_author_IP()]);
