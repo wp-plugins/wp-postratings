@@ -372,7 +372,7 @@ function comment_author_ratings($comment_author_specific = '', $display = true) 
 
 
 ### Function:  Display Comment Author Ratings
-add_filter('comment_text', 'comment_author_ratings_filter');
+//add_filter('comment_text', 'comment_author_ratings_filter');
 function comment_author_ratings_filter($comment_text) {
 	global $comment, $comment_authors_ratings;
 	$output = '';
