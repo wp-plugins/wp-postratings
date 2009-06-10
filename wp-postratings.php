@@ -539,7 +539,6 @@ function add_ratings_fields($post_ID) {
 
 ### Function:Delete Rating Custom Fields
 add_action('delete_post', 'delete_ratings_fields');
-add_action('delete_page', 'delete_ratings_fields');
 function delete_ratings_fields($post_ID) {
 	global $wpdb;
 	if(!wp_is_post_revision($post_ID)) { 
