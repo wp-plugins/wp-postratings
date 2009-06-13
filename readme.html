@@ -305,6 +305,7 @@
 						<li>NEW: Use _n() Instead Of __ngettext() And _n_noop() Instead Of __ngettext_noop()</li>
 						<li>NEW: Uses New Widget Class From WordPress</li>
 						<li>NEW: Merge Widget Code To wp-postratings.php And Remove wp-postratings-widget.php</li>
+						<li>NEW: get_highest_rated_tag() And get_lowest_rated_tag()</li>
 						<li>FIXED: Uses $_SERVER['PHP_SELF'] With plugin_basename(__FILE__) Instead Of Just $_SERVER['REQUEST_URI']</li>
 						<li>FIXED: Ensure That Post Is Not A Revision</li>
 						<li>FIXED: Missing + Sign For Thumbs Up/Down Ratings If Score Is Positive</li>
@@ -653,6 +654,26 @@
 					<p>The value <strong>0</strong> refers to the minimum votes required before the post get shown.</p>
 					<p>The value <strong>10</strong> will display only the top 10 lowest rated posts/pages.</p>
 				</li>
+					<li>
+					To Display <strong>Lowest Rated Post By Tag</strong>
+				</li>
+				<li>
+					Use:
+					<blockquote>
+						&lt;?php if (function_exists('get_lowest_rated_tag')): ?&gt;<br />
+						&nbsp;&nbsp;&nbsp;&lt;ul&gt;<br />
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;?php get_lowest_rated_tag(TAG_ID); ?&gt;<br />
+						&nbsp;&nbsp;&nbsp;&lt;/ul&gt;<br />
+						&lt;?php endif; ?&gt;
+					</blockquote>
+					<p>Default: get_lowest_rated_tag(TAG_ID, 'both', 0, 10)</p>
+					<p>Replace <strong>TAG_ID</strong> will your tag ID. If you want it to span several categories, replace <strong>TAG_ID</strong> with <strong>array(1, 2)</strong> where <strong>1</strong> and <strong>2</strong> are your categories ID.</p>
+					<p>The value <strong>'both'</strong> will display both the lowest rated posts and pages.</p>
+					<p>If you want to display the lowest rated posts only, replace 'both' with <strong>'post'</strong>.</p>
+					<p>If you want to display the lowest rated pages only, replace 'both' with <strong>'page'</strong>.</p>
+					<p>The value <strong>0</strong> refers to the minimum votes required before the post get shown.</p>
+					<p>The value <strong>10</strong> will display only the top 10 lowest rated posts/pages.</p>
+				</li>
 				<li>
 					To Display <strong>Lowest Rated Post In A Category</strong>
 				</li>
@@ -687,6 +708,26 @@
 					</blockquote>
 					<p>Default: get_highest_rated('both', 0, 10)</p>
 					<p>The value <strong>'both'</strong> will display both the highest rated posts and pages.</p>
+					<p>If you want to display the highest rated posts only, replace 'both' with <strong>'post'</strong>.</p>
+					<p>If you want to display the highest rated pages only, replace 'both' with <strong>'page'</strong>.</p>
+					<p>The value <strong>0</strong> refers to the minimum votes required before the post get shown.</p>
+					<p>The value <strong>10</strong> will display only the top 10 highest rated posts/pages.</p>
+				</li>
+				<li>
+					To Display <strong>Highest Rated Post By Tag</strong>
+				</li>
+				<li>
+					Use:
+					<blockquote>
+						&lt;?php if (function_exists('get_highest_rated_tag')): ?&gt;<br />
+						&nbsp;&nbsp;&nbsp;&lt;ul&gt;<br />
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;?php get_highest_rated_tag(TAG_ID); ?&gt;<br />
+						&nbsp;&nbsp;&nbsp;&lt;/ul&gt;<br />
+						&lt;?php endif; ?&gt;
+					</blockquote>
+					<p>Default: get_highest_rated_tag(TAG_ID, 'both', 0, 10)</p>
+					<p>Replace <strong>TAG_ID</strong> will your tag ID. If you want it to span several categories, replace <strong>TAG_ID</strong> with <strong>array(1, 2)</strong> where <strong>1</strong> and <strong>2</strong> are your categories ID.</p>
+					<p>The value <strong>'both'</strong> will display both the highest rated posts and pages.</p>					
 					<p>If you want to display the highest rated posts only, replace 'both' with <strong>'post'</strong>.</p>
 					<p>If you want to display the highest rated pages only, replace 'both' with <strong>'page'</strong>.</p>
 					<p>The value <strong>0</strong> refers to the minimum votes required before the post get shown.</p>

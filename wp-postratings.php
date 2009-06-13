@@ -322,9 +322,9 @@ function check_rated_username($post_id) {
 ### Function: Get Comment Authors Ratings
 add_action('loop_start', 'get_comment_authors_ratings');
 function get_comment_authors_ratings() {
-	global $wpdb, $id, $comment_authors_ratings;
+	global $wpdb, $post, $comment_authors_ratings;
 	$comment_authors_ratings = array();
-	$comment_authors_ratings_results = $wpdb->get_results("SELECT rating_username, rating_rating, rating_ip FROM $wpdb->ratings WHERE rating_postid = $id");
+	$comment_authors_ratings_results = $wpdb->get_results("SELECT rating_username, rating_rating, rating_ip FROM $wpdb->ratings WHERE rating_postid = ".$post->ID);
 	if($comment_authors_ratings_results) {
 		foreach($comment_authors_ratings_results as $comment_authors_ratings_result) {
 			$comment_author = stripslashes($comment_authors_ratings_result->rating_username);
