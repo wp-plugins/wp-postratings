@@ -2,7 +2,7 @@
 /*
 +----------------------------------------------------------------+
 |																							|
-|	WordPress 2.8 Plugin: WP-PostRatings 1.50								|
+|	WordPress 2.8 Plugin: WP-PostRatings 1.60								|
 |	Copyright (c) 2009 Lester "GaMerZ" Chan									|
 |																							|
 |	File Written By:																	|
@@ -42,7 +42,7 @@ if($_POST['Submit']) {
 	$postratings_ratingstext_array = $_POST['postratings_ratingstext'];
 	$postratings_ratingstext = array();
 	foreach($postratings_ratingstext_array as $ratingstext) {
-		$postratings_ratingstext[] = trim(addslashes($ratingstext));
+		$postratings_ratingstext[] = trim($ratingstext);
 	}
 	$postratings_ratingsvalue_array = $_POST['postratings_ratingsvalue'];
 	$postratings_ratingsvalue = array();
@@ -199,7 +199,7 @@ $postratings_image = get_option('postratings_image');
 <div class="wrap">
 	<div id="icon-wp-postratings" class="icon32"><br /></div>
 	<h2><?php _e('Post Rating Options', 'wp-postratings'); ?></h2> 
-	<form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>?page=<?php echo plugin_basename(__FILE__); ?>"> 
+	<form method="post" action="<?php echo admin_url('admin.php?page='.plugin_basename(__FILE__)); ?>"> 
 		<input type="hidden" id="postratings_customrating" name="postratings_customrating" value="<?php echo $postratings_customrating; ?>" />
 		<input type="hidden" id="postratings_template_vote" name="postratings_template_vote" value="<?php echo htmlspecialchars(stripslashes(get_option('postratings_template_vote'))); ?>" />
 		<input type="hidden" id="postratings_template_text" name="postratings_template_text" value="<?php echo htmlspecialchars(stripslashes(get_option('postratings_template_text'))); ?>" />
@@ -393,7 +393,7 @@ $postratings_image = get_option('postratings_image');
 			</tr>
 		</table>
 		<p class="submit">
-			<input type="submit" name="Submit" class="button" value="<?php _e('Save Changes', 'wp-postratings'); ?>" />
+			<input type="submit" name="Submit" class="button-primary" value="<?php _e('Save Changes', 'wp-postratings'); ?>" />
 		</p>
 	</form>
 </div>

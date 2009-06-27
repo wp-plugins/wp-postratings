@@ -3,7 +3,7 @@
 Plugin Name: WP-PostRatings
 Plugin URI: http://lesterchan.net/portfolio/programming/php/
 Description: Adds an AJAX rating system for your WordPress blog's post/page.
-Version: 1.50
+Version: 1.60
 Author: Lester 'GaMerZ' Chan
 Author URI: http://lesterchan.net
 */
@@ -76,39 +76,41 @@ function the_ratings($start_tag = 'div', $custom_id = 0, $display = true) {
 	global $id;
 	// Allow Custom ID
 	if(intval($custom_id) > 0) {
-		$id = $custom_id;
+		$ratings_id = $custom_id;
+	} else {
+		$ratings_id = $id;
 	}
 	// Loading Style
 	$postratings_ajax_style = get_option('postratings_ajax_style');
 	if(intval($postratings_ajax_style['loading']) == 1) {
-		$loading = "\n<$start_tag id=\"post-ratings-$id-loading\"  class=\"post-ratings-loading\"><img src=\"".plugins_url('wp-postratings/images/loading.gif')."\" width=\"16\" height=\"16\" alt=\"".__('Loading', 'wp-postratings')." ...\" title=\"".__('Loading', 'wp-postratings')." ...\" class=\"post-ratings-image\" />&nbsp;".__('Loading', 'wp-postratings')." ...</".$start_tag.">\n";
+		$loading = "\n<$start_tag id=\"post-ratings-$ratings_id-loading\"  class=\"post-ratings-loading\"><img src=\"".plugins_url('wp-postratings/images/loading.gif')."\" width=\"16\" height=\"16\" alt=\"".__('Loading', 'wp-postratings')." ...\" title=\"".__('Loading', 'wp-postratings')." ...\" class=\"post-ratings-image\" />&nbsp;".__('Loading', 'wp-postratings')." ...</".$start_tag.">\n";
 	} else {
 		$loading = '';
 	}
 	// Check To See Whether User Has Voted
-	$user_voted = check_rated($id);
+	$user_voted = check_rated($ratings_id);
 	// If User Voted Or Is Not Allowed To Rate
 	if($user_voted) {
 		if(!$display) {
-			return "<$start_tag id=\"post-ratings-$id\" class=\"post-ratings\">".the_ratings_results($id).'</'.$start_tag.'>'.$loading;
+			return "<$start_tag id=\"post-ratings-$ratings_id\" class=\"post-ratings\">".the_ratings_results($ratings_id).'</'.$start_tag.'>'.$loading;
 		} else {
-			echo "<$start_tag id=\"post-ratings-$id\" class=\"post-ratings\">".the_ratings_results($id).'</'.$start_tag.'>'.$loading;
+			echo "<$start_tag id=\"post-ratings-$ratings_id\" class=\"post-ratings\">".the_ratings_results($ratings_id).'</'.$start_tag.'>'.$loading;
 			return;
 		}
 	// If User Is Not Allowed To Rate
 	} else if(!check_allowtorate()) {
 		if(!$display) {
-			return "<$start_tag id=\"post-ratings-$id\" class=\"post-ratings\">".the_ratings_results($id, 0, 0, 0, 1).'</'.$start_tag.'>'.$loading;
+			return "<$start_tag id=\"post-ratings-$ratings_id\" class=\"post-ratings\">".the_ratings_results($ratings_id, 0, 0, 0, 1).'</'.$start_tag.'>'.$loading;
 		} else {
-			echo "<$start_tag id=\"post-ratings-$id\" class=\"post-ratings\">".the_ratings_results($id, 0, 0, 0, 1).'</'.$start_tag.'>'.$loading;
+			echo "<$start_tag id=\"post-ratings-$ratings_id\" class=\"post-ratings\">".the_ratings_results($ratings_id, 0, 0, 0, 1).'</'.$start_tag.'>'.$loading;
 			return;
 		}
 	// If User Has Not Voted
 	} else {
 		if(!$display) {
-			return "<$start_tag id=\"post-ratings-$id\" class=\"post-ratings\">".the_ratings_vote($id).'</'.$start_tag.'>'.$loading;
+			return "<$start_tag id=\"post-ratings-$ratings_id\" class=\"post-ratings\">".the_ratings_vote($ratings_id).'</'.$start_tag.'>'.$loading;
 		} else {
-			echo "<$start_tag id=\"post-ratings-$id\" class=\"post-ratings\">".the_ratings_vote($id).'</'.$start_tag.'>'.$loading;
+			echo "<$start_tag id=\"post-ratings-$ratings_id\" class=\"post-ratings\">".the_ratings_vote($ratings_id).'</'.$start_tag.'>'.$loading;
 			return;
 		}
 	}

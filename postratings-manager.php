@@ -2,7 +2,7 @@
 /*
 +----------------------------------------------------------------+
 |																							|
-|	WordPress 2.8 Plugin: WP-PostRatings 1.50								|
+|	WordPress 2.8 Plugin: WP-PostRatings 1.60								|
 |	Copyright (c) 2009 Lester "GaMerZ" Chan									|
 |																							|
 |	File Written By:																	|
@@ -382,7 +382,7 @@ $postratings_logs = $wpdb->get_results("SELECT * FROM $wpdb->ratings WHERE 1=1 $
 			}
 		?>
 	<br />
-	<form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="get">
+	<form action="<?php echo admin_url('admin.php'); ?>" method="get">
 		<input type="hidden" name="page" value="<?php echo $base_name; ?>" />
 		<table class="widefat">
 			<tr>
@@ -498,7 +498,7 @@ $postratings_logs = $wpdb->get_results("SELECT * FROM $wpdb->ratings WHERE 1=1 $
 	<h3><?php _e('Delete Post Ratings Data/Logs', 'wp-postratings'); ?></h3>
 	<br style="clear" />
 	<div align="center">
-		<form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>?page=<?php echo plugin_basename(__FILE__); ?>">
+		<form method="post" action="<?php echo admin_url('admin.php?page='.plugin_basename(__FILE__)); ?>">
 		<table class="widefat">
 			<tr>
 				<td valign="top"><b><?php _e('Delete Type: ', 'wp-postratings'); ?></b></td>

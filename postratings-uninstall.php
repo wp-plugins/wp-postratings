@@ -2,7 +2,7 @@
 /*
 +----------------------------------------------------------------+
 |																							|
-|	WordPress 2.8 Plugin: WP-PostRatings 1.50								|
+|	WordPress 2.8 Plugin: WP-PostRatings 1.60								|
 |	Copyright (c) 2009 Lester "GaMerZ" Chan									|
 |																							|
 |	File Written By:																	|
@@ -102,7 +102,7 @@ switch($mode) {
 	default:
 ?>
 <!-- Uninstall WP-PostRatings -->
-<form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>?page=<?php echo plugin_basename(__FILE__); ?>">
+<form method="post" action="<?php echo admin_url('admin.php?page='.plugin_basename(__FILE__)); ?>">
 <div class="wrap">
 	<div id="icon-wp-postratings" class="icon32"><br /></div>
 	<h2><?php _e('Uninstall WP-PostRatings', 'wp-postratings'); ?></h2>
@@ -159,7 +159,7 @@ switch($mode) {
 	<p>&nbsp;</p>
 	<p style="text-align: center;">
 		<input type="checkbox" name="uninstall_rating_yes" value="yes" />&nbsp;<?php _e('Yes', 'wp-postratings'); ?><br /><br />
-		<input type="submit" name="do" value="<?php _e('UNINSTALL WP-PostRatings', 'wp-postratings'); ?>" class="button" onclick="return confirm('<?php _e('You Are About To Uninstall WP-PostRatings From WordPress.\nThis Action Is Not Reversible.\n\n Choose [Cancel] To Stop, [OK] To Uninstall.', 'wp-postratings'); ?>')" />
+		<input type="submit" name="do" value="<?php _e('UNINSTALL WP-PostRatings', 'wp-postratings'); ?>" class="button-primary" onclick="return confirm('<?php _e('You Are About To Uninstall WP-PostRatings From WordPress.\nThis Action Is Not Reversible.\n\n Choose [Cancel] To Stop, [OK] To Uninstall.', 'wp-postratings'); ?>')" />
 	</p>
 </div>
 </form>

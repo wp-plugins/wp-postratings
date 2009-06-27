@@ -2,7 +2,7 @@
 /*
 +----------------------------------------------------------------+
 |																							|
-|	WordPress 2.8 Plugin: WP-PostRatings 1.50								|
+|	WordPress 2.8 Plugin: WP-PostRatings 1.60								|
 |	Copyright (c) 2009 Lester "GaMerZ" Chan									|
 |																							|
 |	File Written By:																	|
@@ -20,7 +20,7 @@
 ### Function: Display Most Rated Page/Post
 if(!function_exists('get_most_rated')) {
 	function get_most_rated($mode = '', $min_votes = 0, $limit = 10, $chars = 0, $display = true) {
-		global $wpdb, $post;
+		global $wpdb;
 		$ratings_max = intval(get_option('postratings_max'));
 		$ratings_custom = intval(get_option('postratings_customrating'));
 		$output = '';
@@ -55,7 +55,7 @@ if(!function_exists('get_most_rated')) {
 ### Function: Display Most Rated Page/Post By Category ID
 if(!function_exists('get_most_rated_category')) {
 	function get_most_rated_category($category_id = 0, $mode = '', $min_votes = 0, $limit = 10, $chars = 0, $display = true) {
-		global $wpdb, $post;
+		global $wpdb;
 		$ratings_max = intval(get_option('postratings_max'));
 		$ratings_custom = intval(get_option('postratings_customrating'));
 		$output = '';
@@ -95,7 +95,7 @@ if(!function_exists('get_most_rated_category')) {
 ### Function: Display Most Rated Page/Post With Time Range
 if(!function_exists('get_most_rated_range')) {
 	function get_most_rated_range($time = '1 day', $mode = '', $limit = 10, $chars = 0, $display = true) {
-		global $wpdb, $post;
+		global $wpdb;
 		$ratings_max = intval(get_option('postratings_max'));
 		$ratings_custom = intval(get_option('postratings_customrating'));
 		$min_time = strtotime('-'.$time, current_time('timestamp')); 
@@ -131,7 +131,7 @@ if(!function_exists('get_most_rated_range')) {
 ### Function: Display Most Rated Page/Post With Time Range By Category ID
 if(!function_exists('get_most_rated_range_category')) {
 	function get_most_rated_range_category($time = '1 day', $category_id = 0, $mode = '', $limit = 10, $chars = 0, $display = true) {
-		global $wpdb, $post;
+		global $wpdb;
 		$ratings_max = intval(get_option('postratings_max'));
 		$ratings_custom = intval(get_option('postratings_customrating'));
 		$min_time = strtotime('-'.$time, current_time('timestamp')); 
@@ -173,8 +173,7 @@ if(!function_exists('get_most_rated_range_category')) {
 ### Function: Display Highest Rated Page/Post
 if(!function_exists('get_highest_rated')) {
 	function get_highest_rated($mode = '', $min_votes = 0, $limit = 10, $chars = 0, $display = true) {
-		global $wpdb, $post;
-		$temp_post = $post;
+		global $wpdb;
 		$ratings_max = intval(get_option('postratings_max'));
 		$ratings_custom = intval(get_option('postratings_customrating'));
 		$output = '';
@@ -197,7 +196,6 @@ if(!function_exists('get_highest_rated')) {
 		} else {
 			$output = '<li>'.__('N/A', 'wp-postratings').'</li>'."\n";
 		}
-		$post = $temp_post;
 		if($display) {
 			echo $output;
 		} else {
@@ -210,7 +208,7 @@ if(!function_exists('get_highest_rated')) {
 ### Function: Display Highest Rated Page/Post By Category ID
 if(!function_exists('get_highest_rated_category')) {
 	function get_highest_rated_category($category_id = 0, $mode = '', $min_votes = 0, $limit = 10, $chars = 0, $display = true) {
-		global $wpdb, $post;
+		global $wpdb;
 		$ratings_max = intval(get_option('postratings_max'));
 		$ratings_custom = intval(get_option('postratings_customrating'));
 		$output = '';
@@ -251,8 +249,7 @@ if(!function_exists('get_highest_rated_category')) {
 ### Function: Display Highest Rated Page/Post With Time Range
 if(!function_exists('get_highest_rated_range')) {
 	function get_highest_rated_range($time = '1 day', $mode = '', $limit = 10, $chars = 0, $display = true) {
-		global $wpdb, $post;
-		$temp_post = $post;
+		global $wpdb;
 		$ratings_max = intval(get_option('postratings_max'));
 		$ratings_custom = intval(get_option('postratings_customrating'));
 		$min_time = strtotime('-'.$time, current_time('timestamp')); 
@@ -276,7 +273,6 @@ if(!function_exists('get_highest_rated_range')) {
 		} else {
 			$output = '<li>'.__('N/A', 'wp-postratings').'</li>'."\n";
 		}
-		$post = $temp_post;
 		if($display) {
 			echo $output;
 		} else {
@@ -289,7 +285,7 @@ if(!function_exists('get_highest_rated_range')) {
 ### Function: Display Highest Rated Page/Post With Time Range By Category ID
 if(!function_exists('get_highest_rated_range_category')) {
 	function get_highest_rated_range_category($time = '1 day', $category_id = 0, $mode = '', $limit = 10, $chars = 0, $display = true) {
-		global $wpdb, $post;
+		global $wpdb;
 		$ratings_max = intval(get_option('postratings_max'));
 		$ratings_custom = intval(get_option('postratings_customrating'));
 		$min_time = strtotime('-'.$time, current_time('timestamp')); 
@@ -331,8 +327,7 @@ if(!function_exists('get_highest_rated_range_category')) {
 ### Function: Display Lowest Rated Page/Post
 if(!function_exists('get_lowest_rated')) {
 	function get_lowest_rated($mode = '', $min_votes = 0, $limit = 10, $chars = 0, $display = true) {
-		global $wpdb, $post;
-		$temp_post = $post;
+		global $wpdb;
 		$ratings_max = intval(get_option('postratings_max'));
 		$ratings_custom = intval(get_option('postratings_customrating'));
 		$output = '';
@@ -355,7 +350,6 @@ if(!function_exists('get_lowest_rated')) {
 		} else {
 			$output = '<li>'.__('N/A', 'wp-postratings').'</li>'."\n";
 		}
-		$post = $temp_post;
 		if($display) {
 			echo $output;
 		} else {
@@ -368,7 +362,7 @@ if(!function_exists('get_lowest_rated')) {
 ### Function: Display Lowest Rated Page/Post By Category ID
 if(!function_exists('get_lowest_rated_category')) {
 	function get_lowest_rated_category($category_id = 0, $mode = '', $min_votes = 0, $limit = 10, $chars = 0, $display = true) {
-		global $wpdb, $post;
+		global $wpdb;
 		$ratings_max = intval(get_option('postratings_max'));
 		$ratings_custom = intval(get_option('postratings_customrating'));
 		$output = '';
@@ -409,8 +403,7 @@ if(!function_exists('get_lowest_rated_category')) {
 ### Function: Display Lowest Rated Page/Post With Time Range
 if(!function_exists('get_lowest_rated_range')) {
 	function get_lowest_rated_range($time = '1 day', $mode = '', $limit = 10, $chars = 0, $display = true) {
-		global $wpdb, $post;
-		$temp_post = $post;
+		global $wpdb;
 		$ratings_max = intval(get_option('postratings_max'));
 		$ratings_custom = intval(get_option('postratings_customrating'));
 		$min_time = strtotime('-'.$time, current_time('timestamp')); 
@@ -434,7 +427,6 @@ if(!function_exists('get_lowest_rated_range')) {
 		} else {
 			$output = '<li>'.__('N/A', 'wp-postratings').'</li>'."\n";
 		}
-		$post = $temp_post;
 		if($display) {
 			echo $output;
 		} else {
@@ -446,7 +438,7 @@ if(!function_exists('get_lowest_rated_range')) {
 ### Function: Display Highest Score Page/Post
 if(!function_exists('get_highest_score')) {
 	function get_highest_score($mode = '', $min_votes = 0, $limit = 10, $chars = 0, $display = true) {
-		global $wpdb, $post;
+		global $wpdb;
 		$output = '';
 		if(!empty($mode) && $mode != 'both') {
 			$where = "$wpdb->posts.post_type = '$mode'";
@@ -474,7 +466,7 @@ if(!function_exists('get_highest_score')) {
 ### Function: Display Highest Score Page/Post By Category ID
 if(!function_exists('get_highest_score_category')) {
 	function get_highest_score_category($category_id = 0, $mode = '', $min_votes = 0, $limit = 10, $chars = 0, $display = true) {
-		global $wpdb, $post;
+		global $wpdb;
 		$output = '';
 		if(is_array($category_id)) {
 			$category_sql = "$wpdb->term_taxonomy.term_id IN (".join(',', $category_id).')';
@@ -507,7 +499,7 @@ if(!function_exists('get_highest_score_category')) {
 ### Function: Display Highest Score Page/Post With Time Range
 if(!function_exists('get_highest_score_range')) {
 	function get_highest_score_range($time = '1 day', $mode = '', $limit = 10, $chars = 0, $display = true) {
-		global $wpdb, $post;
+		global $wpdb;
 		$min_time = strtotime('-'.$time, current_time('timestamp')); 
 		$output = '';
 		if(!empty($mode) && $mode != 'both') {
@@ -536,7 +528,7 @@ if(!function_exists('get_highest_score_range')) {
 ### Function: Display Highest Score Page/Post With Time Range By Category ID
 if(!function_exists('get_highest_score_range_category')) {
 	function get_highest_score_range_category($time = '1 day', $category_id = 0, $mode = '', $limit = 10, $chars = 0, $display = true) {
-		global $wpdb, $post;
+		global $wpdb;
 		$min_time = strtotime('-'.$time, current_time('timestamp')); 
 		$output = '';
 		if(is_array($category_id)) {
@@ -571,7 +563,7 @@ if(!function_exists('get_highest_score_range_category')) {
 ### Function: Display Highest Rated Page/Post By Tag ID
 if(!function_exists('get_highest_rated_tag')) {
 	function get_highest_rated_tag($tag_id = 0, $mode = '', $min_votes = 0, $limit = 10, $chars = 0, $display = true) {
-		global $wpdb, $post;
+		global $wpdb;
 		$ratings_max = intval(get_option('postratings_max'));
 		$ratings_custom = intval(get_option('postratings_customrating'));
 		$output = '';
@@ -611,7 +603,7 @@ if(!function_exists('get_highest_rated_tag')) {
 ### Function: Display Lowest Rated Page/Post By Tag ID
 if(!function_exists('get_lowest_rated_tag')) {
 	function get_lowest_rated_tag($tag_id = 0, $mode = '', $min_votes = 0, $limit = 10, $chars = 0, $display = true) {
-		global $wpdb, $post;
+		global $wpdb;
 		$ratings_max = intval(get_option('postratings_max'));
 		$ratings_custom = intval(get_option('postratings_customrating'));
 		$output = '';

@@ -2,7 +2,7 @@
 /*
 +----------------------------------------------------------------+
 |																							|
-|	WordPress 2.8 Plugin: WP-PostRatings 1.50								|
+|	WordPress 2.8 Plugin: WP-PostRatings 1.60								|
 |	Copyright (c) 2009 Lester "GaMerZ" Chan									|
 |																							|
 |	File Written By:																	|
@@ -127,7 +127,7 @@ if($_POST['Submit']) {
 <div class="wrap">
 	<div id="icon-wp-postratings" class="icon32"><br /></div>
 	<h2><?php _e('Post Rating Templates', 'wp-postratings'); ?></h2> 
-	<form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>?page=<?php echo plugin_basename(__FILE__); ?>">
+	<form method="post" action="<?php echo admin_url('admin.php?page='.plugin_basename(__FILE__)); ?>">
 		<h3><?php _e('Template Variables', 'wp-postratings'); ?></h3>
 		<table class="form-table">
 			<tr>
@@ -248,7 +248,7 @@ if($_POST['Submit']) {
 			</tr>
 		</table>	
 		<p class="submit">
-			<input type="submit" name="Submit" class="button" value="<?php _e('Save Changes', 'wp-postratings'); ?>" />
+			<input type="submit" name="Submit" class="button-primary" value="<?php _e('Save Changes', 'wp-postratings'); ?>" />
 		</p>
 	</form>
 </div>
