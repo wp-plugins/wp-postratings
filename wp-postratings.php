@@ -1069,7 +1069,7 @@ function expand_ratings_template($template, $post_id, $post_ratings_data = null,
 	// Constructor
 	function WP_Widget_PostRatings() {
 		$widget_ops = array('description' => __('WP-PostRatings ratings statistics', 'wp-postratings'));
-		$this->WP_Widget('ratings', __('Ratings', 'wp-postratings'), $widget_ops);
+		$this->WP_Widget('ratings-widget', __('Ratings', 'wp-postratings'), $widget_ops);
 	}
 
 	// Display Widget
