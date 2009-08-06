@@ -325,15 +325,17 @@ function check_rated_username($post_id) {
 add_action('loop_start', 'get_comment_authors_ratings');
 function get_comment_authors_ratings() {
 	global $wpdb, $post, $comment_authors_ratings;
-	$comment_authors_ratings = array();
-    if($post->ID) {
-		$comment_authors_ratings_results = $wpdb->get_results("SELECT rating_username, rating_rating, rating_ip FROM $wpdb->ratings WHERE rating_postid = ".$post->ID);
-	}
-	if($comment_authors_ratings_results) {
-		foreach($comment_authors_ratings_results as $comment_authors_ratings_result) {
-			$comment_author = stripslashes($comment_authors_ratings_result->rating_username);
-			$comment_authors_ratings[$comment_author] = $comment_authors_ratings_result->rating_rating;
-			$comment_authors_ratings[$comment_authors_ratings_result->rating_ip] = $comment_authors_ratings_result->rating_rating;
+	if(!is_feed() && !is_admin()) {
+		$comment_authors_ratings = array();
+		if($post->ID) {
+			$comment_authors_ratings_results = $wpdb->get_results("SELECT rating_username, rating_rating, rating_ip FROM $wpdb->ratings WHERE rating_postid = ".$post->ID);
+		}
+		if($comment_authors_ratings_results) {
+			foreach($comment_authors_ratings_results as $comment_authors_ratings_result) {
+				$comment_author = stripslashes($comment_authors_ratings_result->rating_username);
+				$comment_authors_ratings[$comment_author] = $comment_authors_ratings_result->rating_rating;
+				$comment_authors_ratings[$comment_authors_ratings_result->rating_ip] = $comment_authors_ratings_result->rating_rating;
+			}
 		}
 	}
 }
