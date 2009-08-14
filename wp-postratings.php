@@ -1062,7 +1062,7 @@ function expand_ratings_template($template, $post_id, $post_ratings_data = null,
 	}
 	// Return value
 	$post = $temp_post;
-	return apply_filters('expand_ratings_template', $value);
+	return apply_filters('expand_ratings_template', htmlspecialchars_decode($value));
 }
 
 
