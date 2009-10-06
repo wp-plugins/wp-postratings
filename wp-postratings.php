@@ -311,7 +311,7 @@ function check_rated_ip($post_id) {
 function check_rated_username($post_id) {
 	global $wpdb, $user_ID;
 	if(!is_user_logged_in()) {
-		return 1;
+		return 0;
 	}
 	$rating_userid = intval($user_ID);
 	// Check User ID From IP Logging Database
