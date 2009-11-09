@@ -198,7 +198,7 @@ $postratings_image = get_option('postratings_image');
 <?php if(!empty($text)) { echo '<!-- Last Action --><div id="message" class="updated fade"><p>'.$text.'</p></div>'; } ?>
 <div class="wrap">
 	<div id="icon-wp-postratings" class="icon32"><br /></div>
-	<h2><?php _e('Post Rating Options', 'wp-postratings'); ?></h2> 
+	<h2><?php _e('Post Ratings Options', 'wp-postratings'); ?></h2> 
 	<form method="post" action="<?php echo admin_url('admin.php?page='.plugin_basename(__FILE__)); ?>"> 
 		<input type="hidden" id="postratings_customrating" name="postratings_customrating" value="<?php echo $postratings_customrating; ?>" />
 		<input type="hidden" id="postratings_template_vote" name="postratings_template_vote" value="<?php echo htmlspecialchars(stripslashes(get_option('postratings_template_vote'))); ?>" />
