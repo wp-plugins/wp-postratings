@@ -57,7 +57,7 @@ if(!empty($_POST['do'])) {
 						echo '</font><br />';
 					} else {
 						echo '<font color="red">';
-						printf(__('Error deleting Setting Key \'%s\' or Setting Key \'%s\' does not exist.', 'wp-postratings'), "<strong><em>{$setting}</em></strong>");
+						printf(__('Error deleting Setting Key \'%s\' or Setting Key \'%s\' does not exist.', 'wp-postratings'), "<strong><em>{$setting}</em></strong>", "<strong><em>{$setting}</em></strong>");
 						echo '</font><br />';
 					}
 				}
@@ -71,7 +71,7 @@ if(!empty($_POST['do'])) {
 						echo '</font><br />';
 					} else {
 						echo '<font color="red">';
-						printf(__('Error deleting Post Meta Key \'%s\' or Post Meta Key \'%s\' does not exist.', 'wp-postratings'), "<strong><em>{$postmeta}</em></strong>");
+						printf(__('Error deleting Post Meta Key \'%s\' or Post Meta Key \'%s\' does not exist.', 'wp-postratings'), "<strong><em>{$postmeta}</em></strong>", "<strong><em>{$postmeta}</em></strong>");
 						echo '</font><br />';
 					}
 				}
