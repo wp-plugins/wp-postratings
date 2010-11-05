@@ -10,7 +10,7 @@ Adds an AJAX rating system for your WordPress blog's post/page.
 == Description ==
 
 All the information (general, changelog, installation, upgrade, usage) you need about this plugin can be found here: [WP-PostRatings Readme](http://lesterchan.net/wordpress/readme/wp-postratings.html "WP-PostRatings Readme").
-It is the exact same readme.html is included in the zip package.
+It is the exact same readme.html is included in the ZIP package.
 
 == Development Blog ==
 
