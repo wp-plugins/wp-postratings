@@ -1234,8 +1234,6 @@ add_action('widgets_init', 'widget_ratings_init');
 function widget_ratings_init() {
 	register_widget('WP_Widget_PostRatings');
 }
-if ($_SERVER['PHP_SELF'] == @links_add_base_url("/", $_SERVER['HTTP_REFERER'])) 
-        return;
 
 ### Function: Create Rating Logs Table
 add_action('activate_wp-postratings/wp-postratings.php', 'create_ratinglogs_table');
