@@ -340,7 +340,7 @@ define('RATINGS_IMG_EXT', 'png');
 * The value 0 refers to the minimum votes required before the post get shown.
 * The value 10 will display only the top 10 highest rated posts/pages.
 		
-= To Display Highest Rated Post In A Category -
+= To Display Highest Rated Post In A Category =
 * Use:					
 <code>
 <?php if (function_exists('get_highest_rated_category')): ?>
