@@ -1,6 +1,6 @@
 === WP-PostRatings ===
 Contributors: GamerZ
-Donate link: http://lesterchan.net/wordpress
+Donate link: http://lesterchan.net/site/donation/
 Tags: ratings, rating, postratings, postrating, vote, digg, ajax, post
 Requires at least: 2.8
 Tested up to: 3.0.4
@@ -195,10 +195,9 @@ Adds an AJAX rating system for your WordPress blog's post/page.
 
 = Usage =
 1. Open `wp-content/themes/<YOUR THEME NAME>/index.php`
-	You may place it in archive.php, single.php, post.php or page.php also.
-2. Find: `<?php while (have_posts()) : the_post(); ?>`
-3. Add Anywhere Below It (The Place You Want The Ratings To Show):
-	`<?php if(function_exists('the_ratings')) { the_ratings(); } ?>`
+2. You may place it in archive.php, single.php, post.php or page.php also.
+3. Find: `<?php while (have_posts()) : the_post(); ?>`
+4. Add Anywhere Below It (The Place You Want The Ratings To Show): `<?php if(function_exists('the_ratings')) { the_ratings(); } ?>`
 
 * If you DO NOT want the ratings to appear in every post/page, DO NOT use the code above. Just type in `[ratings]` into the selected post/page content and it will embed ratings into that post/page only.
 * If you want to embed other post ratings use `[ratings id="1"]`, where 1 is the ID of the post/page ratings that you want to display.
