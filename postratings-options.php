@@ -216,7 +216,7 @@ $postratings_image = get_option('postratings_image');
 						$postratings_images_array = array();
 						if($handle = @opendir($postratings_path)) {     
 							while (false !== ($filename = readdir($handle))) {  
-								if ($filename != '.' && $filename != '..') {
+								if ($filename != '.' && $filename != '..' && strpos($filename, '.') !== 0) {
 									if(is_dir($postratings_path.'/'.$filename)) {
 										$postratings_images_array[$filename] = ratings_images_folder($filename);
 									}

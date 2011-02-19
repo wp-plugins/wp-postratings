@@ -446,7 +446,7 @@ function ratings_images_folder($folder_name) {
 	if(is_dir($postratings_path)) {
 		if($handle = @opendir($postratings_path)) {
 			while (false !== ($filename = readdir($handle))) {  
-				if ($filename != '.' && $filename != '..' && substr($filename, -8) != '-rtl.'.RATINGS_IMG_EXT) {
+				if ($filename != '.' && $filename != '..' && substr($filename, -8) != '-rtl.'.RATINGS_IMG_EXT && strpos($filename, '.') !== 0) {
 					if(in_array($filename, $normal_images)) {
 						$count++;
 					} elseif(intval(substr($filename,7, -7)) > $rating['max']) {
