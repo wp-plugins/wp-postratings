@@ -3,7 +3,7 @@
 Plugin Name: WP-PostRatings
 Plugin URI: http://lesterchan.net/portfolio/programming/php/
 Description: Adds an AJAX rating system for your WordPress blog's post/page.
-Version: 1.61
+Version: 1.62
 Author: Lester 'GaMerZ' Chan
 Author URI: http://lesterchan.net
 */
@@ -484,6 +484,7 @@ add_shortcode('ratings', 'ratings_shortcode');
 function ratings_shortcode($atts) {
 	extract(shortcode_atts(array('id' => '0', 'results' => false), $atts));
 	if(!is_feed()) {
+		$id = intval($id);
 		if($results) {
 			return the_ratings_results($id);
 		} else {
@@ -617,7 +618,7 @@ function process_ratings() {
 					$rate_cookie = setcookie("rated_".$post_id, $ratings_value[$rate-1], time() + 30000000, COOKIEPATH);
 				}
 				// Log Ratings No Matter What
-				$rate_log = $wpdb->query("INSERT INTO $wpdb->ratings VALUES (0, $post_id, '$post_title', ".$ratings_value[$rate-1].",'".current_time('timestamp')."', '".get_ipaddress()."', '".@gethostbyaddr(get_ipaddress())."' ,'$rate_user', $rate_userid)");
+				$rate_log = $wpdb->query("INSERT INTO $wpdb->ratings VALUES (0, $post_id, '$post_title', ".$ratings_value[$rate-1].",'".current_time('timestamp')."', '".get_ipaddress()."', '".esc_attr(@gethostbyaddr(get_ipaddress()))."' ,'$rate_user', $rate_userid)");
 				// Output AJAX Result
 				echo the_ratings_results($post_id, $post_ratings_users, $post_ratings_score, $post_ratings_average);
 				exit();

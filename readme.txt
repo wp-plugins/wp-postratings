@@ -36,6 +36,11 @@ Adds an AJAX rating system for your WordPress blog's post/page.
 * I spent most of my free time creating, updating, maintaining and supporting these plugins, if you really love my plugins and could spare me a couple of bucks, I will really appericiate it. If not feel free to use it without any obligations.
 
 == Changelog ==
+
+= Version 1.62 (31-09-2011) =
+* FIXED: Escaped Hostname
+* FIXED: Ensure Ratings Post ID In Shortcode Is An Integer
+
 = Version 1.61 (17-02-2011) =
 * FIXED: XSS Vulnerability. Thanks Dion Hulse aka dd32
 * FIXED: Removed Global $post
