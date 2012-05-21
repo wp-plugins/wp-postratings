@@ -2,8 +2,8 @@
 /*
 +----------------------------------------------------------------+
 |																							|
-|	WordPress 2.8 Plugin: WP-PostRatings 1.62								|
-|	Copyright (c) 2009 Lester "GaMerZ" Chan									|
+|	WordPress Plugin: WP-PostRatings								|
+|	Copyright (c) 2012 Lester "GaMerZ" Chan									|
 |																							|
 |	File Written By:																	|
 |	- Lester "GaMerZ" Chan															|
@@ -38,6 +38,7 @@ if(!empty($_POST['do'])) {
 	switch($_POST['do']) {
 		//  Uninstall WP-PostRatings
 		case __('UNINSTALL WP-PostRatings', 'wp-postratings') :
+			check_admin_referer('wp-postratings_uninstall');
 			if(trim($_POST['uninstall_rating_yes']) == 'yes') {
 				echo '<div id="message" class="updated fade">';
 				echo '<p>';
@@ -103,6 +104,7 @@ switch($mode) {
 ?>
 <!-- Uninstall WP-PostRatings -->
 <form method="post" action="<?php echo admin_url('admin.php?page='.plugin_basename(__FILE__)); ?>">
+<?php wp_nonce_field('wp-postratings_uninstall'); ?>
 <div class="wrap">
 	<div id="icon-wp-postratings" class="icon32"><br /></div>
 	<h2><?php _e('Uninstall WP-PostRatings', 'wp-postratings'); ?></h2>

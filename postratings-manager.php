@@ -2,8 +2,8 @@
 /*
 +----------------------------------------------------------------+
 |																							|
-|	WordPress 2.8 Plugin: WP-PostRatings 1.62								|
-|	Copyright (c) 2009 Lester "GaMerZ" Chan									|
+|	WordPress Plugin: WP-PostRatings								|
+|	Copyright (c) 2012 Lester "GaMerZ" Chan									|
 |																							|
 |	File Written By:																	|
 |	- Lester "GaMerZ" Chan															|
@@ -46,6 +46,7 @@ if(!empty($_POST['do'])) {
 	// Decide What To Do
 	switch($_POST['do']) {
 		case __('Delete Data/Logs', 'wp-postratings'):
+			check_admin_referer('wp-postratings_logs');
 			$post_ids = trim($_POST['delete_postid']);
 			$delete_datalog = intval($_POST['delete_datalog']);
 			$ratings_postmeta = array('ratings_users', 'ratings_score', 'ratings_average');
@@ -499,6 +500,7 @@ $postratings_logs = $wpdb->get_results("SELECT * FROM $wpdb->ratings WHERE 1=1 $
 	<br style="clear" />
 	<div align="center">
 		<form method="post" action="<?php echo admin_url('admin.php?page='.plugin_basename(__FILE__)); ?>">
+		<?php wp_nonce_field('wp-postratings_logs'); ?>
 		<table class="widefat">
 			<tr>
 				<td valign="top"><b><?php _e('Delete Type: ', 'wp-postratings'); ?></b></td>

@@ -2,8 +2,8 @@
 /*
 +----------------------------------------------------------------+
 |																							|
-|	WordPress 2.8 Plugin: WP-PostRatings 1.62								|
-|	Copyright (c) 2009 Lester "GaMerZ" Chan									|
+|	WordPress Plugin: WP-PostRatings								|
+|	Copyright (c) 2012 Lester "GaMerZ" Chan									|
 |																							|
 |	File Written By:																	|
 |	- Lester "GaMerZ" Chan															|
@@ -30,6 +30,7 @@ $base_page = 'admin.php?page='.$base_name;
 
 ### If Form Is Submitted
 if($_POST['Submit']) {
+	check_admin_referer('wp-postratings_templates');
 	$postratings_template_vote = trim($_POST['postratings_template_vote']);
 	$postratings_template_text = trim($_POST['postratings_template_text']);
 	$postratings_template_permission = trim($_POST['postratings_template_permission']);
@@ -128,6 +129,7 @@ if($_POST['Submit']) {
 	<div id="icon-wp-postratings" class="icon32"><br /></div>
 	<h2><?php _e('Post Ratings Templates', 'wp-postratings'); ?></h2> 
 	<form method="post" action="<?php echo admin_url('admin.php?page='.plugin_basename(__FILE__)); ?>">
+		<?php wp_nonce_field('wp-postratings_templates'); ?>
 		<h3><?php _e('Template Variables', 'wp-postratings'); ?></h3>
 		<table class="form-table">
 			<tr>

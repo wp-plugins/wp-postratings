@@ -37,6 +37,10 @@ Adds an AJAX rating system for your WordPress blog's post/page.
 
 == Changelog ==
 
+= Version 1.63 (21-05-2012) =
+* Move AJAX Request to wp-admin/admin-ajax.php
+* Added nonce To AJAX Calls And Admin Pages
+
 = Version 1.62 (31-09-2011) =
 * FIXED: Escaped Hostname
 * FIXED: Ensure Ratings Post ID In Shortcode Is An Integer

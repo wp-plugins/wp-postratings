@@ -2,8 +2,8 @@
 /*
 +----------------------------------------------------------------+
 |																							|
-|	WordPress 2.8 Plugin: WP-PostRatings 1.62								|
-|	Copyright (c) 2009 Lester "GaMerZ" Chan									|
+|	WordPress Plugin: WP-PostRatings								|
+|	Copyright (c) 2012 Lester "GaMerZ" Chan									|
 |																							|
 |	File Written By:																	|
 |	- Lester "GaMerZ" Chan															|
@@ -30,6 +30,7 @@ $base_page = 'admin.php?page='.$base_name;
 
 ### If Form Is Submitted
 if($_POST['Submit']) {
+	check_admin_referer('wp-postratings_options');
 	$postratings_customrating = intval($_POST['postratings_customrating']);
 	$postratings_template_vote = trim($_POST['postratings_template_vote']);
 	$postratings_template_text = trim($_POST['postratings_template_text']);
@@ -200,6 +201,7 @@ $postratings_image = get_option('postratings_image');
 	<div id="icon-wp-postratings" class="icon32"><br /></div>
 	<h2><?php _e('Post Ratings Options', 'wp-postratings'); ?></h2> 
 	<form method="post" action="<?php echo admin_url('admin.php?page='.plugin_basename(__FILE__)); ?>"> 
+		<?php wp_nonce_field('wp-postratings_options'); ?>
 		<input type="hidden" id="postratings_customrating" name="postratings_customrating" value="<?php echo $postratings_customrating; ?>" />
 		<input type="hidden" id="postratings_template_vote" name="postratings_template_vote" value="<?php echo htmlspecialchars(stripslashes(get_option('postratings_template_vote'))); ?>" />
 		<input type="hidden" id="postratings_template_text" name="postratings_template_text" value="<?php echo htmlspecialchars(stripslashes(get_option('postratings_template_text'))); ?>" />
@@ -284,7 +286,7 @@ $postratings_image = get_option('postratings_image');
 				<td><input type="text" id="postratings_max" name="postratings_max" value="<?php echo $postratings_max; ?>" size="3" <?php if($postratings_customrating) { echo 'readonly="readonly"'; } ?> /></td>
 			</tr>
 			<tr>
-				<td colspan="2" align="center"><input type="button" name="update" value="<?php _e('Update \'Individual Rating Text/Value\' Display', 'wp-postratings'); ?>" onclick="update_rating_text_value();" class="button" /><br /><img id="postratings_loading" src="<?php echo $postratings_url; ?>/loading.gif" alt="" style="display: none;" /></td>
+				<td colspan="2" align="center"><input type="button" name="update" value="<?php _e('Update \'Individual Rating Text/Value\' Display', 'wp-postratings'); ?>" onclick="update_rating_text_value('<?php echo wp_create_nonce('wp-postratings_option_update_individual_rating')?>');" class="button" /><br /><img id="postratings_loading" src="<?php echo $postratings_url; ?>/loading.gif" alt="" style="display: none;" /></td>
 			</tr>
 		</table>
 		<h3><?php _e('Individual Rating Text/Value', 'wp-postratings'); ?></h3>
