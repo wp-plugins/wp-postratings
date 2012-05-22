@@ -102,20 +102,24 @@ function rate_post_success(data) {
 
 // Process Post Ratings
 function rate_post() {
+	post_ratings_el = jQuery('#post-ratings-' + post_id);
 	if(!is_being_rated) {
+		post_ratings_nonce = jQuery(post_ratings_el).data('nonce');
+		if(typeof post_ratings_nonce == 'undefined')
+			post_ratings_nonce = jQuery(post_ratings_el).attr('data-nonce');
 		set_is_being_rated(true);
 		if(ratingsL10n.show_fading) {
-			jQuery('#post-ratings-' + post_id).fadeTo('def', 0, function () {
+			jQuery(post_ratings_el).fadeTo('def', 0, function () {
 				if(ratingsL10n.show_loading) {
 					jQuery('#post-ratings-' + post_id + '-loading').show();
 				}
-				jQuery.ajax({type: 'GET', url: ratingsL10n.ajax_url, data: 'pid=' + post_id + '&rate=' + post_rating, cache: false, success: rate_post_success});
+				jQuery.ajax({type: 'GET', url: ratingsL10n.ajax_url, data: 'action=postratings&pid=' + post_id + '&rate=' + post_rating + '&postratings_' + post_id + '_nonce=' + post_ratings_nonce, cache: false, success: rate_post_success});
 			});
 		} else {
 			if(ratingsL10n.show_loading) {
 				jQuery('#post-ratings-' + post_id + '-loading').show();
 			}
-			jQuery.ajax({type: 'GET', url: ratingsL10n.ajax_url, data: 'pid=' + post_id + '&rate=' + post_rating, cache: false, success: rate_post_success});
+			jQuery.ajax({type: 'GET', url: ratingsL10n.ajax_url, data: 'action=postratings&pid=' + post_id + '&rate=' + post_rating + '&postratings_' + post_id + '_nonce=' + post_ratings_nonce, cache: false, success: rate_post_success});
 		}
 	} else {
 		alert(ratingsL10n.text_wait);
