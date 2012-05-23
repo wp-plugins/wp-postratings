@@ -38,8 +38,9 @@ Adds an AJAX rating system for your WordPress blog's post/page.
 == Changelog ==
 
 = Version 1.63 (21-05-2012) =
-* Move AJAX Request to wp-admin/admin-ajax.php
-* Added nonce To AJAX Calls And Admin Pages
+* NEW: Move AJAX Request to wp-admin/admin-ajax.php
+* NEW: Added nonce To AJAX Calls And Admin Pages
+* NEW: Added Support For Google Rich Snippet
 
 = Version 1.62 (31-09-2011) =
 * FIXED: Escaped Hostname

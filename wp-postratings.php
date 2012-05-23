@@ -78,28 +78,33 @@ function the_ratings($start_tag = 'div', $custom_id = 0, $display = true) {
 	}
 	// Check To See Whether User Has Voted
 	$user_voted = check_rated($ratings_id);
+	// HTML Attributes
+	if(is_single())
+		$attributes = 'id="post-ratings-'.$ratings_id.'" class="post-ratings" itemscope itemtype="http://schema.org/Product"';
+	else
+		$attributes = 'id="post-ratings-'.$ratings_id.'" class="post-ratings"';
 	// If User Voted Or Is Not Allowed To Rate
 	if($user_voted) {
 		if(!$display) {
-			return "<$start_tag id=\"post-ratings-$ratings_id\" class=\"post-ratings\">".the_ratings_results($ratings_id).'</'.$start_tag.'>'.$loading;
+			return "<$start_tag $attributes>".the_ratings_results($ratings_id).'</'.$start_tag.'>'.$loading;
 		} else {
-			echo "<$start_tag id=\"post-ratings-$ratings_id\" class=\"post-ratings\">".the_ratings_results($ratings_id).'</'.$start_tag.'>'.$loading;
+			echo "<$start_tag $attributes>".the_ratings_results($ratings_id).'</'.$start_tag.'>'.$loading;
 			return;
 		}
 	// If User Is Not Allowed To Rate
 	} else if(!check_allowtorate()) {
 		if(!$display) {
-			return "<$start_tag id=\"post-ratings-$ratings_id\" class=\"post-ratings\">".the_ratings_results($ratings_id, 0, 0, 0, 1).'</'.$start_tag.'>'.$loading;
+			return "<$start_tag $attributes>".the_ratings_results($ratings_id, 0, 0, 0, 1).'</'.$start_tag.'>'.$loading;
 		} else {
-			echo "<$start_tag id=\"post-ratings-$ratings_id\" class=\"post-ratings\">".the_ratings_results($ratings_id, 0, 0, 0, 1).'</'.$start_tag.'>'.$loading;
+			echo "<$start_tag $attributes>".the_ratings_results($ratings_id, 0, 0, 0, 1).'</'.$start_tag.'>'.$loading;
 			return;
 		}
 	// If User Has Not Voted
 	} else {
 		if(!$display) {
-			return "<$start_tag id=\"post-ratings-$ratings_id\" class=\"post-ratings\" data-nonce=\"".wp_create_nonce('postratings_'.$ratings_id.'-nonce')."\">".the_ratings_vote($ratings_id).'</'.$start_tag.'>'.$loading;
+			return "<$start_tag $attributes data-nonce=\"".wp_create_nonce('postratings_'.$ratings_id.'-nonce')."\">".the_ratings_vote($ratings_id).'</'.$start_tag.'>'.$loading;
 		} else {
-			echo "<$start_tag id=\"post-ratings-$ratings_id\" class=\"post-ratings\" data-nonce=\"".wp_create_nonce('postratings_'.$ratings_id.'-nonce')."\">".the_ratings_vote($ratings_id).'</'.$start_tag.'>'.$loading;
+			echo "<$start_tag $attributes data-nonce=\"".wp_create_nonce('postratings_'.$ratings_id.'-nonce')."\">".the_ratings_vote($ratings_id).'</'.$start_tag.'>'.$loading;
 			return;
 		}
 	}
@@ -1164,8 +1169,26 @@ function expand_ratings_template($template, $post_id, $post_ratings_data = null,
 		}
 		$value = str_replace("%POST_CONTENT%", get_the_content(), $value);
 	}
+	
+	// Google Rich Snippet
+	if(is_single())
+	{
+		if(!isset($post_title))
+			$post_title = get_the_title($post_id);
+		if(!isset($post_excerpt))
+			$post_excerpt = ratings_post_excerpt($post_id, $post->post_excerpt, $post->post_content, $post->post_password);
+		if(!isset($post_link))
+			$post_link = get_permalink($post_id);
+			
+		$post_meta = '<meta itemprop="name" content="'.$post_title.'"><meta itemprop="description" content="'.$post_excerpt.'"><meta itemprop="url" content="'.$post_link.'">';
+		$ratings_meta = '<div style="display: none;" itemprop="aggregateRating" itemscope itemtype="http://schema.org/AggregateRating"><meta itemprop="bestRating" content="'.$ratings_max.'"><meta itemprop="ratingValue" content="'.$post_ratings_average.'"><meta itemprop="ratingCount" content="'.$post_ratings_users.'"></div>';
+		
+		$value = $value.$post_meta.$ratings_meta;
+	}
+	
 	// Return value
 	$post = $temp_post;
+	
 	return apply_filters('expand_ratings_template', htmlspecialchars_decode($value));
 }
 
