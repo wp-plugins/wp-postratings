@@ -1171,7 +1171,7 @@ function expand_ratings_template($template, $post_id, $post_ratings_data = null,
 	}
 	
 	// Google Rich Snippet
-	if(is_single())
+	if(is_single() || is_page())
 	{
 		if(!isset($post_title))
 			$post_title = get_the_title($post_id);
