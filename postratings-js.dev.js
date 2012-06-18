@@ -105,7 +105,7 @@ function rate_post() {
 	post_ratings_el = jQuery('#post-ratings-' + post_id);
 	if(!is_being_rated) {
 		post_ratings_nonce = jQuery(post_ratings_el).data('nonce');
-		if(typeof post_ratings_nonce == 'undefined')
+		if(typeof post_ratings_nonce == 'undefined' || post_ratings_nonce == null)
 			post_ratings_nonce = jQuery(post_ratings_el).attr('data-nonce');
 		set_is_being_rated(true);
 		if(ratingsL10n.show_fading) {
