@@ -3,7 +3,7 @@ Contributors: GamerZ
 Donate link: http://lesterchan.net/site/donation/
 Tags: ratings, rating, postratings, postrating, vote, digg, ajax, post
 Requires at least: 2.8
-Tested up to: 3.3.2
+Tested up to: 3.5.0
 Stable tag: trunk
 
 Adds an AJAX rating system for your WordPress blog's post/page.
@@ -36,6 +36,11 @@ Adds an AJAX rating system for your WordPress blog's post/page.
 * I spent most of my free time creating, updating, maintaining and supporting these plugins, if you really love my plugins and could spare me a couple of bucks, I will really appericiate it. If not feel free to use it without any obligations.
 
 == Changelog ==
+
+== Changelog ==
+= Version 1.64 (17-12-2012) =
+* Add "Ratings" Column To Manage Pages In WP-Admin
+* Add Sortable "Ratings" Column To Manage Posts/Pages In WP-Admin
 
 = Version 1.63 (21-05-2012) =
 * NEW: Move AJAX Request to wp-admin/admin-ajax.php
@@ -76,7 +81,7 @@ Adds an AJAX rating system for your WordPress blog's post/page.
 * NEW: Works For WordPress 2.7 Only
 * NEW: Load Admin JS And CSS Only In WP-PostRatings Admin Pages
 * NEW: Added postratings-admin-css.css For WP-PostRatings Admin CSS Styles
-* NEW: Allow The Usage Of PNG Icons Or GIF Icons. See Usage Tab.* 
+* NEW: Allow The Usage Of PNG Icons Or GIF Icons. See Usage Tab.*
 * NEW: Added get_lowest_rated_range() Function
 * NEW: Right To Left Language Support by <a href="http://persian-programming.com/" title="http://persian-programming.com/">Kambiz R. Khojasteh</a>
 * NEW: Added "postratings-css-rtl.css" by <a href="http://persian-programming.com/" title="http://persian-programming.com/">Kambiz R. Khojasteh</a>
@@ -222,7 +227,7 @@ Adds an AJAX rating system for your WordPress blog's post/page.
 4. Activate `WP-PostRatings` Plugin
 5. Go to `WP-Admin -> Ratings -> Ratings Templates` and restore all the template variables to `Default`
 6. Go to `WP-Admin -> Appearance -> Widgets` and re-add the Ratings Widget
-	
+
 == Upgrade Notice ==
 
 N/A
@@ -256,7 +261,7 @@ define('RATINGS_IMG_EXT', 'gif');
 define('RATINGS_IMG_EXT', 'png');
 </code>
 
-= How Does WP-PostRatings Load CSS? = 
+= How Does WP-PostRatings Load CSS? =
 * WP-PostRatings will load `postratings-css.css` from your theme's directory if it exists.
 * If it doesn't exists, it will just load the default 'postratings-css.css' that comes with WP-PostRatings.
 * This will allow you to upgrade WP-PostRatings without worrying about overwriting your ratings styles that you have created.
@@ -300,7 +305,7 @@ define('RATINGS_IMG_EXT', 'png');
 * The value 0 refers to the minimum votes required before the post get shown.
 * The value 10 will display only the top 10 lowest rated posts/pages.
 
-= To Display Lowest Rated Post In A Category = 
+= To Display Lowest Rated Post In A Category =
 * Use:
 <code>
 <?php if (function_exists('get_lowest_rated_category')): ?>
@@ -316,8 +321,8 @@ define('RATINGS_IMG_EXT', 'png');
 * If you want to display the lowest rated pages only, replace 'both' with 'page'.
 * The value 0 refers to the minimum votes required before the post get shown.
 * The value 10 will display only the top 10 lowest rated posts/pages.
-		
-= To Display Highest Rated Post =				
+
+= To Display Highest Rated Post =
 * Use:
 <code>
 <?php if (function_exists('get_highest_rated')): ?>
@@ -344,14 +349,14 @@ define('RATINGS_IMG_EXT', 'png');
 </code>
 * Default: get_highest_rated_tag(TAG_ID, 'both', 0, 10)
 * Replace TAG_ID will your tag ID. If you want it to span several categories, replace TAG_ID with array(1, 2) where 1 and 2 are your categories ID.
-* The value 'both' will display both the highest rated posts and pages.					
+* The value 'both' will display both the highest rated posts and pages.
 * If you want to display the highest rated posts only, replace 'both' with 'post'.
 * If you want to display the highest rated pages only, replace 'both' with 'page'.
 * The value 0 refers to the minimum votes required before the post get shown.
 * The value 10 will display only the top 10 highest rated posts/pages.
-		
+
 = To Display Highest Rated Post In A Category =
-* Use:					
+* Use:
 <code>
 <?php if (function_exists('get_highest_rated_category')): ?>
 	<ul>
@@ -361,7 +366,7 @@ define('RATINGS_IMG_EXT', 'png');
 </code>
 * Default: get_highest_rated_category(CATEGORY_ID, 'both', 0, 10)
 * Replace CATEGORY_ID will your category ID. If you want it to span several categories, replace CATEGORY_ID with array(1, 2) where 1 and 2 are your categories ID.
-* The value 'both' will display both the highest rated posts and pages.					
+* The value 'both' will display both the highest rated posts and pages.
 * If you want to display the highest rated posts only, replace 'both' with 'post'.
 * If you want to display the highest rated pages only, replace 'both' with 'page'.
 * The value 0 refers to the minimum votes required before the post get shown.
@@ -369,12 +374,12 @@ define('RATINGS_IMG_EXT', 'png');
 
 = To Display Highest Rated Post Within A Given Period =
 * Use:
-<code>					
+<code>
 <?php if (function_exists('get_highest_rated_range')): ?>
 	<ul>
 		<?php get_highest_rated_range('1 day'); ?>
 	</ul>
-<?php endif; ?>				
+<?php endif; ?>
 </code>
 * Default: get_highest_rated_range('1 day', 'both', 10)
 * The value '1 day' will be the range that you want. You can use '2 days', '1 month', etc.
@@ -391,7 +396,7 @@ define('RATINGS_IMG_EXT', 'png');
 		<?php get_most_rated(); ?>
 	</ul>
 <?php endif; ?>
-</code>		
+</code>
 * Default: get_most_rated('both', 0, 10)
 * The value 'both' will display both the most rated posts and pages.
 * If you want to display the most rated posts only, replace 'both' with 'post'.
@@ -399,7 +404,7 @@ define('RATINGS_IMG_EXT', 'png');
 * The value 0 refers to the minimum votes required before the post get shown.
 * The value 10 will display only the top 10 most rated posts/pages.
 
-= To Display Most Rated Post In A Category =				
+= To Display Most Rated Post In A Category =
 * Use:
 <code>
 <?php if (function_exists('get_most_rated_category')): ?>
@@ -407,7 +412,7 @@ define('RATINGS_IMG_EXT', 'png');
 		<?php get_most_rated_category(CATEGORY_ID); ?>
 	</ul>
 <?php endif; ?>
-</code>				
+</code>
 * Default: get_most_rated_category(CATEGORY_ID, 'both', 0, 10)
 * Replace CATEGORY_ID will your category ID. If you want it to span several categories, replace CATEGORY_ID with array(1, 2) where 1 and 2 are your categories ID.
 * The value 'both' will display both the most rated posts and pages.
@@ -416,7 +421,7 @@ define('RATINGS_IMG_EXT', 'png');
 * The value 0 refers to the minimum votes required before the post get shown.
 * The value 10 will display only the top 10 most rated posts/pages.
 
-= To Display Most Rated Post Within A Given Period =				
+= To Display Most Rated Post Within A Given Period =
 * Use:
 <code>
 <?php if (function_exists('get_most_rated_range')): ?>
@@ -432,7 +437,7 @@ define('RATINGS_IMG_EXT', 'png');
 * If you want to display the most rated pages only, replace 'both' with 'page'.
 * The value 10 will display only the top 10 most rated posts/pages.
 
-= To Display Highest Score Post =				
+= To Display Highest Score Post =
 * Use:
 <code>
 <?php if (function_exists('get_highest_score')): ?>
@@ -447,16 +452,16 @@ define('RATINGS_IMG_EXT', 'png');
 * If you want to display the most rated pages only, replace 'both' with 'page'.
 * The value 0 refers to the minimum votes required before the post get shown.
 * The value 10 will display only the top 10 most rated posts/pages.
-	
+
 = To Display Highest Score Post In A Category =
 * Use:
-<code>				
+<code>
 <?php if (function_exists('get_highest_score_category')): ?>
 	<ul>
 		<?php get_highest_score_category(CATEGORY_ID); ?>
 	</ul>
 <?php endif; ?>
-</code>	
+</code>
 * Default: get_highest_score_category(CATEGORY_ID, 'both', 0, 10)
 * Replace CATEGORY_ID will your category ID. If you want it to span several categories, replace CATEGORY_ID with array(1, 2) where 1 and 2 are your categories ID.
 * The value 'both' will display both the most rated posts and pages.
@@ -464,8 +469,8 @@ define('RATINGS_IMG_EXT', 'png');
 * If you want to display the most rated pages only, replace 'both' with 'page'.
 * The value 0 refers to the minimum votes required before the post get shown.
 * The value 10 will display only the top 10 most rated posts/pages.
-				
-				
+
+
 = To Display Highest Score Post Within A Given Period =
 * Use:
 <code>
@@ -481,7 +486,7 @@ define('RATINGS_IMG_EXT', 'png');
 * If you want to display the most rated posts only, replace 'both' with 'post'.
 * If you want to display the most rated pages only, replace 'both' with 'page'.
 * The value 10 will display only the top 10 most rated posts/pages.
-				
+
 = To Sort Highest/Lowest Rated Posts =
 * You can use: `<?php query_posts($query_string.'&r_sortby=highest_rated&amp;r_orderby=desc') ?>`
 * Or pass in the variables to the URL: `http://yoursite.com/?r_sortby=highest_rated&amp;r_orderby=desc`
@@ -489,5 +494,5 @@ define('RATINGS_IMG_EXT', 'png');
 
 = To Sort Most/Least Rated Posts =
 * You can use: `<?php query_posts($query_string.'&r_sortby=most_rated&amp;r_orderby=desc') ?>`
-* Or pass in the variables to the URL: `http://yoursite.com/?r_sortby=most_rated&amp;r_orderby=desc`	
+* Or pass in the variables to the URL: `http://yoursite.com/?r_sortby=most_rated&amp;r_orderby=desc`
 * You can replace desc with asc if you want the least rated posts.

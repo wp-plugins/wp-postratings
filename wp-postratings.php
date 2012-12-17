@@ -3,13 +3,13 @@
 Plugin Name: WP-PostRatings
 Plugin URI: http://lesterchan.net/portfolio/programming/php/
 Description: Adds an AJAX rating system for your WordPress blog's post/page.
-Version: 1.63
+Version: 1.64
 Author: Lester 'GaMerZ' Chan
 Author URI: http://lesterchan.net
 */
 
 
-/* 
+/*
 	Copyright 2012  Lester Chan  (email : lesterchan@gmail.com)
 
     This program is free software; you can redistribute it and/or modify
@@ -126,13 +126,13 @@ function ratings_scripts() {
 		wp_enqueue_style('wp-postratings', get_stylesheet_directory_uri().'/postratings-css.css', false, '1.63', 'all');
 	} else {
 		wp_enqueue_style('wp-postratings', plugins_url('wp-postratings/postratings-css.css'), false, '1.63', 'all');
-	}	
+	}
 	if('rtl' == $text_direction) {
 		if(@file_exists(TEMPLATEPATH.'/postratings-css-rtl.css')) {
 			wp_enqueue_style('wp-postratings-rtl', get_stylesheet_directory_uri().'/postratings-css-rtl.css', false, '1.63', 'all');
 		} else {
 			wp_enqueue_style('wp-postratings-rtl', plugins_url('wp-postratings/postratings-css-rtl.css'), false, '1.63', 'all');
-		} 
+		}
 	}
 	$postratings_max = intval(get_option('postratings_max'));
 	$postratings_custom = intval(get_option('postratings_customrating'));
@@ -175,7 +175,7 @@ function ratings_scripts_admin($hook_suffix) {
 }
 
 
-### Function: Display Ratings Results 
+### Function: Display Ratings Results
 function the_ratings_results($post_id, $new_user = 0, $new_score = 0, $new_average = 0, $type = 0) {
 	if($new_user == 0 && $new_score == 0 && $new_average == 0) {
 		$post_ratings_data = null;
@@ -277,7 +277,7 @@ function check_rated($post_id) {
 			return check_rated_username($post_id);
 			break;
 	}
-	return false;	
+	return false;
 }
 
 
@@ -348,7 +348,7 @@ function comment_author_ratings($comment_author_specific = '', $display = true) 
 		} else {
 			$comment_author = $comment_author_specific;
 		}
-		$comment_author_rating = intval($comment_authors_ratings[$comment_author]);	
+		$comment_author_rating = intval($comment_authors_ratings[$comment_author]);
 		if($comment_author_rating == 0) {
 			$comment_author_rating = intval($comment_authors_ratings[get_comment_author_IP()]);
 		}
@@ -357,7 +357,7 @@ function comment_author_ratings($comment_author_specific = '', $display = true) 
 			if($ratings_custom && $ratings_max == 2) {
 				if($comment_author_rating > 0) {
 					$comment_author_rating = '+'.$comment_author_rating;
-				}		
+				}
 			}
 			$image_alt = sprintf(__('%s gives a rating of %s', 'wp-postratings'), $comment_author, $comment_author_rating);
 			$post_ratings_images = get_ratings_images_comment_author($ratings_custom, $ratings_max, $comment_author_rating, $ratings_image, $image_alt);
@@ -383,7 +383,7 @@ function comment_author_ratings_filter($comment_text) {
 			$ratings_max = intval(get_option('postratings_max'));
 			$ratings_custom = intval(get_option('postratings_customrating'));
 			$comment_author = get_comment_author();
-			$comment_author_rating = intval($comment_authors_ratings[$comment_author]);	
+			$comment_author_rating = intval($comment_authors_ratings[$comment_author]);
 			if($comment_author_rating == 0) {
 				$comment_author_rating = intval($comment_authors_ratings[get_comment_author_IP()]);
 			}
@@ -392,7 +392,7 @@ function comment_author_ratings_filter($comment_text) {
 				if($ratings_custom && $ratings_max == 2) {
 					if($comment_author_rating > 0) {
 						$comment_author_rating = '+'.$comment_author_rating;
-					}		
+					}
 				}
 				$image_alt = sprintf(__('%s gives a rating of %s', 'wp-postratings'), $comment_author, $comment_author_rating);
 				$post_ratings_images = get_ratings_images_comment_author($ratings_custom, $ratings_max, $comment_author_rating, $ratings_image, $image_alt);
@@ -439,7 +439,7 @@ function ratings_images_folder($folder_name) {
 	$rating['images'] = array();
 	if(is_dir($postratings_path)) {
 		if($handle = @opendir($postratings_path)) {
-			while (false !== ($filename = readdir($handle))) {  
+			while (false !== ($filename = readdir($handle))) {
 				if ($filename != '.' && $filename != '..' && substr($filename, -8) != '-rtl.'.RATINGS_IMG_EXT && strpos($filename, '.') !== 0) {
 					if(in_array($filename, $normal_images)) {
 						$count++;
@@ -542,10 +542,10 @@ function add_ratings_fields($post_ID) {
 add_action('delete_post', 'delete_ratings_fields');
 function delete_ratings_fields($post_ID) {
 	global $wpdb;
-	if(!wp_is_post_revision($post_ID)) { 
+	if(!wp_is_post_revision($post_ID)) {
 		delete_post_meta($post_ID, 'ratings_users');
 		delete_post_meta($post_ID, 'ratings_score');
-		delete_post_meta($post_ID, 'ratings_average');	
+		delete_post_meta($post_ID, 'ratings_average');
 	}
 }
 
@@ -567,15 +567,15 @@ function process_ratings() {
 			_e('Failed To Verify Referrer', 'wp-postratings');
 			exit();
 		}
-		
-		if($rate > 0 && $post_id > 0 && check_allowtorate()) {		
+
+		if($rate > 0 && $post_id > 0 && check_allowtorate()) {
 			// Check For Bot
 			$bots_useragent = array('googlebot', 'google', 'msnbot', 'ia_archiver', 'lycos', 'jeeves', 'scooter', 'fast-webcrawler', 'slurp@inktomi', 'turnitinbot', 'technorati', 'yahoo', 'findexa', 'findlinks', 'gaisbo', 'zyborg', 'surveybot', 'bloglines', 'blogsearch', 'ubsub', 'syndic8', 'userland', 'gigabot', 'become.com');
 			$useragent = $_SERVER['HTTP_USER_AGENT'];
-			foreach ($bots_useragent as $bot) { 
+			foreach ($bots_useragent as $bot) {
 				if (stristr($useragent, $bot) !== false) {
 					return;
-				} 
+				}
 			}
 			header('Content-Type: text/html; charset='.get_option('blog_charset').'');
 			postratings_textdomain();
@@ -592,7 +592,7 @@ function process_ratings() {
 					$post_title = addslashes($post->post_title);
 					$post_ratings = get_post_custom($post_id);
 					$post_ratings_users = intval($post_ratings['ratings_users'][0]);
-					$post_ratings_score = intval($post_ratings['ratings_score'][0]);	
+					$post_ratings_score = intval($post_ratings['ratings_score'][0]);
 					// Check For Ratings Lesser Than 1 And Greater Than $ratings_max
 					if($rate < 1 || $rate > $ratings_max) {
 						$rate = 0;
@@ -607,7 +607,7 @@ function process_ratings() {
 						add_post_meta($post_id, 'ratings_score', $post_ratings_score, true);
 					}
 					if(!update_post_meta($post_id, 'ratings_average', $post_ratings_average)) {
-						add_post_meta($post_id, 'ratings_average', $post_ratings_average, true);	
+						add_post_meta($post_id, 'ratings_average', $post_ratings_average, true);
 					}
 					// Add Log
 					if(!empty($user_identity)) {
@@ -634,7 +634,7 @@ function process_ratings() {
 				} // End if($post)
 			} else {
 				printf(__('You Had Already Rated This Post. Post ID #%s.', 'wp-postratings'), $post_id);
-				exit();	
+				exit();
 			}// End if(!$rated)
 		} // End if($rate && $post_id && check_allowtorate())
 	} // End if(isset($_GET['action']) && $_GET['action'] == 'postratings')
@@ -649,18 +649,18 @@ function manage_ratings()
 	if(isset($_GET['action']) && $_GET['action'] == 'postratings-admin')
 	{
 		check_ajax_referer('wp-postratings_option_update_individual_rating');
-		
+
 		//Variables
 		$postratings_url = plugins_url('wp-postratings/images');
 		$postratings_path = WP_PLUGIN_DIR.'/wp-postratings/images';
 		$postratings_ratingstext = get_option('postratings_ratingstext');
 		$postratings_ratingsvalue = get_option('postratings_ratingsvalue');
-		
+
 		// Form Processing
 		$postratings_customrating = intval($_GET['custom']);
 		$postratings_image = trim($_GET['image']);
 		$postratings_max = intval($_GET['max']);
-		
+
 		// If It Is A Up/Down Rating
 		if($postratings_customrating && $postratings_max == 2) {
 			$postratings_ratingsvalue[0] = -1;
@@ -727,7 +727,7 @@ function manage_ratings()
 						echo '<input type="text" id="postratings_ratingsvalue_'.$i.'" name="postratings_ratingsvalue[]" value="'.$postratings_value.'" size="2" maxlength="2" />'."\n";
 						echo '</td>'."\n";
 						echo '</tr>'."\n";
-					}								
+					}
 				?>
 			</tbody>
 		</table>
@@ -780,7 +780,7 @@ function ratings_highest_where($content) {
 		$content .= " AND t1.meta_key = 'ratings_score' AND t2.meta_key = 'ratings_users'";
 	} else {
 		$content .= " AND t1.meta_key = 'ratings_average' AND t2.meta_key = 'ratings_users'";
-	}	
+	}
 	return $content;
 }
 function ratings_highest_orderby($content) {
@@ -832,6 +832,48 @@ function ratings_sorting($local_wp_query) {
 		remove_filter('posts_join', 'ratings_most_join');
 		remove_filter('posts_where', 'ratings_most_where');
 		remove_filter('posts_orderby', 'ratings_most_orderby');
+	}
+}
+
+
+### Function Show Ratings Column in WP-Admin
+add_action('manage_posts_custom_column', 'add_postratings_column_content');
+add_filter('manage_posts_columns', 'add_postratings_column');
+add_action('manage_pages_custom_column', 'add_postratings_column_content');
+add_filter('manage_pages_columns', 'add_postratings_column');
+function add_postratings_column($defaults) {
+    $defaults['ratings'] = 'Ratings';
+    return $defaults;
+}
+
+
+### Functions Fill In The Ratings
+function add_postratings_column_content($column_name) {
+    if($column_name == 'ratings') {
+        if(function_exists('the_ratings')) {
+        	$template = str_replace('%RATINGS_IMAGES_VOTE%', '%RATINGS_IMAGES%<br />', stripslashes(get_option('postratings_template_vote')));
+        	echo expand_ratings_template($template, get_the_id());
+        }
+    }
+}
+
+
+### Function Sort Columns
+add_filter('manage_edit-post_sortable_columns', 'sort_postratings_column');
+add_filter('manage_edit-page_sortable_columns', 'sort_postratings_column');
+function sort_postratings_column($defaults)
+{
+    $defaults['ratings'] = 'ratings';
+    return $defaults;
+}
+add_action('pre_get_posts', 'sort_postratings');
+function sort_postratings($query) {
+	if(!is_admin())
+		return;
+	$orderby = $query->get('orderby');
+	if('ratings' == $orderby) {
+		$query->set('meta_key', 'ratings_average');
+		$query->set('orderby', 'meta_value_num');
 	}
 }
 
@@ -944,11 +986,11 @@ function get_ratings_images($ratings_custom, $ratings_max, $post_rating, $rating
 	} elseif(file_exists(WP_PLUGIN_DIR.'/wp-postratings/images/'.$ratings_image.'/rating_start.'.RATINGS_IMG_EXT)) {
 		$ratings_images .= '<img src="'.plugins_url('/wp-postratings/images/'.$ratings_image.'/rating_start.'.RATINGS_IMG_EXT).'" alt="" class="post-ratings-image" />';
 	}
-	if($ratings_custom) { 
+	if($ratings_custom) {
 		for($i=1; $i <= $ratings_max; $i++) {
 			if($i <= $post_rating) {
 				$ratings_images .= '<img src="'.plugins_url('/wp-postratings/images/'.$ratings_image.'/rating_'.$i.'_on.'.RATINGS_IMG_EXT).'" alt="'.$image_alt.'" title="'.$image_alt.'" class="post-ratings-image" />';
-			} elseif($i == $insert_half) {            
+			} elseif($i == $insert_half) {
 				if ('rtl' == $text_direction && file_exists(WP_PLUGIN_DIR.'/wp-postratings/images/'.$ratings_image.'/rating_'.$i.'_half-rtl.'.RATINGS_IMG_EXT)) {
 					$ratings_images .= '<img src="'.plugins_url('/wp-postratings/images/'.$ratings_image.'/rating_'.$i.'_half-rtl.'.RATINGS_IMG_EXT).'" alt="'.$image_alt.'" title="'.$image_alt.'" class="post-ratings-image" />';
 				} else {
@@ -1000,7 +1042,7 @@ function get_ratings_images_vote($post_id, $ratings_custom, $ratings_max, $post_
 			}
 			$ratings_text = stripslashes($ratings_texts[$i-1]);
 			if($i <= $post_rating) {
-				$ratings_images .= '<img id="rating_'.$post_id.'_'.$i.'" src="'.plugins_url('/wp-postratings/images/'.$ratings_image.'/rating_'.$i.'_on.'.RATINGS_IMG_EXT).'" alt="'.$ratings_text.'" title="'.$ratings_text.'" onmouseover="current_rating('.$post_id.', '.$i.', \''.$ratings_text.'\');" onmouseout="ratings_off('.$post_rating.', '.$insert_half.', '.$use_half_rtl.');" onclick="rate_post();" onkeypress="rate_post();" style="cursor: pointer; border: 0px;" />';    
+				$ratings_images .= '<img id="rating_'.$post_id.'_'.$i.'" src="'.plugins_url('/wp-postratings/images/'.$ratings_image.'/rating_'.$i.'_on.'.RATINGS_IMG_EXT).'" alt="'.$ratings_text.'" title="'.$ratings_text.'" onmouseover="current_rating('.$post_id.', '.$i.', \''.$ratings_text.'\');" onmouseout="ratings_off('.$post_rating.', '.$insert_half.', '.$use_half_rtl.');" onclick="rate_post();" onkeypress="rate_post();" style="cursor: pointer; border: 0px;" />';
 			} elseif($i == $insert_half) {
 				if ($use_half_rtl) {
 					$ratings_images .= '<img id="rating_'.$post_id.'_'.$i.'" src="'.plugins_url('/wp-postratings/images/'.$ratings_image.'/rating_'.$i.'_half-rtl.'.RATINGS_IMG_EXT).'" alt="'.$ratings_text.'" title="'.$ratings_text.'" onmouseover="current_rating('.$post_id.', '.$i.', \''.$ratings_text.'\');" onmouseout="ratings_off('.$post_rating.', '.$insert_half.', '.$use_half_rtl.');" onclick="rate_post();" onkeypress="rate_post();" style="cursor: pointer; border: 0px;" />';
@@ -1020,7 +1062,7 @@ function get_ratings_images_vote($post_id, $ratings_custom, $ratings_max, $post_
 		for($i=1; $i <= $ratings_max; $i++) {
 			$ratings_text = stripslashes($ratings_texts[$i-1]);
 			if($i <= $post_rating) {
-				$ratings_images .= '<img id="rating_'.$post_id.'_'.$i.'" src="'.plugins_url('/wp-postratings/images/'.$ratings_image.'/rating_on.'.RATINGS_IMG_EXT).'" alt="'.$ratings_text.'" title="'.$ratings_text.'" onmouseover="current_rating('.$post_id.', '.$i.', \''.$ratings_text.'\');" onmouseout="ratings_off('.$post_rating.', '.$insert_half.', '.$use_half_rtl.');" onclick="rate_post();" onkeypress="rate_post();" style="cursor: pointer; border: 0px;" />';    
+				$ratings_images .= '<img id="rating_'.$post_id.'_'.$i.'" src="'.plugins_url('/wp-postratings/images/'.$ratings_image.'/rating_on.'.RATINGS_IMG_EXT).'" alt="'.$ratings_text.'" title="'.$ratings_text.'" onmouseover="current_rating('.$post_id.', '.$i.', \''.$ratings_text.'\');" onmouseout="ratings_off('.$post_rating.', '.$insert_half.', '.$use_half_rtl.');" onclick="rate_post();" onkeypress="rate_post();" style="cursor: pointer; border: 0px;" />';
 			} elseif($i == $insert_half) {
 				if ($use_half_rtl) {
 					$ratings_images .= '<img id="rating_'.$post_id.'_'.$i.'" src="'.plugins_url('/wp-postratings/images/'.$ratings_image.'/rating_half-rtl.'.RATINGS_IMG_EXT).'" alt="'.$ratings_text.'" title="'.$ratings_text.'" onmouseover="current_rating('.$post_id.', '.$i.', \''.$ratings_text.'\');" onmouseout="ratings_off('.$post_rating.', '.$insert_half.', '.$use_half_rtl.');" onclick="rate_post();" onkeypress="rate_post();" style="cursor: pointer; border: 0px;" />';
@@ -1067,7 +1109,7 @@ function get_ratings_images_comment_author($ratings_custom, $ratings_max, $comme
 	} else {
 		for($i=1; $i <= $ratings_max; $i++) {
 			if($i <= $comment_author_rating) {
-				$ratings_images .= '<img src="'.plugins_url('wp-postratings/images/'.$ratings_image.'/rating_on.'.RATINGS_IMG_EXT).'" alt="'.$image_alt.'" title="'.$image_alt.'" class="post-ratings-image" />';    
+				$ratings_images .= '<img src="'.plugins_url('wp-postratings/images/'.$ratings_image.'/rating_on.'.RATINGS_IMG_EXT).'" alt="'.$image_alt.'" title="'.$image_alt.'" class="post-ratings-image" />';
 			} else {
 				$ratings_images .= '<img src="'.plugins_url('wp-postratings/images/'.$ratings_image.'/rating_off.'.RATINGS_IMG_EXT).'" alt="'.$image_alt.'" title="'.$image_alt.'" class="post-ratings-image" />';
 			}
@@ -1106,7 +1148,7 @@ function expand_ratings_template($template, $post_id, $post_ratings_data = null,
 		$post_ratings_percentage = 0;
 	} else {
 		$post_ratings = round($post_ratings_average, 1);
-		$post_ratings_percentage = round((($post_ratings_score/$post_ratings_users)/$ratings_max) * 100, 2);    
+		$post_ratings_percentage = round((($post_ratings_score/$post_ratings_users)/$ratings_max) * 100, 2);
 	}
 	$post_ratings_text = '<span class="post-ratings-text" id="ratings_'.$post_id.'_text"></span>';
 	// Get the image's alt text
@@ -1126,7 +1168,7 @@ function expand_ratings_template($template, $post_id, $post_ratings_data = null,
 		$insert_half = ceil($post_ratings_average);
 	} elseif($average_diff > 0.75) {
 		$insert_half = ceil($post_ratings);
-	}  
+	}
 	// Replace the variables
 	$value = $template;
 	if (strpos($template, '%RATINGS_IMAGES%') !== false) {
@@ -1169,7 +1211,7 @@ function expand_ratings_template($template, $post_id, $post_ratings_data = null,
 		}
 		$value = str_replace("%POST_CONTENT%", get_the_content(), $value);
 	}
-	
+
 	// Google Rich Snippet
 	if(is_single() || is_page())
 	{
@@ -1179,16 +1221,16 @@ function expand_ratings_template($template, $post_id, $post_ratings_data = null,
 			$post_excerpt = ratings_post_excerpt($post_id, $post->post_excerpt, $post->post_content, $post->post_password);
 		if(!isset($post_link))
 			$post_link = get_permalink($post_id);
-			
+
 		$post_meta = '<meta itemprop="name" content="'.$post_title.'"><meta itemprop="description" content="'.$post_excerpt.'"><meta itemprop="url" content="'.$post_link.'">';
 		$ratings_meta = '<div style="display: none;" itemprop="aggregateRating" itemscope itemtype="http://schema.org/AggregateRating"><meta itemprop="bestRating" content="'.$ratings_max.'"><meta itemprop="ratingValue" content="'.$post_ratings_average.'"><meta itemprop="ratingCount" content="'.$post_ratings_users.'"></div>';
-		
+
 		$value = $value.$post_meta.$ratings_meta;
 	}
-	
+
 	// Return value
 	$post = $temp_post;
-	
+
 	return apply_filters('expand_ratings_template', htmlspecialchars_decode($value));
 }
 
@@ -1410,7 +1452,7 @@ function create_ratinglogs_table() {
 	// Database Upgrade For WP-PostRatings 1.02
 	add_option('postratings_logging_method', '3', 'Logging Method Of User Rated\'s Answer');
 	add_option('postratings_allowtorate', '2', 'Who Is Allowed To Rate');
-	// Database Uprade For WP-PostRatings 1.04	
+	// Database Uprade For WP-PostRatings 1.04
 	maybe_add_column($wpdb->ratings, 'rating_userid', "ALTER TABLE $wpdb->ratings ADD rating_userid INT( 10 ) NOT NULL DEFAULT '0';");
 	// Database Uprade For WP-PostRatings 1.05
 	add_option('postratings_ratingstext', array(__('1 Star', 'wp-postratings'), __('2 Stars', 'wp-postratings'), __('3 Stars', 'wp-postratings'), __('4 Stars', 'wp-postratings'), __('5 Stars', 'wp-postratings')), 'Individual Post Rating Text');
@@ -1426,7 +1468,7 @@ function create_ratinglogs_table() {
 	// Database Upgrade For WP-PostRatings 1.50
 	delete_option('widget_ratings_highest_rated');
 	delete_option('widget_ratings_most_rated');
-	// Set 'manage_ratings' Capabilities To Administrator	
+	// Set 'manage_ratings' Capabilities To Administrator
 	$role = get_role('administrator');
 	if(!$role->has_cap('manage_ratings')) {
 		$role->add_cap('manage_ratings');
