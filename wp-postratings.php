@@ -6,6 +6,7 @@ Description: Adds an AJAX rating system for your WordPress blog's post/page.
 Version: 1.64
 Author: Lester 'GaMerZ' Chan
 Author URI: http://lesterchan.net
+Text Domain: wp-postratings
 */
 
 
