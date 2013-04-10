@@ -10,7 +10,7 @@ Author URI: http://lesterchan.net
 
 
 /*
-	Copyright 2012  Lester Chan  (email : lesterchan@gmail.com)
+	Copyright 2013  Lester Chan  (email : lesterchan@gmail.com)
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -1410,6 +1410,7 @@ function expand_ratings_template($template, $post_id, $post_ratings_data = null,
 ### Function: Init WP-PostRatings Widget
 add_action('widgets_init', 'widget_ratings_init');
 function widget_ratings_init() {
+	postratings_textdomain();
 	register_widget('WP_Widget_PostRatings');
 }
 
