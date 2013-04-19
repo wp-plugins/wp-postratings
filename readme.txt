@@ -3,7 +3,7 @@ Contributors: GamerZ
 Donate link: http://lesterchan.net/site/donation/
 Tags: ratings, rating, postratings, postrating, vote, digg, ajax, post
 Requires at least: 2.8
-Tested up to: 3.5.1
+Tested up to: 3.5
 Stable tag: trunk
 
 Adds an AJAX rating system for your WordPress blog's post/page.
@@ -38,6 +38,11 @@ Adds an AJAX rating system for your WordPress blog's post/page.
 == Changelog ==
 
 == Changelog ==
+= Version 1.65 (19-04-2013) =
+* Fixed "Creating default object from empty value"
+* Added Text Domain To Plugin
+* Added Tested To 3.5
+
 = Version 1.64 (17-12-2012) =
 * Add "Ratings" Column To Manage Pages In WP-Admin
 * Add Sortable "Ratings" Column To Manage Posts/Pages In WP-Admin
