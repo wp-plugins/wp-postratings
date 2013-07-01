@@ -16,6 +16,8 @@
 +----------------------------------------------------------------+
 */
 
+// Exit if accessed directly
+if ( ! defined( 'ABSPATH' ) ) exit;
 
 ### Check Whether User Can Manage Ratings
 if(!current_user_can('manage_ratings')) {
@@ -29,7 +31,7 @@ $base_page = 'admin.php?page='.$base_name;
 
 
 ### If Form Is Submitted
-if($_POST['Submit']) {
+if ( isset( $_POST['Submit'] ) ) {
 	check_admin_referer('wp-postratings_templates');
 	$postratings_template_vote = trim($_POST['postratings_template_vote']);
 	$postratings_template_text = trim($_POST['postratings_template_text']);

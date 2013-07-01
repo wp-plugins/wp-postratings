@@ -3,7 +3,7 @@
 Plugin Name: WP-PostRatings
 Plugin URI: http://lesterchan.net/portfolio/programming/php/
 Description: Adds an AJAX rating system for your WordPress blog's post/page.
-Version: 1.65
+Version: 1.66
 Author: Lester 'GaMerZ' Chan
 Author URI: http://lesterchan.net
 Text Domain: wp-postratings
@@ -28,6 +28,8 @@ Text Domain: wp-postratings
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
+// Exit if accessed directly
+if ( ! defined( 'ABSPATH' ) ) exit;
 
 ### Define Image Extension
 define('RATINGS_IMG_EXT', 'gif');
@@ -297,7 +299,7 @@ function check_rated_cookie($post_id) {
 function check_rated_ip($post_id) {
 	global $wpdb;
 	// Check IP From IP Logging Database
-	$get_rated = $wpdb->get_var("SELECT rating_ip FROM $wpdb->ratings WHERE rating_postid = $post_id AND rating_ip = '".get_ipaddress()."'");
+	$get_rated = $wpdb->get_var( $wpdb->prepare( "SELECT rating_ip FROM {$wpdb->ratings} WHERE rating_postid = %d AND rating_ip = %s", $post_id, get_ipaddress() ) );
 	// 0: False | > 0: True
 	return intval($get_rated);
 }
@@ -309,9 +311,8 @@ function check_rated_username($post_id) {
 	if(!is_user_logged_in()) {
 		return 0;
 	}
-	$rating_userid = intval($user_ID);
 	// Check User ID From IP Logging Database
-	$get_rated = $wpdb->get_var("SELECT rating_userid FROM $wpdb->ratings WHERE rating_postid = $post_id AND rating_userid = $rating_userid");
+	$get_rated = $wpdb->get_var( $wpdb->prepare( "SELECT rating_userid FROM {$wpdb->ratings} WHERE rating_postid = %d AND rating_userid = %d", $post_id, $rating_userid ) );
 	// 0: False | > 0: True
 	return intval($get_rated);
 }
@@ -324,7 +325,7 @@ function get_comment_authors_ratings() {
 	if(!is_feed() && !is_admin()) {
 		$comment_authors_ratings = array();
 		if($post->ID) {
-			$comment_authors_ratings_results = $wpdb->get_results("SELECT rating_username, rating_rating, rating_ip FROM $wpdb->ratings WHERE rating_postid = ".$post->ID);
+			$comment_authors_ratings_results = $wpdb->get_results( $wpdb->prepare( "SELECT rating_username, rating_rating, rating_ip FROM {$wpdb->ratings} WHERE rating_postid = %d", $post->ID ) );
 		}
 		if($comment_authors_ratings_results) {
 			foreach($comment_authors_ratings_results as $comment_authors_ratings_result) {
@@ -626,7 +627,9 @@ function process_ratings() {
 						$rate_cookie = setcookie("rated_".$post_id, $ratings_value[$rate-1], time() + 30000000, COOKIEPATH);
 					}
 					// Log Ratings No Matter What
-					$rate_log = $wpdb->query("INSERT INTO $wpdb->ratings VALUES (0, $post_id, '$post_title', ".$ratings_value[$rate-1].",'".current_time('timestamp')."', '".get_ipaddress()."', '".esc_attr(@gethostbyaddr(get_ipaddress()))."' ,'$rate_user', $rate_userid)");
+					$rate_log = $wpdb->query( $wpdb->prepare( "INSERT INTO {$wpdb->ratings} (%d, %d, %s, %d, NOW(), %s, %s, %s, %d )", 0, $post_id, $post_title, $ratings_value[$rate-1], get_ipaddress(), @gethostbyaddr( get_ipaddress() ), $rate_user, $rate_userid ) );
+					// Allow Other Plugins To Hook When A Post Is Rated
+					do_action('rate_post', $rate_userid, $post_id, $ratings_value[$rate-1]);
 					// Output AJAX Result
 					echo the_ratings_results($post_id, $post_ratings_users, $post_ratings_score, $post_ratings_average);
 					exit();
@@ -1224,7 +1227,7 @@ function expand_ratings_template($template, $post_id, $post_ratings_data = null,
 		if(!isset($post_link))
 			$post_link = get_permalink($post_id);
 
-		$post_meta = '<meta itemprop="name" content="'.$post_title.'"><meta itemprop="description" content="'.$post_excerpt.'"><meta itemprop="url" content="'.$post_link.'">';
+		$post_meta = '<meta itemprop="name" content="'.esc_attr($post_title).'"><meta itemprop="description" content="'.esc_attr($post_excerpt).'"><meta itemprop="url" content="'.$post_link.'">';
 		$ratings_meta = '<div style="display: none;" itemprop="aggregateRating" itemscope itemtype="http://schema.org/AggregateRating">';
 		$ratings_meta .= '<meta itemprop="bestRating" content="'.$ratings_max.'">';
 		$ratings_meta .= '<meta itemprop="ratingValue" content="'.$post_ratings_average.'">';
