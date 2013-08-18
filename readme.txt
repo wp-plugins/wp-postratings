@@ -47,7 +47,7 @@ Adds an AJAX rating system for your WordPress blog's post/page.
 * Fixed not logging ratings
 * Fixed sorting of ratings logs
 
-3## Version 1.71 (10-07-2013)
+= Version 1.71 (10-07-2013) =
 * Fixed "unable to delete logs/data"
 
 = Version 1.70 (01-07-2013) =
