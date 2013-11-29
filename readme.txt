@@ -3,7 +3,7 @@ Contributors: GamerZ
 Donate link: http://lesterchan.net/site/donation/  
 Tags: ratings, rating, postratings, postrating, vote, digg, ajax, post  
 Requires at least: 2.8  
-Tested up to: 3.6  
+Tested up to: 3.7  
 Stable tag: trunk  
 
 Adds an AJAX rating system for your WordPress blog's post/page.
@@ -36,6 +36,13 @@ Adds an AJAX rating system for your WordPress blog's post/page.
 * I spent most of my free time creating, updating, maintaining and supporting these plugins, if you really love my plugins and could spare me a couple of bucks, I will really appericiate it. If not feel free to use it without any obligations.
 
 == Changelog ==
+* Version 1.77
+* NEW: Add in %POST_ID% template variables
+* FIXED: Ensure Google Rich Snippet only displays in main loop and not in the widget
+* FIXED: Removed reviewCount from Google Rich Snippet
+* FIXED: Make the ratings widget more optimized
+* FIXED: Some widget templates are using postratings_template_mostrated instead of postratings_template_highestrated
+
 = Version 1.76 =
 * FIXED: No longer needing add_post_meta() if update_post_meta() fails
 * FIXED: Update 'Individual Rating Text/Value' Display no working due to missing nonce

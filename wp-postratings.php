@@ -3,7 +3,7 @@
 Plugin Name: WP-PostRatings
 Plugin URI: http://lesterchan.net/portfolio/programming/php/
 Description: Adds an AJAX rating system for your WordPress blog's post/page.
-Version: 1.76
+Version: 1.77
 Author: Lester 'GaMerZ' Chan
 Author URI: http://lesterchan.net
 Text Domain: wp-postratings
@@ -595,8 +595,8 @@ function process_ratings() {
 					$ratings_value = get_option('postratings_ratingsvalue');
 					$post_title = addslashes($post->post_title);
 					$post_ratings = get_post_custom($post_id);
-					$post_ratings_users = intval($post_ratings['ratings_users'][0]);
-					$post_ratings_score = intval($post_ratings['ratings_score'][0]);
+					$post_ratings_users = ! empty( $post_ratings['ratings_users'] ) ? intval($post_ratings['ratings_users'][0]) : 0;
+					$post_ratings_score = ! empty( $post_ratings['ratings_score'] ) ? intval($post_ratings['ratings_score'][0]) : 0;
 					// Check For Ratings Lesser Than 1 And Greater Than $ratings_max
 					if($rate < 1 || $rate > $ratings_max) {
 						$rate = 0;
@@ -850,10 +850,11 @@ function add_postratings_column($defaults) {
 
 ### Functions Fill In The Ratings
 function add_postratings_column_content($column_name) {
+	global $post;
     if($column_name == 'ratings') {
         if(function_exists('the_ratings')) {
         	$template = str_replace('%RATINGS_IMAGES_VOTE%', '%RATINGS_IMAGES%<br />', stripslashes(get_option('postratings_template_vote')));
-        	echo expand_ratings_template($template, get_the_id());
+			echo expand_ratings_template($template, $post, null, 0, false);
         }
     }
 }
@@ -1125,24 +1126,42 @@ function get_ratings_images_comment_author($ratings_custom, $ratings_max, $comme
 }
 
 ### Function: Replaces the template's variables with appropriate values
-function expand_ratings_template($template, $post_id, $post_ratings_data = null, $max_post_title_chars = 0) {
+function expand_ratings_template($template, $post_data, $post_ratings_data = null, $max_post_title_chars = 0, $is_main_loop = true) {
 	global $post;
-	$temp_post = $post;
+
 	// Get global variables
 	$ratings_image = get_option('postratings_image');
 	$ratings_max = intval(get_option('postratings_max'));
 	$ratings_custom = intval(get_option('postratings_customrating'));
-	// Get post related variables
-	if(is_null($post_ratings_data)) {
-		$post_ratings_data = get_post_custom($post_id);
-		$post_ratings_users = is_array($post_ratings_data) && array_key_exists('ratings_users', $post_ratings_data) ? intval($post_ratings_data['ratings_users'][0]) : 0;
-		$post_ratings_score = is_array($post_ratings_data) &&  array_key_exists('ratings_score', $post_ratings_data) ? intval($post_ratings_data['ratings_score'][0]) : 0;
-		$post_ratings_average = is_array($post_ratings_data) &&  array_key_exists('ratings_average', $post_ratings_data) ? floatval($post_ratings_data['ratings_average'][0]) : 0;
+
+	if(is_object($post_data)) {
+		$post_id = $post_data->ID;
 	} else {
+		$post_id = $post_data;
+	}
+
+	// Most likely from coming from Widget
+	if(isset($post_data->ratings_users)) {
+		$post_ratings_users = intval($post_data->ratings_users);
+		$post_ratings_score = intval($post_data->ratings_score);
+		$post_ratings_average = floatval($post_data->ratings_average);
+	// Most Likely coming from the_ratings_vote or the_ratings_rate
+	} else if(isset($post_ratings_data->ratings_users)) {
 		$post_ratings_users = intval($post_ratings_data->ratings_users);
 		$post_ratings_score = intval($post_ratings_data->ratings_score);
 		$post_ratings_average = floatval($post_ratings_data->ratings_average);
+	} else {
+		if(get_the_ID() != $post_id) {
+			$post_ratings_data = get_post_custom($post_id);
+		} else {
+			$post_ratings_data = get_post_custom();
+		}
+
+		$post_ratings_users = is_array($post_ratings_data) && array_key_exists('ratings_users', $post_ratings_data) ? intval($post_ratings_data['ratings_users'][0]) : 0;
+		$post_ratings_score = is_array($post_ratings_data) && array_key_exists('ratings_score', $post_ratings_data) ? intval($post_ratings_data['ratings_score'][0]) : 0;
+		$post_ratings_average = is_array($post_ratings_data) && array_key_exists('ratings_average', $post_ratings_data) ? floatval($post_ratings_data['ratings_average'][0]) : 0;
 	}
+
 	if($post_ratings_score == 0 || $post_ratings_users == 0) {
 		$post_ratings = 0;
 		$post_ratings_average = 0;
@@ -1188,54 +1207,46 @@ function expand_ratings_template($template, $post_id, $post_ratings_data = null,
 	$value = str_replace("%RATINGS_AVERAGE%", number_format_i18n($post_ratings_average, 2), $value);
 	$value = str_replace("%RATINGS_PERCENTAGE%", number_format_i18n($post_ratings_percentage, 2), $value);
 	$value = str_replace("%RATINGS_USERS%", number_format_i18n($post_ratings_users), $value);
-	if (strpos($template, '%POST_URL%') !== false) {
-		$post_link = get_permalink($post_id);
-		$value = str_replace("%POST_URL%", $post_link, $value);
+
+	// Post Template Variables
+	$post_link = get_permalink($post_data);
+	$post_title = get_the_title($post_data);
+	if ($max_post_title_chars > 0) {
+		$post_title = snippet_text($post_title, $max_post_title_chars);
 	}
-	if (strpos($template, '%POST_TITLE%') !== false) {
-		$post_title = get_the_title($post_id);
-		if ($max_post_title_chars > 0) {
-			$post_title = snippet_text($post_title, $max_post_title_chars);
-		}
-		$value = str_replace("%POST_TITLE%", $post_title, $value);
-	}
+	$value = str_replace("%POST_ID%", $post_id, $value);
+	$value = str_replace("%POST_TITLE%", $post_title, $value);
+	$value = str_replace("%POST_URL%", $post_link, $value);
+
 	if (strpos($template, '%POST_EXCERPT%') !== false) {
-		if ($post->ID != $post_id) {
+		if (get_the_ID() != $post_id) {
 			$post = &get_post($post_id);
 		}
 		$post_excerpt = ratings_post_excerpt($post_id, $post->post_excerpt, $post->post_content, $post->post_password);
 		$value = str_replace("%POST_EXCERPT%", $post_excerpt, $value);
 	}
 	if (strpos($template, '%POST_CONTENT%') !== false) {
-		if ($post->ID != $post_id) {
+		if (get_the_ID() != $post_id) {
 			$post = &get_post($post_id);
 		}
 		$value = str_replace("%POST_CONTENT%", get_the_content(), $value);
 	}
 
 	// Google Rich Snippet
-	if(is_single() || is_page())
+	if((is_single() || is_page()) && $is_main_loop)
 	{
-		if(!isset($post_title))
-			$post_title = get_the_title($post_id);
 		if(!isset($post_excerpt))
 			$post_excerpt = ratings_post_excerpt($post_id, $post->post_excerpt, $post->post_content, $post->post_password);
-		if(!isset($post_link))
-			$post_link = get_permalink($post_id);
 
 		$post_meta = '<meta itemprop="name" content="'.esc_attr($post_title).'" /><meta itemprop="description" content="'.wp_kses($post_excerpt, array()).'" /><meta itemprop="url" content="'.$post_link.'" />';
 		$ratings_meta = '<div style="display: none;" itemprop="aggregateRating" itemscope itemtype="http://schema.org/AggregateRating">';
 		$ratings_meta .= '<meta itemprop="bestRating" content="'.$ratings_max.'" />';
 		$ratings_meta .= '<meta itemprop="ratingValue" content="'.$post_ratings_average.'" />';
 		$ratings_meta .= '<meta itemprop="ratingCount" content="'.$post_ratings_users.'" />';
-		$ratings_meta .= '<meta itemprop="reviewCount" content="'.$post_ratings_users.'" />';
 		$ratings_meta .= '</div>';
 
 		$value = $value.$post_meta.$ratings_meta;
 	}
-
-	// Return value
-	$post = $temp_post;
 
 	return apply_filters('expand_ratings_template', $value);
 }
@@ -1421,15 +1432,13 @@ add_action('activate_wp-postratings/wp-postratings.php', 'create_ratinglogs_tabl
 function create_ratinglogs_table() {
 	global $wpdb;
 	postratings_textdomain();
-	if(@is_file(ABSPATH.'/wp-admin/upgrade-functions.php')) {
-		include_once(ABSPATH.'/wp-admin/upgrade-functions.php');
-	} elseif(@is_file(ABSPATH.'/wp-admin/includes/upgrade.php')) {
+	if(@is_file(ABSPATH.'/wp-admin/includes/upgrade.php')) {
 		include_once(ABSPATH.'/wp-admin/includes/upgrade.php');
 	} else {
 		die('We have problem finding your \'/wp-admin/upgrade-functions.php\' and \'/wp-admin/includes/upgrade.php\'');
 	}
 	$charset_collate = '';
-	if($wpdb->supports_collation()) {
+	if( $wpdb->has_cap( 'collation' ) ) {
 		if(!empty($wpdb->charset)) {
 			$charset_collate = "DEFAULT CHARACTER SET $wpdb->charset";
 		}
@@ -1450,28 +1459,29 @@ function create_ratinglogs_table() {
 			"rating_userid int(10) NOT NULL default '0',".
 			"PRIMARY KEY (rating_id)) $charset_collate;";
 	maybe_create_table($wpdb->ratings, $create_ratinglogs_sql);
-	// Add In Options (4 Records)
-	add_option('postratings_image', 'stars', 'Your Ratings Image');
-	add_option('postratings_max', '5', 'Your Max Ratings');
-	add_option('postratings_template_vote', '%RATINGS_IMAGES_VOTE% (<strong>%RATINGS_USERS%</strong> '.__('votes', 'wp-postratings').__(',', 'wp-postratings').' '.__('average', 'wp-postratings').': <strong>%RATINGS_AVERAGE%</strong> '.__('out of', 'wp-postratings').' %RATINGS_MAX%)<br />%RATINGS_TEXT%', 'Ratings Vote Template Text');
-	add_option('postratings_template_text', '%RATINGS_IMAGES% (<em><strong>%RATINGS_USERS%</strong> '.__('votes', 'wp-postratings').__(',', 'wp-postratings').' '.__('average', 'wp-postratings').': <strong>%RATINGS_AVERAGE%</strong> '.__('out of', 'wp-postratings').' %RATINGS_MAX%'.__(',', 'wp-postratings').' <strong>'.__('rated', 'wp-postratings').'</strong></em>)', 'Ratings Template Text');
-	add_option('postratings_template_none', '%RATINGS_IMAGES_VOTE% ('.__('No Ratings Yet', 'wp-postratings').')<br />%RATINGS_TEXT%', 'Ratings Template For No Ratings');
+
+    // Add In Options (4 Records)
+	add_option('postratings_image', 'stars' );
+	add_option('postratings_max', '5' );
+	add_option('postratings_template_vote', '%RATINGS_IMAGES_VOTE% (<strong>%RATINGS_USERS%</strong> '.__('votes', 'wp-postratings').__(',', 'wp-postratings').' '.__('average', 'wp-postratings').': <strong>%RATINGS_AVERAGE%</strong> '.__('out of', 'wp-postratings').' %RATINGS_MAX%)<br />%RATINGS_TEXT%' );
+	add_option('postratings_template_text', '%RATINGS_IMAGES% (<em><strong>%RATINGS_USERS%</strong> '.__('votes', 'wp-postratings').__(',', 'wp-postratings').' '.__('average', 'wp-postratings').': <strong>%RATINGS_AVERAGE%</strong> '.__('out of', 'wp-postratings').' %RATINGS_MAX%'.__(',', 'wp-postratings').' <strong>'.__('rated', 'wp-postratings').'</strong></em>)' );
+	add_option('postratings_template_none', '%RATINGS_IMAGES_VOTE% ('.__('No Ratings Yet', 'wp-postratings').')<br />%RATINGS_TEXT%' );
 	// Database Upgrade For WP-PostRatings 1.02
-	add_option('postratings_logging_method', '3', 'Logging Method Of User Rated\'s Answer');
-	add_option('postratings_allowtorate', '2', 'Who Is Allowed To Rate');
+	add_option('postratings_logging_method', '3' );
+	add_option('postratings_allowtorate', '2' );
 	// Database Uprade For WP-PostRatings 1.04
 	maybe_add_column($wpdb->ratings, 'rating_userid', "ALTER TABLE $wpdb->ratings ADD rating_userid INT( 10 ) NOT NULL DEFAULT '0';");
 	// Database Uprade For WP-PostRatings 1.05
-	add_option('postratings_ratingstext', array(__('1 Star', 'wp-postratings'), __('2 Stars', 'wp-postratings'), __('3 Stars', 'wp-postratings'), __('4 Stars', 'wp-postratings'), __('5 Stars', 'wp-postratings')), 'Individual Post Rating Text');
-	add_option('postratings_template_highestrated', '<li><a href="%POST_URL%" title="%POST_TITLE%">%POST_TITLE%</a> %RATINGS_IMAGES% (%RATINGS_AVERAGE% '.__('out of', 'wp-postratings').' %RATINGS_MAX%)</li>', 'Template For Highest Rated');
+	add_option('postratings_ratingstext', array(__('1 Star', 'wp-postratings'), __('2 Stars', 'wp-postratings'), __('3 Stars', 'wp-postratings'), __('4 Stars', 'wp-postratings'), __('5 Stars', 'wp-postratings')) );
+	add_option('postratings_template_highestrated', '<li><a href="%POST_URL%" title="%POST_TITLE%">%POST_TITLE%</a> %RATINGS_IMAGES% (%RATINGS_AVERAGE% '.__('out of', 'wp-postratings').' %RATINGS_MAX%)</li>' );
 	// Database Upgrade For WP-PostRatings 1.11
-	add_option('postratings_ajax_style', array('loading' => 1, 'fading' => 1), 'Ratings AJAX Style');
+	add_option('postratings_ajax_style', array('loading' => 1, 'fading' => 1) );
 	// Database Upgrade For WP-PostRatings 1.20
-	add_option('postratings_ratingsvalue', array(1,2,3,4,5), 'Individual Post Rating Value');
-	add_option('postratings_customrating', 0, 'Use Custom Ratings');
-	add_option('postratings_template_permission', '%RATINGS_IMAGES% (<em><strong>%RATINGS_USERS%</strong> '.__('votes', 'wp-postratings').__(',', 'wp-postratings').' '.__('average', 'wp-postratings').': <strong>%RATINGS_AVERAGE%</strong> '.__('out of', 'wp-postratings').' %RATINGS_MAX%</em>)<br /><em>'.__('You need to be a registered member to rate this post.', 'wp-postratings').'</em>', 'Ratings Template Text');
+	add_option('postratings_ratingsvalue', array(1,2,3,4,5) );
+	add_option('postratings_customrating', 0 );
+	add_option('postratings_template_permission', '%RATINGS_IMAGES% (<em><strong>%RATINGS_USERS%</strong> '.__('votes', 'wp-postratings').__(',', 'wp-postratings').' '.__('average', 'wp-postratings').': <strong>%RATINGS_AVERAGE%</strong> '.__('out of', 'wp-postratings').' %RATINGS_MAX%</em>)<br /><em>'.__('You need to be a registered member to rate this post.', 'wp-postratings').'</em>' );
 	// Database Upgrade For WP-PostRatings 1.30
-	add_option('postratings_template_mostrated', '<li><a href="%POST_URL%"  title="%POST_TITLE%">%POST_TITLE%</a> - %RATINGS_USERS% '.__('votes', 'wp-postratings').'</li>', 'Most Rated Template Text');
+	add_option('postratings_template_mostrated', '<li><a href="%POST_URL%"  title="%POST_TITLE%">%POST_TITLE%</a> - %RATINGS_USERS% '.__('votes', 'wp-postratings').'</li>' );
 	// Database Upgrade For WP-PostRatings 1.50
 	delete_option('widget_ratings_highest_rated');
 	delete_option('widget_ratings_most_rated');
@@ -1485,4 +1495,3 @@ function create_ratinglogs_table() {
 
 ### Seperate PostRatings Stats For Readability
 require_once('postratings-stats.php');
-?>
