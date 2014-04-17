@@ -30,11 +30,11 @@ $base_name = plugin_basename('wp-postratings/postratings-manager.php');
 $base_page = 'admin.php?page='.$base_name;
 $mode = isset( $_GET['mode'] ) ? trim( $_GET['mode'] ) : '';
 $ratings_tables = array($wpdb->ratings);
-$ratings_settings = array('postratings_image', 'postratings_max', 'postratings_template_vote', 'postratings_template_text', 'postratings_template_none', 'postratings_logging_method', 'postratings_allowtorate', 'postratings_ratingstext', 'postratings_template_highestrated', 'postratings_ajax_style', 'widget_ratings_highest_rated', 'widget_ratings_most_rated', 'postratings_customrating', 'postratings_ratingsvalue', 'postratings_template_permission', 'postratings_template_mostrated', 'widget_ratings', 'widget_ratings-widget');
+$ratings_settings = array('postratings_image', 'postratings_max', 'postratings_template_vote', 'postratings_template_text', 'postratings_template_none', 'postratings_logging_method', 'postratings_allowtorate', 'postratings_ratingstext', 'postratings_template_highestrated', 'postratings_ajax_style', 'widget_ratings_highest_rated', 'widget_ratings_most_rated', 'postratings_customrating', 'postratings_ratingsvalue', 'postratings_template_permission', 'postratings_template_mostrated', 'postratings_options', 'widget_ratings', 'widget_ratings-widget');
 $ratings_postmetas = array('ratings_users', 'ratings_score', 'ratings_average');
 
 
-### Form Processing 
+### Form Processing
 if(!empty($_POST['do'])) {
 	// Decide What To Do
 	switch($_POST['do']) {
@@ -79,7 +79,7 @@ if(!empty($_POST['do'])) {
 					}
 				}
 				echo '</p>';
-				echo '</div>'; 
+				echo '</div>';
 				$mode = 'end-UNINSTALL';
 			}
 			break;
@@ -92,11 +92,10 @@ switch($mode) {
 		//  Deactivating WP-PostRatings
 		case 'end-UNINSTALL':
 			$deactivate_url = 'plugins.php?action=deactivate&amp;plugin=wp-postratings/wp-postratings.php';
-			if(function_exists('wp_nonce_url')) { 
+			if(function_exists('wp_nonce_url')) {
 				$deactivate_url = wp_nonce_url($deactivate_url, 'deactivate-plugin_wp-postratings/wp-postratings.php');
 			}
 			echo '<div class="wrap">';
-			echo '<div id="icon-wp-postratings" class="icon32"><br /></div>';
 			echo '<h2>'.__('Uninstall WP-PostRatings', 'wp-postratings').'</h2>';
 			echo '<p><strong>'.sprintf(__('<a href="%s">Click Here</a> To Finish The Uninstallation And WP-PostRatings Will Be Deactivated Automatically.', 'wp-postratings'), $deactivate_url).'</strong></p>';
 			echo '</div>';
@@ -108,7 +107,6 @@ switch($mode) {
 <form method="post" action="<?php echo admin_url('admin.php?page='.plugin_basename(__FILE__)); ?>">
 <?php wp_nonce_field('wp-postratings_uninstall'); ?>
 <div class="wrap">
-	<div id="icon-wp-postratings" class="icon32"><br /></div>
 	<h2><?php _e('Uninstall WP-PostRatings', 'wp-postratings'); ?></h2>
 	<p>
 		<?php _e('Deactivating WP-PostRatings plugin does not remove any data that may have been created, such as the ratings data and the ratings\'s logs. To completely remove this plugin, you can uninstall it here.', 'wp-postratings'); ?>

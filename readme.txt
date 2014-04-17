@@ -3,29 +3,18 @@ Contributors: GamerZ
 Donate link: http://lesterchan.net/site/donation/  
 Tags: ratings, rating, postratings, postrating, vote, digg, ajax, post  
 Requires at least: 2.8  
-Tested up to: 3.7  
-Stable tag: trunk  
+Tested up to: 3.9  
+Stable tag: 1.78  
 
 Adds an AJAX rating system for your WordPress blog's post/page.
 
 == Description ==
 
-= Previous Versions =
-* [WP-PostRatings 1.40 For WordPress 2.7.x](http://downloads.wordpress.org/plugin/wp-postratings.1.40.zip "WP-PostRatings 1.40 For WordPress 2.7.x")
-* [WP-PostRatings 1.31 For WordPress 2.5.x And 2.6.x](http://downloads.wordpress.org/plugin/wp-postratings.1.31.zip "WP-PostRatings 1.31 For WordPress 2.5.x And 2.6.x")
-* [WP-PostRatings 1.20 For WordPress 2.3.x](http://downloads.wordpress.org/plugin/wp-postratings.1.20.zip "WP-PostRatings 1.20 For WordPress 2.3.x")</a>
-* [WP-PostRatings 1.11 For WordPress 2.1.x And 2.2.x](http://downloads.wordpress.org/plugin/wp-postratings.1.11.zip "WP-PostRatings 1.11 For WordPress 2.1.x And 2.2.x")
-* [WP-PostRatings 1.05 For WordPress 2.0.x](http://downloads.wordpress.org/plugin/wp-postratings.1.05.zip "WP-PostRatings 1.05 For WordPress 2.0.x")
-* [WP-PostRatings 1.03 For WordPress 1.5.2](http://downloads.wordpress.org/plugin/wp-postratings.1.03wp1.52.zip "WP-PostRatings 1.03 For WordPress 1.5.2")
-
 = Development =
-* [http://dev.wp-plugins.org/browser/wp-postratings/](http://dev.wp-plugins.org/browser/wp-postratings/ "http://dev.wp-plugins.org/browser/wp-postratings/")
+* [https://github.com/lesterchan/wp-postratings](https://github.com/lesterchan/wp-postratings "https://github.com/lesterchan/wp-postratings")
 
 = Translations =
 * [http://dev.wp-plugins.org/browser/wp-postratings/i18n/](http://dev.wp-plugins.org/browser/wp-postratings/i18n/ "http://dev.wp-plugins.org/browser/wp-postratings/i18n/")
-
-= Support Forums =
-* [http://forums.lesterchan.net/index.php?board=17.0](http://forums.lesterchan.net/index.php?board=17.0 "http://forums.lesterchan.net/index.php?board=17.0")
 
 = Credits =
 * Icons courtesy of [FamFamFam](http://www.famfamfam.com/ "FamFamFam") and [Everaldo](http://www.everaldo.com "Everaldo")
@@ -36,7 +25,14 @@ Adds an AJAX rating system for your WordPress blog's post/page.
 * I spent most of my free time creating, updating, maintaining and supporting these plugins, if you really love my plugins and could spare me a couple of bucks, I will really appericiate it. If not feel free to use it without any obligations.
 
 == Changelog ==
-* Version 1.77
+= Version 1.78 =
+* NEW: Uses Dash Icons
+* NEW: Option to turn off Google Rich Snippets
+* FIXED: Use SITECOOKIEPATH instead of COOKIEPATH. Props jbrule.
+* FIXED: If global $id is 0, use get_the_ID(). Props instruite.
+* FIXED: use esc_attr() and esc_js() to escape characters
+
+= Version 1.77 =
 * NEW: Add in %POST_ID% template variables
 * FIXED: Ensure Google Rich Snippet only displays in main loop and not in the widget
 * FIXED: Removed reviewCount from Google Rich Snippet
