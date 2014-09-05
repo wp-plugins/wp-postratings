@@ -3,28 +3,35 @@ Contributors: GamerZ
 Donate link: http://lesterchan.net/site/donation/  
 Tags: ratings, rating, postratings, postrating, vote, digg, ajax, post  
 Requires at least: 2.8  
-Tested up to: 3.9  
-Stable tag: 1.78  
+Tested up to: 4.0  
+Stable tag: 1.79  
 
 Adds an AJAX rating system for your WordPress blog's post/page.
 
 == Description ==
 
+= Build Status =
+[![Build Status](https://travis-ci.org/lesterchan/wp-postratings.svg?branch=master)](https://travis-ci.org/lesterchan/wp-postratings)
+
 = Development =
-* [https://github.com/lesterchan/wp-postratings](https://github.com/lesterchan/wp-postratings "https://github.com/lesterchan/wp-postratings")
+[https://github.com/lesterchan/wp-postratings](https://github.com/lesterchan/wp-postratings "https://github.com/lesterchan/wp-postratings")
 
 = Translations =
-* [http://dev.wp-plugins.org/browser/wp-postratings/i18n/](http://dev.wp-plugins.org/browser/wp-postratings/i18n/ "http://dev.wp-plugins.org/browser/wp-postratings/i18n/")
+[http://dev.wp-plugins.org/browser/wp-postratings/i18n/](http://dev.wp-plugins.org/browser/wp-postratings/i18n/ "http://dev.wp-plugins.org/browser/wp-postratings/i18n/")
 
 = Credits =
+* Plugin icon by [Freepik](http://www.freepik.com) from [Flaticon](http://www.flaticon.com)
 * Icons courtesy of [FamFamFam](http://www.famfamfam.com/ "FamFamFam") and [Everaldo](http://www.everaldo.com "Everaldo")
-* __ngetext() by [Anna Ozeritskaya](http://hweia.ru/ "Anna Ozeritskaya")
-* Right To Left Language Support by [Kambiz R. Khojasteh](http://persian-programming.com/ "Kambiz R. Khojasteh")
 
 = Donations =
-* I spent most of my free time creating, updating, maintaining and supporting these plugins, if you really love my plugins and could spare me a couple of bucks, I will really appericiate it. If not feel free to use it without any obligations.
+I spent most of my free time creating, updating, maintaining and supporting these plugins, if you really love my plugins and could spare me a couple of bucks, I will really appericiate it. If not feel free to use it without any obligations.
 
 == Changelog ==
+= Version 1.79 =
+* NEW: Use POST for ratings instead
+* NEW: Add 'wp_postratings_schema_itemtype' filter so that you can change the Schema Type. See the FAQ for sample.
+* FIXED: Use 'is_rtl()' instead of $text_direction
+
 = Version 1.78 =
 * NEW: Uses Dash Icons
 * NEW: Option to turn off Google Rich Snippets
@@ -284,6 +291,17 @@ N/A
 6. Ratings Hover
 
 == Frequently Asked Questions ==
+
+= How To Change Schema Type? =
+* The default schema type is 'Article', if you want to change it to 'Recipe', you need to make use of the `wp_postratings_schema_itemtype` filter as shown in the sample code below:
+<code>
+<?php  
+add_filter('wp_postratings_schema_itemtype', 'wp_postratings_schema_itemtype');  
+function wp_postratings_schema_itemtype($itemtype) {  
+	return 'itemscope itemtype="http://schema.org/Recipe"';  
+}  
+?>
+</code>
 
 = How To Display Comment Author Ratings? =
 1. Open `wp-content/plugins/wp-postratings/wp-postratings.php`
