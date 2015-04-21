@@ -3,8 +3,8 @@ Contributors: GamerZ
 Donate link: http://lesterchan.net/site/donation/  
 Tags: ratings, rating, postratings, postrating, vote, digg, ajax, post  
 Requires at least: 2.8  
-Tested up to: 4.1  
-Stable tag: 1.80  
+Tested up to: 4.2  
+Stable tag: 1.81  
 
 Adds an AJAX rating system for your WordPress blog's post/page.
 
@@ -24,9 +24,13 @@ Adds an AJAX rating system for your WordPress blog's post/page.
 * Icons courtesy of [FamFamFam](http://www.famfamfam.com/ "FamFamFam") and [Everaldo](http://www.everaldo.com "Everaldo")
 
 = Donations =
-I spent most of my free time creating, updating, maintaining and supporting these plugins, if you really love my plugins and could spare me a couple of bucks, I will really appericiate it. If not feel free to use it without any obligations.
+I spent most of my free time creating, updating, maintaining and supporting these plugins, if you really love my plugins and could spare me a couple of bucks, I will really appreciate it. If not feel free to use it without any obligations.
 
 == Changelog ==
+= Version 1.81 =
+* NEW: Checked for defined() for RATINGS_IMG_EXT to allow overwrite
+* FIXED: Integration with WP-Stats
+
 = Version 1.80 =
 * NEW: Suppor Custom Post Types in Widgets
 * NEW: Added 'wp_postratings_process_ratings_user', 'wp_postratings_process_ratings_userid' & 'wp_postratings_check_rated' filters
